@@ -45,38 +45,6 @@ The configuration files are organized by purpose.
 
 ---
 
-# Versioning
-
-Configuration files follow semantic versioning.
-
-Example:
-
-```text
-configs/
-
-v1/
-
-v2/
-
-v3/
-```
-
-Each model release should reference the exact configuration version used during training.
-
----
-
-# Why Version Configurations?
-
-Separating configuration versions provides several benefits:
-
-- Reproducibility
-- Experiment tracking
-- Easier comparison between model releases
-- Backward compatibility
-- Simplified maintenance
-
----
-
 # Relationship to Other Components
 
 Each configuration version corresponds to:

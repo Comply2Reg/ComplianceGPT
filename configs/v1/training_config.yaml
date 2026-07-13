@@ -1,0 +1,136 @@
+# =============================================================================
+# ComplianceGPT
+# Training Configuration
+# Version: v1
+# =============================================================================
+
+project:
+  name: ComplianceGPT
+  version: v1
+  task: Regulatory Obligation Extraction
+  description: >
+    Fine-tuning Google Gemma 4 E2B IT using QLoRA for
+    regulatory obligation extraction from legal and compliance documents.
+
+# =============================================================================
+# Base Model
+# =============================================================================
+
+model:
+  base_model: google/gemma-4-E2B-it
+  architecture: Decoder Transformer
+  instruction_tuned: true
+  framework: transformers
+
+# =============================================================================
+# Dataset
+# =============================================================================
+
+dataset:
+  version: v1
+  format: jsonl
+  training_file: data/v1/resampled_ft-v2.jsonl
+  sample_dataset: data/v1/sample_dataset.jsonl
+
+  original_samples: 2947
+  training_samples: 860
+
+  classes:
+    obligation: 430
+    neutral: 258
+    non_obligation: 172
+
+# =============================================================================
+# Training
+# =============================================================================
+
+training:
+
+  epochs: 5
+
+  learning_rate: 1e-4
+
+  batch_size: 1
+
+  gradient_accumulation_steps: 4
+
+  max_seq_length: 1024
+
+  packing: false
+
+  warmup_ratio: 0.03
+
+  weight_decay: 0.01
+
+  lr_scheduler: cosine
+
+  optimizer: adamw_8bit
+
+  seed: 3407
+
+# =============================================================================
+# Precision
+# =============================================================================
+
+precision:
+
+  fp16: true
+
+  bf16: false
+
+# =============================================================================
+# Checkpointing
+# =============================================================================
+
+checkpointing:
+
+  gradient_checkpointing: true
+
+  implementation: unsloth
+
+# =============================================================================
+# Logging
+# =============================================================================
+
+logging:
+
+  backend: mlflow
+
+  log_steps: 10
+
+  save_strategy: epoch
+
+  evaluation_strategy: epoch
+
+# =============================================================================
+# Output
+# =============================================================================
+
+output:
+
+  output_dir: outputs/
+
+  save_total_limit: 3
+
+  load_best_model_at_end: true
+
+# =============================================================================
+# Reproducibility
+# =============================================================================
+
+reproducibility:
+
+  deterministic: true
+
+  random_seed: 3407
+
+# =============================================================================
+# Notes
+# =============================================================================
+
+notes:
+  - QLoRA fine-tuning
+  - Regulatory obligation extraction
+  - Structured JSON generation
+  - Instruction tuning
+  - MLflow experiment tracking

@@ -1,0 +1,139 @@
+# =============================================================================
+# ComplianceGPT
+# Generation Configuration
+# Version: v1
+# =============================================================================
+
+project:
+  name: ComplianceGPT
+  version: v1
+  task: Regulatory Obligation Extraction
+
+# =============================================================================
+# Generation Strategy
+# =============================================================================
+
+generation:
+
+  do_sample: false
+
+  temperature: 0.1
+
+  top_p: 0.95
+
+  top_k: 50
+
+  repetition_penalty: 1.05
+
+  max_new_tokens: 512
+
+  min_new_tokens: 1
+
+  early_stopping: true
+
+# =============================================================================
+# Decoding
+# =============================================================================
+
+decoding:
+
+  strategy: greedy
+
+  num_beams: 1
+
+# =============================================================================
+# Token Handling
+# =============================================================================
+
+tokens:
+
+  add_special_tokens: true
+
+  skip_special_tokens: true
+
+  clean_up_tokenization_spaces: true
+
+# =============================================================================
+# JSON-Oriented Generation
+# =============================================================================
+
+structured_output:
+
+  enabled: true
+
+  format: json
+
+  enforce_schema: true
+
+  allow_multiple_obligations: true
+
+  pretty_print: false
+
+# =============================================================================
+# Output Constraints
+# =============================================================================
+
+constraints:
+
+  hallucination_reduction: true
+
+  deterministic_output: true
+
+  preserve_input_order: true
+
+# =============================================================================
+# Inference Recommendations
+# =============================================================================
+
+recommended_settings:
+
+  production:
+
+    temperature: 0.0
+
+    do_sample: false
+
+    max_new_tokens: 512
+
+  experimentation:
+
+    temperature: 0.2
+
+    do_sample: true
+
+    top_p: 0.95
+
+# =============================================================================
+# Performance
+# =============================================================================
+
+performance:
+
+  optimize_for:
+
+    - Structured JSON
+    - Deterministic Output
+    - Low Hallucination
+    - Regulatory Information Extraction
+
+# =============================================================================
+# Compatibility
+# =============================================================================
+
+compatible_with:
+
+  - Hugging Face Transformers
+  - Text Generation Pipeline
+  - PEFT
+  - Unsloth
+
+# =============================================================================
+# Notes
+# =============================================================================
+
+notes:
+
+  - Low temperature is recommended for compliance tasks.
+  - Greedy decoding improves output consistency.
+  - Structured JSON should always be validated before downstream use.
+  - Human review is recommended for production compliance workflows.

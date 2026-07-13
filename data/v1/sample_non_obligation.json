@@ -1,0 +1,26 @@
+{
+    "metadata": {
+        "source_id": "ISO27001-A5-001",
+        "regulation_name": "ISO/IEC 27001",
+        "jurisdiction": "International",
+        "doc_type": "Standard",
+        "section": "Annex A"
+    },
+    "classification": "non_obligation",
+    "instruction": "Analyze the regulatory text and determine whether it contains an enforceable compliance obligation.",
+    "input_text": "Organizations may consider implementing additional security awareness initiatives based on operational requirements.",
+    "tool_use": {
+        "tool_rationale": "No external lookup required.",
+        "tool_call": {
+            "function": "none",
+            "parameters": {}
+        },
+        "external_context": null
+    },
+    "thought_trace": "The sentence uses the permissive modal verb 'may', indicating an optional recommendation rather than a mandatory requirement. Therefore, no enforceable obligation exists.",
+    "output": {
+        "status": "rejected",
+        "message": "No regulatory obligation detected.",
+        "reason": "The statement is permissive and does not require a mandatory action."
+    }
+}

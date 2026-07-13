@@ -1,0 +1,180 @@
+# =============================================================================
+# ComplianceGPT
+# Inference Configuration
+# Version: v1
+# =============================================================================
+
+project:
+  name: ComplianceGPT
+  version: v1
+  task: Regulatory Obligation Extraction
+
+# =============================================================================
+# Model
+# =============================================================================
+
+model:
+
+  huggingface_repo: PrinceRansom7/gemma4-e2b-it-regulatory-obligation-v1
+
+  base_model: google/gemma-4-E2B-it
+
+  framework: transformers
+
+  model_type: causal_lm
+
+# =============================================================================
+# Tokenizer
+# =============================================================================
+
+tokenizer:
+
+  use_fast: true
+
+  trust_remote_code: true
+
+  padding_side: right
+
+  truncation: true
+
+  max_length: 1024
+
+# =============================================================================
+# Device
+# =============================================================================
+
+device:
+
+  device_map: auto
+
+  torch_dtype: auto
+
+  low_cpu_mem_usage: true
+
+# =============================================================================
+# Quantization
+# =============================================================================
+
+quantization:
+
+  enabled: true
+
+  load_in_4bit: true
+
+  quantization_type: nf4
+
+  compute_dtype: float16
+
+# =============================================================================
+# PEFT
+# =============================================================================
+
+peft:
+
+  enabled: true
+
+  load_adapter: true
+
+  merge_adapter: false
+
+# =============================================================================
+# Chat Template
+# =============================================================================
+
+chat_template:
+
+  enabled: true
+
+  apply_chat_template: true
+
+  add_generation_prompt: true
+
+# =============================================================================
+# Prompt
+# =============================================================================
+
+prompt:
+
+  include_system_prompt: true
+
+  instruction_style: instruction_tuning
+
+  structured_output: true
+
+# =============================================================================
+# Batch Inference
+# =============================================================================
+
+batch:
+
+  supported: true
+
+  default_batch_size: 1
+
+  dynamic_padding: true
+
+# =============================================================================
+# Memory Optimization
+# =============================================================================
+
+memory:
+
+  low_memory_mode: true
+
+  gradient_checkpointing: false
+
+  use_cache: true
+
+# =============================================================================
+# Output
+# =============================================================================
+
+output:
+
+  format: json
+
+  validate_json: true
+
+  pretty_print: false
+
+# =============================================================================
+# Logging
+# =============================================================================
+
+logging:
+
+  log_requests: false
+
+  log_latency: true
+
+  log_generation_time: true
+
+# =============================================================================
+# Compatibility
+# =============================================================================
+
+compatible_with:
+
+  - Hugging Face Transformers
+  - PEFT
+  - Unsloth
+  - PyTorch
+
+# =============================================================================
+# Example Loading Code
+# =============================================================================
+
+example:
+
+  model_id: PrinceRansom7/gemma4-e2b-it-regulatory-obligation-v1
+
+# =============================================================================
+# Notes
+# =============================================================================
+
+notes:
+
+  - Load the tokenizer before loading the model.
+  - Apply the chat template prior to generation.
+  - Use deterministic decoding for production compliance workflows.
+  - Validate generated JSON before downstream processing.

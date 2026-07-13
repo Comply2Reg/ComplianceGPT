@@ -1,0 +1,241 @@
+# =============================================================================
+# ComplianceGPT
+# Dataset Configuration
+# Version: v1
+# =============================================================================
+
+project:
+  name: ComplianceGPT
+  version: v1
+  dataset_version: v1
+  task: Regulatory Obligation Extraction
+
+# =============================================================================
+# Dataset Information
+# =============================================================================
+
+dataset:
+
+  name: ComplianceGPT Dataset
+
+  version: v1
+
+  format: jsonl
+
+  language: English
+
+  annotation_type: Instruction Tuning
+
+  output_format: Structured JSON
+
+# =============================================================================
+# Dataset Files
+# =============================================================================
+
+files:
+
+  training_dataset: data/v1/resampled_ft-v2.jsonl
+
+  sample_dataset: data/v1/sample_dataset.jsonl
+
+  schema: data/v1/schema.md
+
+  data_dictionary: data/v1/data_dictionary.md
+
+  statistics: data/v1/dataset_statistics.md
+
+# =============================================================================
+# Dataset Statistics
+# =============================================================================
+
+statistics:
+
+  original_samples: 2947
+
+  training_samples: 860
+
+  classes:
+
+    obligation:
+
+      samples: 430
+
+      percentage: 50
+
+    neutral:
+
+      samples: 258
+
+      percentage: 30
+
+    non_obligation:
+
+      samples: 172
+
+      percentage: 20
+
+# =============================================================================
+# Original Dataset Distribution
+# =============================================================================
+
+original_distribution:
+
+  obligation: 430
+
+  non_obligation: 282
+
+  neutral: 2235
+
+# =============================================================================
+# Annotation Schema
+# =============================================================================
+
+annotation:
+
+  classes:
+
+    - obligation
+
+    - non_obligation
+
+    - neutral
+
+  reasoning_trace: true
+
+  metadata: true
+
+  tool_use: true
+
+  structured_output: true
+
+# =============================================================================
+# Record Structure
+# =============================================================================
+
+record:
+
+  required_fields:
+
+    - metadata
+
+    - classification
+
+    - instruction
+
+    - input_text
+
+    - tool_use
+
+    - thought_trace
+
+    - output
+
+# =============================================================================
+# Tokenization
+# =============================================================================
+
+tokenization:
+
+  tokenizer: Google Gemma Tokenizer
+
+  max_sequence_length: 1024
+
+  truncation: true
+
+  padding: false
+
+# =============================================================================
+# Dataset Preparation
+# =============================================================================
+
+preprocessing:
+
+  chunking: true
+
+  manual_validation: true
+
+  duplicate_removal: true
+
+  json_validation: true
+
+  prompt_validation: true
+
+  output_validation: true
+
+  class_resampling: true
+
+# =============================================================================
+# Training Objective
+# =============================================================================
+
+objective:
+
+  primary_task: Regulatory Obligation Extraction
+
+  secondary_task: Obligation Classification
+
+  output: Structured JSON
+
+# =============================================================================
+# Supported Regulatory Sources
+# =============================================================================
+
+sources:
+
+  - RBI Guidelines
+
+  - MAS Regulations
+
+# =============================================================================
+# Intended Use
+# =============================================================================
+
+intended_use:
+
+  - Instruction Tuning
+
+  - Legal NLP
+
+  - Compliance Automation
+
+  - Governance Risk and Compliance (GRC)
+
+  - Regulatory Information Extraction
+
+# =============================================================================
+# Limitations
+# =============================================================================
+
+limitations:
+
+  language: English only
+
+  domain: Regulatory Compliance
+
+  document_level: Chunk-based
+
+# =============================================================================
+# Reproducibility
+# =============================================================================
+
+reproducibility:
+
+  dataset_version: v1
+
+  deterministic_preprocessing: true
+
+  documented_schema: true
+
+# =============================================================================
+# Notes
+# =============================================================================
+
+notes:
+
+  - Dataset was resampled to prioritize obligation extraction.
+
+  - Original regulatory distribution was intentionally not preserved.
+
+  - Structured JSON output is required for all obligation samples.
+
+  - Metadata and reasoning traces support future explainable AI research.

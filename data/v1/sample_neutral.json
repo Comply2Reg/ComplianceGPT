@@ -1,0 +1,26 @@
+{
+    "metadata": {
+        "source_id": "HIPAA-DEF-001",
+        "regulation_name": "HIPAA",
+        "jurisdiction": "United States",
+        "doc_type": "Regulation",
+        "section": "Definitions"
+    },
+    "classification": "neutral",
+    "instruction": "Analyze the regulatory text and determine whether it contains a compliance obligation.",
+    "input_text": "A covered entity is a health plan, health care clearinghouse, or health care provider that transmits health information electronically.",
+    "tool_use": {
+        "tool_rationale": "No external lookup required.",
+        "tool_call": {
+            "function": "none",
+            "parameters": {}
+        },
+        "external_context": null
+    },
+    "thought_trace": "The passage defines the meaning of a regulatory term. It does not instruct an entity to perform or avoid any action and therefore does not contain an obligation.",
+    "output": {
+        "status": "no_obligation",
+        "message": "Informational statement.",
+        "reason": "The passage is a definition and does not impose a compliance requirement."
+    }
+}

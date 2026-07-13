@@ -1,0 +1,36 @@
+{
+    "metadata": {
+        "source_id": "GDPR-ART5-001",
+        "regulation_name": "General Data Protection Regulation (GDPR)",
+        "jurisdiction": "European Union",
+        "doc_type": "Regulation",
+        "section": "Article 5"
+    },
+    "classification": "obligation",
+    "instruction": "Analyze the regulatory text and extract all compliance obligations using the predefined JSON schema.",
+    "input_text": "Personal data shall be processed lawfully, fairly and in a transparent manner in relation to the data subject.",
+    "tool_use": {
+        "tool_rationale": "Verify regulatory metadata for the cited article.",
+        "tool_call": {
+            "function": "lookup_regulation",
+            "parameters": {
+                "regulation": "GDPR",
+                "article": "5"
+            }
+        },
+        "external_context": "Article 5 defines the principles relating to the processing of personal data."
+    },
+    "thought_trace": "The sentence contains the mandatory modal verb 'shall'. The subject is implicit (controllers processing personal data). The action is to process personal data lawfully, fairly, and transparently. This constitutes a regulatory obligation.",
+    "output": [
+        {
+            "obligation_id": "OBL-GDPR-ART5-001",
+            "subject": "Data Controller",
+            "modality": "MUST",
+            "modality_detected": "shall",
+            "action": "Process personal data lawfully, fairly, and transparently",
+            "conditions": null,
+            "deadline": null,
+            "reference_anchor": "GDPR Article 5"
+        }
+    ]
+}

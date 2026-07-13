@@ -1,0 +1,144 @@
+# =============================================================================
+# ComplianceGPT
+# LoRA / QLoRA Configuration
+# Version: v1
+# =============================================================================
+
+project:
+  name: ComplianceGPT
+  version: v1
+  task: Regulatory Obligation Extraction
+
+# =============================================================================
+# Parameter-Efficient Fine-Tuning
+# =============================================================================
+
+peft:
+  method: LoRA
+  framework: PEFT
+  quantized_training: QLoRA
+
+# =============================================================================
+# LoRA Configuration
+# =============================================================================
+
+lora:
+
+  rank: 16
+
+  alpha: 16
+
+  dropout: 0.05
+
+  bias: none
+
+  task_type: CAUSAL_LM
+
+# =============================================================================
+# Target Modules
+# =============================================================================
+
+target_modules:
+
+  - q_proj
+  - k_proj
+  - v_proj
+
+# =============================================================================
+# Quantization
+# =============================================================================
+
+quantization:
+
+  enabled: true
+
+  load_in_4bit: true
+
+  quantization_method: NF4
+
+  double_quantization: true
+
+  compute_dtype: float16
+
+# =============================================================================
+# BitsAndBytes
+# =============================================================================
+
+bitsandbytes:
+
+  library: bitsandbytes
+
+  optimizer: adamw_8bit
+
+  quant_storage: 4bit
+
+# =============================================================================
+# Gradient Checkpointing
+# =============================================================================
+
+gradient_checkpointing:
+
+  enabled: true
+
+  implementation: unsloth
+
+# =============================================================================
+# Adapter
+# =============================================================================
+
+adapter:
+
+  merge_before_export: false
+
+  save_adapter_only: true
+
+  inference_mode: false
+
+# =============================================================================
+# Memory Optimization
+# =============================================================================
+
+memory:
+
+  low_vram_training: true
+
+  mixed_precision: fp16
+
+  gradient_checkpointing: true
+
+  quantization: 4bit
+
+# =============================================================================
+# Export
+# =============================================================================
+
+export:
+
+  huggingface_compatible: true
+
+  merge_supported: true
+
+  peft_adapter: true
+
+# =============================================================================
+# Compatibility
+# =============================================================================
+
+compatible_with:
+
+  - HuggingFace Transformers
+  - PEFT
+  - Unsloth
+  - TRL
+  - BitsAndBytes
+
+# =============================================================================
+# Notes
+# =============================================================================
+
+notes:
+
+  - Parameter-efficient fine-tuning using QLoRA.
+  - Base model parameters remain frozen.
+  - Only LoRA adapter weights are updated.
+  - Optimized for low-memory GPU environments.

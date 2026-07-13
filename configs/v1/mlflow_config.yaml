@@ -1,0 +1,182 @@
+# =============================================================================
+# ComplianceGPT
+# MLflow Configuration
+# Version: v1
+# =============================================================================
+
+project:
+  name: ComplianceGPT
+  version: v1
+
+experiment:
+
+  name: ComplianceGPT_v1
+
+  description: >
+    Fine-tuning Gemma 4 E2B IT using QLoRA for
+    Regulatory Obligation Extraction.
+
+  tags:
+
+    project: ComplianceGPT
+
+    task: Regulatory Obligation Extraction
+
+    framework: Unsloth
+
+    model: Gemma4-E2B-IT
+
+    tuning: QLoRA
+
+# =============================================================================
+# Tracking
+# =============================================================================
+
+tracking:
+
+  backend: MLflow
+
+  tracking_uri: ./mlruns
+
+  artifact_location: ./mlruns
+
+# =============================================================================
+# Run Information
+# =============================================================================
+
+run:
+
+  run_name: Gemma4_Regulatory_Obligation_v1
+
+  nested_runs: false
+
+# =============================================================================
+# Parameters Logged
+# =============================================================================
+
+log_parameters:
+
+  project: true
+
+  base_model: true
+
+  dataset_version: true
+
+  learning_rate: true
+
+  epochs: true
+
+  batch_size: true
+
+  gradient_accumulation_steps: true
+
+  max_seq_length: true
+
+  optimizer: true
+
+  scheduler: true
+
+  lora_rank: true
+
+  lora_alpha: true
+
+  lora_dropout: true
+
+  quantization: true
+
+# =============================================================================
+# Metrics Logged
+# =============================================================================
+
+log_metrics:
+
+  training_loss: true
+
+  learning_rate: true
+
+  epoch: true
+
+  step: true
+
+  runtime: true
+
+# =============================================================================
+# Artifacts
+# =============================================================================
+
+artifacts:
+
+  save_training_config: true
+
+  save_lora_config: true
+
+  save_dataset_config: true
+
+  save_generation_config: true
+
+  save_model_card: true
+
+  save_training_notebook: false
+
+# =============================================================================
+# Model Registration
+# =============================================================================
+
+model_registry:
+
+  enabled: false
+
+  register_model: false
+
+# =============================================================================
+# Checkpoints
+# =============================================================================
+
+checkpoints:
+
+  log_checkpoints: true
+
+  save_best_model: true
+
+  save_last_model: true
+
+# =============================================================================
+# Reproducibility
+# =============================================================================
+
+reproducibility:
+
+  log_git_commit: true
+
+  log_python_version: true
+
+  log_cuda_version: true
+
+  log_library_versions: true
+
+  log_random_seed: true
+
+# =============================================================================
+# Environment
+# =============================================================================
+
+environment:
+
+  platform: Google Colab
+
+  gpu: NVIDIA Tesla T4
+
+  framework: Unsloth
+
+  transformers: Hugging Face
+
+# =============================================================================
+# Notes
+# =============================================================================
+
+notes:
+
+  - MLflow is used for experiment tracking.
+  - Every training run should have a unique run name.
+  - Configurations should be logged as artifacts.
+  - Future versions may enable Model Registry.

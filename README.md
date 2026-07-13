@@ -64,15 +64,8 @@ Regulatory compliance is a knowledge-intensive task that requires organizations 
 
 Examples include:
 
-- GDPR
-- ISO 27001
 - RBI Guidelines
-- PCI DSS
-- HIPAA
-- DORA
 - MAS Regulations
-- SEC Regulations
-- NIS2
 
 These documents contain a mixture of:
 

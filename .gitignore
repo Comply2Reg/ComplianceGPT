@@ -1,0 +1,53 @@
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual Environments (ignores any venv inside the repo recursively)
+.venv/
+venv/
+env/
+ENV/
+
+# Sensitive Information / API Keys
+.env
+.env.local
+.env.*.local
+
+# Editor / IDE settings
+.cursor/
+.vscode/
+.idea/
+*.swp
+*.suo
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# Machine Learning Outputs and Weights
+outputs/
+models/*.bin
+models/*.pt
+models/*.pth
+models/*.safetensors
+models/*.pkl
+
+# Experiment Logs
+mlruns/
+mlruns.db
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Specific Pipeline Scripts to Ignore
+scripts/ObligationDataPipeline/resample_ft_data.py
+scripts/ObligationDataPipeline/test_openai.py
+scripts/ObligationDataPipeline/test_schema.py
+
+# Specific Data Subdirectories to Ignore
+**/data/input_pdfs/
+**/data/output/

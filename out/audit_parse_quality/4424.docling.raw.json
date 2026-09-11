@@ -1,0 +1,6497 @@
+{
+  "doc_id": 4424,
+  "source_pdf": "data/raw/4424.pdf",
+  "stage": "A_raw_docling_extraction",
+  "note": "Raw Docling export ONLY via DocumentConverter.export_to_dict(). No ResultPostprocessor, no region classification, no canonicalization, no furniture filtering, no newsletter rules, no chunking.",
+  "counts": {
+    "n_texts": 166,
+    "n_tables": 2,
+    "n_groups": 4
+  },
+  "texts": [
+    {
+      "order_index": 0,
+      "self_ref": "#/texts/0",
+      "label": "page_header",
+      "level": null,
+      "page_no": 1,
+      "bbox": {
+        "l": 526.718114053411,
+        "t": 825.6364667964217,
+        "r": 583.0880472834953,
+        "b": 793.7144475274831,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "EDITION N° 67",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 526.718114053411,
+            "t": 825.6364667964217,
+            "r": 583.0880472834953,
+            "b": 793.7144475274831,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            13
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 1,
+      "self_ref": "#/texts/1",
+      "label": "text",
+      "level": null,
+      "page_no": 1,
+      "bbox": {
+        "l": 41.1863214839032,
+        "t": 709.0296709798384,
+        "r": 435.73018626293646,
+        "b": 693.9537648846006,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Spotlight on Markets - January & February 2026",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 41.1863214839032,
+            "t": 709.0296709798384,
+            "r": 435.73018626293646,
+            "b": 693.9537648846006,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            46
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 2,
+      "self_ref": "#/texts/2",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 1,
+      "bbox": {
+        "l": 41.1863214839032,
+        "t": 660.9306327381731,
+        "r": 521.2923552857204,
+        "b": 561.9512332629141,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESMA'S DIGITAL AND DATA STRATEGIES SUPPORT SUPERVISION OF EU FINANCIAL MARKETS",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 41.1863214839032,
+            "t": 660.9306327381731,
+            "r": 521.2923552857204,
+            "b": 561.9512332629141,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            78
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 3,
+      "self_ref": "#/texts/3",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 1,
+      "bbox": {
+        "l": 55.8793344716943,
+        "t": 521.2385924319709,
+        "r": 153.84548752173174,
+        "b": 507.04754755061947,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "In this edition",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 55.8793344716943,
+            "t": 521.2385924319709,
+            "r": 153.84548752173174,
+            "b": 507.04754755061947,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            15
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 4,
+      "self_ref": "#/texts/4",
+      "label": "list_item",
+      "level": null,
+      "page_no": 1,
+      "bbox": {
+        "l": 83.0888051054663,
+        "t": 499.48039445856256,
+        "r": 348.34149648407987,
+        "b": 463.53115160380275,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESMA launches selection of CTP for OTC derivatives",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 83.0888051054663,
+            "t": 499.48039445856256,
+            "r": 348.34149648407987,
+            "b": 463.53115160380275,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            50
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/groups/0"
+      }
+    },
+    {
+      "order_index": 5,
+      "self_ref": "#/texts/5",
+      "label": "list_item",
+      "level": null,
+      "page_no": 1,
+      "bbox": {
+        "l": 83.0888051054663,
+        "t": 455.96399851174584,
+        "r": 337.58196854891463,
+        "b": 420.014755656986,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESMA signs MoU with the Reserve Bank of India",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 83.0888051054663,
+            "t": 455.96399851174584,
+            "r": 337.58196854891463,
+            "b": 420.014755656986,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            45
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/groups/0"
+      }
+    },
+    {
+      "order_index": 6,
+      "self_ref": "#/texts/6",
+      "label": "list_item",
+      "level": null,
+      "page_no": 1,
+      "bbox": {
+        "l": 83.0888051054663,
+        "t": 412.44760256492907,
+        "r": 351.06205039932837,
+        "b": 376.4983597101692,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESMA signs MoU with UK regulators under DORA",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 83.0888051054663,
+            "t": 412.44760256492907,
+            "r": 351.06205039932837,
+            "b": 376.4983597101692,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            44
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/groups/0"
+      }
+    },
+    {
+      "order_index": 7,
+      "self_ref": "#/texts/7",
+      "label": "text",
+      "level": null,
+      "page_no": 1,
+      "bbox": {
+        "l": 587.758029240545,
+        "t": 95.83394325627592,
+        "r": 591.3063426520247,
+        "b": 25.85831945620805,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "© peshkov, GettyImages-2214346556",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 587.758029240545,
+            "t": 95.83394325627592,
+            "r": 591.3063426520247,
+            "b": 25.85831945620805,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            33
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 8,
+      "self_ref": "#/texts/8",
+      "label": "page_header",
+      "level": null,
+      "page_no": 2,
+      "bbox": {
+        "l": 412.234326823569,
+        "t": 794.2703408783517,
+        "r": 555.1124582678193,
+        "b": 767.1191747921389,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Spotlight on Markets January & February 2026",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 412.234326823569,
+            "t": 794.2703408783517,
+            "r": 555.1124582678193,
+            "b": 767.1191747921389,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            44
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 9,
+      "self_ref": "#/texts/9",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 2,
+      "bbox": {
+        "l": 214.0650296306234,
+        "t": 711.6829802682919,
+        "r": 381.4079207165832,
+        "b": 685.0706129333619,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "In this issue",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 214.0650296306234,
+            "t": 711.6829802682919,
+            "r": 381.4079207165832,
+            "b": 685.0706129333619,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            13
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 10,
+      "self_ref": "#/texts/10",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 2,
+      "bbox": {
+        "l": 48.086306796403804,
+        "t": 620.9882810757338,
+        "r": 280.3427559978528,
+        "b": 606.7972361943823,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESMA in January and February",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 48.086306796403804,
+            "t": 620.9882810757338,
+            "r": 280.3427559978528,
+            "b": 606.7972361943823,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            28
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 11,
+      "self_ref": "#/texts/11",
+      "label": "page_footer",
+      "level": null,
+      "page_no": 2,
+      "bbox": {
+        "l": 567.0334456725191,
+        "t": 14.703045360323586,
+        "r": 573.2878021658408,
+        "b": 4.058098426351535,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "2",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 567.0334456725191,
+            "t": 14.703045360323586,
+            "r": 573.2878021658408,
+            "b": 4.058098426351535,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            1
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 12,
+      "self_ref": "#/texts/12",
+      "label": "page_header",
+      "level": null,
+      "page_no": 3,
+      "bbox": {
+        "l": 412.234326823569,
+        "t": 794.2703408783517,
+        "r": 555.1124582678193,
+        "b": 767.1191747921389,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Spotlight on Markets January & February 2026",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 412.234326823569,
+            "t": 794.2703408783517,
+            "r": 555.1124582678193,
+            "b": 767.1191747921389,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            44
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 13,
+      "self_ref": "#/texts/13",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 3,
+      "bbox": {
+        "l": 214.0650296306234,
+        "t": 711.6829802682919,
+        "r": 381.4079207165832,
+        "b": 685.0706129333619,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "In this issue",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 214.0650296306234,
+            "t": 711.6829802682919,
+            "r": 381.4079207165832,
+            "b": 685.0706129333619,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            13
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 14,
+      "self_ref": "#/texts/14",
+      "label": "page_footer",
+      "level": null,
+      "page_no": 3,
+      "bbox": {
+        "l": 566.8810407499557,
+        "t": 14.703045360323586,
+        "r": 573.291456042535,
+        "b": 4.058098426351535,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "3",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 566.8810407499557,
+            "t": 14.703045360323586,
+            "r": 573.291456042535,
+            "b": 4.058098426351535,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            1
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 15,
+      "self_ref": "#/texts/15",
+      "label": "page_header",
+      "level": null,
+      "page_no": 4,
+      "bbox": {
+        "l": 412.234326823569,
+        "t": 794.2703408783517,
+        "r": 555.1124582678193,
+        "b": 767.1191747921389,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Spotlight on Markets January & February 2026",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 412.234326823569,
+            "t": 794.2703408783517,
+            "r": 555.1124582678193,
+            "b": 767.1191747921389,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            44
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 16,
+      "self_ref": "#/texts/16",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 4,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 703.4425117799775,
+        "r": 511.04320719920537,
+        "b": 604.3899276292382,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESMA's Digital and Data strategies support supervision of EU financial markets",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 703.4425117799775,
+            "r": 511.04320719920537,
+            "b": 604.3899276292382,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            78
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 17,
+      "self_ref": "#/texts/17",
+      "label": "text",
+      "level": null,
+      "page_no": 4,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 570.1149442706563,
+        "r": 554.982341886212,
+        "b": 486.5579980039288,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The  European  Securities  and  Markets  Authority  (ESMA),  the  EU's  financial markets  regulator  and  supervisor,  has  adopted  a  new  Digital  Strategy  and updated  its  Data  Strategy.  They  reflect  ESMA's  commitment  to  smarter regulatory  reporting  and  technology-driven  supervision,  promote  synergies and innovation while reducing unnecessary complexity.",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 570.1149442706563,
+            "r": 554.982341886212,
+            "b": 486.5579980039288,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            376
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 18,
+      "self_ref": "#/texts/18",
+      "label": "text",
+      "level": null,
+      "page_no": 4,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 465.4254942327169,
+        "r": 554.9841633474956,
+        "b": 417.8821170254239,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The  digital  strategy  aims  to  continue  ESMA's  digital  transformation,  while  the Data Strategy update is oriented to capitalise on opportunities to simplify, better integrate and streamline data management and technology.",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 465.4254942327169,
+            "r": 554.9841633474956,
+            "b": 417.8821170254239,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            229
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 19,
+      "self_ref": "#/texts/19",
+      "label": "text",
+      "level": null,
+      "page_no": 4,
+      "bbox": {
+        "l": 67.2097315995944,
+        "t": 350.39418048044286,
+        "r": 401.07439786949965,
+        "b": 225.21788784025523,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "'ESMA is committed to smarter regulation and supervision, and this drives our dual focus on digitalisation and simplification. These two strategies support a digitally mature, resilient and agile authority that understands the importance of data for its community.",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 67.2097315995944,
+            "t": 350.39418048044286,
+            "r": 401.07439786949965,
+            "b": 225.21788784025523,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            264
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 20,
+      "self_ref": "#/texts/20",
+      "label": "text",
+      "level": null,
+      "page_no": 4,
+      "bbox": {
+        "l": 67.2097315995944,
+        "t": 192.83481584541664,
+        "r": 390.30672824173746,
+        "b": 112.67548452952224,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "By helping to drive the digital transformation of the European System of Financial Supervision (ESFS), we reinforce a more efficient, transparent, and resilient financial ecosystem for the EU.\"",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 67.2097315995944,
+            "t": 192.83481584541664,
+            "r": 390.30672824173746,
+            "b": 112.67548452952224,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            193
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 21,
+      "self_ref": "#/texts/21",
+      "label": "text",
+      "level": null,
+      "page_no": 4,
+      "bbox": {
+        "l": 67.2097315995944,
+        "t": 80.42293921404337,
+        "r": 183.94921522073327,
+        "b": 67.63035483369538,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Verena Ross , Chair The  new Digital  Strategy  2026-2028 sets  out  a  roadmap  for  innovation, efficiency, and resilience. The key objectives include:",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 67.2097315995944,
+            "t": 80.42293921404337,
+            "r": 183.94921522073327,
+            "b": 67.63035483369538,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            19
+          ]
+        },
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 682.8866963718331,
+            "r": 554.9884052957611,
+            "b": 653.3501036942573,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            20,
+            153
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 22,
+      "self_ref": "#/texts/22",
+      "label": "page_footer",
+      "level": null,
+      "page_no": 4,
+      "bbox": {
+        "l": 572.919207872279,
+        "t": 22.268613045091683,
+        "r": 579.4736774410961,
+        "b": 11.623666111119633,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "4",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 572.919207872279,
+            "t": 22.268613045091683,
+            "r": 579.4736774410961,
+            "b": 11.623666111119633,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            1
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 23,
+      "self_ref": "#/texts/23",
+      "label": "page_header",
+      "level": null,
+      "page_no": 5,
+      "bbox": {
+        "l": 412.234326823569,
+        "t": 794.2703408783517,
+        "r": 555.1124582678193,
+        "b": 767.1191747921389,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Spotlight on Markets January & February 2026",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 412.234326823569,
+            "t": 794.2703408783517,
+            "r": 555.1124582678193,
+            "b": 767.1191747921389,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            44
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 24,
+      "self_ref": "#/texts/24",
+      "label": "list_item",
+      "level": null,
+      "page_no": 5,
+      "bbox": {
+        "l": 81.64816733549289,
+        "t": 628.8663427826812,
+        "r": 260.45959299351813,
+        "b": 617.3365346348228,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Building EU digital synergies",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 81.64816733549289,
+            "t": 628.8663427826812,
+            "r": 260.45959299351813,
+            "b": 617.3365346348228,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            29
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/groups/1"
+      }
+    },
+    {
+      "order_index": 25,
+      "self_ref": "#/texts/25",
+      "label": "list_item",
+      "level": null,
+      "page_no": 5,
+      "bbox": {
+        "l": 81.64816733549289,
+        "t": 592.8527737232466,
+        "r": 554.9744353322102,
+        "b": 563.316181045671,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Enhancing digital capabilities of ESMA and the European System of Financial Supervision (ESFS)",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 81.64816733549289,
+            "t": 592.8527737232466,
+            "r": 554.9744353322102,
+            "b": 563.316181045671,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            94
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/groups/1"
+      }
+    },
+    {
+      "order_index": 26,
+      "self_ref": "#/texts/26",
+      "label": "list_item",
+      "level": null,
+      "page_no": 5,
+      "bbox": {
+        "l": 81.64816733549289,
+        "t": 538.8324201340948,
+        "r": 283.730075760001,
+        "b": 527.3026119862363,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Bolstering operational efficiency",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 81.64816733549289,
+            "t": 538.8324201340948,
+            "r": 283.730075760001,
+            "b": 527.3026119862363,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            33
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/groups/1"
+      }
+    },
+    {
+      "order_index": 27,
+      "self_ref": "#/texts/27",
+      "label": "list_item",
+      "level": null,
+      "page_no": 5,
+      "bbox": {
+        "l": 81.64816733549289,
+        "t": 502.81885107466024,
+        "r": 396.000570697102,
+        "b": 491.2890429268018,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Establishing a secure and future-ready ecosystem.",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 81.64816733549289,
+            "t": 502.81885107466024,
+            "r": 396.000570697102,
+            "b": 491.2890429268018,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            49
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/groups/1"
+      }
+    },
+    {
+      "order_index": 28,
+      "self_ref": "#/texts/28",
+      "label": "page_footer",
+      "level": null,
+      "page_no": 5,
+      "bbox": {
+        "l": 572.9309272878771,
+        "t": 16.145493300221688,
+        "r": 579.4733923336744,
+        "b": 5.500546366249637,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "5",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 572.9309272878771,
+            "t": 16.145493300221688,
+            "r": 579.4733923336744,
+            "b": 5.500546366249637,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            1
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 29,
+      "self_ref": "#/texts/29",
+      "label": "page_header",
+      "level": null,
+      "page_no": 6,
+      "bbox": {
+        "l": 412.234326823569,
+        "t": 794.2703408783517,
+        "r": 555.1124582678193,
+        "b": 767.1191747921389,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Spotlight on Markets January & February 2026",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 412.234326823569,
+            "t": 794.2703408783517,
+            "r": 555.1124582678193,
+            "b": 767.1191747921389,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            44
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 30,
+      "self_ref": "#/texts/30",
+      "label": "text",
+      "level": null,
+      "page_no": 6,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 682.8866963718331,
+        "r": 554.9761681100795,
+        "b": 617.3365346348228,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The Data Strategy 2023-2028 has been updated to reflect the focus on burden reduction, the evolving technological landscape, and ESMA's desire for unlocking efficiency opportunities. While its key objectives remain the same, the key new actions include:",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 682.8866963718331,
+            "r": 554.9761681100795,
+            "b": 617.3365346348228,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            253
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 31,
+      "self_ref": "#/texts/31",
+      "label": "list_item",
+      "level": null,
+      "page_no": 6,
+      "bbox": {
+        "l": 81.64816733549289,
+        "t": 592.8527737232466,
+        "r": 554.9773615847527,
+        "b": 563.316181045671,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Flagship initiatives  related  to  streamlining  supervisory  reporting,  relating  to transaction data and in the funds domain",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 81.64816733549289,
+            "t": 592.8527737232466,
+            "r": 554.9773615847527,
+            "b": 563.316181045671,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            127
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/groups/2"
+      }
+    },
+    {
+      "order_index": 32,
+      "self_ref": "#/texts/32",
+      "label": "list_item",
+      "level": null,
+      "page_no": 6,
+      "bbox": {
+        "l": 81.64816733549289,
+        "t": 538.8324201340948,
+        "r": 554.9793876481253,
+        "b": 509.2958274565191,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Expanding the capacity of the ESMA Data Platform to benefit national and European authorities",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 81.64816733549289,
+            "t": 538.8324201340948,
+            "r": 554.9793876481253,
+            "b": 509.2958274565191,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            93
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/groups/2"
+      }
+    },
+    {
+      "order_index": 33,
+      "self_ref": "#/texts/33",
+      "label": "list_item",
+      "level": null,
+      "page_no": 6,
+      "bbox": {
+        "l": 81.64816733549289,
+        "t": 484.812066544943,
+        "r": 554.9706897709714,
+        "b": 455.2754738673673,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Implementing  next  phases  of  the  MiCA  joint  supervisory  tool  for  cryptomarket monitoring",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 81.64816733549289,
+            "t": 484.812066544943,
+            "r": 554.9706897709714,
+            "b": 455.2754738673673,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            97
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/groups/2"
+      }
+    },
+    {
+      "order_index": 34,
+      "self_ref": "#/texts/34",
+      "label": "list_item",
+      "level": null,
+      "page_no": 6,
+      "bbox": {
+        "l": 81.64816733549289,
+        "t": 430.7917129557911,
+        "r": 520.8502847108707,
+        "b": 419.2619048079327,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Finalising the development of the European Single Access Point (ESAP).",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 81.64816733549289,
+            "t": 430.7917129557911,
+            "r": 520.8502847108707,
+            "b": 419.2619048079327,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            70
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/groups/2"
+      }
+    },
+    {
+      "order_index": 35,
+      "self_ref": "#/texts/35",
+      "label": "text",
+      "level": null,
+      "page_no": 6,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 374.83910360715,
+        "r": 554.9760245059731,
+        "b": 345.3025109295742,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "These goals are in line with ESMA's wider simplification and burden reduction initiative launched last year.",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 374.83910360715,
+            "r": 554.9760245059731,
+            "b": 345.3025109295742,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            108
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 36,
+      "self_ref": "#/texts/36",
+      "label": "text",
+      "level": null,
+      "page_no": 6,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 320.8187500179981,
+        "r": 554.9812901399389,
+        "b": 255.26858828098784,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "With the alignment of both the digital and data strategies, ESMA ensures that innovation and technology translate into tangible benefits for stakeholders, with more possibilities for synergies and digital transformation across ESMA and the ESFS at large.",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 320.8187500179981,
+            "r": 554.9812901399389,
+            "b": 255.26858828098784,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            254
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 37,
+      "self_ref": "#/texts/37",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 6,
+      "bbox": {
+        "l": 65.9283956529834,
+        "t": 207.42567346270982,
+        "r": 133.76821343877486,
+        "b": 195.89586531485145,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Next steps",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 65.9283956529834,
+            "t": 207.42567346270982,
+            "r": 133.76821343877486,
+            "b": 195.89586531485145,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            10
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 38,
+      "self_ref": "#/texts/38",
+      "label": "text",
+      "level": null,
+      "page_no": 6,
+      "bbox": {
+        "l": 65.9283956529834,
+        "t": 178.9149312906576,
+        "r": 548.6025684687261,
+        "b": 131.37155408336446,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESMA's  Data  and  Digital  work  will  be  guided  by  the  roadmaps  under  both strategies.  By  2029  ESMA  expects  to  converge  the  two  into  one  unified strategy.",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 65.9283956529834,
+            "t": 178.9149312906576,
+            "r": 548.6025684687261,
+            "b": 131.37155408336446,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            173
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 39,
+      "self_ref": "#/texts/39",
+      "label": "page_footer",
+      "level": null,
+      "page_no": 6,
+      "bbox": {
+        "l": 572.23926418561,
+        "t": 16.145493300221688,
+        "r": 579.4779915665564,
+        "b": 5.500546366249637,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "6",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 572.23926418561,
+            "t": 16.145493300221688,
+            "r": 579.4779915665564,
+            "b": 5.500546366249637,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            1
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 40,
+      "self_ref": "#/texts/40",
+      "label": "page_header",
+      "level": null,
+      "page_no": 7,
+      "bbox": {
+        "l": 412.234326823569,
+        "t": 794.2703408783517,
+        "r": 555.1124582678193,
+        "b": 767.1191747921389,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Spotlight on Markets January & February 2026",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 412.234326823569,
+            "t": 794.2703408783517,
+            "r": 555.1124582678193,
+            "b": 767.1191747921389,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            44
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 41,
+      "self_ref": "#/texts/41",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 7,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 703.4582897814226,
+        "r": 510.26479153337806,
+        "b": 608.291698930141,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESMA launches selection of Consolidated Tape Provider for OTC derivatives",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 703.4582897814226,
+            "r": 510.26479153337806,
+            "b": 608.291698930141,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            73
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 42,
+      "self_ref": "#/texts/42",
+      "label": "text",
+      "level": null,
+      "page_no": 7,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 590.8799934854458,
+        "r": 555.1120677888581,
+        "b": 501.3207857088125,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The  European  Securities  and  Markets  Authority  (ESMA),  the  EU's  financial markets regulator and supervisor, is launching the first selection procedure for the  Consolidated  Tape  Provider  (CTP)  for  over  the  counter  (OTC)  derivatives. Entities  interested  to  apply  are  encouraged  to  register  and  submit  their requests to participate in the selection procedure by 11 February 2026.",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 590.8799934854458,
+            "r": 555.1120677888581,
+            "b": 501.3207857088125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            404
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 43,
+      "self_ref": "#/texts/43",
+      "label": "text",
+      "level": null,
+      "page_no": 7,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 484.8500542233602,
+        "r": 555.1126139196272,
+        "b": 383.2863234269153,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The  CTP  aims  to  enhance  market  transparency  and  efficiency  by  consolidating post-trade data from data contributors, such as trading venues, into a single and continuous electronic  stream. This  consolidated view  of  market  activity will  help market participants to access accurate and timely information and make betterinformed decisions, leading to more efficient price discovery and contributing to the Savings and Investment Union (SIU).",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 484.8500542233602,
+            "r": 555.1126139196272,
+            "b": 383.2863234269153,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            454
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 44,
+      "self_ref": "#/texts/44",
+      "label": "text",
+      "level": null,
+      "page_no": 7,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 358.8025625153392,
+        "r": 555.1091803259305,
+        "b": 329.26596983776346,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The  CTP  will  collect  and  disseminate  data  on  OTC  derivatives  based  on  the proposals in ESMA's Final Report on transparency for derivatives.",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 358.8025625153392,
+            "r": 555.1091803259305,
+            "b": 329.26596983776346,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            151
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 45,
+      "self_ref": "#/texts/45",
+      "label": "text",
+      "level": null,
+      "page_no": 7,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 322.7889934559047,
+        "r": 555.1119247099494,
+        "b": 311.2591853080462,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The contract notice and procurement documents are available on the EU Funding",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 322.7889934559047,
+            "r": 555.1119247099494,
+            "b": 311.2591853080462,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            77
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 46,
+      "self_ref": "#/texts/46",
+      "label": "text",
+      "level": null,
+      "page_no": 7,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 304.7822089261873,
+        "r": 164.95946330764875,
+        "b": 293.25240077832893,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "& Tenders Portal.",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 304.7822089261873,
+            "r": 164.95946330764875,
+            "b": 293.25240077832893,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            17
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 47,
+      "self_ref": "#/texts/47",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 7,
+      "bbox": {
+        "l": 56.345234452281794,
+        "t": 265.08221506035386,
+        "r": 124.18505223807327,
+        "b": 253.55240691249537,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Next steps",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 56.345234452281794,
+            "t": 265.08221506035386,
+            "r": 124.18505223807327,
+            "b": 253.55240691249537,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            10
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 48,
+      "self_ref": "#/texts/48",
+      "label": "text",
+      "level": null,
+      "page_no": 7,
+      "bbox": {
+        "l": 56.345234452281794,
+        "t": 236.5714728883014,
+        "r": 539.021846286989,
+        "b": 153.01452662157396,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESMA will  assess  the  received  requests  against  the  exclusion  and  selection criteria  and  will  invite  the  successful  candidates  to  submit  their  application. Any questions during the application period will be answered via the Portal. ESMA intends to adopt a reasoned decision on the selected applicant by early July 2026.",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 56.345234452281794,
+            "t": 236.5714728883014,
+            "r": 539.021846286989,
+            "b": 153.01452662157396,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            338
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 49,
+      "self_ref": "#/texts/49",
+      "label": "text",
+      "level": null,
+      "page_no": 7,
+      "bbox": {
+        "l": 56.345234452281794,
+        "t": 128.5307657099978,
+        "r": 539.0147605422483,
+        "b": 62.980603972987524,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The  successful  applicant  will  be  selected  to  operate  the  CTP  for  OTC derivatives for a period of five years and invited to apply for authorisation with ESMA.  Once  authorised,  the  CTP  will  be  supervised  by  ESMA.  Further information about the process is available on the dedicated webpage.",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 56.345234452281794,
+            "t": 128.5307657099978,
+            "r": 539.0147605422483,
+            "b": 62.980603972987524,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            308
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 50,
+      "self_ref": "#/texts/50",
+      "label": "page_footer",
+      "level": null,
+      "page_no": 7,
+      "bbox": {
+        "l": 573.0598858764174,
+        "t": 16.145493300221688,
+        "r": 579.4823056920166,
+        "b": 5.500546366249637,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "7",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 573.0598858764174,
+            "t": 16.145493300221688,
+            "r": 579.4823056920166,
+            "b": 5.500546366249637,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            1
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 51,
+      "self_ref": "#/texts/51",
+      "label": "page_header",
+      "level": null,
+      "page_no": 8,
+      "bbox": {
+        "l": 412.234326823569,
+        "t": 794.2703408783517,
+        "r": 555.1124582678193,
+        "b": 767.1191747921389,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Spotlight on Markets January & February 2026",
+      "prov": [
+        {
+          "page_no": 8,
+          "bbox": {
+            "l": 412.234326823569,
+            "t": 794.2703408783517,
+            "r": 555.1124582678193,
+            "b": 767.1191747921389,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            44
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 52,
+      "self_ref": "#/texts/52",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 8,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 679.9983679735434,
+        "r": 532.6723411130845,
+        "b": 584.8184709385943,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESMA signs Memorandum of Understanding with the Reserve Bank of India",
+      "prov": [
+        {
+          "page_no": 8,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 679.9983679735434,
+            "r": 532.6723411130845,
+            "b": 584.8184709385943,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            69
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 53,
+      "self_ref": "#/texts/53",
+      "label": "text",
+      "level": null,
+      "page_no": 8,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 559.4227675961636,
+        "r": 554.9841253081632,
+        "b": 469.8635598195303,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The  European  Securities  and  Markets  Authority  (ESMA),  the  EU's  financial markets regulator and supervisor, has signed a Memorandum of Understanding  (MoU)  with  the  Reserve  Bank  of  India  (RBI)  to  facilitate cooperation  and  exchange  of  information  for  the  recognition  of  central counterparties (CCPs) established in India and supervised by RBI.",
+      "prov": [
+        {
+          "page_no": 8,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 559.4227675961636,
+            "r": 554.9841253081632,
+            "b": 469.8635598195303,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            369
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 54,
+      "self_ref": "#/texts/54",
+      "label": "text",
+      "level": null,
+      "page_no": 8,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 455.471130327482,
+        "r": 554.9819189518604,
+        "b": 365.9119225508487,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "This  agreement  marks  a  significant  step  towards  restoring  access  for  EU clearing  members  to  Indian  central  counterparties  and  follows  two  years  of sustained  engagement  between  ESMA  and  RBI.  It  reflects  ESMA's  strong commitment  to  international  supervisory  cooperation  and  mutual  support  to advance safe, resilient and open financial markets.",
+      "prov": [
+        {
+          "page_no": 8,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 455.471130327482,
+            "r": 554.9819189518604,
+            "b": 365.9119225508487,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            378
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 55,
+      "self_ref": "#/texts/55",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 8,
+      "bbox": {
+        "l": 60.7743766677342,
+        "t": 334.50201728786203,
+        "r": 131.86587475961232,
+        "b": 322.97220914000366,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Next steps",
+      "prov": [
+        {
+          "page_no": 8,
+          "bbox": {
+            "l": 60.7743766677342,
+            "t": 334.50201728786203,
+            "r": 131.86587475961232,
+            "b": 322.97220914000366,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            10
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 56,
+      "self_ref": "#/texts/56",
+      "label": "text",
+      "level": null,
+      "page_no": 8,
+      "bbox": {
+        "l": 60.7743766677342,
+        "t": 300.3297439917068,
+        "r": 554.975432864991,
+        "b": 230.2778861222672,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The  MoU  is  a  key  requirement  under  Article  25  of  the  European  Market Infrastructure  Regulation  (EMIR)  for  the  recognition  by  ESMA  of  third-country CCPs. It allows the Clearing Corporation of India Ltd (CCIL), a CCP established in India and supervised by RBI, to re-apply for recognition under EMIR.",
+      "prov": [
+        {
+          "page_no": 8,
+          "bbox": {
+            "l": 60.7743766677342,
+            "t": 300.3297439917068,
+            "r": 554.975432864991,
+            "b": 230.2778861222672,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            319
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 57,
+      "self_ref": "#/texts/57",
+      "label": "text",
+      "level": null,
+      "page_no": 8,
+      "bbox": {
+        "l": 58.937805544258,
+        "t": 207.96495584023978,
+        "r": 307.1981428315053,
+        "b": 98.89839815641278,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESMA  is also continuing discussions with the Securities and Exchange Board of India (SEBI) and the International Financial Services Centres Authority (IFSCA) to conclude similar cooperation arrangements.",
+      "prov": [
+        {
+          "page_no": 8,
+          "bbox": {
+            "l": 58.937805544258,
+            "t": 207.96495584023978,
+            "r": 307.1981428315053,
+            "b": 98.89839815641278,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            204
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 58,
+      "self_ref": "#/texts/58",
+      "label": "page_footer",
+      "level": null,
+      "page_no": 8,
+      "bbox": {
+        "l": 572.3564958557254,
+        "t": 16.145493300221688,
+        "r": 579.4751780064735,
+        "b": 5.500546366249637,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "8",
+      "prov": [
+        {
+          "page_no": 8,
+          "bbox": {
+            "l": 572.3564958557254,
+            "t": 16.145493300221688,
+            "r": 579.4751780064735,
+            "b": 5.500546366249637,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            1
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 59,
+      "self_ref": "#/texts/59",
+      "label": "page_header",
+      "level": null,
+      "page_no": 9,
+      "bbox": {
+        "l": 412.234326823569,
+        "t": 794.2703408783517,
+        "r": 555.1124582678193,
+        "b": 767.1191747921389,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Spotlight on Markets January & February 2026",
+      "prov": [
+        {
+          "page_no": 9,
+          "bbox": {
+            "l": 412.234326823569,
+            "t": 794.2703408783517,
+            "r": 555.1124582678193,
+            "b": 767.1191747921389,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            44
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 60,
+      "self_ref": "#/texts/60",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 9,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 707.606584423201,
+        "r": 532.6460580810109,
+        "b": 540.3995492693826,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The European Supervisory Authorities and UK financial regulators sign Memorandum of Understanding on oversight of critical ICT third-party service providers under DORA",
+      "prov": [
+        {
+          "page_no": 9,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 707.606584423201,
+            "r": 532.6460580810109,
+            "b": 540.3995492693826,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            167
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 61,
+      "self_ref": "#/texts/61",
+      "label": "text",
+      "level": null,
+      "page_no": 9,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 518.7228080119954,
+        "r": 554.9821588922644,
+        "b": 417.15907721555055,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The European Supervisory Authorities (EBA, EIOPA and ESMA - the ESAs) have today  signed  a  Memorandum  of  Understanding  (MoU)  with  the  Bank  of England  (BoE),  the  Prudential  Regulation  Authority  (PRA),  and  the  Financial Conduct Authority (FCA). This agreement enhances the cooperation between the authorities to oversee critical ICT third-party service providers (CTPPs) as required by the Digital Operational Resilience Act (DORA).",
+      "prov": [
+        {
+          "page_no": 9,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 518.7228080119954,
+            "r": 554.9821588922644,
+            "b": 417.15907721555055,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            448
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 62,
+      "self_ref": "#/texts/62",
+      "label": "text",
+      "level": null,
+      "page_no": 9,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 401.863414481137,
+        "r": 554.9801781459662,
+        "b": 300.2996836846921,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The MoU establishes clear principles and procedures for cooperation, information sharing and coordination of oversight activities between the relevant authorities  responsible  for  EU  CTPPs/UK  CTPs  oversight.  The  MoU  aims  at enhancing third-party risk management and contributing to the overall operational  resilience  of  the  financial  sector  in  the  EU  and  UK  through  strong cross-border cooperation.",
+      "prov": [
+        {
+          "page_no": 9,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 401.863414481137,
+            "r": 554.9801781459662,
+            "b": 300.2996836846921,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            419
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 63,
+      "self_ref": "#/texts/63",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 9,
+      "bbox": {
+        "l": 65.9283956529834,
+        "t": 271.7173104638915,
+        "r": 245.1088014839944,
+        "b": 260.18750231603315,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Legal basis and background",
+      "prov": [
+        {
+          "page_no": 9,
+          "bbox": {
+            "l": 65.9283956529834,
+            "t": 271.7173104638915,
+            "r": 245.1088014839944,
+            "b": 260.18750231603315,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            26
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 64,
+      "self_ref": "#/texts/64",
+      "label": "text",
+      "level": null,
+      "page_no": 9,
+      "bbox": {
+        "l": 65.9283956529834,
+        "t": 245.28360500529595,
+        "r": 535.8082427449708,
+        "b": 197.74022779800293,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The MoU has been prepared in accordance with DORA Articles 36, 44, and 49, which cover the ESAs' oversight powers, international cooperation, and financial cross-sector exercises, communication and cooperation.",
+      "prov": [
+        {
+          "page_no": 9,
+          "bbox": {
+            "l": 65.9283956529834,
+            "t": 245.28360500529595,
+            "r": 535.8082427449708,
+            "b": 197.74022779800293,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            210
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 65,
+      "self_ref": "#/texts/65",
+      "label": "text",
+      "level": null,
+      "page_no": 9,
+      "bbox": {
+        "l": 65.9283956529834,
+        "t": 173.25646688642678,
+        "r": 535.8124972979856,
+        "b": 89.69952061969923,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "To  exchange  information  with  a  third-country  authority,  the  ESAs  must ensure that the confidentiality and professional secrecy regime in the third country is equivalent to that in the EU. Therefore, before signing this MoU, the  ESAs  conducted  an  assessment  that  confirmed  the  UK  confidentiality and professional secrecy regime's equivalence with that in DORA.",
+      "prov": [
+        {
+          "page_no": 9,
+          "bbox": {
+            "l": 65.9283956529834,
+            "t": 173.25646688642678,
+            "r": 535.8124972979856,
+            "b": 89.69952061969923,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            377
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 66,
+      "self_ref": "#/texts/66",
+      "label": "page_footer",
+      "level": null,
+      "page_no": 9,
+      "bbox": {
+        "l": 572.4385542733926,
+        "t": 16.145493300221688,
+        "r": 579.4732047630022,
+        "b": 5.500546366249637,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "9",
+      "prov": [
+        {
+          "page_no": 9,
+          "bbox": {
+            "l": 572.4385542733926,
+            "t": 16.145493300221688,
+            "r": 579.4732047630022,
+            "b": 5.500546366249637,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            1
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 67,
+      "self_ref": "#/texts/67",
+      "label": "page_header",
+      "level": null,
+      "page_no": 10,
+      "bbox": {
+        "l": 412.234326823569,
+        "t": 794.2703408783517,
+        "r": 555.1124582678193,
+        "b": 767.1191747921389,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Spotlight on Markets January & February 2026",
+      "prov": [
+        {
+          "page_no": 10,
+          "bbox": {
+            "l": 412.234326823569,
+            "t": 794.2703408783517,
+            "r": 555.1124582678193,
+            "b": 767.1191747921389,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            44
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 68,
+      "self_ref": "#/texts/68",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 10,
+      "bbox": {
+        "l": 61.3046206456407,
+        "t": 689.8399895488518,
+        "r": 518.1757505925158,
+        "b": 630.6869677570047,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESAs publish joint Guidelines on ESG stress testing",
+      "prov": [
+        {
+          "page_no": 10,
+          "bbox": {
+            "l": 61.3046206456407,
+            "t": 689.8399895488518,
+            "r": 518.1757505925158,
+            "b": 630.6869677570047,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            51
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 69,
+      "self_ref": "#/texts/69",
+      "label": "text",
+      "level": null,
+      "page_no": 10,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 606.4640256361112,
+        "r": 554.9807391323322,
+        "b": 493.646054508593,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The  European  Supervisory  Authorities  (EBA,  EIOPA  and  ESMA  -  the  ESAs) published today their Joint Guidelines on environmental, social, and governance (ESG) stress testing. These Guidelines provide national insurance and banking supervisors with clear guidance on how to integrate ESG risks into  supervisory  stress  tests,  both  when  using  established  frameworks  and when conducting complementary assessments of ESG risk impacts.",
+      "prov": [
+        {
+          "page_no": 10,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 606.4640256361112,
+            "r": 554.9807391323322,
+            "b": 493.646054508593,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            445
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 70,
+      "self_ref": "#/texts/70",
+      "label": "text",
+      "level": null,
+      "page_no": 10,
+      "bbox": {
+        "l": 61.3046206456407,
+        "t": 475.0087672734138,
+        "r": 535.9402398998849,
+        "b": 395.9535171391156,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The  Guidelines  set  common  standards  for  embedding  ESG  risks  into  stress testing methodologies across the EU's financial system. They provide guidance on designing ESG-inclusive stress tests and outline the necessary organisational and governance arrangements.",
+      "prov": [
+        {
+          "page_no": 10,
+          "bbox": {
+            "l": 61.3046206456407,
+            "t": 475.0087672734138,
+            "r": 535.9402398998849,
+            "b": 395.9535171391156,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            269
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 71,
+      "self_ref": "#/texts/71",
+      "label": "text",
+      "level": null,
+      "page_no": 10,
+      "bbox": {
+        "l": 61.3046206456407,
+        "t": 362.4663639626808,
+        "r": 535.9400860169054,
+        "b": 260.902633166236,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The Guidelines are designed to support a consistent, long-term approach to ESG stress testing while allowing flexibility to accommodate future methodological  advances  and  improvements  in  data  availability.  Importantly, they do not introduce new requirements for competent authorities to carry out ESG-focused supervisory stress tests.",
+      "prov": [
+        {
+          "page_no": 10,
+          "bbox": {
+            "l": 61.3046206456407,
+            "t": 362.4663639626808,
+            "r": 535.9400860169054,
+            "b": 260.902633166236,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            341
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 72,
+      "self_ref": "#/texts/72",
+      "label": "page_footer",
+      "level": null,
+      "page_no": 10,
+      "bbox": {
+        "l": 566.9990047800405,
+        "t": 16.145493300221688,
+        "r": 579.4837141226799,
+        "b": 5.500546366249637,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "10",
+      "prov": [
+        {
+          "page_no": 10,
+          "bbox": {
+            "l": 566.9990047800405,
+            "t": 16.145493300221688,
+            "r": 579.4837141226799,
+            "b": 5.500546366249637,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            2
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 73,
+      "self_ref": "#/texts/73",
+      "label": "page_header",
+      "level": null,
+      "page_no": 11,
+      "bbox": {
+        "l": 412.234326823569,
+        "t": 794.2703408783517,
+        "r": 555.1124582678193,
+        "b": 767.1191747921389,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Spotlight on Markets January & February 2026",
+      "prov": [
+        {
+          "page_no": 11,
+          "bbox": {
+            "l": 412.234326823569,
+            "t": 794.2703408783517,
+            "r": 555.1124582678193,
+            "b": 767.1191747921389,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            44
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 74,
+      "self_ref": "#/texts/74",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 11,
+      "bbox": {
+        "l": 60.7743766677342,
+        "t": 669.1279625451137,
+        "r": 131.86587475961232,
+        "b": 657.5981543972553,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Next steps",
+      "prov": [
+        {
+          "page_no": 11,
+          "bbox": {
+            "l": 60.7743766677342,
+            "t": 669.1279625451137,
+            "r": 131.86587475961232,
+            "b": 657.5981543972553,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            10
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 75,
+      "self_ref": "#/texts/75",
+      "label": "text",
+      "level": null,
+      "page_no": 11,
+      "bbox": {
+        "l": 60.7743766677342,
+        "t": 627.6052978752248,
+        "r": 554.9734687749682,
+        "b": 580.0619206679318,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The Guidelines will be subject to a 'comply or explain' procedure by the National Competent Authorities and will be translated into all the official languages of the EU in the first quarter of 2026.",
+      "prov": [
+        {
+          "page_no": 11,
+          "bbox": {
+            "l": 60.7743766677342,
+            "t": 627.6052978752248,
+            "r": 554.9734687749682,
+            "b": 580.0619206679318,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            198
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 76,
+      "self_ref": "#/texts/76",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 11,
+      "bbox": {
+        "l": 57.569613601266,
+        "t": 360.84305875031856,
+        "r": 135.0563311352871,
+        "b": 349.31325060246013,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Background",
+      "prov": [
+        {
+          "page_no": 11,
+          "bbox": {
+            "l": 57.569613601266,
+            "t": 360.84305875031856,
+            "r": 135.0563311352871,
+            "b": 349.31325060246013,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            10
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 77,
+      "self_ref": "#/texts/77",
+      "label": "text",
+      "level": null,
+      "page_no": 11,
+      "bbox": {
+        "l": 57.569613601266,
+        "t": 334.4093292917241,
+        "r": 527.4543481847443,
+        "b": 178.8252449061273,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The Final Report on the Joint ESAs Guidelines on ESG stress testing follows a public consultation and sets out the final text of the Guidelines, together with  an  assessment  of  the  comments  received  during  the  consultation process.  These  Guidelines  are  designed  to  ensure  consistency,  long-term perspective, and common standards for ESG risk assessment methodologies  in  line  with  Article  100(4)  of  the  Capital  Requirements Directive  (CRD  -  Directive  2013/36/EU)  and  Article  304c  (3)  of  Solvency  II (Directive 2009/138/EC), which require the publication of the joint Guidelines by 10 January 2026.",
+      "prov": [
+        {
+          "page_no": 11,
+          "bbox": {
+            "l": 57.569613601266,
+            "t": 334.4093292917241,
+            "r": 527.4543481847443,
+            "b": 178.8252449061273,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            632
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 78,
+      "self_ref": "#/texts/78",
+      "label": "text",
+      "level": null,
+      "page_no": 11,
+      "bbox": {
+        "l": 169.6979521292517,
+        "t": 106.40870385897574,
+        "r": 485.8326765401979,
+        "b": 95.29138800358703,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Read the Joint Guidelines on ESG stress testing here",
+      "prov": [
+        {
+          "page_no": 11,
+          "bbox": {
+            "l": 169.6979521292517,
+            "t": 106.40870385897574,
+            "r": 485.8326765401979,
+            "b": 95.29138800358703,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            52
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 79,
+      "self_ref": "#/texts/79",
+      "label": "page_footer",
+      "level": null,
+      "page_no": 11,
+      "bbox": {
+        "l": 569.2029601782091,
+        "t": 16.145493300221688,
+        "r": 579.478837285203,
+        "b": 5.500546366249637,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "11",
+      "prov": [
+        {
+          "page_no": 11,
+          "bbox": {
+            "l": 569.2029601782091,
+            "t": 16.145493300221688,
+            "r": 579.478837285203,
+            "b": 5.500546366249637,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            2
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 80,
+      "self_ref": "#/texts/80",
+      "label": "page_header",
+      "level": null,
+      "page_no": 12,
+      "bbox": {
+        "l": 412.234326823569,
+        "t": 794.2703408783517,
+        "r": 555.1124582678193,
+        "b": 767.1191747921389,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Spotlight on Markets January & February 2026",
+      "prov": [
+        {
+          "page_no": 12,
+          "bbox": {
+            "l": 412.234326823569,
+            "t": 794.2703408783517,
+            "r": 555.1124582678193,
+            "b": 767.1191747921389,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            44
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 81,
+      "self_ref": "#/texts/81",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 12,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 677.5880864744452,
+        "r": 508.10453956387585,
+        "b": 616.2159640564603,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESMA promotes clarity in communications on ESG strategies",
+      "prov": [
+        {
+          "page_no": 12,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 677.5880864744452,
+            "r": 508.10453956387585,
+            "b": 616.2159640564603,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            57
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 82,
+      "self_ref": "#/texts/82",
+      "label": "text",
+      "level": null,
+      "page_no": 12,
+      "bbox": {
+        "l": 60.8714470636896,
+        "t": 584.0684222492613,
+        "r": 554.9680562577902,
+        "b": 530.5227835320626,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The  European  Securities  and  Markets  Authority  (ESMA),  the  EU's  financial markets regulator  and  supervisor,  published  today  a  second  thematic  note on sustainability-related claims, focusing on ESG strategies.",
+      "prov": [
+        {
+          "page_no": 12,
+          "bbox": {
+            "l": 60.8714470636896,
+            "t": 584.0684222492613,
+            "r": 554.9680562577902,
+            "b": 530.5227835320626,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            224
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 83,
+      "self_ref": "#/texts/83",
+      "label": "text",
+      "level": null,
+      "page_no": 12,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 504.52698908348793,
+        "r": 553.6525068608867,
+        "b": 452.4819157437656,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The note concentrates on ESG integration and ESG exclusions, as references to these strategies are often made by market participants and widely referenced in marketing communications directed to retail investors.",
+      "prov": [
+        {
+          "page_no": 12,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 504.52698908348793,
+            "r": 553.6525068608867,
+            "b": 452.4819157437656,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            212
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 84,
+      "self_ref": "#/texts/84",
+      "label": "text",
+      "level": null,
+      "page_no": 12,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 423.4964586997602,
+        "r": 553.6502837732801,
+        "b": 330.936120168174,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESG  integration  and  ESG  exclusions  can  mean  different  things  to  different market  participants.  Lack  of  transparency  when  using  these  terms  poses  a notable  greenwashing  risk  to  investors.  The  aim  of  the  note  is  not  to  define these strategies, but to call on market participants to be clear about what they mean when referencing them.",
+      "prov": [
+        {
+          "page_no": 12,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 423.4964586997602,
+            "r": 553.6502837732801,
+            "b": 330.936120168174,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            365
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 85,
+      "self_ref": "#/texts/85",
+      "label": "text",
+      "level": null,
+      "page_no": 12,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 301.9506631241685,
+        "r": 553.649611820104,
+        "b": 229.64795718851428,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Similarly  to  the  first  thematic  note  on  ESG  credentials,  this  publication  offers practical  do's  and  don'ts  for  making  sustainability  claims.  These  are  illustrated through  concrete  examples  of  good  and  poor  practices  that  are  based  on observed market practices.",
+      "prov": [
+        {
+          "page_no": 12,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 301.9506631241685,
+            "r": 553.649611820104,
+            "b": 229.64795718851428,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            292
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 86,
+      "self_ref": "#/texts/86",
+      "label": "text",
+      "level": null,
+      "page_no": 12,
+      "bbox": {
+        "l": 169.6979521292517,
+        "t": 160.40541360911277,
+        "r": 461.37437363285784,
+        "b": 132.03159591274482,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Read the thematic note on sustainability-related claims, focusing on ESG strategies.",
+      "prov": [
+        {
+          "page_no": 12,
+          "bbox": {
+            "l": 169.6979521292517,
+            "t": 160.40541360911277,
+            "r": 461.37437363285784,
+            "b": 132.03159591274482,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            84
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 87,
+      "self_ref": "#/texts/87",
+      "label": "page_footer",
+      "level": null,
+      "page_no": 12,
+      "bbox": {
+        "l": 568.0892630635267,
+        "t": 16.145493300221688,
+        "r": 579.4815608113632,
+        "b": 5.500546366249637,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "12",
+      "prov": [
+        {
+          "page_no": 12,
+          "bbox": {
+            "l": 568.0892630635267,
+            "t": 16.145493300221688,
+            "r": 579.4815608113632,
+            "b": 5.500546366249637,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            2
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 88,
+      "self_ref": "#/texts/88",
+      "label": "page_header",
+      "level": null,
+      "page_no": 13,
+      "bbox": {
+        "l": 412.234326823569,
+        "t": 794.2703408783517,
+        "r": 555.1124582678193,
+        "b": 767.1191747921389,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Spotlight on Markets January & February 2026",
+      "prov": [
+        {
+          "page_no": 13,
+          "bbox": {
+            "l": 412.234326823569,
+            "t": 794.2703408783517,
+            "r": 555.1124582678193,
+            "b": 767.1191747921389,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            44
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 89,
+      "self_ref": "#/texts/89",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 13,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 688.7521823941771,
+        "r": 540.6516221050832,
+        "b": 593.5855915428955,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Principles for risk-based supervision: a critical pillar for ESMA's simplification and burden reduction efforts",
+      "prov": [
+        {
+          "page_no": 13,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 688.7521823941771,
+            "r": 540.6516221050832,
+            "b": 593.5855915428955,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            111
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 90,
+      "self_ref": "#/texts/90",
+      "label": "text",
+      "level": null,
+      "page_no": 13,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 576.2510964949832,
+        "r": 554.9824935933717,
+        "b": 503.948390559329,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The  European  Securities  and  Markets  Authority  (ESMA),  the  EU's  financial markets  regulator  and  supervisor,  published  today  its  principles  for  riskbased supervision. These principles support a common and effective EU-wide supervisory culture and strengthen the EU single market.",
+      "prov": [
+        {
+          "page_no": 13,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 576.2510964949832,
+            "r": 554.9824935933717,
+            "b": 503.948390559329,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            295
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 91,
+      "self_ref": "#/texts/91",
+      "label": "text",
+      "level": null,
+      "page_no": 13,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 488.5294484700521,
+        "r": 554.9795624639918,
+        "b": 404.97250220332455,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The principles on risk-based supervision outline key concepts and foundational elements  for  use  by  ESMA  and  National  Competent  Authorities  (NCAs),  and provide a structured framework  for  identifying, assessing, prioritising  and addressing risks. They are designed to support a supervisory framework that is consistent, proportionate, and effective across the Union.",
+      "prov": [
+        {
+          "page_no": 13,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 488.5294484700521,
+            "r": 554.9795624639918,
+            "b": 404.97250220332455,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            377
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 92,
+      "self_ref": "#/texts/92",
+      "label": "text",
+      "level": null,
+      "page_no": 13,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 380.4887412917484,
+        "r": 554.9795250248856,
+        "b": 278.9250104953036,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "A risk-based approach is the cornerstone of EU securities markets supervision, allowing regulators to focus on and address risks that pose the greatest threats to investor protection, financial stability, and  orderly  markets.  Risk-based supervision is also one of ESMA's flagship projects supporting the simplification and burden reduction agenda, through its contribution to boosting supervisory efficiency and value.",
+      "prov": [
+        {
+          "page_no": 13,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 380.4887412917484,
+            "r": 554.9795250248856,
+            "b": 278.9250104953036,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            421
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 93,
+      "self_ref": "#/texts/93",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 13,
+      "bbox": {
+        "l": 60.7743766677342,
+        "t": 253.09860467967098,
+        "r": 131.86587475961232,
+        "b": 241.5687965318125,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Next steps",
+      "prov": [
+        {
+          "page_no": 13,
+          "bbox": {
+            "l": 60.7743766677342,
+            "t": 253.09860467967098,
+            "r": 131.86587475961232,
+            "b": 241.5687965318125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            10
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 94,
+      "self_ref": "#/texts/94",
+      "label": "text",
+      "level": null,
+      "page_no": 13,
+      "bbox": {
+        "l": 60.7743766677342,
+        "t": 218.67137411413898,
+        "r": 546.0626659706243,
+        "b": 171.12799690684596,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESMA and NCAs will work together to advance the implementation of effective risk-based supervision and foster high quality supervisory outcomes for market participants.",
+      "prov": [
+        {
+          "page_no": 13,
+          "bbox": {
+            "l": 60.7743766677342,
+            "t": 218.67137411413898,
+            "r": 546.0626659706243,
+            "b": 171.12799690684596,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            168
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 95,
+      "self_ref": "#/texts/95",
+      "label": "page_footer",
+      "level": null,
+      "page_no": 13,
+      "bbox": {
+        "l": 567.9251387253652,
+        "t": 16.145493300221688,
+        "r": 579.4734952724592,
+        "b": 5.500546366249637,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "13",
+      "prov": [
+        {
+          "page_no": 13,
+          "bbox": {
+            "l": 567.9251387253652,
+            "t": 16.145493300221688,
+            "r": 579.4734952724592,
+            "b": 5.500546366249637,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            2
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 96,
+      "self_ref": "#/texts/96",
+      "label": "page_header",
+      "level": null,
+      "page_no": 14,
+      "bbox": {
+        "l": 412.234326823569,
+        "t": 794.2703408783517,
+        "r": 555.1124582678193,
+        "b": 767.1191747921389,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Spotlight on Markets January & February 2026",
+      "prov": [
+        {
+          "page_no": 14,
+          "bbox": {
+            "l": 412.234326823569,
+            "t": 794.2703408783517,
+            "r": 555.1124582678193,
+            "b": 767.1191747921389,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            44
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 97,
+      "self_ref": "#/texts/97",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 14,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 677.150633277575,
+        "r": 549.9355822715285,
+        "b": 581.9840424262934,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESMA publishes report on cross-border marketing of funds including statistics on notifications",
+      "prov": [
+        {
+          "page_no": 14,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 677.150633277575,
+            "r": 549.9355822715285,
+            "b": 581.9840424262934,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            94
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 98,
+      "self_ref": "#/texts/98",
+      "label": "text",
+      "level": null,
+      "page_no": 14,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 559.4724835940922,
+        "r": 554.9783863208488,
+        "b": 466.912145062506,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The  European  Securities  and  Markets  Authority  (ESMA),  the  EU's  financial markets  regulator  and  supervisor,  has  today  published  its  third  report  on marketing requirements and marketing communications under the Regulation on cross-border distribution of funds. For the first time, the report includes statistics on notifications of cross-border marketing of funds.",
+      "prov": [
+        {
+          "page_no": 14,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 559.4724835940922,
+            "r": 554.9783863208488,
+            "b": 466.912145062506,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            381
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 99,
+      "self_ref": "#/texts/99",
+      "label": "text",
+      "level": null,
+      "page_no": 14,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 453.08240034701254,
+        "r": 554.9760327590827,
+        "b": 405.5390231397195,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Drawing  on  input  from  National  Competent  Authorities,  the  report  finds  that national  rules  governing  the  marketing  of  funds  have  not  undergone  any significant changes since the publication of the second report in 2023.",
+      "prov": [
+        {
+          "page_no": 14,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 453.08240034701254,
+            "r": 554.9760327590827,
+            "b": 405.5390231397195,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            238
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 100,
+      "self_ref": "#/texts/100",
+      "label": "text",
+      "level": null,
+      "page_no": 14,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 381.0552622281434,
+        "r": 554.9767690865131,
+        "b": 261.48474690198134,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESMA  has  used  the  opportunity  of  this  report  to  provide  stakeholders  with statistics  on  the  volume  of  cross-border  fund  notifications.  In  particular,  the analysis shows that Luxembourg and Ireland are the leading notifying jurisdictions,  accounting  for  59%  and  30%  respectively.  UCITS  notifications comprise  56%  of  the  total  fund  notifications,  while  AIFs  account  for  44%.  This information was retrieved from the ESMA database, which lists all notifications of cross-border marketing of funds.",
+      "prov": [
+        {
+          "page_no": 14,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 381.0552622281434,
+            "r": 554.9767690865131,
+            "b": 261.48474690198134,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            534
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 101,
+      "self_ref": "#/texts/101",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 14,
+      "bbox": {
+        "l": 65.9283956529834,
+        "t": 232.25084810832743,
+        "r": 143.41511318700452,
+        "b": 220.72103996046906,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Background",
+      "prov": [
+        {
+          "page_no": 14,
+          "bbox": {
+            "l": 65.9283956529834,
+            "t": 232.25084810832743,
+            "r": 143.41511318700452,
+            "b": 220.72103996046906,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            10
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 102,
+      "self_ref": "#/texts/102",
+      "label": "text",
+      "level": null,
+      "page_no": 14,
+      "bbox": {
+        "l": 65.9283956529834,
+        "t": 205.8171426497321,
+        "r": 535.8061290485803,
+        "b": 176.28054997215634,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The report will now be submitted to the European Parliament, the Council and the European Commission.",
+      "prov": [
+        {
+          "page_no": 14,
+          "bbox": {
+            "l": 65.9283956529834,
+            "t": 205.8171426497321,
+            "r": 535.8061290485803,
+            "b": 176.28054997215634,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            101
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 103,
+      "self_ref": "#/texts/103",
+      "label": "text",
+      "level": null,
+      "page_no": 14,
+      "bbox": {
+        "l": 123.7986284417236,
+        "t": 121.17751831464238,
+        "r": 529.2196887425305,
+        "b": 92.69059812363207,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Report on Marketing requirements and marketing communications under the regulation on cross-border distribution of funds",
+      "prov": [
+        {
+          "page_no": 14,
+          "bbox": {
+            "l": 123.7986284417236,
+            "t": 121.17751831464238,
+            "r": 529.2196887425305,
+            "b": 92.69059812363207,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            120
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 104,
+      "self_ref": "#/texts/104",
+      "label": "page_footer",
+      "level": null,
+      "page_no": 14,
+      "bbox": {
+        "l": 567.7844607212268,
+        "t": 16.145493300221688,
+        "r": 579.4768715445585,
+        "b": 5.500546366249637,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "14",
+      "prov": [
+        {
+          "page_no": 14,
+          "bbox": {
+            "l": 567.7844607212268,
+            "t": 16.145493300221688,
+            "r": 579.4768715445585,
+            "b": 5.500546366249637,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            2
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 105,
+      "self_ref": "#/texts/105",
+      "label": "page_header",
+      "level": null,
+      "page_no": 15,
+      "bbox": {
+        "l": 412.234326823569,
+        "t": 794.2703408783517,
+        "r": 555.1124582678193,
+        "b": 767.1191747921389,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Spotlight on Markets January & February 2026",
+      "prov": [
+        {
+          "page_no": 15,
+          "bbox": {
+            "l": 412.234326823569,
+            "t": 794.2703408783517,
+            "r": 555.1124582678193,
+            "b": 767.1191747921389,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            44
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 106,
+      "self_ref": "#/texts/106",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 15,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 702.5568286336076,
+        "r": 540.5306936601106,
+        "b": 499.3362244203547,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESAs' Joint Board of Appeal rules on reimbursement of costs in an appeal brought by NOVIS Insurance Company against the European Insurance and Occupational Pensions Authority (EIOPA)",
+      "prov": [
+        {
+          "page_no": 15,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 702.5568286336076,
+            "r": 540.5306936601106,
+            "b": 499.3362244203547,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            182
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 107,
+      "self_ref": "#/texts/107",
+      "label": "text",
+      "level": null,
+      "page_no": 15,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 473.8104650833431,
+        "r": 553.6566503720636,
+        "b": 372.24673428689823,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The  Joint  Board  of  Appeal  ('The  Board')  of  the  European  Supervisory Authorities (ESAs) - the EBA, ESMA, EIOPA - has issued its decision on costs arising in the appeal brought by NOVIS Insurance Company,  NOVIS Versicherungsgesellschaft,  NOVIS  Compagnia  di  Assicurazioni,  and  NOVIS Poisťovňa  a.s.  ('NOVIS')  against  the  European  Insurance  and  Occupational Pensions Authority ('EIOPA').",
+      "prov": [
+        {
+          "page_no": 15,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 473.8104650833431,
+            "r": 553.6566503720636,
+            "b": 372.24673428689823,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            407
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 108,
+      "self_ref": "#/texts/108",
+      "label": "text",
+      "level": null,
+      "page_no": 15,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 357.456024331445,
+        "r": 553.654816906257,
+        "b": 309.91264712415193,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Its Decision of 30 July 2024, the Board had ordered EIOPA to reimburse NOVIS' costs for the appeal. The breakdown of costs subsequently submitted by NOVIS was contested by EIOPA. The matter was brought to the Board for a decision.",
+      "prov": [
+        {
+          "page_no": 15,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 357.456024331445,
+            "r": 553.654816906257,
+            "b": 309.91264712415193,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            230
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 109,
+      "self_ref": "#/texts/109",
+      "label": "text",
+      "level": null,
+      "page_no": 15,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 303.43567074229315,
+        "r": 553.6577941029944,
+        "b": 219.8787244755655,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "In  its  Decision  of  03  December  2025,  the  Board  confirmed  its  competence  to decide on the allocation and taxation of costs. It clarified that only costs that are objectively  necessary  and  reasonable  may  be  reimbursed.  The  Board  also decided on those aspects, ruling on a total amount of costs to be reimbursed by EIOPA.",
+      "prov": [
+        {
+          "page_no": 15,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 303.43567074229315,
+            "r": 553.6577941029944,
+            "b": 219.8787244755655,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            339
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 110,
+      "self_ref": "#/texts/110",
+      "label": "page_footer",
+      "level": null,
+      "page_no": 15,
+      "bbox": {
+        "l": 567.7961801368249,
+        "t": 16.145493300221688,
+        "r": 579.4765864371369,
+        "b": 5.500546366249637,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "15",
+      "prov": [
+        {
+          "page_no": 15,
+          "bbox": {
+            "l": 567.7961801368249,
+            "t": 16.145493300221688,
+            "r": 579.4765864371369,
+            "b": 5.500546366249637,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            2
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 111,
+      "self_ref": "#/texts/111",
+      "label": "page_header",
+      "level": null,
+      "page_no": 16,
+      "bbox": {
+        "l": 412.234326823569,
+        "t": 794.2703408783517,
+        "r": 555.1124582678193,
+        "b": 767.1191747921389,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Spotlight on Markets January & February 2026",
+      "prov": [
+        {
+          "page_no": 16,
+          "bbox": {
+            "l": 412.234326823569,
+            "t": 794.2703408783517,
+            "r": 555.1124582678193,
+            "b": 767.1191747921389,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            44
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 112,
+      "self_ref": "#/texts/112",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 16,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 685.1902537425908,
+        "r": 542.4517192952987,
+        "b": 626.0372319507437,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Commissioner Maria Luís Albuquerque visits ESMA headquarters",
+      "prov": [
+        {
+          "page_no": 16,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 685.1902537425908,
+            "r": 542.4517192952987,
+            "b": 626.0372319507437,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            60
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 113,
+      "self_ref": "#/texts/113",
+      "label": "text",
+      "level": null,
+      "page_no": 16,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 606.9662472151853,
+        "r": 554.9802356926483,
+        "b": 554.921173875463,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Maria  Luís  Albuquerque,  EU  Commissioner  for  Financial  Services  and  the Savings and Investments Union, visited ESMA for forward-looking discussions on the latest developments in EU financial markets.",
+      "prov": [
+        {
+          "page_no": 16,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 606.9662472151853,
+            "r": 554.9802356926483,
+            "b": 554.921173875463,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            207
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 114,
+      "self_ref": "#/texts/114",
+      "label": "text",
+      "level": null,
+      "page_no": 16,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 535.9994765721342,
+        "r": 554.9817821002982,
+        "b": 407.42556898111343,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The  exchange  focused  on  how  Europe  can  foster  stronger,  more  stable  and more attractive  markets  amid  ongoing  global  uncertainty.  Key  topics  included strengthening market integration, reducing fragmentation, and ensuring consistent application and supervision of rules across Member States. Participants  also  explored  how  enhanced  use  of  data,  digitalisation  and  new market infrastructures can drive more  efficient, resilient and competitive markets.",
+      "prov": [
+        {
+          "page_no": 16,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 535.9994765721342,
+            "r": 554.9817821002982,
+            "b": 407.42556898111343,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            479
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 115,
+      "self_ref": "#/texts/115",
+      "label": "page_footer",
+      "level": null,
+      "page_no": 16,
+      "bbox": {
+        "l": 567.1045170345577,
+        "t": 16.145493300221688,
+        "r": 579.4811856700188,
+        "b": 5.500546366249637,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "16",
+      "prov": [
+        {
+          "page_no": 16,
+          "bbox": {
+            "l": 567.1045170345577,
+            "t": 16.145493300221688,
+            "r": 579.4811856700188,
+            "b": 5.500546366249637,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            2
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 116,
+      "self_ref": "#/texts/116",
+      "label": "page_header",
+      "level": null,
+      "page_no": 17,
+      "bbox": {
+        "l": 412.234326823569,
+        "t": 794.2703408783517,
+        "r": 555.1124582678193,
+        "b": 767.1191747921389,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Spotlight on Markets January & February 2026",
+      "prov": [
+        {
+          "page_no": 17,
+          "bbox": {
+            "l": 412.234326823569,
+            "t": 794.2703408783517,
+            "r": 555.1124582678193,
+            "b": 767.1191747921389,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            44
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 117,
+      "self_ref": "#/texts/117",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 17,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 682.3545362607457,
+        "r": 520.1996788127351,
+        "b": 623.2015144688986,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESMA launches selection process for its next Chair",
+      "prov": [
+        {
+          "page_no": 17,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 682.3545362607457,
+            "r": 520.1996788127351,
+            "b": 623.2015144688986,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            50
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 118,
+      "self_ref": "#/texts/118",
+      "label": "text",
+      "level": null,
+      "page_no": 17,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 604.1305297333402,
+        "r": 554.9802665292666,
+        "b": 511.570191201754,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The  European  Securities  and  Markets  Authority  (ESMA),  the  EU's  financial markets regulator and supervisor, has launched the selection procedure for the position of ESMA Chair. This key leadership role offers the opportunity to shape  the  future  of  Europe's  financial  markets  and  steer  the  organisation through an evolving regulatory and supervisory landscape.",
+      "prov": [
+        {
+          "page_no": 17,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 604.1305297333402,
+            "r": 554.9802665292666,
+            "b": 511.570191201754,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            377
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 119,
+      "self_ref": "#/texts/119",
+      "label": "text",
+      "level": null,
+      "page_no": 17,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 494.9544470804942,
+        "r": 554.9777973489383,
+        "b": 405.3432297078776,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "As a full - time, independent professional based in Paris, the Chair leads ESMA's strategic direction and represents the Authority at the highest institutional level. The  successful  candidate  will  chair  both  the  Board  of  Supervisors  and  the Management Board, ensuring effective governance, strategic oversight and the delivery of ESMA's priorities.",
+      "prov": [
+        {
+          "page_no": 17,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 494.9544470804942,
+            "r": 554.9777973489383,
+            "b": 405.3432297078776,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            359
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 120,
+      "self_ref": "#/texts/120",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 17,
+      "bbox": {
+        "l": 60.7743766677342,
+        "t": 385.276199172271,
+        "r": 220.46612378394985,
+        "b": 373.74639102441256,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Role and Responsibilities",
+      "prov": [
+        {
+          "page_no": 17,
+          "bbox": {
+            "l": 60.7743766677342,
+            "t": 385.276199172271,
+            "r": 220.46612378394985,
+            "b": 373.74639102441256,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            25
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 121,
+      "self_ref": "#/texts/121",
+      "label": "text",
+      "level": null,
+      "page_no": 17,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 347.8321260124407,
+        "r": 508.8514428315785,
+        "b": 336.3023178645823,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "In line with the ESMA Regulation, the Chair's main responsibilities include:",
+      "prov": [
+        {
+          "page_no": 17,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 347.8321260124407,
+            "r": 508.8514428315785,
+            "b": 336.3023178645823,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            76
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 122,
+      "self_ref": "#/texts/122",
+      "label": "list_item",
+      "level": null,
+      "page_no": 17,
+      "bbox": {
+        "l": 81.64816733549289,
+        "t": 308.81742619805334,
+        "r": 554.9727477213584,
+        "b": 277.7802681430011,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Chairing meetings and setting the agendas of the Board of Supervisors and the Management Board.",
+      "prov": [
+        {
+          "page_no": 17,
+          "bbox": {
+            "l": 81.64816733549289,
+            "t": 308.81742619805334,
+            "r": 554.9727477213584,
+            "b": 277.7802681430011,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            95
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/groups/3"
+      }
+    },
+    {
+      "order_index": 123,
+      "self_ref": "#/texts/123",
+      "label": "list_item",
+      "level": null,
+      "page_no": 17,
+      "bbox": {
+        "l": 81.64816733549289,
+        "t": 269.8027263836658,
+        "r": 371.32339552225295,
+        "b": 258.2729182358074,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Preparing the work of the Board of Supervisors.",
+      "prov": [
+        {
+          "page_no": 17,
+          "bbox": {
+            "l": 81.64816733549289,
+            "t": 269.8027263836658,
+            "r": 371.32339552225295,
+            "b": 258.2729182358074,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            47
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/groups/3"
+      }
+    },
+    {
+      "order_index": 124,
+      "self_ref": "#/texts/124",
+      "label": "list_item",
+      "level": null,
+      "page_no": 17,
+      "bbox": {
+        "l": 81.64816733549289,
+        "t": 250.29537647647214,
+        "r": 369.00921496885803,
+        "b": 238.76556832861365,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Acting as ESMA's main external representative.",
+      "prov": [
+        {
+          "page_no": 17,
+          "bbox": {
+            "l": 81.64816733549289,
+            "t": 250.29537647647214,
+            "r": 369.00921496885803,
+            "b": 238.76556832861365,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            46
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/groups/3"
+      }
+    },
+    {
+      "order_index": 125,
+      "self_ref": "#/texts/125",
+      "label": "list_item",
+      "level": null,
+      "page_no": 17,
+      "bbox": {
+        "l": 81.64816733549289,
+        "t": 230.84003616526172,
+        "r": 554.973931367328,
+        "b": 199.75086851422623,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Developing ESMA's long - term strategy and ensuring delivery on its objectives.",
+      "prov": [
+        {
+          "page_no": 17,
+          "bbox": {
+            "l": 81.64816733549289,
+            "t": 230.84003616526172,
+            "r": 554.973931367328,
+            "b": 199.75086851422623,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            79
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/groups/3"
+      }
+    },
+    {
+      "order_index": 126,
+      "self_ref": "#/texts/126",
+      "label": "list_item",
+      "level": null,
+      "page_no": 17,
+      "bbox": {
+        "l": 81.64816733549289,
+        "t": 191.77332675489095,
+        "r": 524.7520876677667,
+        "b": 180.24351860703257,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Implementing tasks and decisions assigned by the Board of Supervisors.",
+      "prov": [
+        {
+          "page_no": 17,
+          "bbox": {
+            "l": 81.64816733549289,
+            "t": 191.77332675489095,
+            "r": 524.7520876677667,
+            "b": 180.24351860703257,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            70
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/groups/3"
+      }
+    },
+    {
+      "order_index": 127,
+      "self_ref": "#/texts/127",
+      "label": "list_item",
+      "level": null,
+      "page_no": 17,
+      "bbox": {
+        "l": 81.64816733549289,
+        "t": 172.2659768476973,
+        "r": 554.9724065678197,
+        "b": 141.22881879264503,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Ensuring accountability and representing ESMA  before the European Parliament in annual hearings on ESMA's performance.",
+      "prov": [
+        {
+          "page_no": 17,
+          "bbox": {
+            "l": 81.64816733549289,
+            "t": 172.2659768476973,
+            "r": 554.9724065678197,
+            "b": 141.22881879264503,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            119
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/groups/3"
+      }
+    },
+    {
+      "order_index": 128,
+      "self_ref": "#/texts/128",
+      "label": "list_item",
+      "level": null,
+      "page_no": 17,
+      "bbox": {
+        "l": 81.64816733549289,
+        "t": 133.25127703330975,
+        "r": 554.9757661836436,
+        "b": 82.70676907106395,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Leading ESMA  through potential changes arising from the  European Commission's  legislative  proposal  on  market  integration  and  supervision, including adjustments to ESMA's governance framework.",
+      "prov": [
+        {
+          "page_no": 17,
+          "bbox": {
+            "l": 81.64816733549289,
+            "t": 133.25127703330975,
+            "r": 554.9757661836436,
+            "b": 82.70676907106395,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            200
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/groups/3"
+      }
+    },
+    {
+      "order_index": 129,
+      "self_ref": "#/texts/129",
+      "label": "page_footer",
+      "level": null,
+      "page_no": 17,
+      "bbox": {
+        "l": 567.1045170345577,
+        "t": 16.145493300221688,
+        "r": 579.4811856700188,
+        "b": 5.500546366249637,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "16",
+      "prov": [
+        {
+          "page_no": 17,
+          "bbox": {
+            "l": 567.1045170345577,
+            "t": 16.145493300221688,
+            "r": 579.4811856700188,
+            "b": 5.500546366249637,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            2
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 130,
+      "self_ref": "#/texts/130",
+      "label": "page_header",
+      "level": null,
+      "page_no": 18,
+      "bbox": {
+        "l": 412.234326823569,
+        "t": 794.2703408783517,
+        "r": 555.1124582678193,
+        "b": 767.1191747921389,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Spotlight on Markets January & February 2026",
+      "prov": [
+        {
+          "page_no": 18,
+          "bbox": {
+            "l": 412.234326823569,
+            "t": 794.2703408783517,
+            "r": 555.1124582678193,
+            "b": 767.1191747921389,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            44
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 131,
+      "self_ref": "#/texts/131",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 18,
+      "bbox": {
+        "l": 60.7743766677342,
+        "t": 671.5520728441091,
+        "r": 385.9034513987485,
+        "b": 660.0222646962507,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "A Strategic and Multicultural Working Environment",
+      "prov": [
+        {
+          "page_no": 18,
+          "bbox": {
+            "l": 60.7743766677342,
+            "t": 671.5520728441091,
+            "r": 385.9034513987485,
+            "b": 660.0222646962507,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            49
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 132,
+      "self_ref": "#/texts/132",
+      "label": "text",
+      "level": null,
+      "page_no": 18,
+      "bbox": {
+        "l": 59.54999751875,
+        "t": 634.1080140842782,
+        "r": 554.9782392654419,
+        "b": 564.0561562148387,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "The  position  offers  the  opportunity  to  contribute  to  the  effective  functioning, stability  and  integrity  of  EU  financial  markets.  ESMA  provides  a  dynamic, multicultural and inclusive working environment, bringing together professionals from across the EU committed to investor protection and orderly markets.",
+      "prov": [
+        {
+          "page_no": 18,
+          "bbox": {
+            "l": 59.54999751875,
+            "t": 634.1080140842782,
+            "r": 554.9782392654419,
+            "b": 564.0561562148387,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            327
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 133,
+      "self_ref": "#/texts/133",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 18,
+      "bbox": {
+        "l": 65.9283956529834,
+        "t": 222.87109649915044,
+        "r": 145.31308289701647,
+        "b": 211.34128835129206,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Applications",
+      "prov": [
+        {
+          "page_no": 18,
+          "bbox": {
+            "l": 65.9283956529834,
+            "t": 222.87109649915044,
+            "r": 145.31308289701647,
+            "b": 211.34128835129206,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            12
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 134,
+      "self_ref": "#/texts/134",
+      "label": "text",
+      "level": null,
+      "page_no": 18,
+      "bbox": {
+        "l": 65.9283956529834,
+        "t": 196.4373910405551,
+        "r": 318.06975239139433,
+        "b": 184.9075828926966,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Applications are open until 3 March 2026.",
+      "prov": [
+        {
+          "page_no": 18,
+          "bbox": {
+            "l": 65.9283956529834,
+            "t": 196.4373910405551,
+            "r": 318.06975239139433,
+            "b": 184.9075828926966,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            41
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 135,
+      "self_ref": "#/texts/135",
+      "label": "text",
+      "level": null,
+      "page_no": 18,
+      "bbox": {
+        "l": 65.9283956529834,
+        "t": 160.42382198112057,
+        "r": 535.815903131223,
+        "b": 130.8872293035448,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "For  further  details  on  the  role  and  application  process,  please  consult  the vacancy notice.",
+      "prov": [
+        {
+          "page_no": 18,
+          "bbox": {
+            "l": 65.9283956529834,
+            "t": 160.42382198112057,
+            "r": 535.815903131223,
+            "b": 130.8872293035448,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            102
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 136,
+      "self_ref": "#/texts/136",
+      "label": "page_footer",
+      "level": null,
+      "page_no": 18,
+      "bbox": {
+        "l": 567.1045170345577,
+        "t": 16.145493300221688,
+        "r": 579.4811856700188,
+        "b": 5.500546366249637,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "16",
+      "prov": [
+        {
+          "page_no": 18,
+          "bbox": {
+            "l": 567.1045170345577,
+            "t": 16.145493300221688,
+            "r": 579.4811856700188,
+            "b": 5.500546366249637,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            2
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 137,
+      "self_ref": "#/texts/137",
+      "label": "page_header",
+      "level": null,
+      "page_no": 19,
+      "bbox": {
+        "l": 412.234326823569,
+        "t": 794.2703408783517,
+        "r": 555.1124582678193,
+        "b": 767.1191747921389,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Spotlight on Markets January & February 2026",
+      "prov": [
+        {
+          "page_no": 19,
+          "bbox": {
+            "l": 412.234326823569,
+            "t": 794.2703408783517,
+            "r": 555.1124582678193,
+            "b": 767.1191747921389,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            44
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 138,
+      "self_ref": "#/texts/138",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 19,
+      "bbox": {
+        "l": 50.6993426875273,
+        "t": 658.7858195008363,
+        "r": 87.07311121158475,
+        "b": 644.5947746194848,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Date",
+      "prov": [
+        {
+          "page_no": 19,
+          "bbox": {
+            "l": 50.6993426875273,
+            "t": 658.7858195008363,
+            "r": 87.07311121158475,
+            "b": 644.5947746194848,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            4
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 139,
+      "self_ref": "#/texts/139",
+      "label": "text",
+      "level": null,
+      "page_no": 19,
+      "bbox": {
+        "l": 62.355100601870696,
+        "t": 601.1946827004671,
+        "r": 104.34535148339079,
+        "b": 587.0036378191156,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "3 Mar",
+      "prov": [
+        {
+          "page_no": 19,
+          "bbox": {
+            "l": 62.355100601870696,
+            "t": 601.1946827004671,
+            "r": 104.34535148339079,
+            "b": 587.0036378191156,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            5
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 140,
+      "self_ref": "#/texts/140",
+      "label": "text",
+      "level": null,
+      "page_no": 19,
+      "bbox": {
+        "l": 62.355100601870696,
+        "t": 523.9155667204303,
+        "r": 112.25042952947774,
+        "b": 509.7245218390789,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "31 Mar",
+      "prov": [
+        {
+          "page_no": 19,
+          "bbox": {
+            "l": 62.355100601870696,
+            "t": 523.9155667204303,
+            "r": 112.25042952947774,
+            "b": 509.7245218390789,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            6
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 141,
+      "self_ref": "#/texts/141",
+      "label": "text",
+      "level": null,
+      "page_no": 19,
+      "bbox": {
+        "l": 62.355100601870696,
+        "t": 446.8316811322591,
+        "r": 114.95502268108851,
+        "b": 432.6406362509077,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "21 May",
+      "prov": [
+        {
+          "page_no": 19,
+          "bbox": {
+            "l": 62.355100601870696,
+            "t": 446.8316811322591,
+            "r": 114.95502268108851,
+            "b": 432.6406362509077,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            6
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 142,
+      "self_ref": "#/texts/142",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 19,
+      "bbox": {
+        "l": 249.2110843312039,
+        "t": 709.3417203658444,
+        "r": 346.2675692148319,
+        "b": 682.7293530309144,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Events",
+      "prov": [
+        {
+          "page_no": 19,
+          "bbox": {
+            "l": 249.2110843312039,
+            "t": 709.3417203658444,
+            "r": 346.2675692148319,
+            "b": 682.7293530309144,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            6
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 143,
+      "self_ref": "#/texts/143",
+      "label": "text",
+      "level": null,
+      "page_no": 19,
+      "bbox": {
+        "l": 231.11051446539398,
+        "t": 674.5105948456372,
+        "r": 364.37852411847734,
+        "b": 660.3195499642858,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Click on the event",
+      "prov": [
+        {
+          "page_no": 19,
+          "bbox": {
+            "l": 231.11051446539398,
+            "t": 674.5105948456372,
+            "r": 364.37852411847734,
+            "b": 660.3195499642858,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            18
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 144,
+      "self_ref": "#/texts/144",
+      "label": "text",
+      "level": null,
+      "page_no": 19,
+      "bbox": {
+        "l": 135.5896671504303,
+        "t": 601.2311349191402,
+        "r": 509.1226260179959,
+        "b": 587.931604343509,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Save the date: Webinar on AI Adoption Risk Analysis",
+      "prov": [
+        {
+          "page_no": 19,
+          "bbox": {
+            "l": 135.5896671504303,
+            "t": 601.2311349191402,
+            "r": 509.1226260179959,
+            "b": 587.931604343509,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            51
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 145,
+      "self_ref": "#/texts/145",
+      "label": "text",
+      "level": null,
+      "page_no": 19,
+      "bbox": {
+        "l": 135.5896671504303,
+        "t": 523.952033339103,
+        "r": 532.1384083693979,
+        "b": 510.6525027634717,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Workshop on the Authorisation of ESG Rating Providers",
+      "prov": [
+        {
+          "page_no": 19,
+          "bbox": {
+            "l": 135.5896671504303,
+            "t": 523.952033339103,
+            "r": 532.1384083693979,
+            "b": 510.6525027634717,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            53
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 146,
+      "self_ref": "#/texts/146",
+      "label": "text",
+      "level": null,
+      "page_no": 19,
+      "bbox": {
+        "l": 135.5896671504303,
+        "t": 456.9969743688972,
+        "r": 440.97588334017814,
+        "b": 423.439811197334,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESMA's Conference 2026: A new era for EU capital markets",
+      "prov": [
+        {
+          "page_no": 19,
+          "bbox": {
+            "l": 135.5896671504303,
+            "t": 456.9969743688972,
+            "r": 440.97588334017814,
+            "b": 423.439811197334,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            56
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 147,
+      "self_ref": "#/texts/147",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 19,
+      "bbox": {
+        "l": 138.50922199269482,
+        "t": 366.60490824654545,
+        "r": 456.95886382166907,
+        "b": 339.99254091161544,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESMA is on Instagram!",
+      "prov": [
+        {
+          "page_no": 19,
+          "bbox": {
+            "l": 138.50922199269482,
+            "t": 366.60490824654545,
+            "r": 456.95886382166907,
+            "b": 339.99254091161544,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            21
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 148,
+      "self_ref": "#/texts/148",
+      "label": "text",
+      "level": null,
+      "page_no": 19,
+      "bbox": {
+        "l": 62.355100601870696,
+        "t": 290.18749891929235,
+        "r": 349.0116829093942,
+        "b": 175.59980536400133,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESMA protects investors - and we have brought this commitment to Instagram. Connecting with retail investors, we aim to  help  them  make  informed  financial decisions.  Find  us  under  the  handle @ESMAcomms.",
+      "prov": [
+        {
+          "page_no": 19,
+          "bbox": {
+            "l": 62.355100601870696,
+            "t": 290.18749891929235,
+            "r": 349.0116829093942,
+            "b": 175.59980536400133,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            211
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 149,
+      "self_ref": "#/texts/149",
+      "label": "text",
+      "level": null,
+      "page_no": 19,
+      "bbox": {
+        "l": 62.355100601870696,
+        "t": 148.38407074776876,
+        "r": 349.0052060190553,
+        "b": 94.56927498027358,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Join us for practical tips, fun polls, and interactive  quizzes  that  will  empower you along your investing journey!",
+      "prov": [
+        {
+          "page_no": 19,
+          "bbox": {
+            "l": 62.355100601870696,
+            "t": 148.38407074776876,
+            "r": 349.0052060190553,
+            "b": 94.56927498027358,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            118
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 150,
+      "self_ref": "#/texts/150",
+      "label": "text",
+      "level": null,
+      "page_no": 19,
+      "bbox": {
+        "l": 404.72459813137436,
+        "t": 195.24264111869059,
+        "r": 516.5296549717775,
+        "b": 185.89386483801366,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESMA is on Instagram!",
+      "prov": [
+        {
+          "page_no": 19,
+          "bbox": {
+            "l": 404.72459813137436,
+            "t": 195.24264111869059,
+            "r": 516.5296549717775,
+            "b": 185.89386483801366,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            21
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/pictures/31"
+      }
+    },
+    {
+      "order_index": 151,
+      "self_ref": "#/texts/151",
+      "label": "text",
+      "level": null,
+      "page_no": 19,
+      "bbox": {
+        "l": 414.9539179102527,
+        "t": 295.48694495258053,
+        "r": 482.7814251469092,
+        "b": 286.7579439869926,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "@ESMAcomms",
+      "prov": [
+        {
+          "page_no": 19,
+          "bbox": {
+            "l": 414.9539179102527,
+            "t": 295.48694495258053,
+            "r": 482.7814251469092,
+            "b": 286.7579439869926,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            10
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/pictures/31"
+      }
+    },
+    {
+      "order_index": 152,
+      "self_ref": "#/texts/152",
+      "label": "text",
+      "level": null,
+      "page_no": 19,
+      "bbox": {
+        "l": 402.80358938401645,
+        "t": 221.5322610575139,
+        "r": 518.4536704229001,
+        "b": 213.60555797479242,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Empowering retail investors",
+      "prov": [
+        {
+          "page_no": 19,
+          "bbox": {
+            "l": 402.80358938401645,
+            "t": 221.5322610575139,
+            "r": 518.4536704229001,
+            "b": 213.60555797479242,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            27
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/pictures/31"
+      }
+    },
+    {
+      "order_index": 153,
+      "self_ref": "#/texts/153",
+      "label": "text",
+      "level": null,
+      "page_no": 19,
+      "bbox": {
+        "l": 418.15990267447,
+        "t": 148.55490611328798,
+        "r": 508.0126584358776,
+        "b": 141.07741852431298,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Smart choices make for",
+      "prov": [
+        {
+          "page_no": 19,
+          "bbox": {
+            "l": 418.15990267447,
+            "t": 148.55490611328798,
+            "r": 508.0126584358776,
+            "b": 141.07741852431298,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            22
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/pictures/31"
+      }
+    },
+    {
+      "order_index": 154,
+      "self_ref": "#/texts/154",
+      "label": "text",
+      "level": null,
+      "page_no": 19,
+      "bbox": {
+        "l": 430.68334154756,
+        "t": 139.065954796661,
+        "r": 495.4870246418287,
+        "b": 131.588467207686,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "smarter investing",
+      "prov": [
+        {
+          "page_no": 19,
+          "bbox": {
+            "l": 430.68334154756,
+            "t": 139.065954796661,
+            "r": 495.4870246418287,
+            "b": 131.588467207686,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            17
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/pictures/31"
+      }
+    },
+    {
+      "order_index": 155,
+      "self_ref": "#/texts/155",
+      "label": "page_footer",
+      "level": null,
+      "page_no": 19,
+      "bbox": {
+        "l": 567.9269283363769,
+        "t": 16.145493300221688,
+        "r": 579.4872894064907,
+        "b": 5.500546366249637,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "17",
+      "prov": [
+        {
+          "page_no": 19,
+          "bbox": {
+            "l": 567.9269283363769,
+            "t": 16.145493300221688,
+            "r": 579.4872894064907,
+            "b": 5.500546366249637,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            2
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 156,
+      "self_ref": "#/texts/156",
+      "label": "page_header",
+      "level": null,
+      "page_no": 20,
+      "bbox": {
+        "l": 412.234326823569,
+        "t": 794.2703408783517,
+        "r": 555.1124582678193,
+        "b": 767.1191747921389,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Spotlight on Markets January & February 2026",
+      "prov": [
+        {
+          "page_no": 20,
+          "bbox": {
+            "l": 412.234326823569,
+            "t": 794.2703408783517,
+            "r": 555.1124582678193,
+            "b": 767.1191747921389,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            44
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 157,
+      "self_ref": "#/texts/157",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 20,
+      "bbox": {
+        "l": 46.8577492475937,
+        "t": 670.5595734102632,
+        "r": 140.9033995951141,
+        "b": 656.3685285289117,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Contact info",
+      "prov": [
+        {
+          "page_no": 20,
+          "bbox": {
+            "l": 46.8577492475937,
+            "t": 670.5595734102632,
+            "r": 140.9033995951141,
+            "b": 656.3685285289117,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            12
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 158,
+      "self_ref": "#/texts/158",
+      "label": "text",
+      "level": null,
+      "page_no": 20,
+      "bbox": {
+        "l": 46.8577492475937,
+        "t": 641.4985986211371,
+        "r": 209.82526464567445,
+        "b": 605.5493557663774,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "info@esma.europa.eu www.esma.europa.eu",
+      "prov": [
+        {
+          "page_no": 20,
+          "bbox": {
+            "l": 46.8577492475937,
+            "t": 641.4985986211371,
+            "r": 209.82526464567445,
+            "b": 605.5493557663774,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            38
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 159,
+      "self_ref": "#/texts/159",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 20,
+      "bbox": {
+        "l": 46.8577492475937,
+        "t": 563.8063058583163,
+        "r": 248.15071149087584,
+        "b": 549.6152609769648,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Press contact information",
+      "prov": [
+        {
+          "page_no": 20,
+          "bbox": {
+            "l": 46.8577492475937,
+            "t": 563.8063058583163,
+            "r": 248.15071149087584,
+            "b": 549.6152609769648,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            25
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 160,
+      "self_ref": "#/texts/160",
+      "label": "text",
+      "level": null,
+      "page_no": 20,
+      "bbox": {
+        "l": 46.8577492475937,
+        "t": 535.8392462236104,
+        "r": 221.95498831312324,
+        "b": 521.648201342259,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "press@esma.europa.eu",
+      "prov": [
+        {
+          "page_no": 20,
+          "bbox": {
+            "l": 46.8577492475937,
+            "t": 535.8392462236104,
+            "r": 221.95498831312324,
+            "b": 521.648201342259,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            20
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 161,
+      "self_ref": "#/texts/161",
+      "label": "section_header",
+      "level": 1,
+      "page_no": 20,
+      "bbox": {
+        "l": 46.8577492475937,
+        "t": 488.275244205444,
+        "r": 144.5838754612069,
+        "b": 474.08419932409254,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "Social Media",
+      "prov": [
+        {
+          "page_no": 20,
+          "bbox": {
+            "l": 46.8577492475937,
+            "t": 488.275244205444,
+            "r": 144.5838754612069,
+            "b": 474.08419932409254,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            12
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 162,
+      "self_ref": "#/texts/162",
+      "label": "text",
+      "level": null,
+      "page_no": 20,
+      "bbox": {
+        "l": 79.15043430206511,
+        "t": 456.55915192694783,
+        "r": 459.2999596600966,
+        "b": 442.3681070455964,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "European Securities and Markets Authority (ESMA)",
+      "prov": [
+        {
+          "page_no": 20,
+          "bbox": {
+            "l": 79.15043430206511,
+            "t": 456.55915192694783,
+            "r": 459.2999596600966,
+            "b": 442.3681070455964,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            48
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 163,
+      "self_ref": "#/texts/163",
+      "label": "text",
+      "level": null,
+      "page_no": 20,
+      "bbox": {
+        "l": 79.15043430206511,
+        "t": 421.8418909735004,
+        "r": 180.25313340333025,
+        "b": 407.650846092149,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESMAcomms",
+      "prov": [
+        {
+          "page_no": 20,
+          "bbox": {
+            "l": 79.15043430206511,
+            "t": 421.8418909735004,
+            "r": 180.25313340333025,
+            "b": 407.650846092149,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            9
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 164,
+      "self_ref": "#/texts/164",
+      "label": "text",
+      "level": null,
+      "page_no": 20,
+      "bbox": {
+        "l": 79.15043430206511,
+        "t": 386.1437404609234,
+        "r": 180.25313340333025,
+        "b": 371.952695579572,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "ESMAcomms",
+      "prov": [
+        {
+          "page_no": 20,
+          "bbox": {
+            "l": 79.15043430206511,
+            "t": 386.1437404609234,
+            "r": 180.25313340333025,
+            "b": 371.952695579572,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            9
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    },
+    {
+      "order_index": 165,
+      "self_ref": "#/texts/165",
+      "label": "page_footer",
+      "level": null,
+      "page_no": 20,
+      "bbox": {
+        "l": 567.2217487046731,
+        "t": 16.145493300221688,
+        "r": 579.478372109936,
+        "b": 5.500546366249637,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "text": "18",
+      "prov": [
+        {
+          "page_no": 20,
+          "bbox": {
+            "l": 567.2217487046731,
+            "t": 16.145493300221688,
+            "r": 579.478372109936,
+            "b": 5.500546366249637,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            2
+          ]
+        }
+      ],
+      "parent": {
+        "$ref": "#/body"
+      }
+    }
+  ],
+  "tables": [
+    {
+      "order_index": 0,
+      "self_ref": "#/tables/0",
+      "label": "document_index",
+      "page_no": 2,
+      "bbox": {
+        "l": 47.40531881063576,
+        "t": 546.2044938448797,
+        "r": 518.9247075535307,
+        "b": 117.16428125099128,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 47.40531881063576,
+            "t": 546.2044938448797,
+            "r": 518.9247075535307,
+            "b": 117.16428125099128,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "n_cells": 12,
+      "table_cells": [
+        {
+          "text": "ESMA's Digital and Data strategies support supervision of EU financial markets",
+          "start_row_offset_idx": 0,
+          "start_col_offset_idx": 0,
+          "end_row_offset_idx": 1,
+          "end_col_offset_idx": 1
+        },
+        {
+          "text": "4",
+          "start_row_offset_idx": 0,
+          "start_col_offset_idx": 1,
+          "end_row_offset_idx": 1,
+          "end_col_offset_idx": 2
+        },
+        {
+          "text": "12",
+          "start_row_offset_idx": 5,
+          "start_col_offset_idx": 1,
+          "end_row_offset_idx": 6,
+          "end_col_offset_idx": 2
+        },
+        {
+          "text": "ESMA promotes clarity in communications on ESG strategies",
+          "start_row_offset_idx": 5,
+          "start_col_offset_idx": 0,
+          "end_row_offset_idx": 6,
+          "end_col_offset_idx": 1
+        },
+        {
+          "text": "7",
+          "start_row_offset_idx": 1,
+          "start_col_offset_idx": 1,
+          "end_row_offset_idx": 2,
+          "end_col_offset_idx": 2
+        },
+        {
+          "text": "ESMA launches selection of Consolidated Tape Provider for OTC derivatives",
+          "start_row_offset_idx": 1,
+          "start_col_offset_idx": 0,
+          "end_row_offset_idx": 2,
+          "end_col_offset_idx": 1
+        },
+        {
+          "text": "ESMA signs Memorandum of Understanding with the Reserve Bank of India",
+          "start_row_offset_idx": 2,
+          "start_col_offset_idx": 0,
+          "end_row_offset_idx": 3,
+          "end_col_offset_idx": 1
+        },
+        {
+          "text": "8",
+          "start_row_offset_idx": 2,
+          "start_col_offset_idx": 1,
+          "end_row_offset_idx": 3,
+          "end_col_offset_idx": 2
+        },
+        {
+          "text": "9",
+          "start_row_offset_idx": 3,
+          "start_col_offset_idx": 1,
+          "end_row_offset_idx": 4,
+          "end_col_offset_idx": 2
+        },
+        {
+          "text": "The European Supervisory Authorities and UK financial regulators sign Memorandum of Understanding on oversight of critical ICT third-party service providers under DORA",
+          "start_row_offset_idx": 3,
+          "start_col_offset_idx": 0,
+          "end_row_offset_idx": 4,
+          "end_col_offset_idx": 1
+        },
+        {
+          "text": "ESAs publish joint Guidelines on ESG stress testing",
+          "start_row_offset_idx": 4,
+          "start_col_offset_idx": 0,
+          "end_row_offset_idx": 5,
+          "end_col_offset_idx": 1
+        },
+        {
+          "text": "10",
+          "start_row_offset_idx": 4,
+          "start_col_offset_idx": 1,
+          "end_row_offset_idx": 5,
+          "end_col_offset_idx": 2
+        }
+      ]
+    },
+    {
+      "order_index": 1,
+      "self_ref": "#/tables/1",
+      "label": "document_index",
+      "page_no": 3,
+      "bbox": {
+        "l": 51.724350958062494,
+        "t": 636.3080794804057,
+        "r": 525.1429972296593,
+        "b": 94.60349998290917,
+        "coord_origin": "BOTTOMLEFT"
+      },
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 51.724350958062494,
+            "t": 636.3080794804057,
+            "r": 525.1429972296593,
+            "b": 94.60349998290917,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "n_cells": 15,
+      "table_cells": [
+        {
+          "text": "Look ahead",
+          "start_row_offset_idx": 5,
+          "start_col_offset_idx": 0,
+          "end_row_offset_idx": 6,
+          "end_col_offset_idx": 1
+        },
+        {
+          "text": "Contact info",
+          "start_row_offset_idx": 7,
+          "start_col_offset_idx": 0,
+          "end_row_offset_idx": 8,
+          "end_col_offset_idx": 1
+        },
+        {
+          "text": "19",
+          "start_row_offset_idx": 7,
+          "start_col_offset_idx": 1,
+          "end_row_offset_idx": 8,
+          "end_col_offset_idx": 2
+        },
+        {
+          "text": "Events",
+          "start_row_offset_idx": 6,
+          "start_col_offset_idx": 0,
+          "end_row_offset_idx": 7,
+          "end_col_offset_idx": 1
+        },
+        {
+          "text": "18",
+          "start_row_offset_idx": 6,
+          "start_col_offset_idx": 1,
+          "end_row_offset_idx": 7,
+          "end_col_offset_idx": 2
+        },
+        {
+          "text": "15",
+          "start_row_offset_idx": 2,
+          "start_col_offset_idx": 1,
+          "end_row_offset_idx": 3,
+          "end_col_offset_idx": 2
+        },
+        {
+          "text": "ESAs' Joint Board of Appeal rules on reimbursement of costs in an appeal brought by NOVIS Insurance Company against the European Insurance and Occupational Pensions Authority (EIOPA)",
+          "start_row_offset_idx": 2,
+          "start_col_offset_idx": 0,
+          "end_row_offset_idx": 3,
+          "end_col_offset_idx": 1
+        },
+        {
+          "text": "14",
+          "start_row_offset_idx": 1,
+          "start_col_offset_idx": 1,
+          "end_row_offset_idx": 2,
+          "end_col_offset_idx": 2
+        },
+        {
+          "text": "ESMA publishes report on cross-border marketing of funds including statistics on notifications",
+          "start_row_offset_idx": 1,
+          "start_col_offset_idx": 0,
+          "end_row_offset_idx": 2,
+          "end_col_offset_idx": 1
+        },
+        {
+          "text": "13",
+          "start_row_offset_idx": 0,
+          "start_col_offset_idx": 1,
+          "end_row_offset_idx": 1,
+          "end_col_offset_idx": 2
+        },
+        {
+          "text": "Principles for risk-based supervision: a critical pillar for ESMA's simplification and burden reduction efforts",
+          "start_row_offset_idx": 0,
+          "start_col_offset_idx": 0,
+          "end_row_offset_idx": 1,
+          "end_col_offset_idx": 1
+        },
+        {
+          "text": "16",
+          "start_row_offset_idx": 3,
+          "start_col_offset_idx": 1,
+          "end_row_offset_idx": 4,
+          "end_col_offset_idx": 2
+        },
+        {
+          "text": "Commissioner Maria Luís Albuquerque visits ESMA headquarters.",
+          "start_row_offset_idx": 3,
+          "start_col_offset_idx": 0,
+          "end_row_offset_idx": 4,
+          "end_col_offset_idx": 1
+        },
+        {
+          "text": "17",
+          "start_row_offset_idx": 4,
+          "start_col_offset_idx": 1,
+          "end_row_offset_idx": 5,
+          "end_col_offset_idx": 2
+        },
+        {
+          "text": "ESMA launches selection process for its next Chair",
+          "start_row_offset_idx": 4,
+          "start_col_offset_idx": 0,
+          "end_row_offset_idx": 5,
+          "end_col_offset_idx": 1
+        }
+      ]
+    }
+  ],
+  "body": {
+    "self_ref": "#/body",
+    "children": [
+      {
+        "$ref": "#/texts/0"
+      },
+      {
+        "$ref": "#/pictures/0"
+      },
+      {
+        "$ref": "#/texts/1"
+      },
+      {
+        "$ref": "#/texts/2"
+      },
+      {
+        "$ref": "#/texts/3"
+      },
+      {
+        "$ref": "#/groups/0"
+      },
+      {
+        "$ref": "#/texts/7"
+      },
+      {
+        "$ref": "#/texts/8"
+      },
+      {
+        "$ref": "#/pictures/1"
+      },
+      {
+        "$ref": "#/texts/9"
+      },
+      {
+        "$ref": "#/texts/10"
+      },
+      {
+        "$ref": "#/tables/0"
+      },
+      {
+        "$ref": "#/texts/11"
+      },
+      {
+        "$ref": "#/texts/12"
+      },
+      {
+        "$ref": "#/pictures/2"
+      },
+      {
+        "$ref": "#/texts/13"
+      },
+      {
+        "$ref": "#/tables/1"
+      },
+      {
+        "$ref": "#/texts/14"
+      },
+      {
+        "$ref": "#/texts/15"
+      },
+      {
+        "$ref": "#/pictures/3"
+      },
+      {
+        "$ref": "#/texts/16"
+      },
+      {
+        "$ref": "#/texts/17"
+      },
+      {
+        "$ref": "#/texts/18"
+      },
+      {
+        "$ref": "#/texts/19"
+      },
+      {
+        "$ref": "#/texts/20"
+      },
+      {
+        "$ref": "#/texts/21"
+      },
+      {
+        "$ref": "#/pictures/4"
+      },
+      {
+        "$ref": "#/texts/22"
+      },
+      {
+        "$ref": "#/texts/23"
+      },
+      {
+        "$ref": "#/pictures/5"
+      },
+      {
+        "$ref": "#/groups/1"
+      },
+      {
+        "$ref": "#/pictures/6"
+      },
+      {
+        "$ref": "#/texts/28"
+      },
+      {
+        "$ref": "#/texts/29"
+      },
+      {
+        "$ref": "#/pictures/7"
+      },
+      {
+        "$ref": "#/texts/30"
+      },
+      {
+        "$ref": "#/groups/2"
+      },
+      {
+        "$ref": "#/texts/35"
+      },
+      {
+        "$ref": "#/texts/36"
+      },
+      {
+        "$ref": "#/texts/37"
+      },
+      {
+        "$ref": "#/texts/38"
+      },
+      {
+        "$ref": "#/texts/39"
+      },
+      {
+        "$ref": "#/texts/40"
+      },
+      {
+        "$ref": "#/pictures/8"
+      },
+      {
+        "$ref": "#/texts/41"
+      },
+      {
+        "$ref": "#/texts/42"
+      },
+      {
+        "$ref": "#/texts/43"
+      },
+      {
+        "$ref": "#/texts/44"
+      },
+      {
+        "$ref": "#/texts/45"
+      },
+      {
+        "$ref": "#/texts/46"
+      },
+      {
+        "$ref": "#/texts/47"
+      },
+      {
+        "$ref": "#/texts/48"
+      },
+      {
+        "$ref": "#/texts/49"
+      },
+      {
+        "$ref": "#/texts/50"
+      },
+      {
+        "$ref": "#/texts/51"
+      },
+      {
+        "$ref": "#/pictures/9"
+      },
+      {
+        "$ref": "#/texts/52"
+      },
+      {
+        "$ref": "#/texts/53"
+      },
+      {
+        "$ref": "#/texts/54"
+      },
+      {
+        "$ref": "#/texts/55"
+      },
+      {
+        "$ref": "#/texts/56"
+      },
+      {
+        "$ref": "#/texts/57"
+      },
+      {
+        "$ref": "#/pictures/10"
+      },
+      {
+        "$ref": "#/texts/58"
+      },
+      {
+        "$ref": "#/texts/59"
+      },
+      {
+        "$ref": "#/pictures/11"
+      },
+      {
+        "$ref": "#/texts/60"
+      },
+      {
+        "$ref": "#/texts/61"
+      },
+      {
+        "$ref": "#/texts/62"
+      },
+      {
+        "$ref": "#/texts/63"
+      },
+      {
+        "$ref": "#/texts/64"
+      },
+      {
+        "$ref": "#/texts/65"
+      },
+      {
+        "$ref": "#/texts/66"
+      },
+      {
+        "$ref": "#/texts/67"
+      },
+      {
+        "$ref": "#/pictures/12"
+      },
+      {
+        "$ref": "#/texts/68"
+      },
+      {
+        "$ref": "#/texts/69"
+      },
+      {
+        "$ref": "#/texts/70"
+      },
+      {
+        "$ref": "#/texts/71"
+      },
+      {
+        "$ref": "#/pictures/13"
+      },
+      {
+        "$ref": "#/texts/72"
+      },
+      {
+        "$ref": "#/texts/73"
+      },
+      {
+        "$ref": "#/pictures/14"
+      },
+      {
+        "$ref": "#/texts/74"
+      },
+      {
+        "$ref": "#/texts/75"
+      },
+      {
+        "$ref": "#/pictures/15"
+      },
+      {
+        "$ref": "#/texts/76"
+      },
+      {
+        "$ref": "#/texts/77"
+      },
+      {
+        "$ref": "#/pictures/16"
+      },
+      {
+        "$ref": "#/texts/78"
+      },
+      {
+        "$ref": "#/texts/79"
+      },
+      {
+        "$ref": "#/texts/80"
+      },
+      {
+        "$ref": "#/pictures/17"
+      },
+      {
+        "$ref": "#/texts/81"
+      },
+      {
+        "$ref": "#/texts/82"
+      },
+      {
+        "$ref": "#/texts/83"
+      },
+      {
+        "$ref": "#/texts/84"
+      },
+      {
+        "$ref": "#/texts/85"
+      },
+      {
+        "$ref": "#/pictures/18"
+      },
+      {
+        "$ref": "#/texts/86"
+      },
+      {
+        "$ref": "#/texts/87"
+      },
+      {
+        "$ref": "#/texts/88"
+      },
+      {
+        "$ref": "#/pictures/19"
+      },
+      {
+        "$ref": "#/texts/89"
+      },
+      {
+        "$ref": "#/texts/90"
+      },
+      {
+        "$ref": "#/texts/91"
+      },
+      {
+        "$ref": "#/texts/92"
+      },
+      {
+        "$ref": "#/texts/93"
+      },
+      {
+        "$ref": "#/texts/94"
+      },
+      {
+        "$ref": "#/pictures/20"
+      },
+      {
+        "$ref": "#/texts/95"
+      },
+      {
+        "$ref": "#/texts/96"
+      },
+      {
+        "$ref": "#/pictures/21"
+      },
+      {
+        "$ref": "#/texts/97"
+      },
+      {
+        "$ref": "#/texts/98"
+      },
+      {
+        "$ref": "#/texts/99"
+      },
+      {
+        "$ref": "#/texts/100"
+      },
+      {
+        "$ref": "#/texts/101"
+      },
+      {
+        "$ref": "#/texts/102"
+      },
+      {
+        "$ref": "#/pictures/22"
+      },
+      {
+        "$ref": "#/texts/103"
+      },
+      {
+        "$ref": "#/texts/104"
+      },
+      {
+        "$ref": "#/texts/105"
+      },
+      {
+        "$ref": "#/pictures/23"
+      },
+      {
+        "$ref": "#/texts/106"
+      },
+      {
+        "$ref": "#/texts/107"
+      },
+      {
+        "$ref": "#/texts/108"
+      },
+      {
+        "$ref": "#/texts/109"
+      },
+      {
+        "$ref": "#/pictures/24"
+      },
+      {
+        "$ref": "#/texts/110"
+      },
+      {
+        "$ref": "#/texts/111"
+      },
+      {
+        "$ref": "#/pictures/25"
+      },
+      {
+        "$ref": "#/texts/112"
+      },
+      {
+        "$ref": "#/texts/113"
+      },
+      {
+        "$ref": "#/texts/114"
+      },
+      {
+        "$ref": "#/pictures/26"
+      },
+      {
+        "$ref": "#/texts/115"
+      },
+      {
+        "$ref": "#/texts/116"
+      },
+      {
+        "$ref": "#/pictures/27"
+      },
+      {
+        "$ref": "#/texts/117"
+      },
+      {
+        "$ref": "#/texts/118"
+      },
+      {
+        "$ref": "#/texts/119"
+      },
+      {
+        "$ref": "#/texts/120"
+      },
+      {
+        "$ref": "#/texts/121"
+      },
+      {
+        "$ref": "#/groups/3"
+      },
+      {
+        "$ref": "#/texts/129"
+      },
+      {
+        "$ref": "#/texts/130"
+      },
+      {
+        "$ref": "#/pictures/28"
+      },
+      {
+        "$ref": "#/texts/131"
+      },
+      {
+        "$ref": "#/texts/132"
+      },
+      {
+        "$ref": "#/pictures/29"
+      },
+      {
+        "$ref": "#/texts/133"
+      },
+      {
+        "$ref": "#/texts/134"
+      },
+      {
+        "$ref": "#/texts/135"
+      },
+      {
+        "$ref": "#/texts/136"
+      },
+      {
+        "$ref": "#/texts/137"
+      },
+      {
+        "$ref": "#/pictures/30"
+      },
+      {
+        "$ref": "#/texts/138"
+      },
+      {
+        "$ref": "#/texts/139"
+      },
+      {
+        "$ref": "#/texts/140"
+      },
+      {
+        "$ref": "#/texts/141"
+      },
+      {
+        "$ref": "#/texts/142"
+      },
+      {
+        "$ref": "#/texts/143"
+      },
+      {
+        "$ref": "#/texts/144"
+      },
+      {
+        "$ref": "#/texts/145"
+      },
+      {
+        "$ref": "#/texts/146"
+      },
+      {
+        "$ref": "#/texts/147"
+      },
+      {
+        "$ref": "#/texts/148"
+      },
+      {
+        "$ref": "#/texts/149"
+      },
+      {
+        "$ref": "#/pictures/31"
+      },
+      {
+        "$ref": "#/texts/155"
+      },
+      {
+        "$ref": "#/texts/156"
+      },
+      {
+        "$ref": "#/pictures/32"
+      },
+      {
+        "$ref": "#/texts/157"
+      },
+      {
+        "$ref": "#/texts/158"
+      },
+      {
+        "$ref": "#/texts/159"
+      },
+      {
+        "$ref": "#/texts/160"
+      },
+      {
+        "$ref": "#/texts/161"
+      },
+      {
+        "$ref": "#/pictures/33"
+      },
+      {
+        "$ref": "#/texts/162"
+      },
+      {
+        "$ref": "#/pictures/34"
+      },
+      {
+        "$ref": "#/pictures/35"
+      },
+      {
+        "$ref": "#/texts/163"
+      },
+      {
+        "$ref": "#/texts/164"
+      },
+      {
+        "$ref": "#/texts/165"
+      }
+    ],
+    "content_layer": "body",
+    "name": "_root_",
+    "label": "unspecified"
+  },
+  "schema_name": "DoclingDocument",
+  "version": "1.10.0",
+  "name": "4424",
+  "origin": {
+    "mimetype": "application/pdf",
+    "binary_hash": 14750955615780971677,
+    "filename": "4424.pdf"
+  }
+}

@@ -6,8 +6,10 @@
 # Local/source data
 data/raw/
 
-# Generated outputs
-out/
+# Company reference parser (local only - do not publish)
+reference-parser/
+
+
 
 # Python environments
 .venv/

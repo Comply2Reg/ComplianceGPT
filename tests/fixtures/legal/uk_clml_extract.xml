@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Trimmed CLML-shaped extract for tests. Not a full act.
+     Licence: Open Government Licence v3.0
+     https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+     Modelled on legislation.gov.uk UK Public General Act markup (ukpga/2000/8). -->
+<Legislation xmlns="http://www.legislation.gov.uk/namespaces/legislation"
+             xmlns:ukm="http://www.legislation.gov.uk/namespaces/metadata">
+  <ukm:Metadata>
+    <ukm:PrimaryMetadata DocumentClassification="UnitedKingdomPublicGeneralAct"
+                         Year="2000"
+                         Number="8"
+                         DocumentURI="http://www.legislation.gov.uk/ukpga/2000/8"/>
+  </ukm:Metadata>
+  <Body>
+    <P1>
+      <Pnumber>19</Pnumber>
+      <P1para>
+        <Text>A person must not carry on a regulated activity in the United Kingdom, or purport to do so, unless he is an authorised person or an exempt person.</Text>
+      </P1para>
+      <P2>
+        <Pnumber>1</Pnumber>
+        <P2para>
+          <Text>The prohibition in this section applies to a person who is not an authorised person and is not exempt.</Text>
+        </P2para>
+        <P3>
+          <Pnumber>a</Pnumber>
+          <P3para>
+            <Text>This includes a person acting as a principal in the course of business.</Text>
+          </P3para>
+        </P3>
+      </P2>
+    </P1>
+    <P1>
+      <Pnumber>21</Pnumber>
+      <P1para>
+        <Text>A person must not, in the course of business, communicate an invitation or inducement to engage in investment activity.</Text>
+      </P1para>
+    </P1>
+    <P1>
+      <Pnumber>9</Pnumber>
+      <P1para>
+        <Text>The Authority may give a person a direction under this section if it appears that the person has contravened a requirement.</Text>
+      </P1para>
+      <P2>
+        <Pnumber>2</Pnumber>
+        <P2para>
+          <Text>A direction under this section may require the person to take specified steps.</Text>
+        </P2para>
+      </P2>
+    </P1>
+  </Body>
+</Legislation>

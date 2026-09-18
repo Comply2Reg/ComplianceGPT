@@ -290,7 +290,8 @@ def _looks_like_article_title(block: TextBlock) -> bool:
 
 def _render_table_rows(table_obj: dict) -> list[list[str]]:
     data = table_obj.get("data") or {}
-    cells = data.get("table_cells") or []
+    # Live Docling: data.table_cells. Audit fixtures: table_cells at the table root.
+    cells = data.get("table_cells") or table_obj.get("table_cells") or []
     if not cells:
         grid = data.get("grid")
         if isinstance(grid, list):
@@ -407,38 +408,43 @@ def convert_pdf_to_dict(pdf_path: Path) -> dict:
         format_options={InputFormat.PDF: PdfFormatOption(pipeline_options=options)}
     )
     result = converter.convert(str(pdf_path))
-    try:
-        from hierarchical.postprocessor import ResultPostprocessor
-
-        ResultPostprocessor(result).process()
-    except Exception:
-        pass
     return result.document.export_to_dict()
 
 
-def convert_pdf_to_dict_with_fallback(pdf_path: Path) -> tuple[dict, str]:
-    """Return (doc_dict, extractor_name). Falls back to a minimal pypdf pseudo-doc."""
-    try:
-        return convert_pdf_to_dict(pdf_path), "docling"
-    except Exception as exc:
-        # Minimal fallback structure so callers still get plain text (degraded).
-        from pypdf import PdfReader
+def normalize_docling_dict(doc: dict) -> dict:
+    """Accept live Docling export_to_dict() and audit-fixture payloads."""
+    tables = []
+    for tb in doc.get("tables") or []:
+        if isinstance(tb, dict) and "data" not in tb and tb.get("table_cells") is not None:
+            tables.append({**tb, "data": {"table_cells": tb.get("table_cells") or []}})
+        else:
+            tables.append(tb)
+    out = dict(doc)
+    out["tables"] = tables
+    return out
 
-        reader = PdfReader(str(pdf_path))
-        texts = []
-        for i, page in enumerate(reader.pages, start=1):
-            raw = (page.extract_text() or "").strip()
-            if not raw:
-                continue
-            texts.append(
-                {
-                    "self_ref": f"#/texts/{i}",
-                    "label": "text",
-                    "text": raw,
-                    "prov": [{"page_no": i, "bbox": {"l": 0, "t": 0, "r": 0, "b": 0}}],
-                }
-            )
-        return {"texts": texts, "tables": [], "body": {"children": []}}, f"pypdf_fallback:{type(exc).__name__}"
+
+def _pypdf_fallback_doc(pdf_path: Path, exc: Exception) -> tuple[dict, str]:
+    from pypdf import PdfReader
+
+    reader = PdfReader(str(pdf_path))
+    texts = []
+    for i, page in enumerate(reader.pages, start=1):
+        raw = (page.extract_text() or "").strip()
+        if not raw:
+            continue
+        texts.append(
+            {
+                "self_ref": f"#/texts/{i}",
+                "label": "text",
+                "text": raw,
+                "prov": [{"page_no": i, "bbox": {"l": 0, "t": 0, "r": 0, "b": 0}}],
+            }
+        )
+    return (
+        {"texts": texts, "tables": [], "body": {"children": []}},
+        f"pypdf_fallback:{type(exc).__name__}",
+    )
 
 
 def _collect_blocks(doc: dict) -> tuple[list[TextBlock], list[TableBlock]]:
@@ -552,8 +558,9 @@ def _append_segment(
     segments.append((region, title, text, p0, p1))
 
 
-def extract_newsletter(pdf_path: Path) -> ExtractResult:
-    doc, extractor = convert_pdf_to_dict_with_fallback(pdf_path)
+def extract_from_doc(doc: dict, extractor: str = "docling") -> ExtractResult:
+    """Classify a Docling (or fixture) dict into canonical text + region spans."""
+    doc = normalize_docling_dict(doc)
     texts, tables = _collect_blocks(doc)
     boxes = _table_bboxes(doc)
     frequent = _frequent_running_lines(texts)
@@ -953,58 +960,161 @@ def extract_newsletter(pdf_path: Path) -> ExtractResult:
     )
 
 
+def extract_newsletter(pdf_path: Path, *, allow_degraded: bool = False) -> ExtractResult:
+    """PDF → Docling dict → ExtractResult. pypdf only if allow_degraded=True."""
+    try:
+        doc = convert_pdf_to_dict(pdf_path)
+        extractor = "docling"
+    except Exception as exc:
+        if not allow_degraded:
+            raise RuntimeError(
+                f"Docling extraction failed for {pdf_path}. "
+                "Pass --allow-degraded to use pypdf (quality drop)."
+            ) from exc
+        doc, extractor = _pypdf_fallback_doc(pdf_path, exc)
+    return extract_from_doc(doc, extractor=extractor)
+
+
 _SUBSECTION_SPLIT_RE = re.compile(
     r"(?m)^(Next steps|Background|Market developments|Role and Responsibilities|"
     r"Applications|Consultation process|Legal basis and background)\s*$"
 )
+
+ALERT_LICENCE = "ESMA"
+ALERT_SOURCE_TIER = "AMBER"
+ALERT_DOCUMENT_TYPE = "ESMA newsletter"
+
+
+def _title_slug(title: str) -> str:
+    slug = re.sub(r"[^a-zA-Z0-9]+", "-", (title or "").strip()).strip("-").lower()[:40]
+    return slug or "section"
+
+
+def _content_sha(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def _alert_chunk_id(
+    doc_id: int,
+    page_start: Optional[int],
+    title: str,
+    content_sha: str,
+    used: set[str],
+) -> str:
+    page = page_start if page_start is not None else 0
+    base = f"esma:spotlight-{doc_id}#p{page}/{_title_slug(title)}"
+    if base not in used:
+        return base
+    return f"{base}-{content_sha[:8]}"
+
+
+def _chunk_record(
+    *,
+    chunk_id: str,
+    doc_id: int,
+    region: str,
+    section: str,
+    text: str,
+    start: int,
+    end: int,
+    source_url: Optional[str],
+    doc_hash: str,
+    page_start: Optional[int],
+    page_end: Optional[int],
+    extractor: str,
+) -> dict[str, Any]:
+    return {
+        "chunk_id": chunk_id,
+        "doc_id": doc_id,
+        "document_id": f"esma:spotlight-{doc_id}",
+        "region": region,
+        "section": section,
+        "text": text,
+        "start": start,
+        "end": end,
+        "source_url": source_url,
+        "doc_hash": doc_hash,
+        "snapshot_id": doc_hash,
+        "content_sha": _content_sha(text),
+        "page_start": page_start,
+        "page_end": page_end,
+        "extractor": extractor,
+        "licence": ALERT_LICENCE,
+        "source_tier": ALERT_SOURCE_TIER,
+        "document_type": ALERT_DOCUMENT_TYPE,
+        "jurisdiction": "EU",
+    }
 
 
 def regions_to_chunks(
     doc_id: int,
     extract: ExtractResult,
     source_url: Optional[str] = None,
+    extractor: str = "docling",
 ) -> list[dict[str, Any]]:
-    """Build offset-valid chunks from region spans; split articles on subsections."""
+    """Build offset-valid chunks from region spans; split articles on subsections.
+
+    Alert IDs are frozen as esma:spotlight-{doc_id}#p{page}/{title_slug}.
+    Parse-order indexes are not used. content_sha is a drift detector, not identity.
+    """
     text = extract.canonical_text
     chunks: list[dict[str, Any]] = []
+    used_ids: set[str] = set()
 
-    for i, reg in enumerate(extract.regions):
+    def emit(
+        region: str,
+        section: str,
+        span_text: str,
+        start: int,
+        end: int,
+        page_start: Optional[int],
+        page_end: Optional[int],
+    ) -> None:
+        content_sha = _content_sha(span_text)
+        chunk_id = _alert_chunk_id(doc_id, page_start, section, content_sha, used_ids)
+        used_ids.add(chunk_id)
+        chunks.append(
+            _chunk_record(
+                chunk_id=chunk_id,
+                doc_id=doc_id,
+                region=region,
+                section=section,
+                text=span_text,
+                start=start,
+                end=end,
+                source_url=source_url,
+                doc_hash=extract.doc_hash,
+                page_start=page_start,
+                page_end=page_end,
+                extractor=extractor,
+            )
+        )
+
+    for reg in extract.regions:
         span = text[reg.start : reg.end]
 
         if reg.region in {"toc", "events", "consultations"}:
-            chunks.append(
-                {
-                    "chunk_id": f"{doc_id}#{reg.region}-{i+1}",
-                    "doc_id": doc_id,
-                    "region": reg.region,
-                    "section": reg.title or reg.region,
-                    "text": span,
-                    "start": reg.start,
-                    "end": reg.end,
-                    "source_url": source_url,
-                    "doc_hash": extract.doc_hash,
-                    "page_start": reg.page_start,
-                    "page_end": reg.page_end,
-                }
+            emit(
+                reg.region,
+                reg.title or reg.region,
+                span,
+                reg.start,
+                reg.end,
+                reg.page_start,
+                reg.page_end,
             )
             continue
 
         matches = list(_SUBSECTION_SPLIT_RE.finditer(span))
         if not matches:
-            chunks.append(
-                {
-                    "chunk_id": f"{doc_id}#article-{i+1}",
-                    "doc_id": doc_id,
-                    "region": "article",
-                    "section": reg.title or reg.section or "article",
-                    "text": span,
-                    "start": reg.start,
-                    "end": reg.end,
-                    "source_url": source_url,
-                    "doc_hash": extract.doc_hash,
-                    "page_start": reg.page_start,
-                    "page_end": reg.page_end,
-                }
+            emit(
+                "article",
+                reg.title or reg.section or "article",
+                span,
+                reg.start,
+                reg.end,
+                reg.page_start,
+                reg.page_end,
             )
             continue
 
@@ -1019,25 +1129,19 @@ def regions_to_chunks(
                 continue
             start = reg.start + a
             end = reg.start + b
-            chunks.append(
-                {
-                    "chunk_id": f"{doc_id}#article-{i+1}-{j+1}",
-                    "doc_id": doc_id,
-                    "region": "article",
-                    "section": titles[j],
-                    "text": text[start:end],
-                    "start": start,
-                    "end": end,
-                    "source_url": source_url,
-                    "doc_hash": extract.doc_hash,
-                    "page_start": reg.page_start,
-                    "page_end": reg.page_end,
-                }
+            emit(
+                "article",
+                titles[j],
+                text[start:end],
+                start,
+                end,
+                reg.page_start,
+                reg.page_end,
             )
 
     for c in chunks:
         if text[c["start"] : c["end"]] != c["text"]:
-            raise AssertionError(
+            raise RuntimeError(
                 f"Offset validation failed for {c['chunk_id']}: "
                 f"start={c['start']} end={c['end']}"
             )

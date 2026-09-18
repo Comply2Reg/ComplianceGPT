@@ -1,446 +1,128 @@
 In this edition
-ESMA launches selection of CTP for
-OTC derivatives
-ESMA signs MoU with the Reserve
-Bank of India
-ESMA signs MoU with UK regulators
-under DORA
-ESMA’S DIGITAL AND DATA
-STRATEGIES SUPPORT SUPERVISION
-OF EU FINANCIAL MARKETS
-Spotlight on Markets – January & February 2026
-© peshkov, GettyImages-2214346556
-EDITION
-N° 67
-
+ESMA launches selection of CTP for OTC derivatives
+ESMA signs MoU with the Reserve Bank of India
+ESMA signs MoU with UK regulators under DORA
 In this issue
-ESMA in January and February
-Spotlight on Markets
-January & February 2026
-2
-ESMA’s Digital and Data strategies support supervision of
-EU financial markets
-4
-12ESMA promotes clarity in communications on ESG
-strategies
-7ESMA launches selection of Consolidated Tape Provider
-for OTC derivatives
-ESMA signs Memorandum of Understanding with the
-Reserve Bank of India
-8
-9The European Supervisory Authorities and UK financial
-regulators sign Memorandum of Understanding on
-oversight of critical ICT third-party service providers
-under DORA
+ESMA's Digital and Data strategies support supervision of EU financial markets 4
+ESMA launches selection of Consolidated Tape Provider for OTC derivatives 7
+ESMA signs Memorandum of Understanding with the Reserve Bank of India 8
+The European Supervisory Authorities and UK financial regulators sign Memorandum of Understanding on oversight of critical ICT third-party service providers under DORA 9
 ESAs publish joint Guidelines on ESG stress testing 10
-
-In this issue
-3
+ESMA promotes clarity in communications on ESG strategies 12
+Principles for risk-based supervision: a critical pillar for ESMA's simplification and burden reduction efforts 13
+ESMA publishes report on cross-border marketing of funds including statistics on notifications 14
+ESAs' Joint Board of Appeal rules on reimbursement of costs in an appeal brought by NOVIS Insurance Company against the European Insurance and Occupational Pensions Authority (EIOPA) 15
+Commissioner Maria Luís Albuquerque visits ESMA headquarters. 16
+ESMA launches selection process for its next Chair 17
 Look ahead
-Contact info 19
 Events 18
-15ESAs’ Joint Board of Appeal rules on reimbursement of
-costs in an appeal brought by NOVIS Insurance Company
-against the European Insurance and Occupational
-Pensions Authority (EIOPA)
-14ESMA publishes report on cross-border marketing of
-funds including statistics on notifications
-13Principles for risk-based supervision: a critical pillar for
-ESMA’s simplification and burden reduction efforts
-16Commissioner Maria Luís Albuquerque visits ESMA
-headquarters.
-Spotlight on Markets
-January & February 2026
-17ESMA launches selection process for its next Chair
+Contact info 19
 
-“ESMA is committed to smarter regulation and
-supervision, and this drives our dual focus on
-digitalisation and simplification. These two strategies
-support a digitally mature, resilient and agile authority
-that understands the importance of data for its
-community.
-By helping to drive the digital transformation of the
-European System of Financial Supervision (ESFS), we
-reinforce a more efficient, transparent, and resilient
-financial ecosystem for the EU."
-Verena Ross, Chair
-4
-The European Securities and Markets Authority (ESMA), the EU’s financial
-markets regulator and supervisor, has adopted a new Digital Strategy and
-updated its Data Strategy. They reflect ESMA’s commitment to smarter
-regulatory reporting and technology-driven supervision, promote synergies
-and innovation while reducing unnecessary complexity.
-ESMA’s Digital and Data strategies
-support supervision of EU financial
-markets
-The digital strategy aims to continue ESMA’s digital transformation, while the
-Data Strategy update is oriented to capitalise on opportunities to simplify, better
-integrate and streamline data management and technology.
-Spotlight on Markets
-January & February 2026
+ESMA in January and February
 
-5
-The new Digital Strategy 2026–2028 sets out a roadmap for innovation,
-efficiency, and resilience. The key objectives include:
+ESMA's Digital and Data strategies support supervision of EU financial markets
+The European Securities and Markets Authority (ESMA), the EU's financial markets regulator and supervisor, has adopted a new Digital Strategy and updated its Data Strategy. They reflect ESMA's commitment to smarter regulatory reporting and technology-driven supervision, promote synergies and innovation while reducing unnecessary complexity.
+The digital strategy aims to continue ESMA's digital transformation, while the Data Strategy update is oriented to capitalise on opportunities to simplify, better integrate and streamline data management and technology.
+'ESMA is committed to smarter regulation and supervision, and this drives our dual focus on digitalisation and simplification. These two strategies support a digitally mature, resilient and agile authority that understands the importance of data for its community.
+By helping to drive the digital transformation of the European System of Financial Supervision (ESFS), we reinforce a more efficient, transparent, and resilient financial ecosystem for the EU."
+Verena Ross , Chair The new Digital Strategy 2026-2028 sets out a roadmap for innovation, efficiency, and resilience. The key objectives include:
 Building EU digital synergies
-Enhancing digital capabilities of ESMA and the European System of Financial
-Supervision (ESFS)
+Enhancing digital capabilities of ESMA and the European System of Financial Supervision (ESFS)
 Bolstering operational efficiency
 Establishing a secure and future-ready ecosystem.
-Spotlight on Markets
-January & February 2026
-
-6
-The Data Strategy 2023–2028 has been updated to reflect the focus on burden
-reduction, the evolving technological landscape, and ESMA’s desire for
-unlocking efficiency opportunities. While its key objectives remain the same, the
-key new actions include:
-Flagship initiatives related to streamlining supervisory reporting, relating to
-transaction data and in the funds domain
-Expanding the capacity of the ESMA Data Platform to benefit national and
-European authorities
-Implementing next phases of the MiCA joint supervisory tool for crypto-
-market monitoring
+The Data Strategy 2023-2028 has been updated to reflect the focus on burden reduction, the evolving technological landscape, and ESMA's desire for unlocking efficiency opportunities. While its key objectives remain the same, the key new actions include:
+Flagship initiatives related to streamlining supervisory reporting, relating to transaction data and in the funds domain
+Expanding the capacity of the ESMA Data Platform to benefit national and European authorities
+Implementing next phases of the MiCA joint supervisory tool for cryptomarket monitoring
 Finalising the development of the European Single Access Point (ESAP).
-These goals are in line with ESMA’s wider simplification and burden reduction
-initiative launched last year.
-With the alignment of both the digital and data strategies, ESMA ensures that
-innovation and technology translate into tangible benefits for stakeholders, with
-more possibilities for synergies and digital transformation across ESMA and the
-ESFS at large.
+These goals are in line with ESMA's wider simplification and burden reduction initiative launched last year.
+With the alignment of both the digital and data strategies, ESMA ensures that innovation and technology translate into tangible benefits for stakeholders, with more possibilities for synergies and digital transformation across ESMA and the ESFS at large.
 Next steps
+ESMA's Data and Digital work will be guided by the roadmaps under both strategies. By 2029 ESMA expects to converge the two into one unified strategy.
 
-ESMA’s Data and Digital work will be guided by the roadmaps under both
-strategies. By 2029 ESMA expects to converge the two into one unified
-strategy.
-Spotlight on Markets
-January & February 2026
-
-ESMA launches selection of
-Consolidated Tape Provider for OTC
-derivatives
-The European Securities and Markets Authority (ESMA), the EU’s financial
-markets regulator and supervisor, is launching the first selection procedure for
-the Consolidated Tape Provider (CTP) for over the counter (OTC) derivatives.
-Entities interested to apply are encouraged to register and submit their
-requests to participate in the selection procedure by 11 February 2026.
-The CTP aims to enhance market transparency and efficiency by consolidating
-post-trade data from data contributors, such as trading venues, into a single and
-continuous electronic stream. This consolidated view of market activity will help
-market participants to access accurate and timely information and make better-
-informed decisions, leading to more efficient price discovery and contributing to
-the Savings and Investment Union (SIU).
-The CTP will collect and disseminate data on OTC derivatives based on the
-proposals in ESMA’s Final Report on transparency for derivatives.
+ESMA launches selection of Consolidated Tape Provider for OTC derivatives
+The European Securities and Markets Authority (ESMA), the EU's financial markets regulator and supervisor, is launching the first selection procedure for the Consolidated Tape Provider (CTP) for over the counter (OTC) derivatives. Entities interested to apply are encouraged to register and submit their requests to participate in the selection procedure by 11 February 2026.
+The CTP aims to enhance market transparency and efficiency by consolidating post-trade data from data contributors, such as trading venues, into a single and continuous electronic stream. This consolidated view of market activity will help market participants to access accurate and timely information and make betterinformed decisions, leading to more efficient price discovery and contributing to the Savings and Investment Union (SIU).
+The CTP will collect and disseminate data on OTC derivatives based on the proposals in ESMA's Final Report on transparency for derivatives.
 The contract notice and procurement documents are available on the EU Funding
 & Tenders Portal.
 Next steps
+ESMA will assess the received requests against the exclusion and selection criteria and will invite the successful candidates to submit their application. Any questions during the application period will be answered via the Portal. ESMA intends to adopt a reasoned decision on the selected applicant by early July 2026.
+The successful applicant will be selected to operate the CTP for OTC derivatives for a period of five years and invited to apply for authorisation with ESMA. Once authorised, the CTP will be supervised by ESMA. Further information about the process is available on the dedicated webpage.
 
-ESMA will assess the received requests against the exclusion and selection
-criteria and will invite the successful candidates to submit their application.
-Any questions during the application period will be answered via the Portal.
-ESMA intends to adopt a reasoned decision on the selected applicant by early
-July 2026.
-The successful applicant will be selected to operate the CTP for OTC
-derivatives for a period of five years and invited to apply for authorisation with
-ESMA. Once authorised, the CTP will be supervised by ESMA. Further
-information about the process is available on the dedicated webpage.
-7
-Spotlight on Markets
-January & February 2026
-
-This agreement marks a significant step towards restoring access for EU
-clearing members to Indian central counterparties and follows two years of
-sustained engagement between ESMA and RBI. It reflects ESMA’s strong
-commitment to international supervisory cooperation and mutual support to
-advance safe, resilient and open financial markets.
-8
-The European Securities and Markets Authority (ESMA), the EU’s financial
-markets regulator and supervisor, has signed a Memorandum of
-Understanding (MoU) with the Reserve Bank of India (RBI) to facilitate
-cooperation and exchange of information for the recognition of central
-counterparties (CCPs) established in India and supervised by RBI.
-ESMA signs Memorandum of
-Understanding with the Reserve Bank
-of India
+ESMA signs Memorandum of Understanding with the Reserve Bank of India
+The European Securities and Markets Authority (ESMA), the EU's financial markets regulator and supervisor, has signed a Memorandum of Understanding (MoU) with the Reserve Bank of India (RBI) to facilitate cooperation and exchange of information for the recognition of central counterparties (CCPs) established in India and supervised by RBI.
+This agreement marks a significant step towards restoring access for EU clearing members to Indian central counterparties and follows two years of sustained engagement between ESMA and RBI. It reflects ESMA's strong commitment to international supervisory cooperation and mutual support to advance safe, resilient and open financial markets.
 Next steps
-The MoU is a key requirement under Article 25 of the European Market
-Infrastructure Regulation (EMIR) for the recognition by ESMA of third-country
-CCPs. It allows the Clearing Corporation of India Ltd (CCIL), a CCP established in
-India and supervised by RBI, to re-apply for recognition under EMIR.
-ESMA is also continuing discussions
-with the Securities and Exchange Board
-of India (SEBI) and the International
-Financial Services Centres Authority
-(IFSCA) to conclude similar cooperation
-arrangements.
-Spotlight on Markets
-January & February 2026
+The MoU is a key requirement under Article 25 of the European Market Infrastructure Regulation (EMIR) for the recognition by ESMA of third-country CCPs. It allows the Clearing Corporation of India Ltd (CCIL), a CCP established in India and supervised by RBI, to re-apply for recognition under EMIR.
+ESMA is also continuing discussions with the Securities and Exchange Board of India (SEBI) and the International Financial Services Centres Authority (IFSCA) to conclude similar cooperation arrangements.
 
-The MoU has been prepared in accordance with DORA Articles 36, 44, and
-49, which cover the ESAs’ oversight powers, international cooperation, and
-financial cross-sector exercises, communication and cooperation.
-To exchange information with a third-country authority, the ESAs must
-ensure that the confidentiality and professional secrecy regime in the third
-country is equivalent to that in the EU. Therefore, before signing this MoU,
-the ESAs conducted an assessment that confirmed the UK confidentiality
-and professional secrecy regime’s equivalence with that in DORA.
+The European Supervisory Authorities and UK financial regulators sign Memorandum of Understanding on oversight of critical ICT third-party service providers under DORA
+The European Supervisory Authorities (EBA, EIOPA and ESMA - the ESAs) have today signed a Memorandum of Understanding (MoU) with the Bank of England (BoE), the Prudential Regulation Authority (PRA), and the Financial Conduct Authority (FCA). This agreement enhances the cooperation between the authorities to oversee critical ICT third-party service providers (CTPPs) as required by the Digital Operational Resilience Act (DORA).
+The MoU establishes clear principles and procedures for cooperation, information sharing and coordination of oversight activities between the relevant authorities responsible for EU CTPPs/UK CTPs oversight. The MoU aims at enhancing third-party risk management and contributing to the overall operational resilience of the financial sector in the EU and UK through strong cross-border cooperation.
 Legal basis and background
-9
-The European Supervisory Authorities (EBA, EIOPA and ESMA – the ESAs) have
-today signed a Memorandum of Understanding (MoU) with the Bank of
-England (BoE), the Prudential Regulation Authority (PRA), and the Financial
-Conduct Authority (FCA). This agreement enhances the cooperation between
-the authorities to oversee critical ICT third-party service providers (CTPPs) as
-required by the Digital Operational Resilience Act (DORA).
-The European Supervisory Authorities
-and UK financial regulators sign
-Memorandum of Understanding on
-oversight of critical ICT third-party
-service providers under DORA
-The MoU establishes clear principles and procedures for cooperation,
-information sharing and coordination of oversight activities between the relevant
-authorities responsible for EU CTPPs/UK CTPs oversight. The MoU aims at
-enhancing third-party risk management and contributing to the overall
-operational resilience of the financial sector in the EU and UK through strong
-cross-border cooperation.
-Spotlight on Markets
-January & February 2026
+The MoU has been prepared in accordance with DORA Articles 36, 44, and 49, which cover the ESAs' oversight powers, international cooperation, and financial cross-sector exercises, communication and cooperation.
+To exchange information with a third-country authority, the ESAs must ensure that the confidentiality and professional secrecy regime in the third country is equivalent to that in the EU. Therefore, before signing this MoU, the ESAs conducted an assessment that confirmed the UK confidentiality and professional secrecy regime's equivalence with that in DORA.
 
-10
-The European Supervisory Authorities (EBA, EIOPA and ESMA - the ESAs)
-published today their Joint Guidelines on environmental, social, and
-governance (ESG) stress testing. These Guidelines provide national insurance
-and banking supervisors with clear guidance on how to integrate ESG risks
-into supervisory stress tests, both when using established frameworks and
-when conducting complementary assessments of ESG risk impacts.
-ESAs publish joint Guidelines on ESG
-stress testing
-The Guidelines set common standards for embedding ESG risks into stress
-testing methodologies across the EU’s financial system. They provide guidance
-on designing ESG-inclusive stress tests and outline the necessary
-organisational and governance arrangements.
-The Guidelines are designed to support a consistent, long-term approach to
-ESG stress testing while allowing flexibility to accommodate future
-methodological advances and improvements in data availability. Importantly,
-they do not introduce new requirements for competent authorities to carry out
-ESG-focused supervisory stress tests.
-Spotlight on Markets
-January & February 2026
-
+ESAs publish joint Guidelines on ESG stress testing
+The European Supervisory Authorities (EBA, EIOPA and ESMA - the ESAs) published today their Joint Guidelines on environmental, social, and governance (ESG) stress testing. These Guidelines provide national insurance and banking supervisors with clear guidance on how to integrate ESG risks into supervisory stress tests, both when using established frameworks and when conducting complementary assessments of ESG risk impacts.
+The Guidelines set common standards for embedding ESG risks into stress testing methodologies across the EU's financial system. They provide guidance on designing ESG-inclusive stress tests and outline the necessary organisational and governance arrangements.
+The Guidelines are designed to support a consistent, long-term approach to ESG stress testing while allowing flexibility to accommodate future methodological advances and improvements in data availability. Importantly, they do not introduce new requirements for competent authorities to carry out ESG-focused supervisory stress tests.
+Next steps
+The Guidelines will be subject to a 'comply or explain' procedure by the National Competent Authorities and will be translated into all the official languages of the EU in the first quarter of 2026.
+Background
+The Final Report on the Joint ESAs Guidelines on ESG stress testing follows a public consultation and sets out the final text of the Guidelines, together with an assessment of the comments received during the consultation process. These Guidelines are designed to ensure consistency, long-term perspective, and common standards for ESG risk assessment methodologies in line with Article 100(4) of the Capital Requirements Directive (CRD - Directive 2013/36/EU) and Article 304c (3) of Solvency II (Directive 2009/138/EC), which require the publication of the joint Guidelines by 10 January 2026.
 Read the Joint Guidelines on ESG stress testing here
-The Final Report on the Joint ESAs Guidelines on ESG stress testing follows
-a public consultation and sets out the final text of the Guidelines, together
-with an assessment of the comments received during the consultation
-process. These Guidelines are designed to ensure consistency, long-term
-perspective, and common standards for ESG risk assessment
-methodologies in line with Article 100(4) of the Capital Requirements
-Directive (CRD - Directive 2013/36/EU) and Article 304c (3) of Solvency II
-(Directive 2009/138/EC), which require the publication of the joint
-Guidelines by 10 January 2026.
-Background
+
+ESMA promotes clarity in communications on ESG strategies
+The European Securities and Markets Authority (ESMA), the EU's financial markets regulator and supervisor, published today a second thematic note on sustainability-related claims, focusing on ESG strategies.
+The note concentrates on ESG integration and ESG exclusions, as references to these strategies are often made by market participants and widely referenced in marketing communications directed to retail investors.
+ESG integration and ESG exclusions can mean different things to different market participants. Lack of transparency when using these terms poses a notable greenwashing risk to investors. The aim of the note is not to define these strategies, but to call on market participants to be clear about what they mean when referencing them.
+Similarly to the first thematic note on ESG credentials, this publication offers practical do's and don'ts for making sustainability claims. These are illustrated through concrete examples of good and poor practices that are based on observed market practices.
+Read the thematic note on sustainability-related claims, focusing on ESG strategies.
+
+Principles for risk-based supervision: a critical pillar for ESMA's simplification and burden reduction efforts
+The European Securities and Markets Authority (ESMA), the EU's financial markets regulator and supervisor, published today its principles for riskbased supervision. These principles support a common and effective EU-wide supervisory culture and strengthen the EU single market.
+The principles on risk-based supervision outline key concepts and foundational elements for use by ESMA and National Competent Authorities (NCAs), and provide a structured framework for identifying, assessing, prioritising and addressing risks. They are designed to support a supervisory framework that is consistent, proportionate, and effective across the Union.
+A risk-based approach is the cornerstone of EU securities markets supervision, allowing regulators to focus on and address risks that pose the greatest threats to investor protection, financial stability, and orderly markets. Risk-based supervision is also one of ESMA's flagship projects supporting the simplification and burden reduction agenda, through its contribution to boosting supervisory efficiency and value.
 Next steps
-The Guidelines will be subject to a ‘comply or explain’ procedure by the National
-Competent Authorities and will be translated into all the official languages of the
-EU in the first quarter of 2026.
-11
-Spotlight on Markets
-January & February 2026
+ESMA and NCAs will work together to advance the implementation of effective risk-based supervision and foster high quality supervisory outcomes for market participants.
 
-The European Securities and Markets Authority (ESMA), the EU’s financial
-markets regulator and supervisor, published today a second thematic note
-on sustainability-related claims, focusing on ESG strategies.
-ESMA promotes clarity in
-communications on ESG strategies
-The note concentrates on ESG integration and ESG exclusions, as references to
-these strategies are often made by market participants and widely referenced in
-marketing communications directed to retail investors.
-ESG integration and ESG exclusions can mean different things to different
-market participants. Lack of transparency when using these terms poses a
-notable greenwashing risk to investors. The aim of the note is not to define
-these strategies, but to call on market participants to be clear about what they
-mean when referencing them.
-Similarly to the first thematic note on ESG credentials, this publication offers
-practical do’s and don’ts for making sustainability claims. These are illustrated
-through concrete examples of good and poor practices that are based on
-observed market practices.
-12
-Read the thematic note on sustainability-related
-claims, focusing on ESG strategies.
-Spotlight on Markets
-January & February 2026
-
-The principles on risk-based supervision outline key concepts and foundational
-elements for use by ESMA and National Competent Authorities (NCAs), and
-provide a structured framework for identifying, assessing, prioritising and
-addressing risks. They are designed to support a supervisory framework that is
-consistent, proportionate, and effective across the Union.
-A risk-based approach is the cornerstone of EU securities markets supervision,
-allowing regulators to focus on and address risks that pose the greatest threats
-to investor protection, financial stability, and orderly markets. Risk-based
-supervision is also one of ESMA’s flagship projects supporting the simplification
-and burden reduction agenda, through its contribution to boosting supervisory
-efficiency and value.
-Principles for risk-based supervision: a
-critical pillar for ESMA’s simplification
-and burden reduction efforts
-The European Securities and Markets Authority (ESMA), the EU’s financial
-markets regulator and supervisor, published today its principles for risk-
-based supervision. These principles support a common and effective EU-wide
-supervisory culture and strengthen the EU single market.
-Next steps
-ESMA and NCAs will work together to advance the implementation of effective
-risk-based supervision and foster high quality supervisory outcomes for market
-participants.
-Spotlight on Markets
-January & February 2026
-13
-
-Drawing on input from National Competent Authorities, the report finds that
-national rules governing the marketing of funds have not undergone any
-significant changes since the publication of the second report in 2023.
-ESMA has used the opportunity of this report to provide stakeholders with
-statistics on the volume of cross-border fund notifications. In particular, the
-analysis shows that Luxembourg and Ireland are the leading notifying
-jurisdictions, accounting for 59% and 30% respectively. UCITS notifications
-comprise 56% of the total fund notifications, while AIFs account for 44%. This
-information was retrieved from the ESMA database, which lists all notifications of
-cross-border marketing of funds.
-14
-The European Securities and Markets Authority (ESMA), the EU’s financial
-markets regulator and supervisor, has today published its third report on
-marketing requirements and marketing communications under the
-Regulation on cross-border distribution of funds. For the first time, the report
-includes statistics on notifications of cross-border marketing of funds.
-ESMA publishes report on cross-border
-marketing of funds including statistics
-on notifications
-The report will now be submitted to the European Parliament, the Council
-and the European Commission.
+ESMA publishes report on cross-border marketing of funds including statistics on notifications
+The European Securities and Markets Authority (ESMA), the EU's financial markets regulator and supervisor, has today published its third report on marketing requirements and marketing communications under the Regulation on cross-border distribution of funds. For the first time, the report includes statistics on notifications of cross-border marketing of funds.
+Drawing on input from National Competent Authorities, the report finds that national rules governing the marketing of funds have not undergone any significant changes since the publication of the second report in 2023.
+ESMA has used the opportunity of this report to provide stakeholders with statistics on the volume of cross-border fund notifications. In particular, the analysis shows that Luxembourg and Ireland are the leading notifying jurisdictions, accounting for 59% and 30% respectively. UCITS notifications comprise 56% of the total fund notifications, while AIFs account for 44%. This information was retrieved from the ESMA database, which lists all notifications of cross-border marketing of funds.
 Background
-Report on Marketing requirements and marketing communications
-under the regulation on cross-border distribution of funds
-Spotlight on Markets
-January & February 2026
+The report will now be submitted to the European Parliament, the Council and the European Commission.
+Report on Marketing requirements and marketing communications under the regulation on cross-border distribution of funds
 
-Its Decision of 30 July 2024, the Board had ordered EIOPA to reimburse NOVIS’
-costs for the appeal. The breakdown of costs subsequently submitted by NOVIS
-was contested by EIOPA. The matter was brought to the Board for a decision.
-In its Decision of 03 December 2025, the Board confirmed its competence to
-decide on the allocation and taxation of costs. It clarified that only costs that are
-objectively necessary and reasonable may be reimbursed. The Board also
-decided on those aspects, ruling on a total amount of costs to be reimbursed by
-EIOPA.
-ESAs’ Joint Board of Appeal rules on
-reimbursement of costs in an appeal
-brought by NOVIS Insurance Company
-against the European Insurance and
-Occupational Pensions Authority
-(EIOPA)
-The Joint Board of Appeal (“The Board”) of the European Supervisory
-Authorities (ESAs) – the EBA, ESMA, EIOPA – has issued its decision on costs
-arising in the appeal brought by NOVIS Insurance Company, NOVIS
-Versicherungsgesellschaft, NOVIS Compagnia di Assicurazioni, and NOVIS
-Poisťovňa a.s. (“NOVIS”) against the European Insurance and Occupational
-Pensions Authority (“EIOPA”).
-15
-Spotlight on Markets
-January & February 2026
+ESAs' Joint Board of Appeal rules on reimbursement of costs in an appeal brought by NOVIS Insurance Company against the European Insurance and Occupational Pensions Authority (EIOPA)
+The Joint Board of Appeal ('The Board') of the European Supervisory Authorities (ESAs) - the EBA, ESMA, EIOPA - has issued its decision on costs arising in the appeal brought by NOVIS Insurance Company, NOVIS Versicherungsgesellschaft, NOVIS Compagnia di Assicurazioni, and NOVIS Poisťovňa a.s. ('NOVIS') against the European Insurance and Occupational Pensions Authority ('EIOPA').
+Its Decision of 30 July 2024, the Board had ordered EIOPA to reimburse NOVIS' costs for the appeal. The breakdown of costs subsequently submitted by NOVIS was contested by EIOPA. The matter was brought to the Board for a decision.
+In its Decision of 03 December 2025, the Board confirmed its competence to decide on the allocation and taxation of costs. It clarified that only costs that are objectively necessary and reasonable may be reimbursed. The Board also decided on those aspects, ruling on a total amount of costs to be reimbursed by EIOPA.
 
-16
-Commissioner Maria Luís Albuquerque
-visits ESMA headquarters
-Maria Luís Albuquerque, EU Commissioner for Financial Services and the
-Savings and Investments Union, visited ESMA for forward-looking discussions
-on the latest developments in EU financial markets.
-The exchange focused on how Europe can foster stronger, more stable and
-more attractive markets amid ongoing global uncertainty. Key topics included
-strengthening market integration, reducing fragmentation, and ensuring
-consistent application and supervision of rules across Member States.
-Participants also explored how enhanced use of data, digitalisation and new
-market infrastructures can drive more efficient, resilient and competitive
-markets.
-Spotlight on Markets
-January & February 2026
+Commissioner Maria Luís Albuquerque visits ESMA headquarters
+Maria Luís Albuquerque, EU Commissioner for Financial Services and the Savings and Investments Union, visited ESMA for forward-looking discussions on the latest developments in EU financial markets.
+The exchange focused on how Europe can foster stronger, more stable and more attractive markets amid ongoing global uncertainty. Key topics included strengthening market integration, reducing fragmentation, and ensuring consistent application and supervision of rules across Member States. Participants also explored how enhanced use of data, digitalisation and new market infrastructures can drive more efficient, resilient and competitive markets.
 
-16
-ESMA launches selection process for
-its next Chair
-The European Securities and Markets Authority (ESMA), the EU’s financial
-markets regulator and supervisor, has launched the selection procedure for
-the position of ESMA Chair. This key leadership role offers the opportunity to
-shape the future of Europe’s financial markets and steer the organisation
-through an evolving regulatory and supervisory landscape.
-As a full ‑ time, independent professional based in Paris, the Chair leads ESMA’s
-strategic direction and represents the Authority at the highest institutional level.
-The successful candidate will chair both the Board of Supervisors and the
-Management Board, ensuring effective governance, strategic oversight and the
-delivery of ESMA’s priorities.
-Spotlight on Markets
-January & February 2026
-In line with the ESMA Regulation, the Chair’s main responsibilities include:
-Chairing meetings and setting the agendas of the Board of Supervisors and
-the Management Board.
-Preparing the work of the Board of Supervisors.
-Acting as ESMA’s main external representative.
-Developing ESMA’s long ‑ term strategy and ensuring delivery on its
-objectives.
-Implementing tasks and decisions assigned by the Board of Supervisors.
-Ensuring accountability and representing ESMA before the European
-Parliament in annual hearings on ESMA’s performance.
-Leading ESMA through potential changes arising from the European
-Commission’s legislative proposal on market integration and supervision,
-including adjustments to ESMA’s governance framework.
+ESMA launches selection process for its next Chair
+The European Securities and Markets Authority (ESMA), the EU's financial markets regulator and supervisor, has launched the selection procedure for the position of ESMA Chair. This key leadership role offers the opportunity to shape the future of Europe's financial markets and steer the organisation through an evolving regulatory and supervisory landscape.
+As a full - time, independent professional based in Paris, the Chair leads ESMA's strategic direction and represents the Authority at the highest institutional level. The successful candidate will chair both the Board of Supervisors and the Management Board, ensuring effective governance, strategic oversight and the delivery of ESMA's priorities.
 Role and Responsibilities
-
-16
-Spotlight on Markets
-January & February 2026
-The position offers the opportunity to contribute to the effective functioning,
-stability and integrity of EU financial markets. ESMA provides a dynamic,
-multicultural and inclusive working environment, bringing together professionals
-from across the EU committed to investor protection and orderly markets.
+In line with the ESMA Regulation, the Chair's main responsibilities include:
+Chairing meetings and setting the agendas of the Board of Supervisors and the Management Board.
+Preparing the work of the Board of Supervisors.
+Acting as ESMA's main external representative.
+Developing ESMA's long - term strategy and ensuring delivery on its objectives.
+Implementing tasks and decisions assigned by the Board of Supervisors.
+Ensuring accountability and representing ESMA before the European Parliament in annual hearings on ESMA's performance.
+Leading ESMA through potential changes arising from the European Commission's legislative proposal on market integration and supervision, including adjustments to ESMA's governance framework.
 A Strategic and Multicultural Working Environment
-Applications are open until 3 March 2026.
-For further details on the role and application process, please consult the
-vacancy notice.
+The position offers the opportunity to contribute to the effective functioning, stability and integrity of EU financial markets. ESMA provides a dynamic, multicultural and inclusive working environment, bringing together professionals from across the EU committed to investor protection and orderly markets.
 Applications
+Applications are open until 3 March 2026.
+For further details on the role and application process, please consult the vacancy notice.
 
-17
-Events
-Click on the event
-Date
-Workshop on the Authorisation of ESG Rating Providers31 Mar
-Spotlight on Markets
-January & February 2026
-ESMA’s Conference 2026: A new era for EU
-capital markets21 May
-Save the date: Webinar on AI Adoption Risk Analysis3 Mar
-ESMA protects investors – and we have
-brought this commitment to Instagram.
-Connecting with retail investors, we aim
-to help them make informed financial
-decisions. Find us under the handle
-@ESMAcomms.
-Join us for practical tips, fun polls, and
-interactive quizzes that will empower
-you along your investing journey!
-ESMA is on Instagram!
-@ESMAcomms
-Empowering retail investors
-Smart choices make for
-smarter investing
-ESMA is on Instagram!
-
-info@esma.europa.eu
-www.esma.europa.eu
-Contact info
-Press contact information
-ESMAcomms
-Social Media
-18
-European Securities and Markets Authority (ESMA)
-press@esma.europa.eu
-Spotlight on Markets
-January & February 2026
-ESMAcomms
+Save the date: Webinar on AI Adoption Risk Analysis | 3 Mar
+Workshop on the Authorisation of ESG Rating Providers | 31 Mar
+ESMA's Conference 2026: A new era for EU capital markets | 21 May

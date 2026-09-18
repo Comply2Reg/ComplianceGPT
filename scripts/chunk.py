@@ -1,18 +1,17 @@
-"""Deterministic newsletter chunking with character-offset validation.
+"""Docling-based newsletter chunking with character-offset validation.
 
-Writes data/chunks.jsonl.
+Writes data/canonical/{id}.txt and data/chunks.jsonl.
 
 Usage:
   python scripts/chunk.py --ids 4424
-  python scripts/chunk.py
+  python scripts/chunk.py --from-fixtures
+  python scripts/chunk.py --allow-degraded
 """
 
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
-import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -23,27 +22,18 @@ from config import (
     CANONICAL_DIR,
     CHUNKS_PATH,
     RAW_DIR,
+    ROOT,
     ensure_data_dirs,
     get_source_selection,
     load_env,
 )
-
-# Soft max for newsletter paragraph groups (characters).
-MAX_CHUNK_CHARS = 4000
-MIN_CHUNK_CHARS = 80
-
-HEADING_RE = re.compile(
-    r"^(?:"
-    r"#{1,6}\s+.+"  # markdown heading
-    r"|[A-Z][A-Z0-9][A-Z0-9\s,&/\-]{2,120}"  # ALL-CAPS-ish line
-    r"|(?:Article|Section|Chapter)\s+\d+[A-Za-z0-9.\-]*"  # numbered article/section
-    r"|\d+\.\s+[A-Z].{0,120}"  # numbered heading
-    r")$"
+from newsletter_extract_docling import (
+    extract_from_doc,
+    extract_newsletter,
+    regions_to_chunks,
 )
 
-
-def sha256_text(text: str) -> str:
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+FIXTURES_DOCLING_DIR = ROOT / "tests" / "fixtures" / "docling"
 
 
 def load_source_url(doc_id: int) -> str | None:
@@ -60,169 +50,105 @@ def load_source_url(doc_id: int) -> str | None:
     return None
 
 
-def is_heading(line: str) -> bool:
-    s = line.strip()
-    if not s or len(s) > 160:
-        return False
-    if HEADING_RE.match(s):
-        return True
-    # Short title-case lines ending without period often mark sections.
-    if len(s) <= 80 and s[0].isupper() and not s.endswith((".", ",", ";", ":")):
-        words = s.split()
-        if 2 <= len(words) <= 12 and sum(w[0].isupper() for w in words if w) >= max(2, len(words) // 2):
-            return True
-    return False
-
-
-def split_paragraphs(canonical: str) -> list[tuple[int, int, str]]:
-    """Return (start, end, text) for each non-empty paragraph in canonical."""
-    paras: list[tuple[int, int, str]] = []
-    # Paragraph = run of non-empty content bounded by blank lines.
-    for m in re.finditer(r"(?:[^\n]|\n(?!\n))+", canonical):
-        start, end = m.start(), m.end()
-        # Trim outer newlines so offsets still refer to canonical.
-        while start < end and canonical[start] == "\n":
-            start += 1
-        while end > start and canonical[end - 1] == "\n":
-            end -= 1
-        if start < end and canonical[start:end].strip():
-            paras.append((start, end, canonical[start:end]))
-    return paras
-
-
-def group_newsletter_chunks(
-    canonical: str,
-) -> list[dict[str, Any]]:
-    """
-    Chunk newsletters by heading / paragraph groups.
-
-    Extensible schema: uses `section` (not `provision`) for newsletters.
-    """
-    paragraphs = split_paragraphs(canonical)
-    if not paragraphs:
-        return []
-
-    groups: list[dict[str, Any]] = []
-    current_section = "body"
-    current_parts: list[tuple[int, int, str]] = []
-
-    def flush() -> None:
-        nonlocal current_parts
-        if not current_parts:
-            return
-        start = current_parts[0][0]
-        end = current_parts[-1][1]
-        # Include intervening whitespace from canonical between first and last.
-        text = canonical[start:end]
-        if text.strip():
-            groups.append(
-                {
-                    "section": current_section,
-                    "start": start,
-                    "end": end,
-                    "text": text,
-                }
-            )
-        current_parts = []
-
-    for start, end, text in paragraphs:
-        heading = is_heading(text) and len(text) < 160 and "\n" not in text.strip()
-        if heading:
-            flush()
-            current_section = re.sub(r"\s+", " ", text.strip())[:120]
-            current_parts = [(start, end, text)]
-            flush()
-            continue
-
-        current_parts.append((start, end, text))
-        size = current_parts[-1][1] - current_parts[0][0]
-        if size >= MAX_CHUNK_CHARS:
-            flush()
-
-    flush()
-
-    # Merge tiny trailing fragments into previous chunk when possible.
-    # Never merge across section boundaries (preserves newsletter headings).
-    merged: list[dict[str, Any]] = []
-    for g in groups:
-        if (
-            merged
-            and g["section"] == merged[-1]["section"]
-            and len(g["text"]) < MIN_CHUNK_CHARS
-            and (len(merged[-1]["text"]) + (g["end"] - merged[-1]["end"]))
-            < MAX_CHUNK_CHARS * 1.25
-            and g["start"] >= merged[-1]["end"]
-        ):
-            prev = merged[-1]
-            new_end = g["end"]
-            prev["end"] = new_end
-            prev["text"] = canonical[prev["start"]:new_end]
-        else:
-            merged.append(g)
-    return merged
-
-
-def validate_offsets(canonical: str, chunks: list[dict[str, Any]], doc_id: int) -> None:
-    for i, c in enumerate(chunks):
-        start, end, text = c["start"], c["end"], c["text"]
-        if not (0 <= start <= end <= len(canonical)):
-            raise AssertionError(
-                f"Offset range invalid for doc_id={doc_id} chunk_index={i} "
-                f"chunk_id={c.get('chunk_id')} start={start} end={end} "
-                f"canonical_len={len(canonical)}"
-            )
-        sliced = canonical[start:end]
-        if sliced != text:
-            raise AssertionError(
-                f"Offset validation failed for doc_id={doc_id} chunk_index={i} "
-                f"chunk_id={c.get('chunk_id')} start={start} end={end}: "
-                f"canonical[start:end] != chunk['text']"
-            )
-
-
-def chunk_document(doc_id: int) -> list[dict[str, Any]]:
-    path = CANONICAL_DIR / f"{doc_id}.txt"
+def load_fixture_doc(doc_id: int) -> dict[str, Any]:
+    path = FIXTURES_DOCLING_DIR / f"{doc_id}.raw.json"
     if not path.is_file():
-        raise FileNotFoundError(f"Missing canonical file: {path}")
+        raise FileNotFoundError(f"Missing Docling fixture: {path}")
+    return json.loads(path.read_text(encoding="utf-8"))
 
-    canonical = path.read_text(encoding="utf-8")
-    doc_hash = sha256_text(canonical)
+
+def extract_document(
+    doc_id: int,
+    *,
+    allow_degraded: bool,
+    from_fixtures: bool,
+) -> tuple[Any, str]:
+    """Return (ExtractResult, extractor). Prefer live PDF, else fixture."""
+    pdf_path = RAW_DIR / f"{doc_id}.pdf"
+    fixture_path = FIXTURES_DOCLING_DIR / f"{doc_id}.raw.json"
+
+    if from_fixtures:
+        result = extract_from_doc(load_fixture_doc(doc_id), extractor="docling")
+        return result, "docling"
+
+    if pdf_path.is_file():
+        result = extract_newsletter(pdf_path, allow_degraded=allow_degraded)
+        extractor = result.stats.get("extractor") or "docling"
+        return result, extractor
+
+    if fixture_path.is_file():
+        result = extract_from_doc(load_fixture_doc(doc_id), extractor="docling")
+        return result, "docling"
+
+    raise FileNotFoundError(
+        f"No PDF at {pdf_path} and no fixture at {fixture_path}"
+    )
+
+
+def chunk_document(
+    doc_id: int,
+    *,
+    allow_degraded: bool = False,
+    from_fixtures: bool = False,
+    write_canonical: bool = True,
+) -> list[dict[str, Any]]:
+    result, extractor = extract_document(
+        doc_id, allow_degraded=allow_degraded, from_fixtures=from_fixtures
+    )
+    if extractor != "docling" and not allow_degraded:
+        raise RuntimeError(
+            f"id={doc_id}: extractor={extractor!r} is not docling "
+            "(pass --allow-degraded to accept pypdf)"
+        )
+
+    if write_canonical:
+        CANONICAL_DIR.mkdir(parents=True, exist_ok=True)
+        (CANONICAL_DIR / f"{doc_id}.txt").write_text(
+            result.canonical_text, encoding="utf-8"
+        )
+
     source_url = load_source_url(doc_id)
-
-    groups = group_newsletter_chunks(canonical)
-    if not groups:
-        # Single full-document chunk as last resort (still offset-valid).
-        text = canonical
-        groups = [{"section": "document", "start": 0, "end": len(text), "text": text}]
-
-    chunks: list[dict[str, Any]] = []
-    for i, g in enumerate(groups):
-        section = g["section"] or "body"
-        slug = re.sub(r"[^a-zA-Z0-9]+", "-", section).strip("-").lower()[:40] or "section"
-        chunk = {
-            "chunk_id": f"{doc_id}#{slug}-{i+1}",
-            "doc_id": doc_id,
-            "section": section,
-            "text": g["text"],
-            "start": g["start"],
-            "end": g["end"],
-            "source_url": source_url,
-            "doc_hash": doc_hash,
-        }
-        chunks.append(chunk)
-
-    validate_offsets(canonical, chunks, doc_id)
+    chunks = regions_to_chunks(
+        doc_id, result, source_url=source_url, extractor=extractor
+    )
     return chunks
 
 
+def load_existing_chunks() -> list[dict[str, Any]]:
+    if not CHUNKS_PATH.is_file():
+        return []
+    existing: list[dict[str, Any]] = []
+    for line in CHUNKS_PATH.read_text(encoding="utf-8").splitlines():
+        if line.strip():
+            existing.append(json.loads(line))
+    return existing
+
+
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Chunk canonical newsletter texts")
+    parser = argparse.ArgumentParser(
+        description="Chunk ESMA newsletters via Docling (not pypdf headings)"
+    )
     parser.add_argument("--source", default=None)
     parser.add_argument("--ids", nargs="+", type=int, default=None)
     parser.add_argument(
         "--append",
         action="store_true",
-        help="Append to existing chunks.jsonl instead of rewriting selected docs",
+        help="Keep chunks for docs not in --ids (default: also keep them)",
+    )
+    parser.add_argument(
+        "--replace-all",
+        action="store_true",
+        help="Rewrite chunks.jsonl with only the selected ids",
+    )
+    parser.add_argument(
+        "--allow-degraded",
+        action="store_true",
+        help="Allow silent-quality pypdf fallback if Docling fails",
+    )
+    parser.add_argument(
+        "--from-fixtures",
+        action="store_true",
+        help="Use tests/fixtures/docling/{id}.raw.json instead of PDFs",
     )
     args = parser.parse_args()
 
@@ -230,32 +156,35 @@ def main() -> int:
     ensure_data_dirs()
     selection = get_source_selection(args.source, args.ids)
 
-    all_chunks: list[dict[str, Any]] = []
-    existing: list[dict[str, Any]] = []
-    if args.append and CHUNKS_PATH.is_file():
-        for line in CHUNKS_PATH.read_text(encoding="utf-8").splitlines():
-            if line.strip():
-                existing.append(json.loads(line))
-        skip_ids = set(selection.ids)
-        existing = [c for c in existing if int(c.get("doc_id", -1)) not in skip_ids]
+    existing = [] if args.replace_all else load_existing_chunks()
+    skip_ids = set(selection.ids)
+    existing = [c for c in existing if int(c.get("doc_id", -1)) not in skip_ids]
 
+    all_chunks: list[dict[str, Any]] = []
     failed = 0
     for doc_id in selection.ids:
         try:
-            chunks = chunk_document(doc_id)
-            print(f"id={doc_id}: {len(chunks)} chunks, offsets verified")
+            chunks = chunk_document(
+                doc_id,
+                allow_degraded=args.allow_degraded,
+                from_fixtures=args.from_fixtures,
+            )
+            print(
+                f"id={doc_id}: {len(chunks)} chunks, "
+                f"extractor=docling, offsets verified"
+            )
             all_chunks.extend(chunks)
         except Exception as exc:
             print(f"ERROR id={doc_id}: {exc}")
             failed += 1
-            # Hard stop on offset/validation failures for safety.
-            if "Offset" in str(exc) or isinstance(exc, AssertionError):
+            if "Offset" in str(exc):
                 return 1
 
     if failed:
         return 1
 
-    output = existing + all_chunks if args.append else all_chunks
+    # Default preserves other docs so --ids 4424 does not drop 7673/8162.
+    output = existing + all_chunks
     with CHUNKS_PATH.open("w", encoding="utf-8") as f:
         for c in output:
             f.write(json.dumps(c, ensure_ascii=False) + "\n")

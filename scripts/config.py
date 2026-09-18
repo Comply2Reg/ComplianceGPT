@@ -10,6 +10,7 @@ import os
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
+from urllib.parse import quote_plus
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
@@ -70,10 +71,8 @@ def load_env(dotenv_path: Optional[Path] = None) -> None:
     """Load .env from project root if present. Does not print values."""
     try:
         from dotenv import load_dotenv
-    except ImportError as exc:
-        raise SystemExit(
-            "python-dotenv is required. Install with: pip install python-dotenv"
-        ) from exc
+    except ImportError:
+        return
 
     path = dotenv_path or (ROOT / ".env")
     if path.is_file():
@@ -135,7 +134,7 @@ def get_database_url() -> str:
     # Prefer this project's MYSQL_* naming when present.
     if _mysql_env_complete():
         user = os.environ["MYSQL_USER"].strip()
-        password = os.environ["MYSQL_PASSWORD"]
+        password = quote_plus(os.environ["MYSQL_PASSWORD"])
         host = os.environ["MYSQL_HOST"].strip()
         port = os.environ["MYSQL_PORT"].strip()
         name = os.environ["MYSQL_DATABASE"].strip()
@@ -143,7 +142,7 @@ def get_database_url() -> str:
 
     driver = os.environ["DB_DRIVER"].strip().lower()
     user = os.environ["DB_USER"].strip()
-    password = os.environ["DB_PASSWORD"]
+    password = quote_plus(os.environ["DB_PASSWORD"])
     host = os.environ["DB_HOST"].strip()
     port = os.environ["DB_PORT"].strip()
     name = os.environ["DB_NAME"].strip()

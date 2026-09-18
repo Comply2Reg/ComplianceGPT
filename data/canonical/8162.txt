@@ -1,709 +1,201 @@
 In this edition
-Simplification of EU reporting
-frameworks for funds and transactions
-Sixth stress test exercise for Central
-Counterparties
-Call for evidence on the structure of
-European equity markets
-“A NEW ERA FOR EU CAPITAL
-MARKETS” KEY CONFERENCE
-TAKEAWAYS
-Spotlight on Markets – April & May 2026
-© peshkov, GettyImages-2214346556
-EDITION
-N° 69
-
+Simplification of EU reporting frameworks for funds and transactions
+Sixth stress test exercise for Central Counterparties
+Call for evidence on the structure of European equity markets
 In this issue
-ESMA in April and May
-Spotlight on Markets
-April & May 2026
-2
-“A New Era for EU Capital Markets” Key Conference
+'A New Era for EU Capital Markets' Key Conference 4
 Takeaways
-4
-14ESMA launches a call for evidence on restricted
-subscription and private credit ratings
-5ESMA advances the simplification of EU reporting
+ESMA advances the simplification of EU reporting 5
 frameworks for funds and transactions
-ESMA launches its sixth stress test exercise for Central
-Counterparties 8
-11ESMA issues guidance on effective use of resolution
+ESMA launches its sixth stress test exercise for Central 8
+Counterparties
+ESMA issues guidance on effective use of resolution 11
 tools in CCP crisis planning
-ESMA launches a call for evidence on the structure of
+ESMA launches a call for evidence on the structure of 12
 European equity markets
-12
-16ESMA releases reporting templates and instructions for the
+ESMA launches a call for evidence on restricted 14
+subscription and private credit ratings
+ESMA releases reporting templates and instructions for the 16
 Active Account Requirement
-17ESMA consults on guidelines on endorsement under
+ESMA consults on guidelines on endorsement under 17
 the ESG Ratings Regulation
-
-In this issue
-3
+Joint Committee annual report highlights digitalisation, cyber resilience and sustainable finance as key priorities of 2025 19
+ESMA consults on a new simplified approach to updating MMF stress test parameters 20
+ESMA promotes proportionate supervision of MiFID II sustainability requirements 21
+ESMA outlines enforcement activities for corporate reporting across the EEA in 2025 23
+ESMA support ESEF implementation with updated taxonomy 24
+ESMA identifies areas for further supervisory convergence on compliance and internal audit in the funds sector 26
+European Commission launches call for candidates for the ESAs' Board of Appeal 28
+ESMA participated in Europe's day 29
 Look ahead
+Consultations and events
 Contact info 31
-Consultations and events 30
-20ESMA consults on a new simplified approach to updating
-MMF stress test parameters
-Joint Committee annual report highlights digitalisation,
-cyber resilience and sustainable finance as key priorities
-of 2025
-21ESMA promotes proportionate supervision of MiFID II
-sustainability requirements
-23
-ESMA outlines enforcement activities for corporate
-reporting across the EEA in 2025
-24ESMA support ESEF implementation with updated
-taxonomy
-26ESMA identifies areas for further supervisory convergence
-on compliance and internal audit in the funds sector
-19
-28European Commission launches call for candidates for the
-ESAs’ Board of Appeal
-Spotlight on Markets
-April & May 2026
-29 ESMA participated in Europe’s day
 
-You can watch the Conference here
-Discussions focused on the ambition to build more integrated, efficient and
-attractive markets, with the Savings and Investment Union at the heart of the
-debate. In a rapidly changing geopolitical and technological environment,
-participants highlighted the importance of collective action at EU level to unlock
-Europe’s full potential.
-4
-Spotlight on Markets
-April & May 2026
-“A New Era for EU Capital Markets”
-Key Conference Takeaways
-The ESMA Conference “A New Era for EU Capital Markets” brought together a
-wide range of stakeholders from across Europe and beyond, including public
-authorities, market participants and consumer organisations, for a day of
-insightful discussions and exchange.
-Marking ESMA’s 15th anniversary, the Conference provided an opportunity to
-reflect on the Authority’s evolution from a crisis ‑ response body into a globally
-recognised supervisory authority, while also looking ahead to the future of
-Europe’s capital markets.
+ESMA in April and May
 
-Final report on the integrated collection of funds’ data
-“ESMA is advancing on the EU-wide simplification of regulatory
-reporting, targeting both funds reporting and transaction
-reporting. The objective is to reduce operational burden for
-market participants by introducing the principle of ‘reporting
-once’, while also improving data quality and supervisory
-effectiveness. This will be achieved through harmonisation and
-enhanced data sharing between authorities across the EU.
-The data we collect from market participants is and will
-continue to be central to how ESMA and the NCAs supervise
-markets. It underpins our risk assessments and allows us to
-identify vulnerabilities early, supporting our work to safeguard
-integrity and financial stability across EU markets.”
-Verena Ross, Chair
-5
-The European Securities and Markets Authority (ESMA), the EU financial
-markets regulator and supervisor, has launched a harmonised approach to
-funds reporting and has set a clear path towards streamlined, more efficient
-transaction reporting across European markets.
-ESMA advances the simplification of
-EU reporting frameworks for funds
-and transactions
-The two reports are complementary pillars of ESMA’s broader simplification and
-burden reduction agenda, launched last year.
-Spotlight on Markets
-April & May 2026
+'A New Era for EU Capital Markets' Key Conference Takeaways
+The ESMA Conference 'A New Era for EU Capital Markets' brought together a wide range of stakeholders from across Europe and beyond, including public authorities, market participants and consumer organisations, for a day of insightful discussions and exchange.
+Marking ESMA's 15th anniversary, the Conference provided an opportunity to reflect on the Authority's evolution from a crisis - response body into a globally recognised supervisory authority, while also looking ahead to the future of Europe's capital markets.
+Discussions focused on the ambition to build more integrated, efficient and attractive markets, with the Savings and Investment Union at the heart of the debate. In a rapidly changing geopolitical and technological environment, participants highlighted the importance of collective action at EU level to unlock Europe's full potential.
 
-Interim report on the Call for Evidence on a comprehensive
-approach for the simplification of financial transaction reporting
-6
-Spotlight on Markets
-April & May 2026
-Final Report on the integrated collection of funds’ data
-In the report, ESMA sets out a strategic move away from fragmented national
-reporting towards a common EU reporting framework, centred on a common
-and single reporting template designed to remain proportionate for different
-fund sizes and investment strategies, while meeting supervisory needs. The
-aim is to reduce duplication, improve data consistency and enhance the
-usability of data for authorities.
-To support this approach, ESMA outlines a hybrid operational model, under
-which data validation, storage and analytics would be organised at EU level,
-while data collection would remain at national level. By facilitating data sharing
-across authorities, the centralised hub will offer efficiency gains not only for
-authorities but will also contribute further to burden reduction by limiting
-duplicative data requests.
-Next steps on funds reporting include the development of regulatory and
-implementing technical standards (RTS, ITS), that will be presented next year.
-After that, the implementation of the new template and the rest of
-recommendations will be gradually introduced, with the first phase focusing on
-the integration of reporting under AIMFD and UCITS, and the second phase that
-would expand the integrated framework to other reporting obligations.
+ESMA advances the simplification of EU reporting frameworks for funds and transactions
+The European Securities and Markets Authority (ESMA), the EU financial markets regulator and supervisor, has launched a harmonised approach to funds reporting and has set a clear path towards streamlined, more efficient transaction reporting across European markets.
+The two reports are complementary pillars of ESMA's broader simplification and burden reduction agenda, launched last year.
+Final report on the integrated collection of funds' data
+'ESMA is advancing on the EU-wide simplification of regulatory reporting, targeting both funds reporting and transaction reporting. The objective is to reduce operational burden for market participants by introducing the principle of 'reporting once', while also improving data quality and supervisory effectiveness. This will be achieved through harmonisation and enhanced data sharing between authorities across the EU. The data we collect from market participants is and will continue to be central to how ESMA and the NCAs supervise markets. It underpins our risk assessments and allows us to identify vulnerabilities early, supporting our work to safeguard integrity and financial stability across EU markets.'
+Verena Ross , Chair
+
+Final Report on the integrated collection of funds' data
+In the report, ESMA sets out a strategic move away from fragmented national reporting towards a common EU reporting framework, centred on a common and single reporting template designed to remain proportionate for different fund sizes and investment strategies, while meeting supervisory needs. The aim is to reduce duplication, improve data consistency and enhance the usability of data for authorities.
+To support this approach, ESMA outlines a hybrid operational model, under which data validation, storage and analytics would be organised at EU level, while data collection would remain at national level. By facilitating data sharing across authorities, the centralised hub will offer efficiency gains not only for authorities but will also contribute further to burden reduction by limiting duplicative data requests.
+Next steps on funds reporting include the development of regulatory and implementing technical standards (RTS, ITS), that will be presented next year. After that, the implementation of the new template and the rest of recommendations will be gradually introduced, with the first phase focusing on the integration of reporting under AIMFD and UCITS, and the second phase that would expand the integrated framework to other reporting obligations.
+Interim report on the Call for Evidence on a comprehensive approach for the simplification of financial transaction reporting
+
 Interim report on the holistic review of transaction reporting
-Based on the feedback received from more than 100 respondents to the
-previous call for evidence on transaction reporting simplification, ESMA has
-identified the main challenges in the current reporting frameworks, and the
-most promising approaches to overcome them: instrument ‑ based and dual-
-side simplifications and the implementation of a “report once” framework
-across EMIR, MiFIR and SFTR in the long term.
-
-ESMA advances the simplification of EU reporting frameworks for
-funds and transactions - Press release
-7
-Spotlight on Markets
-April & May 2026
-Most respondents indicated that overlapping and inconsistent reporting
-requirements, frequent and unsynchronised regulatory changes, fragmented
-reporting channels and dual reporting are major drivers of cost and complexity.
-Considering the need to perform a thorough cost-benefit analysis, the report
-does not contain policy recommendations yet. As part of the next steps, ESMA
-will further engage with markets participants, including through an open
-hearing that will be held on 28 May, before moving forward with final
-recommendations to be published by mid-year.
+Based on the feedback received from more than 100 respondents to the previous call for evidence on transaction reporting simplification, ESMA has identified the main challenges in the current reporting frameworks, and the most promising approaches to overcome them: instrument - based and dualside simplifications and the implementation of a 'report once' framework across EMIR, MiFIR and SFTR in the long term.
+Most respondents indicated that overlapping and inconsistent reporting requirements, frequent and unsynchronised regulatory changes, fragmented reporting channels and dual reporting are major drivers of cost and complexity.
+Considering the need to perform a thorough cost-benefit analysis, the report does not contain policy recommendations yet. As part of the next steps, ESMA will further engage with markets participants, including through an open hearing that will be held on 28 May, before moving forward with final recommendations to be published by mid-year.
+ESMA advances the simplification of EU reporting frameworks for funds and transactions - Press release
 Background
-Both reports are flagship deliverables of ESMA’s wider Simplification and
-Burden Reduction (SBR) initiative, to address growing complexity and
-operational costs stemming from EU reporting requirements.
+Both reports are flagship deliverables of ESMA's wider Simplification and Burden Reduction (SBR) initiative, to address growing complexity and operational costs stemming from EU reporting requirements.
 
-Mandated under the European Market Infrastructure Regulation (EMIR), the
-stress test aims to assess the resilience of CCPs to adverse market
-developments and identify any potential shortcomings. It also evaluates the
-aggregate effects of CCPs’ recovery and resolution arrangements on Union
-financial stability and, where necessary, enables ESMA to issue
-recommendations. The exercise covers 16 CCPs including all authorised EU
-CCPs as well as two UK based Tier 2 CCPs.
-8
-“In a world continuously challenged by multiple crises,
-stress test exercises are critical to ensure that financial
-market infrastructures have the necessary tools,
-resources and arrangements in place to be resilient.
-That is why, for ESMA, the CCP stress test is a key
-supervisory tool, and we continue to develop it further
-to better measure potential risks to the EU financial
-eco-system.”
-Verena Ross, Chair
-The European Securities and Markets Authority (ESMA), the EU’s financial
-markets regulator and supervisor, has launched its sixth stress test exercise
-for Central Counterparties (CCPs). The CCP stress test framework drafted by
-ESMA for the purpose of this exercise is supported by an adverse market
-scenario provided by the European Systemic Risk Board (ESRB).
-ESMA launches its sixth stress test
-exercise for Central Counterparties
-Spotlight on Markets
-April & May 2026
-
-“CCPs play a critical role in managing counterparty credit
-risk in financial markets. Their resilience is essential for
-safeguarding financial stability, especially during periods
-of pronounced stress. This year’s exercise onboards the
-Recovery and Resolution Component to measure the
-aggregate impact from the activation of CCPs’ recovery
-and resolution arrangements.”
+ESMA launches its sixth stress test exercise for Central Counterparties
+The European Securities and Markets Authority (ESMA), the EU's financial markets regulator and supervisor, has launched its sixth stress test exercise for Central Counterparties (CCPs). The CCP stress test framework drafted by ESMA for the purpose of this exercise is supported by an adverse market scenario provided by the European Systemic Risk Board (ESRB).
+Mandated under the European Market Infrastructure Regulation (EMIR), the stress test aims to assess the resilience of CCPs to adverse market developments and identify any potential shortcomings. It also evaluates the aggregate effects of CCPs' recovery and resolution arrangements on Union financial stability and, where necessary, enables ESMA to issue recommendations. The exercise covers 16 CCPs including all authorised EU CCPs as well as two UK based Tier 2 CCPs.
+'In a world continuously challenged by multiple crises, stress test exercises are critical to ensure that financial market infrastructures have the necessary tools, resources and arrangements in place to be resilient. That is why, for ESMA, the CCP stress test is a key supervisory tool, and we continue to develop it further to better measure potential risks to the EU financial eco-system.'
+Verena Ross , Chair
+'CCPs play a critical role in managing counterparty credit risk in financial markets. Their resilience is essential for safeguarding financial stability, especially during periods of pronounced stress. This year's exercise onboards the Recovery and Resolution Component to measure the aggregate impact from the activation of CCPs' recovery and resolution arrangements.'
 Klaus Löber, Chair of the CCP Supervisory Committee
-Read the Final Report on the Framework for the 6th
-ESMA Stress Test Exercise for Central Counterparties
-9
-Spotlight on Markets
-April & May 2026
-ESMA’s supervisory stress tests complement those run daily by individual CCPs by
-assessing the system-wide implications of potential member defaults and market
-shocks.
+ESMA's supervisory stress tests complement those run daily by individual CCPs by assessing the system-wide implications of potential member defaults and market shocks.
+Read the Final Report on the Framework for the 6th ESMA Stress Test Exercise for Central Counterparties
 
-Next steps
 Components of the test framework
-This year’s exercise further develops ESMA’s framework by introducing
-enhanced methodologies and expanding the analytical scope. Developed in
-cooperation with National Competent Authorities (NCAs) and the ESRB, the
-framework covers:
-10
-Spotlight on Markets
-April & May 2026
-ESMA launched the data request at the beginning of May, followed by a joint
-validation of the submissions together with National Competent Authorities. The
-exercise will then proceed to the analysis and computation of results and, finally,
-the preparation of the report. The stress test will conclude with the publication
-of the final outcomes planned for the first quarter of 2027.
-
-1.Credit Stress Test: Evaluates whether CCPs’ financial resources are sufficient
-to absorb losses from combinations of market shocks and multiple clearing
-member defaults.
-2.Concentration Risk Analysis: Assesses the market impact and liquidation
-costs resulting from the close-out of large, concentrated positions.
-3.Reverse Stress Test: Increases the severity of scenarios to assess the
-absorption capacity of the system and identify potential breaking points.
-4.Recovery and Resolution Component: For the first time, ESMA will assess the
-aggregate effects of CCPs’ recovery and resolution tools on stakeholders.
-
-CCP resolution briefing on the operationalisation of the write-down and
-conversion of instruments of ownership and debt instruments or other unsecured
-liabilities tool
-11
-The European Securities and Markets Authority (ESMA), the EU’s financial
-markets regulator and supervisor, has today published a resolution briefing
-for Central Counterparties (CCPs). The briefing provides practical guidance to
-National Resolution Authorities (NRAs) on how to operationalise the write-
-down and conversion of instruments tool (WDCI).
-ESMA issues guidance on effective use
-of resolution tools in CCP crisis
-planning
-Spotlight on Markets
-April & May 2026
-Developed by ESMA's CCP Resolution Committee, the briefing provides a
-methodology for NRAs to consider when including WDCI in CCP resolution
-plans.
-NRAs should define the relevant data to be
-collected by the CCPs, with a view to calibrate
-the resources available through a WDCI. In
-doing so, NRAs should take into account the
-impact on relevant stakeholders, such as
-clearing members, financial markets and
-financial market infrastructures. NRAs should
-ensure that processes are in place to
-implement WDCI effectively, including
-preparations for the subsequent
-reorganisation of the CCP following the WDCI
-has been applied. Following the previous
-briefings on CCP critical functions and
-resolution cash calls, this briefing contributes
-to building a single resolution rulebook with a
-clear focus on operationalisation of the tools
-available to NRAs.
-
-12
-Spotlight on Markets
-April & May 2026
-ESMA launches a call for evidence on
-the structure of European equity
-markets
-The European Securities and Markets Authority (ESMA) has published a call
-for evidence (CfE) presenting a data driven analysis of the evolution of
-trading in European equity markets between 2022 and 2025, based on MiFIR
-transaction reporting data. The CfE invites stakeholder feedback on
-observed trends and their potential regulatory implications.
-The analysis shows that European equity markets continue to function well
-overall:
-At the same time, ESMA observes a decline in lit continuous trading between
-2022 and 2025. This decline has been offset by increased activity in other
-trading mechanisms, mainly closing auctions, frequent batch auctions and
-systematic internaliser (SI) trading.
-Call for Evidence on the market structure of European equity markets
-On ‑ book trading has also been relatively stable, accounting for
-around 75–80% of trading volume over the period.
-The share of addressable liquidity has remained
-stable at around 85% of total trading volume.
-The paper also analyses how liquidity is allocated across different trading
-mechanisms on a country ‑ by ‑ country basis and seeks input on the concept of
-addressable liquidity and its treatment under RTS 1, including possible
-adjustments to the post ‑ trade transparency flagging framework.
-
+This year's exercise further develops ESMA's framework by introducing enhanced methodologies and expanding the analytical scope. Developed in cooperation with National Competent Authorities (NCAs) and the ESRB, the framework covers:
+Credit Stress Test: Evaluates whether CCPs' financial resources are sufficient to absorb losses from combinations of market shocks and multiple clearing member defaults.
+2.Concentration Risk Analysis: Assesses the market impact and liquidation costs resulting from the close-out of large, concentrated positions.
+3.Reverse Stress Test: Increases the severity of scenarios to assess the absorption capacity of the system and identify potential breaking points.
+4.Recovery and Resolution Component: For the first time, ESMA will assess the aggregate effects of CCPs' recovery and resolution tools on stakeholders.
 Next steps
-13
-Spotlight on Markets
-April & May 2026
-Besides the CfE, ESMA takes the opportunity to inform stakeholders of the
-repeal of the Q&A clarifying that periodic auctions are subject to the tick-size
-regime.
-ESMA invites stakeholders’ views on the functioning of European stock
-markets by 30 June 2026, and will issue a feedback statement in the second
-half of 2026 on this call for evidence.
-ESMA will continue monitoring market developments, considering recent
-MiFIR changes, including the move to a single volume cap and enhanced SI
-transparency obligations, as well as on different types of trading mechanisms
-such as closing auctions.
+ESMA launched the data request at the beginning of May, followed by a joint validation of the submissions together with National Competent Authorities. The exercise will then proceed to the analysis and computation of results and, finally, the preparation of the report. The stress test will conclude with the publication of the final outcomes planned for the first quarter of 2027.
 
-ESMA launches a call for evidence on
-restricted subscription and private
-credit ratings
-The European Securities and Markets Authority (ESMA), the EU’s financial
-markets regulator and supervisor, has launched a call for evidence to gather
-stakeholder views on the purposes, market practices, needs and risks
-associated with restricted subscription and private credit ratings.
-14
-Spotlight on Markets
-April & May 2026
-ESMA is encouraging all interested stakeholders to share views, data and analysis
-including:
-The characteristics and use cases of restricted subscription and private
-credit ratings, including their benefits compared with publicly
-disclosed ratings.
-The characteristics of the parties who are contracting for restricted
-subscription and private credit ratings and those to whom they are
-disclosed or distributed.
-Evidence on whether, and to what extent, the analytical processes,
-governance arrangements, and internal controls applied to
-restricted subscription and private credit ratings are comparable to
-those applied to public credit ratings.
-Stakeholders are invited to provide evidence ‑ based responses, including
-quantitative information where available, as well as concrete examples drawn from
-market practice. ESMA will consider all responses received by 31 May 2026.
+ESMA issues guidance on effective use of resolution tools in CCP crisis planning
+The European Securities and Markets Authority (ESMA), the EU's financial markets regulator and supervisor, has today published a resolution briefing for Central Counterparties (CCPs). The briefing provides practical guidance to National Resolution Authorities (NRAs) on how to operationalise the writedown and conversion of instruments tool (WDCI).
+Developed by ESMA's CCP Resolution Committee, the briefing provides a methodology for NRAs to consider when including WDCI in CCP resolution plans.
+NRAs should define the relevant data to be collected by the CCPs, with a view to calibrate the resources available through a WDCI. In doing so, NRAs should take into account the impact on relevant stakeholders, such as clearing members, financial markets and financial market infrastructures. NRAs should ensure that processes are in place to implement WDCI effectively, including preparations for the subsequent reorganisation of the CCP following the WDCI has been applied. Following the previous briefings on CCP critical functions and resolution cash calls, this briefing contributes to building a single resolution rulebook with a clear focus on operationalisation of the tools available to NRAs.
+CCP resolution briefing on the operationalisation of the write-down and conversion of instruments of ownership and debt instruments or other unsecured liabilities tool
+
+ESMA launches a call for evidence on the structure of European equity markets
+The European Securities and Markets Authority (ESMA) has published a call for evidence (CfE) presenting a data driven analysis of the evolution of trading in European equity markets between 2022 and 2025, based on MiFIR transaction reporting data. The CfE invites stakeholder feedback on observed trends and their potential regulatory implications.
+The analysis shows that European equity markets continue to function well overall:
+The share of addressable liquidity has remained stable at around 85% of total trading volume.
+On - book trading has also been relatively stable, accounting for around 75-80% of trading volume over the period.
+At the same time, ESMA observes a decline in lit continuous trading between 2022 and 2025. This decline has been offset by increased activity in other trading mechanisms, mainly closing auctions, frequent batch auctions and systematic internaliser (SI) trading.
+The paper also analyses how liquidity is allocated across different trading mechanisms on a country - by - country basis and seeks input on the concept of addressable liquidity and its treatment under RTS 1, including possible adjustments to the post - trade transparency flagging framework.
+Call for Evidence on the market structure of European equity markets Besides the CfE, ESMA takes the opportunity to inform stakeholders of the repeal of the Q&A clarifying that periodic auctions are subject to the tick-size regime.
+Next steps
+ESMA invites stakeholders' views on the functioning of European stock markets by 30 June 2026, and will issue a feedback statement in the second half of 2026 on this call for evidence.
+ESMA will continue monitoring market developments, considering recent MiFIR changes, including the move to a single volume cap and enhanced SI transparency obligations, as well as on different types of trading mechanisms such as closing auctions.
+
+ESMA launches a call for evidence on restricted subscription and private credit ratings
+The European Securities and Markets Authority (ESMA), the EU's financial markets regulator and supervisor, has launched a call for evidence to gather stakeholder views on the purposes, market practices, needs and risks associated with restricted subscription and private credit ratings.
+ESMA is encouraging all interested stakeholders to share views, data and analysis including:
+The characteristics and use cases of restricted subscription and private credit ratings, including their benefits compared with publicly disclosed ratings.
+The characteristics of the parties who are contracting for restricted subscription and private credit ratings and those to whom they are disclosed or distributed.
+Evidence on whether, and to what extent, the analytical processes, governance arrangements, and internal controls applied to restricted subscription and private credit ratings are comparable to those applied to public credit ratings.
+Stakeholders are invited to provide evidence - based responses, including quantitative information where available, as well as concrete examples drawn from market practice. ESMA will consider all responses received by 31 May 2026.
 Call for Evidence on the restricted subscription and private credit ratings
-
-Next steps
-ESMA will review the responses received in the second quarter of 2026 with a
-view to assessing whether specific regulatory adjustments or clarifications may
-be needed to enhance clarity on the application of the CRA Regulation.
-15
-Spotlight on Markets
-April & May 2026
 Background
-The use of restricted subscription and private credit ratings has been increasing
-in recent years. This development raises questions about the purposes and
-market needs these products are intended to serve; how they are produced,
-distributed and used in practice; and the potential benefits and risks associated
-with selective access to rating information.
-Calls for evidence form part of ESMA’s commitment to evidence ‑ based
-policymaking and stakeholder engagement, enabling ESMA to better
-understand market developments and practices.
-
+The use of restricted subscription and private credit ratings has been increasing in recent years. This development raises questions about the purposes and market needs these products are intended to serve; how they are produced, distributed and used in practice; and the potential benefits and risks associated with selective access to rating information.
+Calls for evidence form part of ESMA's commitment to evidence - based policymaking and stakeholder engagement, enabling ESMA to better understand market developments and practices.
 Next steps
-The European Securities and Markets Authority (ESMA), the EU’s financial
-markets regulator and supervisor, has published the reporting templates and
-instructions for the Active Account Requirement (AAR) reporting under
-European Market Infrastructure Regulation (EMIR 3).
-ESMA releases reporting templates
-and instructions for the Active Account
-Requirement
-16
-Spotlight on Markets
-April & May 2026
-The new templates set out in detail how entities subject to the AAR should
-report the required information to their competent authorities. Through this
-development, ESMA aims to ensure a harmonised and efficient approach to AAR
-reporting across the EU, providing standardised templates and clear instructions
-while facilitating consistent supervisory practices.
-The first AAR reporting submission is expected on 31 July 2026, covering the
-period from 25 June 2025, when the AAR became applicable, to 30 June 2026.
-Thereafter, reporting will take place on six-months basis, with submissions due
-on 31 January and 31 July each year, each covering a twelve ‑ month reference
-period.
+ESMA will review the responses received in the second quarter of 2026 with a view to assessing whether specific regulatory adjustments or clarifications may be needed to enhance clarity on the application of the CRA Regulation.
 
-17
-The European Securities and Markets Authority (ESMA) has launched a public
-consultation on draft guidelines on endorsement under the ESG Ratings
-Regulation1.
-ESMA consults on guidelines on
-endorsement under the ESG Ratings
-Regulation
+ESMA releases reporting templates and instructions for the Active Account Requirement
+The European Securities and Markets Authority (ESMA), the EU's financial markets regulator and supervisor, has published the reporting templates and instructions for the Active Account Requirement (AAR) reporting under European Market Infrastructure Regulation (EMIR 3).
+The new templates set out in detail how entities subject to the AAR should report the required information to their competent authorities. Through this development, ESMA aims to ensure a harmonised and efficient approach to AAR reporting across the EU, providing standardised templates and clear instructions while facilitating consistent supervisory practices.
+Next steps
+The first AAR reporting submission is expected on 31 July 2026, covering the period from 25 June 2025, when the AAR became applicable, to 30 June 2026.
+Thereafter, reporting will take place on six-months basis, with submissions due on 31 January and 31 July each year, each covering a twelve - month reference period.
+
+ESMA consults on guidelines on endorsement under the ESG Ratings Regulation
+The European Securities and Markets Authority (ESMA) has launched a public consultation on draft guidelines on endorsement under the ESG Ratings Regulation1.
+The consultation paper sets out ESMA's proposed approach to the endorsement of non-EU ESG ratings under the regulatory framework and seeks feedback from ESG rating providers and other stakeholders on the draft guidelines.
+The guidelines aim to support the consistent application of the endorsement regime, in particular, by providing guidance on the information to be submitted as part of an ESG Rating Provider's application to endorse ESG ratings.
+By consulting publicly, ESMA is seeking input on the proposed guidelines to ensure the guidance is clear, proportionate and workable in practice, while remaining aligned with the objectives of the ESG Ratings Regulation.
 Background
-The consultation paper sets out ESMA’s proposed approach to the endorsement
-of non-EU ESG ratings under the regulatory framework and seeks feedback from
-ESG rating providers and other stakeholders on the draft guidelines.
-Spotlight on Markets
-April & May 2026
-The ESG Ratings Regulation establishes a regulatory framework for providers of
-ESG ratings in the European Union. As part of this framework, and in order to
-ensure market integrity and investor protection, the Regulation includes
-provisions which set out how ESG rating providers that are established in the
-Union can endorse ratings from outside the Union.
-The guidelines aim to support the consistent application of the endorsement
-regime, in particular, by providing guidance on the information to be submitted
-as part of an ESG Rating Provider’s application to endorse ESG ratings.
-By consulting publicly, ESMA is seeking input on the proposed guidelines to
-ensure the guidance is clear, proportionate and workable in practice, while
-remaining aligned with the objectives of the ESG Ratings Regulation.
-To support the implementation of these provisions, ESMA has developed draft
-guidelines on endorsement under the ESG Ratings Regulation.
-
+The ESG Ratings Regulation establishes a regulatory framework for providers of ESG ratings in the European Union. As part of this framework, and in order to ensure market integrity and investor protection, the Regulation includes provisions which set out how ESG rating providers that are established in the Union can endorse ratings from outside the Union.
+To support the implementation of these provisions, ESMA has developed draft guidelines on endorsement under the ESG Ratings Regulation.
 Next steps
-ESMA welcomes comments on the consultation paper until 29 May 2026. The
-feedback received will be considered by ESMA in the finalisation of the
-guidelines.
-Following the consultation, ESMA will assess the responses and decide on the
-final form of the guidelines, in line with its mandate under the ESG Ratings
-Regulation. Further information on the outcome of the consultation and the
-adoption of the guidelines will be communicated before the end of July 2026.
-Consultation Paper for Guidelines on Endorsement under Article
-11 of the ESG Rating Regulation
-18
-Spotlight on Markets
-April & May 2026
+ESMA welcomes comments on the consultation paper until 29 May 2026. The feedback received will be considered by ESMA in the finalisation of the guidelines.
+Following the consultation, ESMA will assess the responses and decide on the final form of the guidelines, in line with its mandate under the ESG Ratings Regulation. Further information on the outcome of the consultation and the adoption of the guidelines will be communicated before the end of July 2026.
+Consultation Paper for Guidelines on Endorsement under Article 11 of the ESG Rating Regulation
 
-Read the Joint Committee Annual Report 2025
-19
-The Joint Committee of the European Supervisory Authorities (EBA, EIOPA and
-ESMA – the ESAs) has published its Annual Report for 2025, setting out the
-main priorities and achievements of its cross-sectoral work over the past
-year. In 2025, the Joint Committee focused on protecting consumers in
-increasingly digital financial markets, strengthening operational and cyber
-resilience through the implementation of the Digital Operational Resilience
-Act (DORA), improving the effectiveness of sustainable finance disclosures,
-and enhancing cross-sectoral risk monitoring.
-Joint Committee annual report
-highlights digitalisation, cyber
-resilience and sustainable finance as
-key priorities of 2025
-Chaired by the European Insurance and Occupational Pensions Authority
-(EIOPA), in 2025, the Joint Committee continued to act as a key coordination
-platform, supporting close cooperation and information exchange between the
-ESAs, the European Commission and the European Systemic Risk Board (ESRB).
-Spotlight on Markets
-April & May 2026
-The Joint Committee also advanced a range of other cross-sectoral initiatives,
-including work to enhance the EU securitisation framework, progress on the
-European Single Access Point (ESAP), and support for financial innovation
-through the European Forum for Innovation Facilitators (EFIF).
-In line with the European Commission’s priorities, the Joint Committee further
-contributed to efforts to simplify the EU financial regulatory framework and
-reduce unnecessary complexity, notably in the areas of sustainable finance and
-packaged retail and insurance-based investment products (PRIIPs).
+Joint Committee annual report highlights digitalisation, cyber resilience and sustainable finance as key priorities of 2025
+The Joint Committee of the European Supervisory Authorities (EBA, EIOPA and ESMA - the ESAs) has published its Annual Report for 2025, setting out the main priorities and achievements of its cross-sectoral work over the past year. In 2025, the Joint Committee focused on protecting consumers in increasingly digital financial markets, strengthening operational and cyber resilience through the implementation of the Digital Operational Resilience Act (DORA), improving the effectiveness of sustainable finance disclosures, and enhancing cross-sectoral risk monitoring.
+Chaired by the European Insurance and Occupational Pensions Authority (EIOPA), in 2025, the Joint Committee continued to act as a key coordination platform, supporting close cooperation and information exchange between the ESAs, the European Commission and the European Systemic Risk Board (ESRB).
+The Joint Committee also advanced a range of other cross-sectoral initiatives, including work to enhance the EU securitisation framework, progress on the European Single Access Point (ESAP), and support for financial innovation through the European Forum for Innovation Facilitators (EFIF).
+In line with the European Commission's priorities, the Joint Committee further contributed to efforts to simplify the EU financial regulatory framework and reduce unnecessary complexity, notably in the areas of sustainable finance and packaged retail and insurance-based investment products (PRIIPs).
 
-20
-Spotlight on Markets
-April & May 2026
-ESMA consults on a new simplified
-approach to updating MMF stress test
-parameters
-The European Securities and Markets Authority (ESMA), the EU’s financial
-markets regulator and supervisor, has launched a consultation on a new
-approach to updating the parameters for stress test scenarios under the
-Money Market Funds framework.
-ESMA proposes replacing the current annual amendments to Section 5 of the
-Guidelines with an annual web-based publication of the calibration parameters.
-Read the Consultation paper on the Guidelines on stress test
-scenarios under the MMF Regulation
-The Guidelines would continue to define the stress testing framework and
-methodology, while the website would serve as a single point of access for the
-latest annual calibrations.
-The proposed approach aims to simplify the update process and improve
-accessibility, allowing market participants to apply updated parameters
-immediately after approval. It is also intended to reduce compliance and
-supervisory burdens, in line with ESMA’s Simplification and Burden Reduction
-(SBR) initiative.
+ESMA consults on a new simplified approach to updating MMF stress test parameters
+The European Securities and Markets Authority (ESMA), the EU's financial markets regulator and supervisor, has launched a consultation on a new approach to updating the parameters for stress test scenarios under the Money Market Funds framework.
+ESMA proposes replacing the current annual amendments to Section 5 of the Guidelines with an annual web-based publication of the calibration parameters.
+The Guidelines would continue to define the stress testing framework and methodology, while the website would serve as a single point of access for the latest annual calibrations.
+The proposed approach aims to simplify the update process and improve accessibility, allowing market participants to apply updated parameters immediately after approval. It is also intended to reduce compliance and supervisory burdens, in line with ESMA's Simplification and Burden Reduction (SBR) initiative.
 Next steps
-Feedback should be submitted by 6 August 2026. ESMA will then consider
-the feedback received and expects to publish the corresponding final report
-in H2 2026. The new procedure for the update of the parameters will apply
-with the next update, which is expected at the end of 2026.
+Feedback should be submitted by 6 August 2026. ESMA will then consider the feedback received and expects to publish the corresponding final report in H2 2026. The new procedure for the update of the parameters will apply with the next update, which is expected at the end of 2026.
+Read the Consultation paper on the Guidelines on stress test scenarios under the MMF Regulation
 
-ESMA promotes proportionate
-supervision of MiFID II sustainability
-requirements
-21
-Spotlight on Markets
-April & May 2026
-The European Securities and Markets Authority (ESMA), the EU’s financial
-markets regulator and supervisor, has issued a statement presenting the
-results of its Common Supervisory Action (CSA) on how sustainability is
-integrated into firms’ suitability assessment as well as into processes and
-procedures for product governance.
-The statement highlights key themes emerging from the supervisory exercise
-and sets out high ‑ level interim supervisory expectations, notably in relation to:
-Read the Statement on results of the Common Supervisory
-Action on MiFID II sustainability aspects
-the collection and treatment of clients’ sustainability preferences;
+ESMA promotes proportionate supervision of MiFID II sustainability requirements
+The European Securities and Markets Authority (ESMA), the EU's financial markets regulator and supervisor, has issued a statement presenting the results of its Common Supervisory Action (CSA) on how sustainability is integrated into firms' suitability assessment as well as into processes and procedures for product governance.
+The statement highlights key themes emerging from the supervisory exercise and sets out high - level interim supervisory expectations, notably in relation to:
+the collection and treatment of clients' sustainability preferences;
 the categorisation and matching of products to those preferences;
 the application of the portfolio approach; and
 the target market assessment of products.
-ESMA reaffirms the importance of sustainability and encourages firms to
-continue implementing the MiFID II sustainability requirements, recognising that
-the CSA has been conducted at a time when the sustainable finance framework
-is undergoing significant revision.
-
+ESMA reaffirms the importance of sustainability and encourages firms to continue implementing the MiFID II sustainability requirements, recognising that the CSA has been conducted at a time when the sustainable finance framework is undergoing significant revision.
+Read the Statement on results of the Common Supervisory Action on MiFID II sustainability aspects In view of these developments, and reflecting ESMA's strategic priority of promoting simplification and reducing undue burden, ESMA invites national competent authorities to adopt a proportionate supervisory approach. This includes fostering dialogue with firms during the transition period, rather than prioritising enforcement actions, without prejudice to cases involving clear breaches or mis - selling.
 Next steps
-ESMA will consider the results of this work for any future updates of the MiFID
-II Delegated Acts on sustainability and the related ESMA Guidelines, with the
-aim to simplify the framework and support more consistent and effective
-application
-22
-Spotlight on Markets
-April & May 2026
-In view of these developments, and reflecting ESMA’s strategic priority of
-promoting simplification and reducing undue burden, ESMA invites national
-competent authorities to adopt a proportionate supervisory approach. This
-includes fostering dialogue with firms during the transition period, rather than
-prioritising enforcement actions, without prejudice to cases involving clear
-breaches or mis ‑ selling.
+ESMA will consider the results of this work for any future updates of the MiFID II Delegated Acts on sustainability and the related ESMA Guidelines, with the aim to simplify the framework and support more consistent and effective application
 
-23
-The European Securities and Markets Authority (ESMA), the EU’s financial
-markets regulator and supervisor, has published its Report on 2025 Corporate
-reporting enforcement and regulatory activities. The report provides an
-overview of how national enforcers and ESMA supervised corporate reporting
-across the European Economic Area (EEA) during 2025.
-ESMA outlines enforcement activities
-for corporate reporting across the EEA
-in 2025
-Spotlight on Markets
-April & May 2026
-Read the Report on 2025 Corporate reporting enforcement and
-regulatory activities
-In 2025, financial reporting enforcement continued to promote disclosures that
-are material, transparent, entity specific, and useful for decision ‑ making. In
-sustainability reporting, this was the first year of enforcement of the European
-Sustainability Reporting Standards (ESRS) for in-scope jurisdictions, alongside
-the application of the ESMA Guidelines on Enforcement of Sustainability
-Information (GLESI). Digital reporting remained a supervisory priority, as
-enforcers worked on improving the quality, consistency, and usability of marked
-up financial information in ESEF.
-Addressed primarily to issuers, auditors, and investors, the report offers practical
-messages from enforcement experience to help strengthen the quality and
-transparency of corporate reporting going forward. It presents enforcement
-activities in financial reporting, sustainability reporting, and digital reporting
-under the European Single Electronic Format (ESEF) and assesses issuers’
-compliance with ESMA’s 2024 European Common Enforcement Priorities (ECEP).
+ESMA outlines enforcement activities for corporate reporting across the EEA in 2025
+The European Securities and Markets Authority (ESMA), the EU's financial markets regulator and supervisor, has published its Report on 2025 Corporate reporting enforcement and regulatory activities. The report provides an overview of how national enforcers and ESMA supervised corporate reporting across the European Economic Area (EEA) during 2025.
+In 2025, financial reporting enforcement continued to promote disclosures that are material, transparent, entity specific, and useful for decision - making. In sustainability reporting, this was the first year of enforcement of the European Sustainability Reporting Standards (ESRS) for in-scope jurisdictions, alongside the application of the ESMA Guidelines on Enforcement of Sustainability Information (GLESI). Digital reporting remained a supervisory priority, as enforcers worked on improving the quality, consistency, and usability of marked up financial information in ESEF.
+Addressed primarily to issuers, auditors, and investors, the report offers practical messages from enforcement experience to help strengthen the quality and transparency of corporate reporting going forward. It presents enforcement activities in financial reporting, sustainability reporting, and digital reporting under the European Single Electronic Format (ESEF) and assesses issuers' compliance with ESMA's 2024 European Common Enforcement Priorities (ECEP).
+Read the Report on 2025 Corporate reporting enforcement and regulatory activities
 
+ESMA supports ESEF implementation with updated taxonomy
+The European Securities and Markets Authority (ESMA), the EU's financial markets regulator and supervisor, has published the 2025 European Single Electronic Format (ESEF) XBRL taxonomy files, together with an updated ESEF Conformance Suite. These materials support issuers and software vendors in preparing 2026 IFRS consolidated financial statements using the most up - to - date ESEF format.
+The 2025 taxonomy reflects the introduction of IFRS 18 Presentation and Disclosure in Financial Statements, effective from 1 January 2027, with early application permitted. The ESEF taxonomy includes two entry points, allowing issuers to report under either IAS 1 and IFRS 18. This approach facilitates prompt understanding of the new structure, encourages timely preparation, and lowers implementation risks.
+ESMA does not plan to amend the ESEF RTS or taxonomy in 2026. This follows the IFRS Foundation's decision not to issue a 2026 IFRS Accounting Taxonomy update and will provide greater regulatory stability and more time for implementation.
 Find more about ESEF Taxonomy 2025
-The European Securities and Markets Authority (ESMA), the EU’s financial
-markets regulator and supervisor, has published the 2025 European Single
-Electronic Format (ESEF) XBRL taxonomy files, together with an updated ESEF
-Conformance Suite. These materials support issuers and software vendors in
-preparing 2026 IFRS consolidated financial statements using the most
-up ‑ to ‑ date ESEF format.
-ESMA supports ESEF implementation
-with updated taxonomy
-24
-Spotlight on Markets
-April & May 2026
-The 2025 taxonomy reflects the introduction of IFRS 18 Presentation and
-Disclosure in Financial Statements, effective from 1 January 2027, with early
-application permitted. The ESEF taxonomy includes two entry points, allowing
-issuers to report under either IAS 1 and IFRS 18. This approach facilitates prompt
-understanding of the new structure, encourages timely preparation, and lowers
-implementation risks.
-ESMA does not plan to amend the ESEF RTS or taxonomy in 2026. This follows
-the IFRS Foundation’s decision not to issue a 2026 IFRS Accounting Taxonomy
-update and will provide greater regulatory stability and more time for
-implementation.
-
-Next steps
-
-ESMA encourages issuers and software providers to consult the IFRS
-Foundation’s guidance on the use of the 2025 IFRS Accounting Taxonomy for
-2026 reporting periods when preparing for upcoming reporting requirements.
-Stakeholders wishing to provide feedback or raise questions on the 2025 ESEF
-Taxonomy and Conformance Suite are invited to contact
-esef@esma.europa.eu.
-
 Find more about ESEF Conformance Suite 2025
-25
-Spotlight on Markets
-April & May 2026
-
-26
-Spotlight on Markets
-April & May 2026
-ESMA identifies areas for further
-supervisory convergence on
-compliance and internal audit in the
-funds sector
-The European Securities and Markets Authority (ESMA), the EU’s financial
-markets regulator and supervisor, has published the results of its 2025
-Common Supervisory Action (CSA) on the compliance and internal audit
-functions of fund managers, carried out with the participation of all EU and
-EEA national supervisors.
-The EU-wide review found that most fund managers comply with key
-requirements under the AIFMD and UCITS framework. At the same time, the CSA
-identified governance weaknesses, particularly in the independence of control
-functions, the quality and implementation of internal policies, and the way senior
-management and boards exercise oversight.
-While most entities had relevant policies and procedures in place, national
-competent authorities (NCAs) observed significant differences in their quality
-and practical implementation, notably depending on the size, nature and
-complexity of market participants concerned.
-The report also sets out examples of good
-and poor practices identified across the
-compliance and internal audit functions,
-highlighting where controls were effective
-and where further strengthening is needed.
-The CSA was conducted under a common
-assessment framework. NCAs carried out
-supervisory activities throughout 2025, using
-desk-based reviews and, where
-appropriate, on-site inspections.
-
 Next steps
+ESMA encourages issuers and software providers to consult the IFRS Foundation's guidance on the use of the 2025 IFRS Accounting Taxonomy for 2026 reporting periods when preparing for upcoming reporting requirements.
+Stakeholders wishing to provide feedback or raise questions on the 2025 ESEF Taxonomy and Conformance Suite are invited to contact esef@esma.europa.eu.
 
-While acknowledging the overall positive outcome of the CSA, ESMA
-encourages NCAs to follow up on the breaches and vulnerabilities identified,
-to better understand their root causes and to ensure that effective remedial
-actions are implemented in a timely manner. ESMA will continue to promote
-exchanges among NCAs on this topic, including through follow-up supervisory
-actions, to further enhancing supervisory convergence across the EU funds
-sector.
-Read the Final Report on the Common Supervisory Action on
-Compliance and Internal Audit Functions
-27
-Spotlight on Markets
-April & May 2026
+ESMA identifies areas for further supervisory convergence on compliance and internal audit in the funds sector
+The European Securities and Markets Authority (ESMA), the EU's financial markets regulator and supervisor, has published the results of its 2025 Common Supervisory Action (CSA) on the compliance and internal audit functions of fund managers, carried out with the participation of all EU and EEA national supervisors.
+The EU-wide review found that most fund managers comply with key requirements under the AIFMD and UCITS framework. At the same time, the CSA identified governance weaknesses, particularly in the independence of control functions, the quality and implementation of internal policies, and the way senior management and boards exercise oversight.
+While most entities had relevant policies and procedures in place, national competent authorities (NCAs) observed significant differences in their quality and practical implementation, notably depending on the size, nature and complexity of market participants concerned.
+The report also sets out examples of good and poor practices identified across the compliance and internal audit functions, highlighting where controls were effective and where further strengthening is needed.
+The CSA was conducted under a common assessment framework. NCAs carried out supervisory activities throughout 2025, using desk-based reviews and, where appropriate, on-site inspections.
+Next steps
+While acknowledging the overall positive outcome of the CSA, ESMA encourages NCAs to follow up on the breaches and vulnerabilities identified, to better understand their root causes and to ensure that effective remedial actions are implemented in a timely manner. ESMA will continue to promote exchanges among NCAs on this topic, including through follow-up supervisory actions, to further enhancing supervisory convergence across the EU funds sector.
+Read the Final Report on the Common Supervisory Action on Compliance and Internal Audit Functions
 
-European Commission launches call
-for candidates for the ESAs’ Board of
-Appeal
-28
-Spotlight on Markets
-April & May 2026
-The European Commission has launched a call for expression of interest for
-the appointment of members to the Board of Appeal of the three European
-Supervisory Authorities (EBA, EIOPA and ESMA – the ESAs).
-Inclusion on the reserve list does not
-guarantee appointment as a Member
-or Alternate of the Board of Appeal.
-When a vacancy arises, the
-Management Boards of the respective
-ESAs, following consultation with their
-Boards of Supervisors, will select and
-appoint a candidate from the reserve
-list. Candidates nominated as
-Members or Alternates may also be
-invited by the European Parliament to
-make a statement and respond to
-questions.
-This call aims to establish a reserve list of qualified candidates to fill vacancies
-that may arise within the Board of Appeal. The reserve list will remain valid for a
-period of five years from the date of its adoption.
-Further details on the call for candidates, including application requirements
-and deadlines, are available in the Official Journal of the European Union.
-Applications must be submitted by noon on 8 June 2026.
+European Commission launches call for candidates for the ESAs' Board of Appeal
+The European Commission has launched a call for expression of interest for the appointment of members to the Board of Appeal of the three European Supervisory Authorities (EBA, EIOPA and ESMA - the ESAs).
+This call aims to establish a reserve list of qualified candidates to fill vacancies that may arise within the Board of Appeal. The reserve list will remain valid for a period of five years from the date of its adoption.
+Inclusion on the reserve list does not guarantee appointment as a Member or Alternate of the Board of Appeal. When a vacancy arises, the Management Boards of the respective ESAs, following consultation with their Boards of Supervisors, will select and appoint a candidate from the reserve list. Candidates nominated as Members or Alternates may also be invited by the European Parliament to make a statement and respond to questions.
+Further details on the call for candidates, including application requirements and deadlines, are available in the Official Journal of the European Union. Applications must be submitted by noon on 8 June 2026.
 
-29
-ESMA marked Europe Day in the heart of Paris, joining forces with fellow EU
-institutions, including the European Banking Authority, to engage with visitors
-and foster dialogue. The event provided an opportunity to meet people
-interested in learning more about ESMA’s work, ask questions and connect
-directly with the team.
 ESMA participated in Europe Day
-Spotlight on Markets
-April & May 2026
-The day highlighted the importance of bringing European institutions closer to
-citizens, while showcasing how ESMA contributes to trust and confidence in
-financial markets. ESMA colleagues played a key role in creating an open and
-engaging atmosphere, making the celebration a success.
+ESMA marked Europe Day in the heart of Paris, joining forces with fellow EU institutions, including the European Banking Authority, to engage with visitors and foster dialogue. The event provided an opportunity to meet people interested in learning more about ESMA's work, ask questions and connect directly with the team.
+The day highlighted the importance of bringing European institutions closer to citizens, while showcasing how ESMA contributes to trust and confidence in financial markets. ESMA colleagues played a key role in creating an open and engaging atmosphere, making the celebration a success.
 
-30
-Events
-Click on the event
-Date
-Webinar on the Quantum computing in financial markets:
-applications, investments and prospects
-02 Jun
-11 Jun
-Workshop on the Call for Evidence on the structure of
-European equity markets
-Spotlight on Markets
-Consultations
-Click on the consultation
-Deadline
-30 Jun
-Call for Evidence on the market structure of European
-equity markets
-07 Jul
-Consultation on Amendments to the Guidelines on
-standardised procedures and messaging protocols und…
-06 Aug
-Consultation on the Guidelines on stress test scenarios
-under the MMF Regulation
+Webinar on the Quantum computing in financial markets: applications, investments and prospects | 02 Jun
+Workshop on the Call for Evidence on the structure of European equity markets | 11 Jun
 18 Jun Webinar on the sixth data quality and use report
-
-info@esma.europa.eu
-www.esma.europa.eu
-Contact info
-Press contact information
-ESMAcomms
-Social Media
-31
-European Securities and Markets Authority (ESMA)
-press@esma.europa.eu
-Spotlight on Markets
-ESMAcomms
-ESMA is on Instagram!
-@ESMAcomms
-Empowering retail investors
-Smart choices make for
-smarter investing
-Smart choices make for
-smarter investing
+Call for Evidence on the market structure of European equity markets | 30 Jun
+Consultation on Amendments to the Guidelines on standardised procedures and messaging protocols und… | 07 Jul
+Consultation on the Guidelines on stress test scenarios under the MMF Regulation | 06 Aug

@@ -1,9 +1,16 @@
 """Parser quality gates for Stage-1 artifacts.
 
-G1 extractor == docling
+G1 extractor is one the source declares
 G2 section diversity (not uniformly "body")
 G4 furniture / promo / page-number lines
 G8 offset round-trip + doc_hash == sha256(canonical)
+
+G1 and the chunk-id checks used to be hardcoded to ESMA newsletters
+(`esma:spotlight-` ids, `extractor == "docling"`), which rejected every other
+source wholesale - including the UK alert corpus produced by c2r-inventory-kit
+and this repo's own clml.py UK legislation parser. They are now per-source
+profiles. The default profile is the ESMA one, so existing callers and the
+golden tests are unchanged.
 """
 
 from __future__ import annotations
@@ -11,6 +18,7 @@ from __future__ import annotations
 import hashlib
 import re
 from collections import Counter
+from dataclasses import dataclass
 from typing import Any
 
 RUNNING_HEADER_RE = re.compile(
@@ -23,6 +31,79 @@ PROMO_RES = (
     re.compile(r"@esmacomms", re.I),
     re.compile(r"gettyimages", re.I),
 )
+
+@dataclass(frozen=True)
+class SourceProfile:
+    """What a given source's chunks must look like.
+
+    id_prefix / id_requires are the chunk-id shape; allowed_extractors is G1;
+    furniture_patterns is G4, which is publisher-specific by nature (ESMA's
+    running header is meaningless for an FCA policy statement).
+    """
+
+    name: str
+    id_prefix: str = ""
+    id_requires: tuple[str, ...] = ()
+    allowed_extractors: frozenset[str] = frozenset({"docling", ""})
+    running_header_re: re.Pattern | None = None
+    promo_res: tuple[re.Pattern, ...] = ()
+    check_page_numbers: bool = True
+
+
+ESMA_PROFILE = SourceProfile(
+    name="esma_newsletter",
+    id_prefix="esma:spotlight-",
+    id_requires=("#p",),
+    allowed_extractors=frozenset({"docling", ""}),
+    running_header_re=RUNNING_HEADER_RE,
+    promo_res=PROMO_RES,
+    check_page_numbers=True,
+)
+
+# UK alerts from c2r-inventory-kit. Ids are `{regulator}:{doc_type}#{id}/{slug}`
+# and the text comes from HTML, so there are no page numbers to strip and no
+# ESMA furniture. G8, the field list and G2 still apply in full.
+UK_ALERTS_PROFILE = SourceProfile(
+    name="uk_alerts",
+    id_prefix="",
+    id_requires=("#",),
+    # /html = landing-page text; /pdf = text pypdf pulled from the attachment
+    # (every FCA enforcement notice, a third of FCA policy statements).
+    allowed_extractors=frozenset({"c2r-inventory-kit/html", "c2r-inventory-kit/pdf", ""}),
+    running_header_re=None,
+    promo_res=(),
+    check_page_numbers=False,
+)
+
+# legislation.gov.uk via clml.py: ids are `ukpga:2000/8#s_19`, text is derived
+# from CLML XML rather than an extractor.
+UK_LEGISLATION_PROFILE = SourceProfile(
+    name="uk_legislation",
+    id_prefix="",
+    id_requires=("#",),
+    allowed_extractors=frozenset({"clml", ""}),
+    running_header_re=None,
+    promo_res=(),
+    check_page_numbers=False,
+)
+
+PROFILES: dict[str, SourceProfile] = {
+    ESMA_PROFILE.name: ESMA_PROFILE,
+    UK_ALERTS_PROFILE.name: UK_ALERTS_PROFILE,
+    UK_LEGISLATION_PROFILE.name: UK_LEGISLATION_PROFILE,
+}
+DEFAULT_PROFILE = ESMA_PROFILE
+
+
+def get_profile(name: str | None) -> SourceProfile:
+    if not name:
+        return DEFAULT_PROFILE
+    if name not in PROFILES:
+        raise ValueError(
+            f"Unknown source profile {name!r}. Known: {', '.join(sorted(PROFILES))}"
+        )
+    return PROFILES[name]
+
 
 REQUIRED_ALERT_FIELDS = (
     "chunk_id",
@@ -45,7 +126,14 @@ def sha256_text(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
-def furniture_counts(text: str) -> dict[str, int]:
+def furniture_counts(text: str, profile: "SourceProfile | None" = None) -> dict[str, int]:
+    """Count publisher furniture that survived extraction.
+
+    Which patterns count is per-source: ESMA's running header and Instagram
+    promo are meaningless for an FCA policy statement, and page-number lines
+    only exist in text extracted from a PDF.
+    """
+    prof = profile or DEFAULT_PROFILE
     running = 0
     page_only = 0
     promo = 0
@@ -53,22 +141,25 @@ def furniture_counts(text: str) -> dict[str, int]:
         s = line.strip()
         if not s:
             continue
-        if RUNNING_HEADER_RE.match(s):
+        if prof.running_header_re is not None and prof.running_header_re.match(s):
             running += 1
-        if PAGE_NUM_ONLY_RE.match(s):
+        if prof.check_page_numbers and PAGE_NUM_ONLY_RE.match(s):
             page_only += 1
-        if any(p.search(s) for p in PROMO_RES):
+        if any(p.search(s) for p in prof.promo_res):
             promo += 1
     return {"running_header": running, "page_number_lines": page_only, "promo": promo}
 
 
-def compute_metrics(canonical: str, chunks: list[dict[str, Any]]) -> dict[str, Any]:
+def compute_metrics(canonical: str, chunks: list[dict[str, Any]],
+                    profile: "SourceProfile | None" = None) -> dict[str, Any]:
     sections = [str(c.get("section") or "") for c in chunks]
     counts = Counter(sections)
     n = len(chunks) or 1
     generic = sum(1 for s in sections if s.strip().lower() in {"body", "document", "section", ""})
     extractors = {str(c.get("extractor") or "") for c in chunks}
-    furniture = furniture_counts("\n".join(c.get("text") or "" for c in chunks))
+    furniture = furniture_counts(
+        "\n".join(c.get("text") or "" for c in chunks), profile=profile
+    )
     return {
         "n_chunks": len(chunks),
         "unique_sections": len(set(sections)),
@@ -85,7 +176,9 @@ def check_gates(
     *,
     strict: bool,
     allow_degraded: bool = False,
+    profile: SourceProfile | str | None = None,
 ) -> list[str]:
+    prof = profile if isinstance(profile, SourceProfile) else get_profile(profile)
     errors: list[str] = []
     if not chunks:
         return ["no chunks"]
@@ -113,17 +206,23 @@ def check_gates(
         if c.get("content_sha") != sha256_text(text):
             errors.append(f"{c.get('chunk_id')}: content_sha mismatch")
         cid = str(c.get("chunk_id") or "")
-        if not cid.startswith("esma:spotlight-"):
-            errors.append(f"{cid}: alert ID must start with esma:spotlight-")
-        if "#p" not in cid:
-            errors.append(f"{cid}: alert ID must include #p{{page}}/")
+        if prof.id_prefix and not cid.startswith(prof.id_prefix):
+            errors.append(f"{cid}: alert ID must start with {prof.id_prefix}")
+        for fragment in prof.id_requires:
+            if fragment not in cid:
+                errors.append(f"{cid}: alert ID must include {fragment}")
 
-    metrics = compute_metrics(canonical, chunks)
+    metrics = compute_metrics(canonical, chunks, profile=prof)
     extractors = set(metrics["extractors"])
-    if not allow_degraded and extractors - {"docling", ""}:
-        errors.append(f"G1 extractor must be docling, got {sorted(extractors)}")
-    if "docling" not in extractors and not allow_degraded:
-        errors.append(f"G1 extractor field missing/not docling: {sorted(extractors)}")
+    expected = set(prof.allowed_extractors)
+    if not allow_degraded and extractors - expected:
+        errors.append(
+            f"G1 extractor must be one of {sorted(expected - {''})}, got {sorted(extractors)}"
+        )
+    if not allow_degraded and not (extractors & (expected - {""})):
+        errors.append(
+            f"G1 extractor field missing/unexpected: {sorted(extractors)}"
+        )
 
     if not strict:
         return errors

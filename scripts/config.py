@@ -25,17 +25,35 @@ SOURCES: dict[str, dict] = {
         "document_type": "ESMA newsletter",
         "ids": [4424, 7673, 8162],
     },
-    # Future example (not active):
-    # "fca_newsletter": {
-    #     "label": "FCA newsletters",
-    #     "document_type": "FCA newsletter",
-    #     "ids": [],
-    # },
+    # UK regulatory alerts captured by c2r-inventory-kit and exported with its
+    # scripts/export_alert_corpus.py. Unlike the ESMA source there is no fixed
+    # id list: documents arrive continuously, so pass --ids explicitly or leave
+    # it empty to validate everything present in chunks.jsonl.
+    "uk_alerts": {
+        "label": "UK regulatory alerts",
+        "document_type": None,      # spans FCA/PRA/BoE/HMT/CMA/DRCF types
+        "ids": [],
+        "profile": "uk_alerts",     # scripts/quality.py SourceProfile
+        "corpus_dir": "data/alert_corpus",
+    },
+    # legislation.gov.uk provisions parsed by scripts/clml.py.
+    "uk_legislation": {
+        "label": "UK legislation (CLML)",
+        "document_type": "legislation",
+        "ids": [],
+        "profile": "uk_legislation",
+    },
 }
 
 ACTIVE_SOURCE = "esma_newsletter"
 TARGET_DOCUMENT_IDS = list(SOURCES[ACTIVE_SOURCE]["ids"])
 TARGET_DOCUMENT_TYPE = SOURCES[ACTIVE_SOURCE]["document_type"]
+
+
+def get_profile_name(source_key: Optional[str] = None) -> str:
+    """Quality-gate profile for a source (see scripts/quality.py)."""
+    cfg = SOURCES.get(source_key or ACTIVE_SOURCE, {})
+    return cfg.get("profile", "esma_newsletter")
 
 DOCUMENTS_TABLE = "regulation_documents"
 

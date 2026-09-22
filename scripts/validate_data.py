@@ -20,10 +20,11 @@ from config import (
     CANONICAL_DIR,
     CHUNKS_PATH,
     RAW_DIR,
+    get_profile_name,
     get_source_selection,
     load_env,
 )
-from quality import check_gates
+from quality import check_gates, get_profile
 
 REQUIRED_CHUNK_FIELDS = (
     "chunk_id",
@@ -35,6 +36,22 @@ REQUIRED_CHUNK_FIELDS = (
     "source_url",
     "doc_hash",
 )
+
+
+def _use_corpus_dir(corpus_dir: Path) -> None:
+    """Point the module's canonical/chunks paths at an alternative corpus.
+
+    The Stage-1 constants are module-level by design; rebinding them here keeps
+    every existing caller untouched while letting one flag validate the UK alert
+    corpus the crawler exports.
+    """
+    global CANONICAL_DIR, CHUNKS_PATH
+    CANONICAL_DIR = corpus_dir / "canonical"
+    CHUNKS_PATH = corpus_dir / "chunks.jsonl"
+    if not CANONICAL_DIR.is_dir():
+        raise SystemExit(f"No canonical directory at {CANONICAL_DIR}")
+    if not CHUNKS_PATH.is_file():
+        raise SystemExit(f"No chunks.jsonl at {CHUNKS_PATH}")
 
 
 def find_raw(doc_id: int) -> list[Path]:
@@ -70,7 +87,10 @@ def load_chunks() -> list[dict[str, Any]]:
     if not CHUNKS_PATH.is_file():
         return []
     chunks = []
-    for i, line in enumerate(CHUNKS_PATH.read_text(encoding="utf-8").splitlines(), 1):
+    # JSONL is newline-delimited only. str.splitlines() also breaks on
+    # U+0085/U+2028/U+2029, which a non-ASCII-escaping writer emits raw
+    # inside strings, and then reports a valid file as invalid JSON.
+    for i, line in enumerate(CHUNKS_PATH.read_text(encoding="utf-8").split("\n"), 1):
         if not line.strip():
             continue
         try:
@@ -85,6 +105,7 @@ def validate_chunks_for_ids(
     *,
     strict: bool,
     allow_degraded: bool,
+    profile: str | None = None,
 ) -> list[str]:
     errors: list[str] = []
     chunks = load_chunks()
@@ -115,11 +136,13 @@ def validate_chunks_for_ids(
             errors.append(f"id={doc_id}: no chunks in chunks.jsonl")
             continue
         errors.extend(
-            check_gates(
+            f"id={doc_id}: {issue}"
+            for issue in check_gates(
                 canonical,
                 doc_chunks,
                 strict=strict,
                 allow_degraded=allow_degraded,
+                profile=get_profile(profile),
             )
         )
     return errors
@@ -140,19 +163,43 @@ def main() -> int:
         action="store_true",
         help="Do not require data/raw PDFs (fixture-driven runs)",
     )
+    parser.add_argument(
+        "--corpus-dir",
+        default=None,
+        help=(
+            "Validate a corpus outside data/ — e.g. data/alert_corpus, produced by "
+            "c2r-inventory-kit scripts/export_alert_corpus.py. Expects "
+            "<dir>/canonical/{id}.txt and <dir>/chunks.jsonl"
+        ),
+    )
     args = parser.parse_args()
 
     load_env()
     selection = get_source_selection(args.source, args.ids)
+    profile_name = get_profile_name(args.source)
+
+    if args.corpus_dir:
+        _use_corpus_dir(Path(args.corpus_dir))
+
+    doc_ids = list(selection.ids)
+    if not doc_ids:
+        # Sources that arrive continuously (uk_alerts) carry no fixed id list;
+        # validate whatever the corpus actually contains.
+        doc_ids = sorted({int(c["doc_id"]) for c in load_chunks() if "doc_id" in c})
+        if not doc_ids:
+            print("No document ids to validate (empty chunks.jsonl)")
+            return 1
 
     errors: list[str] = []
-    for doc_id in selection.ids:
-        errors.extend(validate_doc(doc_id, require_raw=not args.skip_raw))
+    if not args.skip_raw:
+        for doc_id in doc_ids:
+            errors.extend(validate_doc(doc_id, require_raw=True))
     errors.extend(
         validate_chunks_for_ids(
-            selection.ids,
+            doc_ids,
             strict=args.strict,
             allow_degraded=args.allow_degraded,
+            profile=profile_name,
         )
     )
 
@@ -166,7 +213,8 @@ def main() -> int:
     print(f"raw files: {raw_count}")
     print(f"canonical files: {canon_count}")
     print(f"chunks: {chunk_count}")
-    print(f"checked ids: {list(selection.ids)}")
+    print(f"checked ids: {len(doc_ids)} ({doc_ids[:8]}{'...' if len(doc_ids) > 8 else ''})")
+    print(f"profile: {profile_name}")
     print(f"strict: {args.strict}")
 
     if errors:

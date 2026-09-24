@@ -19,3 +19,12 @@ env/
 # Python cache
 __pycache__/
 *.pyc
+
+# UK triage labels and datasets (scripts/triage/): model labels and anything
+# containing AMBER (internal-use) text never enter git. GREEN datasets and
+# gold sheets are small and OGL-licensed and may be committed deliberately.
+data/uk/labels/cache/
+data/uk/labels/*.jsonl
+data/uk/labels/*.json
+data/uk/datasets/internal/
+data/uk/obligation/

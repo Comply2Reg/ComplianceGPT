@@ -57,6 +57,30 @@ def get_profile_name(source_key: Optional[str] = None) -> str:
 
 DOCUMENTS_TABLE = "regulation_documents"
 
+# ── Alert-triage labelling and datasets (scripts/triage/) ────────────────────
+# Env var NAMES only; the same names the obligation pipeline on `main` uses.
+OPENAI_ENV_NAMES = ("OPENAI_API_KEY", "OPENAI_MODEL")
+
+TRIAGE = {
+    # The Stage-1 corpus c2r-inventory-kit exports (sibling repo in the club).
+    "corpus_dir": str(ROOT.parent.parent / "09-inventory-kit" / "c2r-inventory-kit"
+                      / "data" / "alert_corpus"),
+    "labels_dir": str(DATA_DIR / "uk" / "labels"),
+    "datasets_dir": str(DATA_DIR / "uk" / "datasets"),
+    "gold_dir": str(DATA_DIR / "uk" / "gold"),
+    "obligation_dir": str(DATA_DIR / "uk" / "obligation"),
+    "default_model": "gpt-4o-2024-08-06",
+}
+
+# USD per 1K tokens (prompt, completion); used only for the cost estimate.
+PRICE_PER_1K = {
+    "gpt-4o-2024-08-06": (0.0025, 0.010),
+    "gpt-4o": (0.0025, 0.010),
+    "gpt-4o-mini": (0.00015, 0.0006),
+    "gpt-4.1": (0.002, 0.008),
+    "gpt-4.1-mini": (0.0004, 0.0016),
+}
+
 # Env var names expected for DB (GraphRAG DB_* and this project's MYSQL_*).
 DB_ENV_NAMES = (
     "DATABASE_URL",

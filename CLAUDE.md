@@ -129,6 +129,37 @@ python scripts/validate_data.py --source uk_alerts \
 the profile via `config.get_profile_name()`. A source with an empty `ids` list (`uk_alerts`)
 validates whatever is present in `chunks.jsonl`.
 
+## UK triage datasets (branch `feature/parser-v1`, `scripts/triage/`)
+
+The UK corpus exported by `c2r-inventory-kit` (`data/alert_corpus/`: canonical
+text, chunks, manifest with tier/class/stratum) is turned into fine-tuning data
+here. `docs/uk-datasets.md` is the runbook; the short form:
+
+```bash
+python -m scripts.triage.weak_labels --corpus-dir <corpus>            # free baseline
+python -m scripts.triage.labeller --corpus-dir <corpus> --tier GREEN  # OpenAI structured outputs, cached by doc_hash
+python -m scripts.triage.build_dataset --labels data/uk/labels/triage_v1.jsonl --corpus-dir <corpus> --out data/uk/datasets/green --tier GREEN
+python -m scripts.triage.validate_dataset --dataset-dir data/uk/datasets/green --strict
+python -m scripts.triage.report --labels data/uk/labels/triage_v1.jsonl --weak data/uk/labels/weak_v1.jsonl
+python -m scripts.triage.obligation_adapter --corpus-dir <corpus> --out data/uk/obligation/chunks_uk_v1.jsonl   # then main's run_extract.py from a worktree
+```
+
+- **Licence gate is code, not convention.** AMBER rows (FCA/PRA/BoE/DRCF/Ofcom,
+  internal use only) are refused by the labeller and the adapter unless both
+  `--allow-amber` and `--counsel-signoff` are given; AMBER datasets live only under
+  `data/uk/datasets/internal/` (gitignored). GREEN alone has no guidance or
+  enforcement documents, so the full 35/20/15/15/15 mix needs the sign-off.
+- Training records use the 7-key `ObligationRecord` envelope from `main` so the
+  Gemma notebook trains them unchanged; `classification` = alert class A1–A14,
+  `output` = `TriageRecord` (never with a `status` key — the notebook rewrites those).
+- Splits are stratified by stratum **and** date (latest two months = test, the
+  gold candidates); `all_<v>.jsonl` = train + val and never contains test.
+- `scripts/triage/taxonomy.py` transcribes `c2r-inventory-kit/docs/alert-taxonomy.md`
+  and copies the exporter's `CLASS_TO_STRATUM`/`TARGET_MIX`; keep them identical.
+- No regex fallback anywhere: a failed API call lands in `failures_<v>.jsonl`.
+- `scripts/triage/` never imports `src.obligation_pipeline` from `main`
+  (`tests/test_no_private_imports.py`); the branches have no common ancestor.
+
 ## Tests
 
 `pytest -q` runs entirely off `tests/fixtures/` — no DB, no S3, no network.

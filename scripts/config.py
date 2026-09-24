@@ -72,6 +72,42 @@ TRIAGE = {
     "default_model": "gpt-4o-2024-08-06",
 }
 
+# ── Target models for fine-tuning (scripts/triage/render.py, train_triage.py) ──
+# Chosen 2026-09-25 (docs/uk-datasets.md "Model choice"). Everything model-
+# specific — chat template markers for response-only loss, budget, gating —
+# lives here so the fallback is a flag, not a rewrite. Templates themselves are
+# never hand-built: render() calls the tokenizer's apply_chat_template.
+MODELS = {
+    "qwen3-4b-instruct": {
+        "hf_id": "Qwen/Qwen3-4B-Instruct-2507",
+        "licence": "Apache-2.0",
+        "max_context": 262144,
+        "max_seq_length": 2048,          # head-of-document triage records
+        "instruction_part": "<|im_start|>user\n",
+        "response_part": "<|im_start|>assistant\n",
+        "supports_system": True,
+        "thinking_switch": False,        # non-thinking model; nothing to disable
+        "gated": False,
+    },
+    "gemma-4-e4b-it": {
+        "hf_id": "google/gemma-4-E4B-it",
+        "licence": "Apache-2.0",
+        "max_context": 131072,
+        "max_seq_length": 2048,
+        "instruction_part": "<|turn>user\n",
+        "response_part": "<|turn>model\n",
+        "supports_system": True,
+        "thinking_switch": True,         # template takes enable_thinking
+        "gated": True,                   # needs HF_TOKEN
+    },
+}
+FOCUS_MODEL = "qwen3-4b-instruct"
+
+TRAIN = {
+    "epochs": 3, "learning_rate": 1e-4, "seed": 3407, "per_device_batch": 1,
+    "grad_accum": 8, "lora_r": 16, "lora_alpha": 16,
+}
+
 # USD per 1K tokens (prompt, completion); used only for the cost estimate.
 PRICE_PER_1K = {
     "gpt-4o-2024-08-06": (0.0025, 0.010),

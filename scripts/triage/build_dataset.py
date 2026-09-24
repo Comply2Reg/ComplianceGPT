@@ -36,6 +36,13 @@ sys.path.insert(0, str(ROOT))
 from scripts import config as cfg  # noqa: E402
 from scripts.triage.corpus import Corpus, read_jsonl, write_jsonl  # noqa: E402
 from scripts.triage.prompts import INSTRUCTION_TEMPLATES  # noqa: E402
+from scripts.triage.render import (  # noqa: E402
+    clean_prose,
+    count_tokens,
+    fit_to_budget,
+    load_tokenizer,
+    to_messages,
+)
 from scripts.triage.schema import OUTPUT_FIELDS  # noqa: E402
 from scripts.triage.taxonomy import CLASS_TO_STRATUM, STRATA, TARGET_MIX  # noqa: E402
 
@@ -109,7 +116,7 @@ def to_record(rec: Dict, head: str, stratum: str, stratum_source: str) -> Dict:
         f"Regulator: {rec['regulator']}\nPublication type: {rec['document_type']}\n"
         f"Title: {rec.get('title') or ''}\n"
         f"Published: {rec.get('release_date') or 'unknown'}\n\n"
-        f"{head}"
+        f"{clean_prose(head)}"
     )
     return {
         "metadata": {
@@ -272,8 +279,21 @@ def main(argv=None) -> int:
     ap.add_argument("--tier", nargs="+", default=["GREEN"])
     ap.add_argument("--gold-months", type=int, default=2)
     ap.add_argument("--val-frac", type=float, default=0.10)
-    ap.add_argument("--head-chars", type=int, default=2000)
+    ap.add_argument("--head-chars", type=int, default=1500)
     ap.add_argument("--seed", type=int, default=42)
+    ap.add_argument(
+        "--model",
+        default=cfg.FOCUS_MODEL,
+        choices=sorted(cfg.MODELS),
+        help="target model: its tokenizer measures the budget and its "
+        "max_seq_length trims the context",
+    )
+    ap.add_argument(
+        "--max-tokens",
+        type=int,
+        default=None,
+        help="override the registry max_seq_length",
+    )
     ap.add_argument("--apply-gold", type=Path, default=None)
     ap.add_argument(
         "--gold-out",
@@ -298,6 +318,12 @@ def main(argv=None) -> int:
         )
     corpus = Corpus(args.corpus_dir)
     corpus.check()
+    tokenizer = load_tokenizer(args.model)
+    budget = args.max_tokens or cfg.MODELS[args.model]["max_seq_length"]
+    token_counter = cfg.MODELS[args.model]["hf_id"] if tokenizer else "chars/4 proxy"
+    if tokenizer is None:
+        log.warning("target tokenizer unavailable; token counts are a chars/4 proxy")
+    trimmed_count = 0
 
     seen = set()
     records: List[Dict] = []
@@ -313,11 +339,19 @@ def main(argv=None) -> int:
             stratum = CLASS_TO_STRATUM.get(lab["label"]["alert_class"], "intelligence")
             source = "model"
         try:
-            head = corpus.canonical(lab["doc_id"])[: args.head_chars]
+            canonical = corpus.canonical(lab["doc_id"])
         except OSError:
             log.warning("no canonical text for doc %s; skipped", lab["doc_id"])
             continue
-        records.append(to_record(lab, head, stratum, source))
+        rec = to_record(lab, canonical[: args.head_chars], stratum, source)
+        rec, n_tokens, trimmed = fit_to_budget(rec, tokenizer, args.model, budget)
+        trimmed_count += int(trimmed)
+        rec["messages"] = to_messages(rec)
+        rec["n_tokens"] = n_tokens
+        rec["metadata"]["context_trimmed"] = trimmed
+        rec["metadata"]["n_tokens_full_document"] = count_tokens(canonical, tokenizer)
+        rec["metadata"]["target_model"] = args.model
+        records.append(rec)
         labels_by_hash[h] = lab
 
     splits = split_by_date(records, args.gold_months, args.val_frac)
@@ -369,6 +403,27 @@ def main(argv=None) -> int:
         "val_frac": args.val_frac,
         "head_chars": args.head_chars,
         "seed": args.seed,
+        "target_model": args.model,
+        "token_counter": token_counter,
+        "max_seq_length": budget,
+        "context_trimmed": trimmed_count,
+        "tokens": {
+            name: {
+                "p50": sorted(r["n_tokens"] for r in rows)[len(rows) // 2]
+                if rows
+                else 0,
+                "p95": sorted(r["n_tokens"] for r in rows)[int(len(rows) * 0.95)]
+                if rows
+                else 0,
+                "max": max((r["n_tokens"] for r in rows), default=0),
+                "over_budget": sum(1 for r in rows if r["n_tokens"] > budget),
+            }
+            for name, rows in (
+                ("train", train),
+                ("val", splits["val"]),
+                ("test", splits["test"]),
+            )
+        },
         "counts": counts,
         "target_mix": TARGET_MIX,
         "balance": balance_report,
@@ -415,8 +470,10 @@ def main(argv=None) -> int:
         "",
         "Record envelope: metadata, classification (alert class A1–A14), instruction, "
         "input_text (title + first head-chars of canonical text), tool_use (null), "
-        "thought_trace (model rationale), output (TriageRecord without rationale). "
-        "AMBER-tier records are internal use only and never leave "
+        "thought_trace (model rationale), output (TriageRecord without rationale), "
+        f"plus `messages` (system/user/assistant) and `n_tokens` measured with "
+        f"{token_counter} against a {budget}-token budget ({trimmed_count} contexts "
+        "trimmed). AMBER-tier records are internal use only and never leave "
         "`datasets/internal/`.",
     ]
     (out / f"dataset_card_{args.version}.md").write_text(

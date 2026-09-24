@@ -1,0 +1,21 @@
+# Descriptive record (not loaded by code — scripts/config.py MODELS is). Pin the
+# exact revision used for a run here when you train.
+focus:
+  key: qwen3-4b-instruct
+  hf_id: Qwen/Qwen3-4B-Instruct-2507
+  revision: main            # pin the commit hash at training time
+  licence: Apache-2.0
+  architecture: dense transformer, 36 layers, GQA 32/8, 4.0B (3.6B non-embedding)
+  context: 262144
+  chat_template: ChatML (<|im_start|>role ... <|im_end|>), native system role, non-thinking
+  tokenizer: Qwen2 byte-level BPE, 151,669 vocab, ungated
+  why: permissive licence, clean JSON without thinking traces, long context for
+       whole-document variants, mature tooling (unsloth/TRL/vLLM/llama.cpp)
+fallback:
+  key: gemma-4-e4b-it
+  hf_id: google/gemma-4-E4B-it
+  licence: Apache-2.0
+  architecture: 4.5B effective (8B with embeddings), per-layer embeddings, hybrid attention
+  context: 131072
+  chat_template: "<|turn>role ..." (Gemma 4; NOT the <start_of_turn> markers of the v1 notebook)
+  gated: true

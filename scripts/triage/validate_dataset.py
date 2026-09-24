@@ -29,6 +29,7 @@ sys.path.insert(0, str(ROOT))
 from scripts import config as cfg  # noqa: E402
 from scripts.triage.corpus import read_jsonl  # noqa: E402
 from scripts.triage.schema import OUTPUT_FIELDS  # noqa: E402
+from scripts.triage.render import parse_assistant_json  # noqa: E402
 from scripts.triage.taxonomy import ALERT_CLASSES  # noqa: E402
 
 ENVELOPE = (
@@ -45,12 +46,13 @@ FALLBACK_MARKERS = ("Extracted Entity", "Extracted Action")
 
 
 def check_record(
-    rec: Dict, task: str, head_chars: int, idx: int, split: str
+    rec: Dict, task: str, head_chars: int, idx: int, split: str, max_tokens: int = 0
 ) -> List[str]:
     errs: List[str] = []
     where = f"{split}[{idx}]"
-    if tuple(rec.keys()) != ENVELOPE and set(rec.keys()) != set(ENVELOPE):
-        errs.append(f"{where}: keys {sorted(rec.keys())} != envelope")
+    if not set(ENVELOPE) <= set(rec.keys()):
+        missing = sorted(set(ENVELOPE) - set(rec.keys()))
+        errs.append(f"{where}: missing envelope keys {missing}")
         return errs
     if not isinstance(rec["metadata"], dict) or "source_id" not in rec["metadata"]:
         errs.append(f"{where}: metadata missing source_id")
@@ -81,6 +83,16 @@ def check_record(
             errs.append(f"{where}: input_text {len(rec['input_text'])} > head-chars")
         if "doc_hash" not in rec["metadata"]:
             errs.append(f"{where}: metadata.doc_hash missing")
+        msgs = rec.get("messages")
+        roles = [m.get("role") for m in msgs] if isinstance(msgs, list) else None
+        if roles != ["system", "user", "assistant"]:
+            errs.append(f"{where}: messages must be system/user/assistant")
+        else:
+            parsed = parse_assistant_json(msgs[2].get("content", ""))
+            if not parsed or parsed.get("alert_class") != rec["classification"]:
+                errs.append(f"{where}: assistant message does not parse back to output")
+        if max_tokens and int(rec.get("n_tokens") or 0) > max_tokens:
+            errs.append(f"{where}: n_tokens {rec.get('n_tokens')} > {max_tokens}")
     else:
         if rec["classification"] not in OBLIGATION_CLASSES:
             errs.append(f"{where}: classification {rec['classification']!r}")
@@ -99,7 +111,14 @@ def main(argv=None) -> int:
     ap.add_argument("--dataset-dir", type=Path, required=True)
     ap.add_argument("--version", default="v1")
     ap.add_argument("--task", choices=("triage", "obligation"), default="triage")
-    ap.add_argument("--head-chars", type=int, default=2000)
+    ap.add_argument("--head-chars", type=int, default=1500)
+    ap.add_argument("--model", default=cfg.FOCUS_MODEL, choices=sorted(cfg.MODELS))
+    ap.add_argument(
+        "--max-tokens",
+        type=int,
+        default=None,
+        help="token budget (default: the model's max_seq_length)",
+    )
     ap.add_argument("--strict", action="store_true")
     ap.add_argument("--corpus-dir", type=Path, default=Path(cfg.TRIAGE["corpus_dir"]))
     ap.add_argument("--skip-corpus-check", action="store_true")
@@ -136,9 +155,19 @@ def main(argv=None) -> int:
             f"no {{train,val,test}}_{args.version}.jsonl under {args.dataset_dir}"
         )
 
+    max_tokens = args.max_tokens or cfg.MODELS[args.model]["max_seq_length"]
     for name, rows in splits.items():
         for i, rec in enumerate(rows):
-            errors.extend(check_record(rec, args.task, args.head_chars, i, name))
+            errors.extend(
+                check_record(
+                    rec,
+                    args.task,
+                    args.head_chars,
+                    i,
+                    name,
+                    max_tokens if args.task == "triage" else 0,
+                )
+            )
 
     seen: Dict[str, str] = {}
     for name, rows in splits.items():
@@ -189,6 +218,12 @@ def main(argv=None) -> int:
         thin = [c for c, n in dist.items() if n < 5]
         if thin:
             warnings.append(f"classes with < 5 records: {thin}")
+        train_classes = {r["classification"] for r in splits.get("train", [])}
+        unseen = sorted(
+            {r["classification"] for r in splits.get("test", [])} - train_classes
+        )
+        if unseen and splits.get("train"):
+            errors.append(f"test contains classes with no training example: {unseen}")
 
     for w in warnings:
         print(f"WARN {w}")

@@ -149,14 +149,20 @@ python -m scripts.triage.obligation_adapter --corpus-dir <corpus> --out data/uk/
   `--allow-amber` and `--counsel-signoff` are given; AMBER datasets live only under
   `data/uk/datasets/internal/` (gitignored). GREEN alone has no guidance or
   enforcement documents, so the full 35/20/15/15/15 mix needs the sign-off.
-- Training records use the 7-key `ObligationRecord` envelope from `main` so the
-  Gemma notebook trains them unchanged; `classification` = alert class A1–A14,
-  `output` = `TriageRecord` (never with a `status` key — the notebook rewrites those).
+- Training records keep the 7-key `ObligationRecord` envelope from `main` (so the
+  obligation tooling reads them) plus `messages`/`n_tokens`; `classification` = alert
+  class A1–A14, `output` = `TriageRecord` (never with a `status` key).
 - Splits are stratified by stratum **and** date (latest two months = test, the
   gold candidates); `all_<v>.jsonl` = train + val and never contains test.
 - `scripts/triage/taxonomy.py` transcribes `c2r-inventory-kit/docs/alert-taxonomy.md`
   and copies the exporter's `CLASS_TO_STRATUM`/`TARGET_MIX`; keep them identical.
 - No regex fallback anywhere: a failed API call lands in `failures_<v>.jsonl`.
+- **Target model is `Qwen/Qwen3-4B-Instruct-2507`** (`config.MODELS`, fallback Gemma 4 E4B).
+  Records carry `messages` and are rendered with the model's own `apply_chat_template`;
+  `train_triage.py` trains response-only at 2048 tokens. The `main` notebook is not used
+  for triage — it drops dict outputs and truncates at 1,024.
+- `analyze_dataset.py` is the pre-training quality report (token lengths, rare classes,
+  diversity, repetition); run it before every training run.
 - `scripts/triage/` never imports `src.obligation_pipeline` from `main`
   (`tests/test_no_private_imports.py`); the branches have no common ancestor.
 

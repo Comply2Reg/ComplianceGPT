@@ -1,0 +1,12 @@
+dataset:
+  source: c2r-inventory-kit data/alert_corpus (Stage-1; furniture-cleaned, exact + near-dedupe)
+  labels: OpenAI structured outputs (scripts/triage/labeller.py), cached by doc_hash
+  record:
+    envelope: [metadata, classification, instruction, input_text, tool_use, thought_trace, output]
+    plus: [messages, n_tokens]
+    assistant_turn: compact JSON, schema key order, thought_trace last
+  head_chars: 1500
+  token_budget: 2048 (Qwen3-4B-Instruct-2507 tokenizer; context trimmed, never the answer)
+  split: stratified by stratum and release_date; test = latest 2 months per stratum; val = next 10%
+  balance: train only, towards 35/20/15/15/15 (rule_final taken whole, no oversampling)
+  tiers: green/ = GREEN only (shareable); internal/ = GREEN+AMBER (never leaves)

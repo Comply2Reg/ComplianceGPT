@@ -1,0 +1,19 @@
+# Descriptive record of scripts/triage/train_triage.py defaults (scripts/config.py TRAIN).
+training:
+  epochs: 3
+  learning_rate: 1.0e-4
+  lr_scheduler: cosine
+  warmup_ratio: 0.05
+  per_device_batch_size: 1
+  gradient_accumulation_steps: 8
+  max_seq_length: 2048
+  packing: false
+  loss: response-only (unsloth train_on_responses_only on the assistant turn)
+  precision: fp16, 4-bit base (QLoRA)
+  optimizer: adamw_8bit
+  seed: 3407
+evaluation:
+  split: test_<v>.jsonl (latest two months per stratum, never trained on)
+  decoding: greedy, max_new_tokens 400, stop at <|im_end|>
+  metrics: json_valid_rate, alert_class_accuracy, alert_class_macro_f1,
+           priority_accuracy, primary_function_jaccard, obligations_present_accuracy, tokens_per_second

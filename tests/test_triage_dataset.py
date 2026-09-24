@@ -139,7 +139,7 @@ def test_build_then_validate_green_only(tmp_path: Path) -> None:
     assert len(allf) == len(train) + len(val)
     # envelope, no AMBER, no status key, classification == output.alert_class
     for rec in train + val + test:
-        assert list(rec) == [
+        assert list(rec)[:7] == [
             "metadata",
             "classification",
             "instruction",
@@ -148,6 +148,9 @@ def test_build_then_validate_green_only(tmp_path: Path) -> None:
             "thought_trace",
             "output",
         ]
+        assert [m["role"] for m in rec["messages"]] == ["system", "user", "assistant"]
+        assert isinstance(rec["n_tokens"], int) and rec["n_tokens"] > 0
+        assert rec["metadata"]["target_model"] == "qwen3-4b-instruct"
         assert rec["metadata"]["tier"] == "GREEN"
         assert "status" not in rec["output"] and "rationale" not in rec["output"]
         assert rec["output"]["alert_class"] == rec["classification"]

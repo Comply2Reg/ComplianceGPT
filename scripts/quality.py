@@ -70,7 +70,10 @@ UK_ALERTS_PROFILE = SourceProfile(
     # /html = landing-page text; /pdf = text pypdf pulled from the attachment
     # (every FCA enforcement notice, a third of FCA policy statements).
     allowed_extractors=frozenset({"c2r-inventory-kit/html", "c2r-inventory-kit/pdf", ""}),
-    running_header_re=None,
+    # The crawler's furniture cleaner removes BoE/PRA running headers before
+    # export; G4 (strict) now catches a regression of that.
+    running_header_re=re.compile(
+        r"^Bank of England( \| Prudential Regulation Authority)? Page \d+$"),
     promo_res=(),
     check_page_numbers=False,
 )

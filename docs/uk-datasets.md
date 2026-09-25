@@ -64,6 +64,15 @@ python -m scripts.triage.train_triage --dataset-dir data/uk/datasets/green --ver
 #    (the main-branch notebook is NOT used for triage: it drops dict outputs and
 #     truncates at 1,024 tokens; it stays as-is for the obligation task)
 
+# 4b. the same on this Mac (Apple Silicon, mlx-lm; unsloth is CUDA-only)
+python -m scripts.triage.train_mlx export --dataset-dir data/uk/datasets/green --version v1
+python -m scripts.triage.train_mlx eval   --dataset-dir data/uk/datasets/green --version v1   # untrained baseline
+python -m scripts.triage.train_mlx train  --dataset-dir data/uk/datasets/green --version v1 --iters 600
+python -m scripts.triage.train_mlx eval   --dataset-dir data/uk/datasets/green --version v1 \
+    --adapter-path models/uk-triage-v1-qwen3-4b-instruct-mlx
+#    mlx-community/Qwen3-4B-Instruct-2507-4bit, LoRA on 16 layers, loss masked to the
+#    assistant turn (--mask-prompt); ~2.5 GB of weights, fits 16-24 GB unified memory
+
 # 5. after counsel sign-off only
 python -m scripts.triage.labeller --corpus-dir $CORPUS --version v1 --tier GREEN AMBER \
     --allow-amber --counsel-signoff "LEGAL-nnn YYYY-MM-DD"
@@ -140,6 +149,18 @@ nothing oversampled). `all_<v>.jsonl` = train + val; test never enters it.
 | tokenizer / budget | Qwen3-4B-Instruct-2507 tokenizer, 2048 tokens; `stats_<v>.json` and `analyze_<v>.md` report p50/p95/max and whole-document sizes |
 | split | stratum × date; test = latest two months; no hash in two splits; test never in `all_<v>.jsonl` |
 | quality report | `analyze_dataset.py`: class coverage (rare classes < 30), diversity (unique 8-gram ratio), internal repetition, dates, label sources, corpus dedupe/furniture figures |
+
+## Training on a Mac
+
+`train_triage.py` needs CUDA (unsloth, bitsandbytes). On Apple Silicon use
+`train_mlx.py`: it exports the records' `messages` to mlx-lm's chat JSONL,
+runs `mlx_lm lora --mask-prompt` against `mlx-community/Qwen3-4B-Instruct-2507-4bit`
+(the same weights, 4-bit), and evaluates with the shared `metrics.py` so
+`eval_<v>_<model>_mlx.json` is comparable with the CUDA numbers. Defaults
+(`config.TRAIN_MLX`): 600 iterations, batch 1, 16 layers, lr 1e-4, 2048 tokens,
+gradient checkpointing — sized for a 24 GB M-series machine; close other apps.
+Note: `Qwen3.5-4B` is a different (hybrid, thinking-by-default) model and has no
+MLX 4-bit conversion; `-2507` belongs to Qwen3-4B-Instruct.
 
 ## Known caveats
 

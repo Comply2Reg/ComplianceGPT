@@ -28,3 +28,8 @@ data/uk/labels/*.jsonl
 data/uk/labels/*.json
 data/uk/datasets/internal/
 data/uk/obligation/
+
+# fine-tuned adapters and derived MLX data files
+models/
+data/uk/datasets/*/mlx/
+data/uk/datasets/*/eval_*

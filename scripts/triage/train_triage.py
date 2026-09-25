@@ -24,7 +24,6 @@ import json
 import logging
 import sys
 import time
-from collections import Counter
 from pathlib import Path
 from typing import Dict, List
 
@@ -40,7 +39,7 @@ from scripts.triage.render import (  # noqa: E402
     render,
     to_messages,
 )
-from scripts.triage.taxonomy import ALERT_CLASSES  # noqa: E402
+from scripts.triage.metrics import score  # noqa: E402
 
 log = logging.getLogger("triage.train")
 
@@ -220,16 +219,7 @@ def evaluate(args, spec) -> int:
     if not rows:
         log.error("no test split")
         return 1
-
-    def gold(r):
-        return r["output"]
-
-    hits = Counter()
-    per_class_tp = Counter()
-    per_class_pred = Counter()
-    per_class_gold = Counter()
-    jaccards: List[float] = []
-    n_valid = 0
+    preds = []
     gen_tokens = 0
     started = time.monotonic()
     for r in rows:
@@ -245,55 +235,21 @@ def evaluate(args, spec) -> int:
         )
         new_tokens = output[0][inputs["input_ids"].shape[1] :]
         gen_tokens += int(new_tokens.shape[0])
-        text = tokenizer.decode(new_tokens, skip_special_tokens=True)
-        pred = parse_assistant_json(text)
-        g = gold(r)
-        per_class_gold[g["alert_class"]] += 1
-        if not pred:
-            continue
-        n_valid += 1
-        pc = pred.get("alert_class")
-        per_class_pred[pc] += 1
-        if pc == g["alert_class"]:
-            hits["alert_class"] += 1
-            per_class_tp[pc] += 1
-        if pred.get("priority") == g.get("priority"):
-            hits["priority"] += 1
-        a, b = (
-            set(pred.get("primary_functions") or []),
-            set(g.get("primary_functions") or []),
+        preds.append(
+            parse_assistant_json(tokenizer.decode(new_tokens, skip_special_tokens=True))
         )
-        jaccards.append(len(a & b) / len(a | b) if (a | b) else 1.0)
-        if pred.get("obligations_present") == g.get("obligations_present"):
-            hits["obligations_present"] += 1
-    n = len(rows)
-    f1s = []
-    for c in ALERT_CLASSES:
-        tp, p, gd = per_class_tp[c], per_class_pred[c], per_class_gold[c]
-        if gd == 0 and p == 0:
-            continue
-        prec = tp / p if p else 0.0
-        rec = tp / gd if gd else 0.0
-        f1s.append(2 * prec * rec / (prec + rec) if prec + rec else 0.0)
     elapsed = time.monotonic() - started
-    result = {
-        "version": args.version,
-        "model": args.model,
-        "adapter": str(args.eval_only),
-        "records": n,
-        "json_valid_rate": round(n_valid / n, 4),
-        "alert_class_accuracy": round(hits["alert_class"] / n, 4),
-        "alert_class_macro_f1": round(sum(f1s) / len(f1s), 4) if f1s else None,
-        "priority_accuracy": round(hits["priority"] / n, 4),
-        "obligations_present_accuracy": round(hits["obligations_present"] / n, 4),
-        "primary_function_jaccard": round(sum(jaccards) / len(jaccards), 4)
-        if jaccards
-        else None,
-        "tokens_per_second": round(gen_tokens / elapsed, 1) if elapsed else None,
-        "per_class_gold": dict(per_class_gold),
-        "per_class_tp": dict(per_class_tp),
-        "evaluated_at": dt.datetime.now(dt.UTC).isoformat(),
-    }
+    result = score(rows, preds)
+    result.update(
+        {
+            "version": args.version,
+            "model": args.model,
+            "backend": "unsloth",
+            "adapter": str(args.eval_only),
+            "tokens_per_second": round(gen_tokens / elapsed, 1) if elapsed else None,
+            "evaluated_at": dt.datetime.now(dt.UTC).isoformat(),
+        }
+    )
     out = args.dataset_dir / f"eval_{args.version}_{args.model}.json"
     out.write_text(json.dumps(result, indent=2), encoding="utf-8")
     print(json.dumps(result, indent=2))

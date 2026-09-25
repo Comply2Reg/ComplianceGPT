@@ -161,6 +161,8 @@ python -m scripts.triage.obligation_adapter --corpus-dir <corpus> --out data/uk/
   Records carry `messages` and are rendered with the model's own `apply_chat_template`;
   `train_triage.py` trains response-only at 2048 tokens. The `main` notebook is not used
   for triage — it drops dict outputs and truncates at 1,024.
+- On this Mac train with `train_mlx.py` (mlx-lm, 4-bit MLX weights, prompt-masked loss);
+  `train_triage.py` is the CUDA path. Both score with `metrics.py`.
 - `analyze_dataset.py` is the pre-training quality report (token lengths, rare classes,
   diversity, repetition); run it before every training run.
 - `scripts/triage/` never imports `src.obligation_pipeline` from `main`

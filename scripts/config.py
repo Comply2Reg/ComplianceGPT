@@ -88,6 +88,9 @@ MODELS = {
         "supports_system": True,
         "thinking_switch": False,        # non-thinking model; nothing to disable
         "gated": False,
+        # Apple Silicon path (scripts/triage/train_mlx.py): the community 4-bit
+        # MLX conversion of the same weights.
+        "mlx_id": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
     },
     "gemma-4-e4b-it": {
         "hf_id": "google/gemma-4-E4B-it",
@@ -99,6 +102,7 @@ MODELS = {
         "supports_system": True,
         "thinking_switch": True,         # template takes enable_thinking
         "gated": True,                   # needs HF_TOKEN
+        "mlx_id": None,                  # no MLX conversion registered yet
     },
 }
 FOCUS_MODEL = "qwen3-4b-instruct"
@@ -106,6 +110,11 @@ FOCUS_MODEL = "qwen3-4b-instruct"
 TRAIN = {
     "epochs": 3, "learning_rate": 1e-4, "seed": 3407, "per_device_batch": 1,
     "grad_accum": 8, "lora_r": 16, "lora_alpha": 16,
+}
+# mlx-lm lora defaults for a 24 GB Apple Silicon machine (train_mlx.py).
+TRAIN_MLX = {
+    "iters": 600, "batch_size": 1, "num_layers": 16, "learning_rate": 1e-4,
+    "steps_per_eval": 100, "save_every": 100,
 }
 
 # USD per 1K tokens (prompt, completion); used only for the cost estimate.

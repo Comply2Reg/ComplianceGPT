@@ -46,7 +46,8 @@ from scripts.triage.schema import TriageRecord  # noqa: E402
 from scripts.triage.taxonomy import CLASS_TO_FUNCTION  # noqa: E402
 
 log = logging.getLogger("triage.labeller")
-MAX_RETRIES = 4
+MAX_RETRIES = 6
+RETRY_BASE_SECS = 3.0
 
 
 def validate_label(label: Dict, prior_alert_class: Optional[str]) -> List[str]:
@@ -129,7 +130,7 @@ async def label_one(client, model: str, doc: DocInput, sem: asyncio.Semaphore) -
             )
             if not retryable or attempt == MAX_RETRIES:
                 break
-            await asyncio.sleep(min(60, 2**attempt + random.random()))
+            await asyncio.sleep(min(90, RETRY_BASE_SECS * 2**attempt + random.random()))
     return {"error": last_error or "unknown", "attempts": MAX_RETRIES}
 
 
@@ -180,6 +181,21 @@ async def run(args) -> int:
             len(amber),
         )
         return 2
+    if args.sample:
+        # Stratified random sample by document type, so a smoke run sees the
+        # whole corpus rather than the first N ids (all HMT policy papers).
+        rng = random.Random(args.seed)
+        by_type: Dict[str, List[Dict]] = {}
+        for r in rows:
+            by_type.setdefault(f"{r['regulator']}:{r['document_type']}", []).append(r)
+        picked: List[Dict] = []
+        per = max(1, args.sample // len(by_type))
+        for key in sorted(by_type):
+            group = by_type[key]
+            picked.extend(rng.sample(group, min(per, len(group))))
+        rest = [r for r in rows if r not in picked]
+        rng.shuffle(rest)
+        rows = (picked + rest)[: args.sample]
     if args.limit:
         rows = rows[: args.limit]
     log.info("%d documents selected (tiers %s)", len(rows), ",".join(args.tier))
@@ -340,7 +356,19 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--regulator", nargs="*", default=None)
     ap.add_argument("--stratum", nargs="*", default=None)
     ap.add_argument("--limit", type=int, default=None)
-    ap.add_argument("--concurrency", type=int, default=4)
+    ap.add_argument(
+        "--sample",
+        type=int,
+        default=None,
+        help="stratified random sample of N documents by document type",
+    )
+    ap.add_argument("--seed", type=int, default=42)
+    ap.add_argument(
+        "--concurrency",
+        type=int,
+        default=2,
+        help="parallel calls; 4 tripped 429s on a fresh gpt-4o quota",
+    )
     ap.add_argument("--model", default=None)
     ap.add_argument(
         "--dry-run",

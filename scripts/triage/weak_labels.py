@@ -134,8 +134,9 @@ def weak_label(row: Dict) -> Dict:
         source = "title" if cls else "none"
     return {
         "doc_id": int(row["id"]),
-        "document_id": (f"{str(row['regulator']).lower()}:"
-                        f"{row['document_type']}#{row['id']}"),
+        "document_id": (
+            f"{str(row['regulator']).lower()}:{row['document_type']}#{row['id']}"
+        ),
         "doc_hash": row["sha256"],
         "regulator": row["regulator"],
         "document_type": row["document_type"],

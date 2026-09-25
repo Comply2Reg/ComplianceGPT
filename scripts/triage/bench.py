@@ -85,8 +85,13 @@ def score_multi_label(golds: List, preds: List) -> Dict:
     n = len(golds)
     prec = tp / (tp + fp) if tp + fp else 0.0
     rec = tp / (tp + fn) if tp + fn else 0.0
+    # Most UNFAIR-ToS clauses carry no label at all, so exact_set_match is
+    # mostly free credit for two empty sets. Say how many rows actually
+    # carried a label, because that is what micro-F1 rests on.
+    with_labels = sum(1 for g in golds if g)
     return {
         "n": n,
+        "n_with_labels": with_labels,
         "micro_f1": round(2 * prec * rec / (prec + rec), 4) if prec + rec else 0.0,
         "micro_precision": round(prec, 4),
         "micro_recall": round(rec, 4),

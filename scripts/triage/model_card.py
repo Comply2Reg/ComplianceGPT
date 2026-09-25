@@ -282,10 +282,13 @@ def _benchmark_table(comparisons: List[Dict]) -> str:
     """One row per task per metric: base, tuned, and the delta that matters."""
     lines = ["| Task | Metric | Base | This model | Change |", "|---|---|---:|---:|---:|"]
     for c in comparisons:
+        # Counts and bookkeeping flags are not metrics and must not be
+        # rendered as though a change in them meant something.
+        skip = {"n", "n_with_labels", "schema_checked", "descriptive_only"}
         metrics = [
             k
             for k in c.get("delta", {})
-            if not k.endswith("_checked") and k != "n"
+            if k not in skip and not k.endswith("_checked")
         ]
         for i, key in enumerate(metrics):
             base = c["base"].get(key)
@@ -595,6 +598,38 @@ Fixing this properly needs human adjudication, which has not been done.
 """
 
 
+def ood_warning(comparisons: List[Dict]) -> str:
+    """The out-of-distribution collapse, stated from the probe's own numbers.
+
+    Generated rather than written by hand so it cannot outlive the evidence: if
+    a later run stops showing the collapse, this paragraph disappears with it.
+    """
+    probe = next((c for c in comparisons if c["task"] == "obliqa"), None)
+    if not probe:
+        return ""
+    tuned = probe["tuned"]
+    mix = tuned.get("alert_class_distribution") or {}
+    if not mix:
+        return ""
+    top, count = max(mix.items(), key=lambda kv: kv[1])
+    total = sum(mix.values())
+    if total == 0 or count / total < 0.9:
+        return ""  # no collapse to report
+    produced = tuned.get("produced_triage_json")
+    obligations = tuned.get("obligations_present_rate")
+    return f"""
+
+**It fails silently on regulation it was not trained on.** Given
+{total} passages from a non-UK financial regulator's rulebook, the model produced
+well-formed triage JSON {produced:.0%} of the time and then assigned **{top} to
+{count} of {total}** of them, flagging an obligation in {obligations:.1%}. That
+class means "intelligence: speech, blog, press release"; the passages are
+rulebook text and obligation-bearing by construction. The summaries were often a
+correct reading of the text while every structured field contradicted them, so
+nothing downstream could detect the failure from the output alone. Outside UK
+open-licence sources, evaluate before trusting it."""
+
+
 def _bench_section(comparisons: List[Dict]) -> str:
     tasks = ", ".join(f"`{c['task']}`" for c in comparisons)
     return f"""## Benchmarks
@@ -649,6 +684,21 @@ def body(
     regs_test = stats["test"]["regulator"]
     curve_str = " → ".join(f"{v:.3f}" for _, v in curve) if curve else "n/a"
     band_section = _band_section(band) if band else ""
+    ood_text = ood_warning(comparisons or [])
+    ledgar = next(
+        (c for c in (comparisons or []) if c["task"] == "ledgar"), None
+    )
+    forgetting_text = ""
+    if ledgar and ledgar["delta"].get("accuracy_when_answered", 0) < -0.05:
+        d = ledgar["delta"]
+        forgetting_text = f"""
+
+**Fine-tuning cost general legal ability.** On a 100-class contract-provision
+benchmark the base model scores {ledgar['base']['accuracy']:.3f} and this model
+{ledgar['tuned']['accuracy']:.3f}. Refusing to answer in the requested format
+explains part of that, but not all: counting only the items where both produced a
+label, accuracy still falls by {abs(d['accuracy_when_answered']):.3f}. This is the
+known cost of LoRA fine-tuning on a single narrow task without replay data."""
     bench_section = _bench_section(comparisons) if comparisons else ""
     if band:
         headline_accuracy = f"{band['low']:.3f} to {band['high']:.3f}"
@@ -908,7 +958,7 @@ its labels came from the same source.
 
 **No calibration.** `alert_class_confidence` is what the labelling model said and
 the fine-tune imitated. It has not been checked against observed accuracy — do not
-threshold on it.
+threshold on it.{ood_text}{forgetting_text}
 
 ## Licence, attribution and provenance
 

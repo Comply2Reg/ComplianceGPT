@@ -94,8 +94,79 @@ Run on the fine-tuned model and on the untouched base
 | `obliqa` | RegNLP ObliQA (ADGM) | financial-regulatory text, behavioural probe |
 | `legalbench` | LegalBench via lm-eval | legal reasoning retention |
 
-Results are in `data/uk/bench/compare_<task>.json`. See the **Results** section appended
-below once the runs complete.
+Results are in `data/uk/bench/compare_<task>.json`.
+
+### Results
+
+| Task | Metric | Base | Tuned | Change |
+|---|---|---:|---:|---:|
+| `ledgar` | accuracy | 0.610 | 0.418 | **−0.192** |
+| | answered_rate | 0.980 | 0.846 | −0.134 |
+| | accuracy_when_answered | 0.622 | 0.494 | −0.128 |
+| `unfair_tos` | micro-F1 | 0.172 | 0.146 | −0.025 |
+| | micro-precision | 0.095 | 0.080 | −0.016 |
+| | micro-recall | 0.873 | 0.909 | +0.036 |
+| `jsonschema` | JSON validity | 0.960 | 0.970 | +0.010 |
+| | schema conformance | 0.891 | 0.830 | **−0.061** |
+| `obliqa` | produced triage JSON | 0.015 | 0.990 | **+0.975** |
+
+### Fine-tuning cost real legal ability, not just output format
+
+LEDGAR is the clearest read. The base model classifies contract provisions into 100 classes
+at 0.610 accuracy; ours manages 0.418. Format lock explains part of it, since the model
+declines to give a usable label on 15% of items where the base model gave one. But it does
+not explain all of it: **even counting only the items where both produced a label, accuracy
+fell from 0.622 to 0.494**. That is capability loss, not formatting.
+
+This is the documented failure mode of LoRA fine-tuning without replay data, and 1,700
+iterations of a single narrow JSON task on 1,683 examples is exactly the recipe for it. If a
+v2 is trained, mixing a few hundred general instruction-following examples into the training
+set is the standard mitigation.
+
+### It learned one schema, not schema-following
+
+On JSONSchemaBench the model is marginally *better* at emitting syntactically valid JSON
+(+0.010) and meaningfully *worse* at satisfying a schema it was given (−0.061). It did not
+learn to follow schemas. It learned to emit one particular shape, and reaches for that shape
+even when another is specified.
+
+### The most serious finding: silent failure on out-of-distribution regulation
+
+ObliQA passages are Abu Dhabi Global Market rulebook text. The model had never seen a non-UK
+regulator. It produced well-formed triage JSON on 198 of 200 passages, against the base
+model's 3 of 200, so the trained skill transfers as *format*.
+
+The content does not transfer at all:
+
+| | Result |
+|---|---|
+| `alert_class` | A11 on **198 of 198** |
+| `priority` | P3 on **198 of 198** |
+| `obligations_present` true | **1 of 198** |
+
+A11 is "intelligence: speech, blog, press release"; P3 is "awareness only". Applied to a
+financial regulator's rulebook, every one of those is wrong, and ADGM rulebook passages are
+obligation-bearing by construction.
+
+Worse, it is not visibly wrong. One passage got the summary *"ADGM sets out the requirements
+for authorized persons to have adequate backup systems and arrangements to maintain essential
+operations during a disaster"* — a correct reading of an obligation — alongside
+`alert_class: A11`, `priority: P3`, `obligations_present: false`. The prose understood the
+text; every structured field contradicted it.
+
+**So the model collapses to its majority class on regulatory text outside its training
+distribution, and does so silently.** Nothing downstream could detect this from the output
+alone: the JSON is valid, the schema is satisfied, the summary is sensible. Any deployment
+outside UK GREEN-tier sources needs its own evaluation before it is trusted, and a
+distribution check in front of the model would be a reasonable safeguard.
+
+### A caveat on unfair_tos
+
+The delta there is weak evidence and should not be leaned on. 449 of the 500 sampled clauses
+carry no label at all, so `exact_set_match` is mostly free credit for two empty sets and the
+micro-F1 rests on just **51 informative rows**. Both models over-predict on those rows,
+returning a mean of 2.9 labels against a gold mean of 1.1. `bench.py` now reports
+`n_with_labels` so this is visible in the artefact rather than needing to be rediscovered.
 
 ### Expect low absolute scores, and read the delta
 

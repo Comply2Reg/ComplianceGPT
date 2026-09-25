@@ -7,7 +7,7 @@ so the published page cannot drift from what actually happened. Prose is
 written here; figures never are.
 
     python -m scripts.triage.model_card \\
-        --model-dir models/publish/uk-alert-triage-qwen3-4b-v1 \\
+        --model-dir models/publish/regulatory-alert-triage-qwen3-4b-v1 \\
         --dataset-dir data/uk/datasets/green --version v1 \\
         --train-report models/uk-triage-v1-qwen3-4b-instruct-mlx/train_report_v1_qwen3-4b-instruct_mlx.json \\
         --train-log logs/train-mlx-v1.out \\
@@ -492,7 +492,7 @@ def body(
     parts: List[str] = []
 
     parts.append(
-        f"""# UK Regulatory Alert Triage — Qwen3-4B (v1)
+        f"""# Regulatory Alert Triage — Qwen3-4B (v1)
 
 Reads a UK regulatory publication and returns a structured triage record: what
 kind of document it is, how urgent it is, which bank functions own the response,
@@ -744,8 +744,8 @@ output to the customer.
 ## Citation
 
 ```bibtex
-@misc{{comply2reg_uk_alert_triage_qwen3_4b_v1,
-  title  = {{UK Regulatory Alert Triage — Qwen3-4B (v1)}},
+@misc{{comply2reg_regulatory_alert_triage_qwen3_4b_v1,
+  title  = {{Regulatory Alert Triage — Qwen3-4B (v1)}},
   author = {{Comply2Reg}},
   year   = {{2026}},
   url    = {{https://huggingface.co/{repo_id}}}
@@ -833,7 +833,7 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--model", default="qwen3-4b-instruct")
     ap.add_argument(
         "--repo-id",
-        default="Comply2Reg/uk-alert-triage-qwen3-4b-v1",
+        default="Comply2Reg/regulatory-alert-triage-qwen3-4b-v1",
         help="where the model will live on the Hub; used in the quickstart",
     )
     ap.add_argument("--train-report", type=Path, required=True)

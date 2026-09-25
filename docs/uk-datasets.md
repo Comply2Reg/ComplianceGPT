@@ -273,15 +273,15 @@ the machine.
 python -m mlx_lm fuse \
     --model mlx-community/Qwen3-4B-Instruct-2507-4bit \
     --adapter-path models/uk-triage-v1-qwen3-4b-instruct-mlx \
-    --save-path models/publish/uk-alert-triage-qwen3-4b-v1
+    --save-path models/publish/regulatory-alert-triage-qwen3-4b-v1
 
 # 2. evaluate the FUSED weights — not the adapter — on the test split
 python -m scripts.triage.train_mlx eval --dataset-dir data/uk/datasets/green \
-    --version v1 --model-path models/publish/uk-alert-triage-qwen3-4b-v1
+    --version v1 --model-path models/publish/regulatory-alert-triage-qwen3-4b-v1
 
 # 3. generate the card and eval summary from the run artefacts
 python -m scripts.triage.model_card \
-    --model-dir models/publish/uk-alert-triage-qwen3-4b-v1 \
+    --model-dir models/publish/regulatory-alert-triage-qwen3-4b-v1 \
     --dataset-dir data/uk/datasets/green --version v1 \
     --train-report models/uk-triage-v1-qwen3-4b-instruct-mlx/train_report_v1_qwen3-4b-instruct_mlx.json \
     --train-log logs/train-mlx-v1.out \
@@ -289,10 +289,10 @@ python -m scripts.triage.model_card \
 
 # 4. validate, then upload (HF_TOKEN in .env, write scope on the org)
 python -m scripts.triage.publish_model \
-    --model-dir models/publish/uk-alert-triage-qwen3-4b-v1 --dry-run
+    --model-dir models/publish/regulatory-alert-triage-qwen3-4b-v1 --dry-run
 python -m scripts.triage.publish_model \
-    --model-dir models/publish/uk-alert-triage-qwen3-4b-v1 \
-    --repo-id Comply2Reg/uk-alert-triage-qwen3-4b-v1
+    --model-dir models/publish/regulatory-alert-triage-qwen3-4b-v1 \
+    --repo-id Comply2Reg/regulatory-alert-triage-qwen3-4b-v1
 ```
 
 Things that bite here:
@@ -314,7 +314,7 @@ Things that bite here:
   `--i-have-checked-licensing`, because the GREEN corpus carries OGL attribution
   obligations that a stray flag should not publish past.
 
-v1 was published as `Comply2Reg/uk-alert-triage-qwen3-4b-v1`: 2.1 GB, 4-bit, fused,
+v1 was published as `Comply2Reg/regulatory-alert-triage-qwen3-4b-v1`: 2.1 GB, 4-bit, fused,
 private pending the licensing review.
 
 ## Known caveats

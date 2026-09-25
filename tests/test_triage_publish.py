@@ -83,7 +83,7 @@ NAMES = {
 
 
 def _model_dir(tmp_path: Path, *, card_metrics: dict | None = None) -> Path:
-    d = tmp_path / "uk-alert-triage-qwen3-4b-v1"
+    d = tmp_path / "regulatory-alert-triage-qwen3-4b-v1"
     d.mkdir()
     (d / "model.safetensors").write_bytes(b"\x00" * 16)
     (d / "config.json").write_text("{}", encoding="utf-8")

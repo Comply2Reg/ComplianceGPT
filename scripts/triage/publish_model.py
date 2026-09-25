@@ -8,12 +8,12 @@ evaluation artefacts, a missing weight file, an absent licence.
 
     # check everything, touch nothing
     python -m scripts.triage.publish_model \\
-        --model-dir models/publish/uk-alert-triage-qwen3-4b-v1 --dry-run
+        --model-dir models/publish/regulatory-alert-triage-qwen3-4b-v1 --dry-run
 
     # create the private repo and upload
     python -m scripts.triage.publish_model \\
-        --model-dir models/publish/uk-alert-triage-qwen3-4b-v1 \\
-        --repo-id Comply2Reg/uk-alert-triage-qwen3-4b-v1
+        --model-dir models/publish/regulatory-alert-triage-qwen3-4b-v1 \\
+        --repo-id Comply2Reg/regulatory-alert-triage-qwen3-4b-v1
 
 Needs HF_TOKEN in .env (or the environment) with write access to the org.
 Repositories are created PRIVATE. Going public is a separate, deliberate act:
@@ -178,7 +178,7 @@ def build_parser() -> argparse.ArgumentParser:
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
     ap.add_argument("--model-dir", type=Path, required=True)
-    ap.add_argument("--repo-id", default="Comply2Reg/uk-alert-triage-qwen3-4b-v1")
+    ap.add_argument("--repo-id", default="Comply2Reg/regulatory-alert-triage-qwen3-4b-v1")
     ap.add_argument(
         "--dry-run",
         action="store_true",

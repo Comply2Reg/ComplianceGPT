@@ -187,6 +187,15 @@ python -m scripts.triage.obligation_adapter --corpus-dir <corpus> --out data/uk/
   `HF_TOKEN` in `.env`. Fusing into 4-bit re-quantizes and is therefore lossy: evaluate
   the fused weights with `train_mlx eval --model-path`, and publish those numbers.
   `docs/uk-datasets.md` has the full sequence.
+- **The test labels are model-generated, so the headline accuracy is a band, not a point.**
+  `rescore.py` scores the saved predictions against a second labeller: 0.644 against
+  `gpt-5.4-mini` (which wrote the training labels) but 0.567 against `gpt-5.4`, while the
+  two labellers agree with each other on only 0.702. Treat ~0.70 as the label-noise
+  ceiling and never quote 0.644 as "64% correct". `docs/benchmarks.md` has the analysis.
+- `bench.py` runs public benchmarks (LEDGAR, UNFAIR-ToS, JSONSchemaBench, ObliQA) and
+  **always against the base model too** — the delta is the result, absolute scores on
+  out-of-domain sets are not. Artefacts land in `data/uk/bench/`. Tasks lm-eval already
+  ships (LegalBench) go through `python -m mlx_lm evaluate` instead.
 - `scripts/triage/` never imports `src.obligation_pipeline` from `main`
   (`tests/test_no_private_imports.py`); the branches have no common ancestor.
 

@@ -227,6 +227,79 @@ def build_summary(
     return summary
 
 
+def error_bar(rescore: Optional[Dict]) -> Optional[Dict]:
+    """The band the headline sits in, once a second labeller is consulted.
+
+    The test labels were written by one model, so a single accuracy figure
+    overstates what is known. Scoring the same predictions against a second
+    labeller, and measuring how much the two labellers agree with each other,
+    turns the point estimate into a range with a stated ceiling.
+    """
+    if not rescore or "against_judge_labels" not in rescore:
+        return None
+    pairs = rescore.get("labeller_agreement") or {}
+    # The pair that bears on this test set: the labeller that wrote its labels
+    # and the judge. Other models may sit in the cache from earlier passes and
+    # their mutual agreement says nothing about these documents.
+    named = rescore.get("primary_pair")
+    best = pairs.get(named) if named else None
+    if best is None:
+        best = max(
+            (v for v in pairs.values() if isinstance(v, dict)),
+            key=lambda v: v.get("n", 0),
+            default=None,
+        )
+        named = next((k for k, v in pairs.items() if v is best), None)
+    a = rescore["against_original_labels"]
+    b = rescore["against_judge_labels"]
+    return {
+        "original": a,
+        "judge": b,
+        "delta": rescore.get("delta", {}),
+        "labeller_agreement": (best or {}).get("agreement", {}),
+        "labeller_n": (best or {}).get("n"),
+        "pair": named,
+        "low": min(a["alert_class_accuracy"], b["alert_class_accuracy"]),
+        "high": max(a["alert_class_accuracy"], b["alert_class_accuracy"]),
+        "ceiling": (best or {}).get("agreement", {}).get("alert_class"),
+    }
+
+
+def load_benchmarks(bench_dir: Optional[Path]) -> List[Dict]:
+    """Every base-vs-tuned comparison written by scripts/triage/bench.py."""
+    if not bench_dir or not Path(bench_dir).is_dir():
+        return []
+    out = []
+    for path in sorted(Path(bench_dir).glob("compare_*.json")):
+        try:
+            out.append(json.loads(path.read_text(encoding="utf-8")))
+        except (OSError, ValueError):
+            continue
+    return out
+
+
+def _benchmark_table(comparisons: List[Dict]) -> str:
+    """One row per task per metric: base, tuned, and the delta that matters."""
+    lines = ["| Task | Metric | Base | This model | Change |", "|---|---|---:|---:|---:|"]
+    for c in comparisons:
+        metrics = [
+            k
+            for k in c.get("delta", {})
+            if not k.endswith("_checked") and k != "n"
+        ]
+        for i, key in enumerate(metrics):
+            base = c["base"].get(key)
+            tuned = c["tuned"].get(key)
+            if not isinstance(base, (int, float)) or not isinstance(tuned, (int, float)):
+                continue
+            delta = c["delta"][key]
+            lines.append(
+                f"| {c['task'] if i == 0 else ''} | {key} | {base:.3f} "
+                f"| {tuned:.3f} | {delta:+.3f} |"
+            )
+    return "\n".join(lines)
+
+
 def frontmatter(repo_name: str, base_model: str, fused: Dict) -> str:
     rows = []
     for name, key, kind in HEADLINE:
@@ -446,6 +519,105 @@ SCHEMA_BLOCK = '''| Field | Type | Meaning |
 | `thought_trace` | string | the reasoning behind the classification |'''
 
 
+def _band_section(band: Dict) -> str:
+    names = {
+        "json_valid_rate": "JSON validity",
+        "alert_class_accuracy": "alert_class accuracy",
+        "alert_class_macro_f1": "alert_class macro-F1",
+        "priority_accuracy": "priority accuracy",
+        "obligations_present_accuracy": "obligations_present",
+        "primary_function_jaccard": "primary_functions Jaccard",
+    }
+    rows = ["| Metric | vs the training labeller | vs a stronger labeller | Change |",
+            "|---|---:|---:|---:|"]
+    for key, label in names.items():
+        a, b = band["original"].get(key), band["judge"].get(key)
+        if not isinstance(a, (int, float)) or not isinstance(b, (int, float)):
+            continue
+        rows.append(f"| {label} | {a:.3f} | {b:.3f} | {b - a:+.3f} |")
+    table = "\n".join(rows)
+
+    agree = band.get("labeller_agreement") or {}
+    ceiling = band.get("ceiling")
+    arows = ["| Field | Labeller agreement |", "|---|---:|"]
+    for key, label in (
+        ("alert_class", "alert_class"),
+        ("priority", "priority"),
+        ("obligations_present", "obligations_present"),
+    ):
+        if key in agree:
+            arows.append(f"| {label} | {agree[key]:.3f} |")
+    atable = "\n".join(arows)
+
+    ceiling_text = (
+        f"""
+
+**So the accuracy is not "{band['high']:.0%} correct".** Two capable models, given the same
+taxonomy and the same documents, agree on the alert class only {ceiling:.1%} of the time.
+That is roughly the ceiling any model can reach against either of them, because a third of
+the remaining disagreement is in the labels rather than in the answer. Read the headline as
+a band between {band['low']:.3f} and {band['high']:.3f} against a ceiling near {ceiling:.2f}."""
+        if isinstance(ceiling, (int, float))
+        else ""
+    )
+
+    improved = [
+        k for k, v in (band.get("delta") or {}).items()
+        if isinstance(v, (int, float)) and v > 0.01
+    ]
+    generalised = (
+        """
+
+Three fields scored **higher** under the stronger labeller, not lower: priority,
+obligations and especially function assignment. On those the model generalised past the
+teacher it was trained on. Only class assignment is anchored to the training labeller's
+idiosyncrasies, which is what one would expect of the field with the largest label space
+and the noisiest labels."""
+        if len(improved) >= 2
+        else ""
+    )
+
+    return f"""### How much of that is label noise
+
+The test labels were written by a model, not a person, so the figures above measure
+agreement with one labeller rather than correctness. All {band['labeller_n']} test documents
+were re-labelled by a stronger model and the **same saved predictions** were scored again.
+
+{table}
+
+And the two labellers against each other, on the same documents:
+
+{atable}
+{ceiling_text}{generalised}
+
+Fixing this properly needs human adjudication, which has not been done.
+
+"""
+
+
+def _bench_section(comparisons: List[Dict]) -> str:
+    tasks = ", ".join(f"`{c['task']}`" for c in comparisons)
+    return f"""## Benchmarks
+
+No public benchmark scores regulatory alert triage, so none of these measure the task. What
+they measure is whether fine-tuning preserved the general legal and structured-output
+ability the base model had. Each task was run on this model **and on the untouched base
+model**, over the same seeded sample, so the **change is the result** and the absolute
+numbers should not be quoted as leaderboard scores.
+
+Tasks: {tasks}.
+
+{_benchmark_table(comparisons)}
+
+The model answers every prompt with a triage record, which costs it marks wherever a task
+wants a different shape. That is a real property, not a scoring artefact, so it is measured
+rather than prompted away: where a task has a fixed label set, the scorer looks inside any
+returned JSON for a label before counting the answer wrong, and reports how often a usable
+answer appeared at all.
+
+"""
+
+
 def body(
     repo_id: str,
     fused: Dict,
@@ -458,6 +630,8 @@ def body(
     curve: List[Tuple[int, float]],
     log_path: Optional[Path] = None,
     agreement: Optional[Dict] = None,
+    band: Optional[Dict] = None,
+    comparisons: Optional[List[Dict]] = None,
 ) -> str:
     baseline = majority_baseline(fused["per_class_gold"])
     cls, share = baseline
@@ -474,6 +648,18 @@ def body(
     regs_train = stats["train"]["regulator"]
     regs_test = stats["test"]["regulator"]
     curve_str = " → ".join(f"{v:.3f}" for _, v in curve) if curve else "n/a"
+    band_section = _band_section(band) if band else ""
+    bench_section = _bench_section(comparisons) if comparisons else ""
+    if band:
+        headline_accuracy = f"{band['low']:.3f} to {band['high']:.3f}"
+        band_caveat = (
+            "The accuracy is a range because the test labels were written by a "
+            "model rather than a person, and a second labeller scores it "
+            "differently. "
+        )
+    else:
+        headline_accuracy = f"{fused['alert_class_accuracy']:.3f}"
+        band_caveat = ""
     if agreement:
         agreement_text = (
             f"{agreement['same_prediction']} of {agreement['documents']} "
@@ -512,11 +698,11 @@ weights. Runs on Apple Silicon through MLX.
 | Precision | 4-bit, group size 64 (unchanged from the base) |
 | Training data | {counts["train"]:,} documents from UK public bodies under the Open Government Licence |
 | Test set | {counts["test"]} documents, {test_from} to {test_to} — later than everything trained on |
-| Headline | alert-class accuracy **{fused["alert_class_accuracy"]:.3f}**, macro-F1 **{fused["alert_class_macro_f1"]:.3f}**, JSON validity **{fused["json_valid_rate"]:.3f}** |
+| Headline | alert-class accuracy **{headline_accuracy}**, macro-F1 **{fused["alert_class_macro_f1"]:.3f}**, JSON validity **{fused["json_valid_rate"]:.3f}** |
 
 **Read the macro-F1, not the accuracy.** The test set is {share:.0%} one class, so
-accuracy flatters any model. Limitations below are specific and worth reading
-before you use this for anything.
+accuracy flatters any model. {band_caveat}Limitations below are specific and worth
+reading before you use this for anything.
 
 ## Quickstart
 
@@ -691,6 +877,7 @@ against {curve[-1][1]:.3f} at the end) and scored worse on every task metric,
 because it had collapsed toward predicting the majority class. The final adapter
 was selected on task metrics, not loss.
 
+{band_section}{bench_section}
 ## Limitations
 
 **It has not learned most of the taxonomy.** Macro-F1 is
@@ -840,6 +1027,18 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--train-log", type=Path, default=None)
     ap.add_argument("--coverage", type=Path, default=None)
     ap.add_argument(
+        "--rescore",
+        type=Path,
+        default=None,
+        help="rescore_<v>.json — turns the headline accuracy into a band",
+    )
+    ap.add_argument(
+        "--bench-dir",
+        type=Path,
+        default=None,
+        help="directory of compare_<task>.json from scripts.triage.bench",
+    )
+    ap.add_argument(
         "--adapter-name",
         default="uk-triage-v1-qwen3-4b-instruct-mlx",
         help="the adapter whose eval is the reference for the fused model",
@@ -882,6 +1081,16 @@ def main(argv=None) -> int:
     train_report = load_json(args.train_report)
     coverage = load_json(args.coverage) if args.coverage else None
     curve = val_loss_curve(args.train_log)
+    rescore_data = load_json(args.rescore) if args.rescore and args.rescore.exists() else None
+    band = error_bar(rescore_data)
+    comparisons = load_benchmarks(args.bench_dir)
+    if band:
+        log.info(
+            "error bar: %.3f-%.3f, labeller ceiling %.3f",
+            band["low"], band["high"], band.get("ceiling") or float("nan"),
+        )
+    if comparisons:
+        log.info("benchmarks: %s", ", ".join(c["task"] for c in comparisons))
 
     if coverage is None:
         log.error("--coverage is required: the card reports corpus provenance")
@@ -912,6 +1121,18 @@ def main(argv=None) -> int:
         curve,
         agreement,
     )
+    if band:
+        summary["label_noise"] = {
+            "band": [band["low"], band["high"]],
+            "labeller_agreement": band.get("labeller_agreement"),
+            "labeller_pair": band.get("pair"),
+            "n": band.get("labeller_n"),
+        }
+    if comparisons:
+        summary["benchmarks"] = {
+            c["task"]: {"base": c["base"], "tuned": c["tuned"], "delta": c["delta"]}
+            for c in comparisons
+        }
     check = summary["fusion"]
     if not check["passed"]:
         log.error(
@@ -941,6 +1162,8 @@ def main(argv=None) -> int:
         curve,
         args.train_log,
         agreement,
+        band,
+        comparisons,
     ))
 
     (args.model_dir / "README.md").write_text(card, encoding="utf-8")

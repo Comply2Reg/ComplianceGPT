@@ -223,7 +223,10 @@ def evaluate(args) -> int:
                 "source_id": r["metadata"]["source_id"],
                 "gold_alert_class": r["output"]["alert_class"],
                 "pred_alert_class": (pred or {}).get("alert_class"),
-                "raw": text[:1200],
+                # Stored whole, not truncated: rescore.py reparses these to
+                # score the same predictions against a different label set, and
+                # a clipped record silently becomes an unparseable one.
+                "raw": text,
             }
         )
         if i % 10 == 0:

@@ -317,6 +317,57 @@ Things that bite here:
 v1 was published as `Comply2Reg/regulatory-alert-triage-qwen3-4b-v1`: 2.1 GB, 4-bit, fused,
 private pending the licensing review.
 
+## Benchmarking and the error bar
+
+`docs/benchmarks.md` is the full write-up. The short form and the one fact that matters:
+
+**The test labels are not ground truth.** They were written by `gpt-5.4-mini`, the same
+model that wrote the training labels, so the headline accuracy measures agreement with one
+labeller. Re-labelling the same 104 documents with `gpt-5.4` ($2.44, 0 failures) and
+re-scoring the *same* predictions gives the band instead of a point:
+
+| | vs `gpt-5.4-mini` | vs `gpt-5.4` |
+|---|---:|---:|
+| alert_class accuracy | 0.644 | 0.567 |
+| macro-F1 | 0.245 | 0.155 |
+| primary_functions Jaccard | 0.574 | 0.780 |
+
+The two labellers agree with each other on **0.702** of alert classes, so that is roughly
+the ceiling any model can reach against either of them. Quote the band, not 0.644.
+Priority, obligations and functions all score *higher* against the stronger judge, so the
+model generalised past its teacher on those fields; only class assignment is anchored to
+the training labeller.
+
+```bash
+# re-label just the test split with a stronger model, then re-score
+python -m scripts.triage.labeller --corpus-dir <corpus> --out data/uk/labels \
+    --version judge1 --tier GREEN --model gpt-5.4 \
+    --ids-file data/uk/labels/test_ids_v1.txt
+python -m scripts.triage.rescore --dataset-dir data/uk/datasets/green --version v1 \
+    --eval-outputs data/uk/datasets/green/eval_v1_..._outputs.jsonl \
+    --judge-labels data/uk/labels/triage_judge1.jsonl
+
+# public benchmarks: always both sides, the delta is the result
+python -m scripts.triage.bench list
+python -m scripts.triage.bench run --task ledgar --limit 200                # base
+python -m scripts.triage.bench run --task ledgar --limit 200 --model-path <fused>
+python -m scripts.triage.bench compare --task ledgar
+```
+
+- `rescore.py` re-parses the saved generations, so it costs nothing and cannot drift from
+  what was measured. It **exits non-zero if it fails to reproduce the published eval**,
+  which is the check that the re-scoring path is sound before the judge numbers are read.
+- `train_mlx.py` now stores the whole generation, not the first 1,200 characters; a clipped
+  record would silently re-parse as unanswerable.
+- Public benchmarks measure transferable ability, never the product metric. Expect low
+  absolute scores: the model answers every prompt with a triage record, so `bench.py`
+  reports `answered_rate` and `accuracy_when_answered` separately and looks inside returned
+  JSON for a label before scoring it wrong.
+- Rejected after checking: **LexGLUE EUR-LEX** (labels are bare EuroVoc ids, unnameable
+  zero-shot) and **FinBen** (not individually addressable on the Hub; QA and numeric tasks,
+  not classification). `main`'s notebook cites `rcraigfieldwork/ObliQA`, which does not
+  exist — the real id is `RegNLP/ObliQA`.
+
 ## Known caveats
 
 - `main`'s `run_extract.py` falls back silently to a regex labeller on API

@@ -280,3 +280,33 @@ def test_token_bucket_without_a_limit_never_blocks() -> None:
         return all(r is None for r in results)
 
     assert asyncio.run(asyncio.wait_for(scenario(), timeout=5))
+
+
+def test_cost_is_priced_per_model_not_at_the_default_rate(tmp_path: Path) -> None:
+    corpus = _corpus(tmp_path, n=4)
+    labels = tmp_path / "labels"
+    shas = [_sha(i) for i in range(1, 5)]
+    for sha in shas[:2]:
+        _cache(labels, sha, "gpt-4o-mini", "A3")  # $0.00015 / $0.0006
+    for sha in shas[2:]:
+        _cache(labels, sha, "gpt-5.4-mini", "A3")  # $0.00075 / $0.0045
+    argv = [
+        "--corpus-dir",
+        str(corpus),
+        "--out",
+        str(labels),
+        "--version",
+        "t",
+        "--cache-only",
+        "--prefer-models",
+        "gpt-5.4-mini,gpt-4o-mini",
+        "--model",
+        "gpt-4o-2024-08-06",
+    ]  # a pricier default: ignored
+    assert labeller.main(argv) == 0
+    cost = json.loads((labels / "cost_t.json").read_text())
+    cheap = 2 * (3000 * 0.00015 + 200 * 0.0006) / 1000
+    dear = 2 * (3000 * 0.00075 + 200 * 0.0045) / 1000
+    assert cost["estimated_usd"] == pytest.approx(cheap + dear, rel=1e-3)
+    assert set(cost["by_model"]) == {"gpt-4o-mini", "gpt-5.4-mini"}
+    assert cost["by_model"]["gpt-5.4-mini"]["documents"] == 2

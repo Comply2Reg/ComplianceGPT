@@ -39,7 +39,7 @@ import os
 import random
 import sys
 import time
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Dict, List, Optional
 
@@ -193,8 +193,10 @@ def estimate_usd(
     )
     if not price:
         return None
+    # 6 dp, not 4: a single document costs ~$0.003, and these subtotals get
+    # summed per model.
     return round(
-        prompt_tokens / 1000 * price[0] + completion_tokens / 1000 * price[1], 4
+        prompt_tokens / 1000 * price[0] + completion_tokens / 1000 * price[1], 6
     )
 
 
@@ -508,9 +510,30 @@ async def run(args) -> int:
         "counsel_signoff": args.counsel_signoff,
         "updated_at": dt.datetime.now(dt.UTC).isoformat(),
     }
-    cost["estimated_usd"] = estimate_usd(
-        model, cost["prompt_tokens"], cost["completion_tokens"]
+    # Price each record at the rate of the model that produced it: a merged
+    # file mixes models, and charging all of them the default model's rate was
+    # off by 3x.
+    per_model: Dict[str, Counter] = defaultdict(Counter)
+    for record in records:
+        usage = record.get("usage") or {}
+        per_model[record["model"]]["prompt"] += usage.get("prompt_tokens") or 0
+        per_model[record["model"]]["completion"] += usage.get("completion_tokens") or 0
+    priced = [
+        estimate_usd(name, counts["prompt"], counts["completion"])
+        for name, counts in per_model.items()
+    ]
+    cost["estimated_usd"] = (
+        round(sum(v for v in priced if v is not None), 6) if any(priced) else None
     )
+    cost["by_model"] = {
+        name: {
+            "documents": sum(1 for r in records if r["model"] == name),
+            "prompt_tokens": counts["prompt"],
+            "completion_tokens": counts["completion"],
+            "estimated_usd": estimate_usd(name, counts["prompt"], counts["completion"]),
+        }
+        for name, counts in sorted(per_model.items())
+    }
     cost_path.write_text(json.dumps(cost, indent=2), encoding="utf-8")
     flags = Counter(f for r in records for f in r["flags"])
     log.info(

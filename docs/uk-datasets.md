@@ -217,6 +217,51 @@ gradient checkpointing — sized for a 24 GB M-series machine; close other apps.
 Note: `Qwen3.5-4B` is a different (hybrid, thinking-by-default) model and has no
 MLX 4-bit conversion; `-2507` belongs to Qwen3-4B-Instruct.
 
+## First run, 2026-09-25 (v1, GREEN only)
+
+Labels: 2,284 documents by `gpt-5.4-mini` in 3 shards, 0 failures, **$7.45**; a full
+`gpt-4o-mini` pass ($1.32) in a separate rate-limit bucket served as the second opinion.
+Which model to believe was settled with evidence, not preference: where the two minis
+disagree, `gpt-4o` sides with gpt-5.4-mini 52% vs gpt-4o-mini 27%, and a 20-document
+`gpt-5.4` probe ($0.43) agreed with gpt-5.4-mini 18/20 and gpt-4o-mini 0/20 — so the
+full $20 strong pass over the 951 disputed rows was **not** run.
+
+Dataset: train 1,683 / val 218 / test 104, p95 1,034 tokens against a 2,048 budget.
+
+Training: `mlx-lm` LoRA on `mlx-community/Qwen3-4B-Instruct-2507-4bit`, 16 layers,
+7.34M trainable parameters (0.18%), batch 1, 1,700 iterations (~1 epoch), 2 h 26 m,
+**4.6 GB peak** on an M4 Pro. Validation loss 3.075 → 0.961 → 0.936 → 0.860 → 0.748
+(iter 1200) → 0.873 → 0.805.
+
+| metric (104 held-out documents) | base model | fine-tuned |
+|---|---:|---:|
+| JSON validity | 0.00 | **1.00** |
+| alert_class accuracy | — | 0.635 |
+| alert_class macro-F1 | — | 0.236 |
+| priority accuracy | — | 0.750 |
+| obligations_present accuracy | — | 0.913 |
+| primary_function Jaccard | — | 0.594 |
+
+The untrained model scores zero because it answers in verbose prose-valued JSON and
+overruns the generation cap — teaching the compact schema is most of what the fine-tune
+does. Per class it gets A11 50/56, A6 5/6, A3 4/7, A10 7/17 and **zero** on A1, A4, A8,
+A9, A12, A13, A14: those have almost no training examples. Majority-class (always A11)
+would score 0.54, so 0.635 is a real but modest gain, and macro-F1 is the honest number.
+
+Two findings worth keeping:
+
+- **Lower validation loss did not mean a better model.** The iteration-1200 checkpoint
+  had the best loss (0.748) but scored worse on the task (0.587 accuracy, 0.962 JSON
+  validity) than the final adapter (0.635, 1.000). Token cross-entropy on the answer is
+  a poor proxy for classification accuracy; select checkpoints on `--eval-only`.
+- **Batch 4 was slower than batch 1** on this machine (0.21 vs 0.35 examples/s): records
+  pad to the longest in the batch, and the run is memory-bandwidth bound.
+
+The ceiling here is class balance, not the recipe: A11 is 54% of the test split because
+GREEN is dominated by HM Treasury news and CMA press releases. The fix is the AMBER
+sign-off (FCA/PRA policy statements, supervisory guidance and enforcement notices), not
+more labelling or more epochs.
+
 ## Known caveats
 
 - `main`'s `run_extract.py` falls back silently to a regex labeller on API

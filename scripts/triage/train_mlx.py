@@ -27,6 +27,7 @@ import argparse
 import datetime as dt
 import json
 import logging
+import signal
 import subprocess
 import sys
 import time
@@ -114,7 +115,31 @@ def train(args) -> int:
         cmd += ["--val-batches", str(args.val_batches)]
     log.info("running: %s", " ".join(cmd))
     started = time.monotonic()
-    proc = subprocess.run(cmd, cwd=ROOT)
+    # Popen, not run(): mlx_lm is a child process, and if this wrapper is
+    # killed (or Ctrl-C'd) an orphaned trainer keeps the GPU busy — two of
+    # them at once exhaust unified memory and both die.
+    child = subprocess.Popen(cmd, cwd=ROOT)
+
+    def stop(signum, _frame):
+        log.warning("signal %s — stopping the trainer", signum)
+        child.terminate()
+        try:
+            child.wait(timeout=30)
+        except subprocess.TimeoutExpired:
+            child.kill()
+        raise SystemExit(128 + signum)
+
+    previous = {
+        sig: signal.signal(sig, stop) for sig in (signal.SIGINT, signal.SIGTERM)
+    }
+    try:
+        child.wait()
+    finally:
+        for sig, handler in previous.items():
+            signal.signal(sig, handler)
+        if child.poll() is None:
+            child.terminate()
+    proc = child
     report = {
         "version": args.version,
         "model": args.model,
@@ -197,7 +222,9 @@ def evaluate(args) -> int:
             "evaluated_at": dt.datetime.now(dt.UTC).isoformat(),
         }
     )
-    suffix = "" if args.adapter_path else "_base"
+    # The adapter is part of the identity of a result: two checkpoints of the
+    # same run would otherwise overwrite each other's numbers.
+    suffix = f"_{args.adapter_path.name}" if args.adapter_path else "_base"
     out = args.dataset_dir / f"eval_{args.version}_{args.model}_mlx{suffix}.json"
     out.write_text(json.dumps(result, indent=2), encoding="utf-8")
     write_jsonl(

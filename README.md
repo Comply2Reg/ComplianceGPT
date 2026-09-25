@@ -4,7 +4,7 @@
 
 ### An Open-Source AI Platform for Regulatory Obligation Extraction and Compliance Automation
 
-*The first release of ComplianceGPT introduces a domain-specialized Small Language Model (SLM) fine-tuned on regulatory text to extract structured compliance obligations from legal documents.*
+*ComplianceGPT builds domain-specialized Small Language Models (SLMs) for regulatory work: extracting structured compliance obligations from legal text, and triaging incoming regulatory publications into the classifications a compliance function acts on.*
 
 [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
 [![Transformers](https://img.shields.io/badge/HuggingFace-Transformers-yellow)](https://huggingface.co/docs/transformers)
@@ -22,6 +22,8 @@
 
 The first public release introduces a **Gemma 4 E2B IT** model fine-tuned specifically for **Regulatory Obligation Extraction**, transforming unstructured legal and regulatory text into structured JSON suitable for downstream Governance, Risk, and Compliance (GRC) systems.
 
+A second model, **Qwen3-4B – UK Regulatory Alert Triage**, extends the platform to the step that comes before extraction: deciding what an incoming publication *is*, how urgent it is, and which function owns the response. Both models emit structured JSON, and both are trained with parameter-efficient fine-tuning on modest hardware.
+
 ---
 
 # Table of Contents
@@ -34,6 +36,7 @@ The first public release introduces a **Gemma 4 E2B IT** model fine-tuned specif
 - [Repository Structure](#repository-structure)
 - [Quick Start](#quick-start)
 - [Project Workflow](#project-workflow)
+- [Evaluation](#evaluation)
 
 ---
 
@@ -127,6 +130,38 @@ For obligation statements, the model generates structured JSON suitable for down
 The released model is available on Hugging Face:
 
 **https://huggingface.co/PrinceRansom7/gemma4-e2b-it-regulatory-obligation-v1**
+
+## Qwen3-4B – UK Regulatory Alert Triage v1
+
+The second model addresses a different stage of the compliance lifecycle. Where obligation extraction reads a document that has already been selected for attention, triage decides which documents deserve attention at all.
+
+Given a UK regulatory publication, the model returns a single structured record describing the document:
+
+| Field | Description |
+|--------|-------------|
+| Alert class | One of fourteen document kinds, from primary legislation to enforcement action to speeches |
+| Priority | P1 binding or imminent, P2 action likely, P3 awareness only |
+| Functions | Which of fourteen bank functions own the response, and which are consulted |
+| Lines of defence | Which of the three lines those functions sit in |
+| Summary | What the publication says and whom it affects |
+| Key dates | Deadlines, in-force dates, consultation closing dates |
+| Applicability | The firms, products or activities in scope |
+| Obligations present | Whether the text creates a duty |
+
+The model was adapted with LoRA from `Qwen3-4B-Instruct-2507` in its 4-bit MLX conversion, then fused back into standalone weights, and trained entirely on a laptop. It was measured on 104 held-out documents published *later* than everything it trained on.
+
+| Property | Value |
+|----------|-------|
+| Base model | Qwen3-4B-Instruct-2507 (4-bit MLX) |
+| Method | LoRA rank 8, 16 of 36 layers, fused into the base |
+| Training data | 1,683 UK documents under the Open Government Licence |
+| JSON validity | 1.000 |
+| Alert-class accuracy | 0.644 (majority-class baseline 0.538) |
+| Alert-class macro-F1 | 0.244 |
+
+The weights are held in the Comply2Reg organisation on Hugging Face and are currently **private**, pending a review of the training-corpus licensing. Access is available to Comply2Reg members on request; a public release is planned.
+
+The honest reading of those numbers is in the [Evaluation](#evaluation) section, which is worth reading before drawing conclusions from the accuracy figure.
 
 ---
 
@@ -257,6 +292,33 @@ model = AutoModelForCausalLM.from_pretrained(
 )
 ```
 
+## Load the triage model
+
+The triage model runs through MLX on Apple Silicon. While the repository is private, loading it requires a Hugging Face token with access to the Comply2Reg organisation.
+
+```python
+from mlx_lm import load, generate
+from mlx_lm.sample_utils import make_sampler
+
+model, tokenizer = load("Comply2Reg/uk-alert-triage-qwen3-4b-v1")
+
+prompt = tokenizer.apply_chat_template(
+    [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user", "content": DOCUMENT},
+    ],
+    tokenize=False,
+    add_generation_prompt=True,
+)
+
+text = generate(
+    model, tokenizer, prompt=prompt, max_tokens=400,
+    sampler=make_sampler(temp=0.0), verbose=False,
+)
+```
+
+The model opens every answer with an empty reasoning block, so take the substring from the first `{` to the last `}` before parsing. The full prompt format and output schema are documented on the model card.
+
 Additional examples for inference, evaluation, and fine-tuning are provided in the `docs/` directory and accompanying notebooks.
 
 ---
@@ -319,6 +381,27 @@ Representative sources include:
 
 These sources contain a mixture of mandatory obligations, recommendations, informative guidance, definitions, and references. The objective of the training process was to enable the model to distinguish actionable compliance requirements from surrounding contextual information.
 
+## UK Regulatory Corpus
+
+The triage model draws on a separate corpus, collected continuously from UK regulator and government websites since January 2022 and currently standing at 6,642 documents.
+
+Sources are separated by licence before any of them reaches a training run. Only material published under the Open Government Licence v3.0 was used:
+
+| Source | Licence | Used for training |
+|--------|---------|-------------------|
+| HM Treasury | Open Government Licence v3.0 | Yes |
+| Competition and Markets Authority | Open Government Licence v3.0 | Yes |
+| Information Commissioner's Office | Open Government Licence v3.0 | Yes |
+| legislation.gov.uk | Open Government Licence v3.0 | Yes |
+| Financial Conduct Authority | Terms not clearly permissive | Held back |
+| Prudential Regulation Authority | Terms not clearly permissive | Held back |
+| Bank of England | Terms not clearly permissive | Held back |
+| Ofcom, DRCF | Terms not clearly permissive | Held back |
+
+Holding back the FCA and PRA is the single largest constraint on the triage model's quality, because those bodies publish most of the supervisory guidance and enforcement material a UK bank cares about. Resolving that licensing question is the main route to a better model, ahead of any change to the training recipe.
+
+Training text carries the required attribution: *Contains public sector information licensed under the Open Government Licence v3.0.*
+
 ---
 
 # Dataset Construction Pipeline
@@ -355,6 +438,47 @@ Final Training Dataset
 
 Each stage contributes to improving the quality, consistency, and suitability of the training corpus for supervised instruction tuning.
 
+## Triage Dataset Pipeline
+
+The triage dataset is built by a separate, automated pipeline that starts from the crawled UK corpus.
+
+```text
+UK Regulator Websites
+        │
+        ▼
+Scheduled Crawl
+        │
+        ▼
+Furniture Removal          (running headers, page numbers, tables of contents)
+        │
+        ▼
+Deduplication              (exact by content hash, near-duplicate by MinHash)
+        │
+        ▼
+Licence Tiering            (open-licence sources separated from the rest)
+        │
+        ▼
+Structured Labelling       (one model call per document, cached by content hash)
+        │
+        ▼
+Cross-Model Adjudication   (disagreements re-labelled by a stronger model)
+        │
+        ▼
+Chronological Split        (test = the most recent months, never trained on)
+        │
+        ▼
+Stratified Balancing
+        │
+        ▼
+Final Training Dataset
+```
+
+Two properties of this pipeline are worth drawing out.
+
+**Cleaning happens before anything else.** Page furniture is removed before text is canonicalised, so every stored character offset and content hash refers to the cleaned text. Across the corpus this removed 1.86 million characters from 5,812 documents.
+
+**Splits are chronological, not random.** The test set is the most recent months of publications; training runs on everything earlier. This measures whether the model generalises forward in time, which is how it is actually used, and it makes the reported scores harder to achieve than a random split would.
+
 ---
 
 # Dataset Annotation Strategy
@@ -368,6 +492,14 @@ Each regulatory text segment was categorized into one of three semantic classes 
 | **Neutral** | Informational, descriptive, or contextual statements without actionable requirements. |
 
 This classification enables the model to learn not only what constitutes an obligation but also what should **not** be interpreted as one.
+
+## Triage Annotation
+
+The triage dataset uses a different label space and a different annotation method. Each document receives a fourteen-class label drawn from a published taxonomy, together with priority, owning functions, lines of defence and an obligation flag.
+
+Labels were generated by a frontier model against that taxonomy, one call per document, cached by content hash so a run is reproducible and re-runs are free. A second model labelled the same corpus independently; where the two disagreed, a stronger model adjudicated a sample, siding with the chosen labeller in 18 of 20 cases.
+
+These labels are **model-generated and not human-adjudicated**. They are consistent, and some of them are wrong. Errors in the labeller are reproduced in the fine-tuned model, and the evaluation shares that bias because its labels come from the same source. This is a known limitation rather than a solved problem.
 
 ---
 
@@ -387,6 +519,12 @@ This approach offers several advantages:
 - Minimal degradation compared to full fine-tuning.
 
 The original pretrained knowledge remains intact while the adapters learn regulatory-domain behavior.
+
+## Adapters and Fused Weights
+
+An adapter is convenient during development but awkward to distribute: it only works alongside the exact base model it was trained against. The triage model is therefore published as **fused weights**, with the adapter merged back into the base so the result loads as an ordinary model.
+
+Fusing into a 4-bit model is not lossless. The process dequantizes each layer, adds the adapter delta and re-quantizes, so the published weights are a numerically different object from base-plus-adapter. Measured on the same test set, the two agree on 93 of 104 documents, with the fused model scoring marginally higher overall. Every figure published for the triage model is measured on the fused weights that are actually distributed, not inherited from the adapter.
 
 ---
 
@@ -437,6 +575,24 @@ The model was fine-tuned using a cloud-based GPU environment with modern open-so
 
 The use of Unsloth significantly reduced memory overhead and accelerated training compared to conventional QLoRA implementations.
 
+## Apple Silicon Training
+
+The triage model was trained on a laptop rather than a cloud GPU, using Apple's MLX framework against a 4-bit conversion of the base model.
+
+| Component | Value |
+|-----------|-------|
+| Development Environment | Local workstation |
+| Hardware | Apple M4 Pro, 24 GB unified memory |
+| Framework | MLX / mlx-lm |
+| Quantization | 4-bit, group size 64 |
+| Adapter | LoRA rank 8, scale 20, 16 of 36 layers |
+| Trainable parameters | 7.34 M of 4,022 M (0.18%) |
+| Loss | Masked to the assistant turn |
+| Wall clock | 2.4 hours for 1,700 iterations |
+| Peak memory | 4.56 GB |
+
+A 4 B model at 4-bit precision with LoRA on half its layers trains comfortably inside 5 GB of unified memory, which puts a full fine-tuning cycle within reach of a laptop and removes the cloud GPU from the iteration loop entirely.
+
 ---
 
 # Training Workflow
@@ -482,6 +638,31 @@ This workflow emphasizes reproducibility by combining structured data preparatio
 ---
 
 
+# Evaluation
+
+The triage model was evaluated on 104 held-out UK regulatory publications, all published later than any document in the training set, with greedy decoding and field-by-field scoring.
+
+| Metric | Score | Note |
+|--------|------:|------|
+| JSON validity | 1.000 | Output parsed as a JSON object |
+| Alert-class accuracy | 0.644 | Always predicting the commonest class scores 0.538 |
+| Alert-class macro-F1 | 0.244 | Unweighted mean across the classes present |
+| Priority accuracy | 0.760 | P1 / P2 / P3 |
+| Obligations present | 0.913 | Binary |
+| Primary functions | 0.574 | Set overlap against the gold functions |
+
+## How to read these numbers
+
+**Macro-F1 is the honest figure, not accuracy.** The test set is 54% a single class, so an always-guess-the-majority baseline scores 0.538 accuracy without knowing anything. The model adds 0.106 on top of that.
+
+**Fine-tuning bought the output format.** The untuned base model produced no parseable triage record at all on a held-out probe; it answers in prose. Everything downstream depends on the JSON being present and well-formed, so moving validity from 0.000 to 1.000 is the change that makes the model usable at all.
+
+**The model has not learned most of its label space.** It scores non-zero on four of the eleven classes present in the test set. Classes with roughly twenty training examples score zero. This is a data problem rather than a recipe problem, and it traces directly back to the licence tiering described under Regulatory Sources.
+
+**Lower validation loss did not mean a better model.** The checkpoint with the best validation loss of the run scored worse on every task metric, having collapsed toward predicting the majority class. The released adapter was selected on task metrics, not on loss — a reminder that loss is a proxy, and on an imbalanced label space it is a poor one.
+
+---
+
 # Reproducibility
 
 To facilitate reproducibility, this repository provides:
@@ -504,6 +685,8 @@ The goal is to enable other researchers and practitioners to reproduce the fine-
 The first ComplianceGPT model demonstrates how parameter-efficient fine-tuning can transform a general-purpose instruction-tuned language model into a domain-specialized regulatory assistant.
 
 By combining **Gemma 4**, **QLoRA**, **Unsloth**, **PEFT**, and **MLflow**, the project establishes a reproducible pipeline for building efficient Legal AI systems capable of extracting structured regulatory obligations while remaining practical to train and deploy on modest hardware.
+
+The second model extends that argument further. Trained with **MLX** on a laptop in under three hours, it shows that a specialized compliance model can be produced without cloud GPUs at all — and, just as importantly, that the limiting factor is the data rather than the hardware or the training recipe.
 
 ---
 
@@ -620,13 +803,24 @@ The project is designed to serve as a building block for larger compliance intel
 
 The current release represents the first specialized model within the ComplianceGPT project.
 
-Known limitations include:
+Known limitations of the obligation extraction model include:
 
 - Focused on English-language regulatory documents.
 - Optimized specifically for obligation extraction.
 - Performance may decrease on unseen regulatory writing styles.
 - Long documents require preprocessing and chunking.
 - Outputs should always be reviewed by qualified compliance or legal professionals before use in production.
+
+Known limitations of the UK triage model include:
+
+- Seven of the fourteen alert classes have too little training data to learn, and the model scores zero on them.
+- One class accounts for over half the test set, so accuracy overstates capability and macro-F1 is the figure to quote.
+- Training sources are cross-sector by necessity: Treasury policy, competition cases, data protection and statutory instruments. The FCA and PRA conduct and prudential material a UK bank most cares about is exactly what is absent.
+- Training labels are model-generated and have not been adjudicated by a human.
+- The confidence field is imitated from the labelling model and has not been calibrated against observed accuracy. It should not be used as a threshold.
+- The model reads the first ~1,500 characters of a document, not its full text.
+
+Neither model is legal advice, and neither replaces a compliance professional's reading of a source document.
 
 These limitations inform the future development roadmap.
 
@@ -647,6 +841,11 @@ ComplianceGPT is intended to evolve into a modular compliance AI platform compos
 - MLflow experiment tracking.
 - Hugging Face model publication.
 - Comprehensive project documentation.
+- Continuous UK regulatory corpus collection with licence tiering.
+- Automated furniture removal and near-duplicate detection.
+- Cross-model label adjudication.
+- Chronologically split evaluation.
+- Apple Silicon fine-tuning path with fused-weight publication.
 
 ## Planned
 
@@ -658,6 +857,10 @@ ComplianceGPT is intended to evolve into a modular compliance AI platform compos
 - Interactive inference interface.
 - Model quantization for optimized deployment.
 - Automated evaluation pipeline.
+- Licensing review to admit FCA and PRA material to the triage corpus.
+- Human adjudication of a gold evaluation set.
+- Class rebalancing for the under-represented alert classes.
+- Confidence calibration.
 
 ## Long-Term Vision
 

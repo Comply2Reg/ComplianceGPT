@@ -1,4 +1,23 @@
-lora:
+# Descriptive record (not loaded by code). Two training backends exist and they
+# do NOT share LoRA settings — the published v1 model came from the mlx one, so
+# read that block for anything about the released weights.
+
+# What actually produced v1: scripts/triage/train_mlx.py on Apple Silicon.
+# mlx_lm takes LoRA parameters only through a YAML config, never a CLI flag, so
+# train_mlx.py writes one (mlx_lora_config.yaml, saved beside the adapter).
+# v1 ran before that existed and therefore inherited mlx_lm's own defaults;
+# they are now named explicitly in scripts/config.py TRAIN_MLX.
+mlx:                        # <- the released model
+  rank: 8
+  scale: 20.0
+  dropout: 0.0
+  num_layers: 16            # of 36; mlx_lm attaches to the last N
+  target_modules: q_proj, k_proj, v_proj, o_proj  # mlx_lm default projection set
+  trainable: 7.340M of 4022.468M (0.182%)
+  provenance: models/uk-triage-v1-qwen3-4b-instruct-mlx/adapter_config.json
+
+# The CUDA/unsloth path (scripts/triage/train_triage.py). Untested for v1.
+cuda_unsloth:
   r: 16
   alpha: 16
   dropout: 0.05

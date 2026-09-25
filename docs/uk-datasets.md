@@ -262,6 +262,61 @@ GREEN is dominated by HM Treasury news and CMA press releases. The fix is the AM
 sign-off (FCA/PRA policy statements, supervisory guidance and enforcement notices), not
 more labelling or more epochs.
 
+## Publishing a trained model
+
+Four steps, in order. The first three are local and reversible; only the last leaves
+the machine.
+
+```bash
+# 1. fuse the adapter into standalone weights (no --dequantize: the adapter was
+#    trained against the 4-bit base, so that is what it should ship as)
+python -m mlx_lm fuse \
+    --model mlx-community/Qwen3-4B-Instruct-2507-4bit \
+    --adapter-path models/uk-triage-v1-qwen3-4b-instruct-mlx \
+    --save-path models/publish/uk-alert-triage-qwen3-4b-v1
+
+# 2. evaluate the FUSED weights — not the adapter — on the test split
+python -m scripts.triage.train_mlx eval --dataset-dir data/uk/datasets/green \
+    --version v1 --model-path models/publish/uk-alert-triage-qwen3-4b-v1
+
+# 3. generate the card and eval summary from the run artefacts
+python -m scripts.triage.model_card \
+    --model-dir models/publish/uk-alert-triage-qwen3-4b-v1 \
+    --dataset-dir data/uk/datasets/green --version v1 \
+    --train-report models/uk-triage-v1-qwen3-4b-instruct-mlx/train_report_v1_qwen3-4b-instruct_mlx.json \
+    --train-log logs/train-mlx-v1.out \
+    --coverage ../../09-inventory-kit/c2r-inventory-kit/data/alert_corpus/coverage.json
+
+# 4. validate, then upload (HF_TOKEN in .env, write scope on the org)
+python -m scripts.triage.publish_model \
+    --model-dir models/publish/uk-alert-triage-qwen3-4b-v1 --dry-run
+python -m scripts.triage.publish_model \
+    --model-dir models/publish/uk-alert-triage-qwen3-4b-v1 \
+    --repo-id Comply2Reg/uk-alert-triage-qwen3-4b-v1
+```
+
+Things that bite here:
+
+- **`mlx_lm fuse --upload-repo` destroys the model card.** Its `upload_to_hub` keeps
+  the YAML frontmatter but overwrites `card.text` with generic boilerplate. Always
+  upload through `publish_model.py`, never through the fuse step.
+- **`fuse` needs a complete snapshot of the base repo**, including `.gitattributes`
+  and `README.md`, which `load()` never downloads. If it dies in `save()` with
+  `IncompleteSnapshotError`, `hf_hub_download` those two files and re-run.
+- **No GGUF for Qwen.** `mlx_lm`'s converter accepts only `llama`, `mixtral` and
+  `mistral` model types and raises on anything else.
+- **Fusing into 4-bit is lossy.** Each layer is dequantized, given the LoRA delta and
+  re-quantized, so the fused model is not the adapter. v1 agreed with base+adapter on
+  93 of 104 test documents (89.4%) and scored 0.644 against 0.635 — noise, but the card
+  must quote the fused model's own numbers. `model_card.py` fails the build if any
+  metric regresses by more than 0.02 or JSON validity drops below 0.99.
+- **Repos are created private.** Going public needs `--public` *and*
+  `--i-have-checked-licensing`, because the GREEN corpus carries OGL attribution
+  obligations that a stray flag should not publish past.
+
+v1 was published as `Comply2Reg/uk-alert-triage-qwen3-4b-v1`: 2.1 GB, 4-bit, fused,
+private pending the licensing review.
+
 ## Known caveats
 
 - `main`'s `run_extract.py` falls back silently to a regex labeller on API

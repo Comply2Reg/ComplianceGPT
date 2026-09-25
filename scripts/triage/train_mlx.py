@@ -78,6 +78,17 @@ def train(args) -> int:
         or Path("models") / f"uk-triage-{args.version}-{args.model}-mlx"
     )
     adapter.mkdir(parents=True, exist_ok=True)
+    # mlx_lm exposes LoRA rank/scale/dropout only through a YAML config, never a
+    # CLI flag, so passing them means writing one. Without it the run silently
+    # inherits mlx_lm's defaults and no artefact records what they were.
+    lora_cfg = adapter / "mlx_lora_config.yaml"
+    lora_cfg.write_text(
+        "lora_parameters:\n"
+        f"  rank: {args.lora_rank}\n"
+        f"  scale: {args.lora_scale}\n"
+        f"  dropout: {args.lora_dropout}\n",
+        encoding="utf-8",
+    )
     cmd = [
         sys.executable,
         "-m",
@@ -110,6 +121,8 @@ def train(args) -> int:
         "--seed",
         str(args.seed),
         "--grad-checkpoint",
+        "-c",
+        str(lora_cfg),
     ]
     if args.val_batches is not None:
         cmd += ["--val-batches", str(args.val_batches)]
@@ -150,6 +163,9 @@ def train(args) -> int:
         "iters": args.iters,
         "batch_size": args.batch_size,
         "num_layers": args.num_layers,
+        "lora_rank": args.lora_rank,
+        "lora_scale": args.lora_scale,
+        "lora_dropout": args.lora_dropout,
         "learning_rate": args.lr,
         "max_seq_length": args.max_seq_length,
         "seconds": round(time.monotonic() - started),
@@ -173,8 +189,12 @@ def evaluate(args) -> int:
     if not rows:
         log.error("no test split")
         return 1
+    # A fused model is a plain MLX directory with the adapter already inside it,
+    # so it is evaluated as the model itself with no adapter — which is exactly
+    # what makes this a fair check that fusing preserved the trained behaviour.
+    model_id = str(args.model_path) if args.model_path else spec["mlx_id"]
     model, tokenizer = load(
-        spec["mlx_id"],
+        model_id,
         adapter_path=str(args.adapter_path) if args.adapter_path else None,
     )
     sampler = make_sampler(temp=0.0)
@@ -215,7 +235,7 @@ def evaluate(args) -> int:
             "version": args.version,
             "model": args.model,
             "backend": "mlx-lm",
-            "mlx_id": spec["mlx_id"],
+            "mlx_id": model_id,
             "adapter": str(args.adapter_path) if args.adapter_path else None,
             "seconds": round(elapsed),
             "chars_per_second": round(gen_chars / elapsed, 1) if elapsed else None,
@@ -224,7 +244,12 @@ def evaluate(args) -> int:
     )
     # The adapter is part of the identity of a result: two checkpoints of the
     # same run would otherwise overwrite each other's numbers.
-    suffix = f"_{args.adapter_path.name}" if args.adapter_path else "_base"
+    if args.adapter_path:
+        suffix = f"_{args.adapter_path.name}"
+    elif args.model_path:
+        suffix = f"_{args.model_path.name}"
+    else:
+        suffix = "_base"
     out = args.dataset_dir / f"eval_{args.version}_{args.model}_mlx{suffix}.json"
     out.write_text(json.dumps(result, indent=2), encoding="utf-8")
     write_jsonl(
@@ -254,10 +279,21 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--version", default="v1")
     ap.add_argument("--model", default=cfg.FOCUS_MODEL, choices=sorted(cfg.MODELS))
     ap.add_argument("--adapter-path", type=Path, default=None)
+    ap.add_argument(
+        "--model-path",
+        type=Path,
+        default=None,
+        help="eval: a local MLX model directory (e.g. a fused model) in place of --model's mlx_id",
+    )
     ap.add_argument("--iters", type=int, default=cfg.TRAIN_MLX["iters"])
     ap.add_argument("--batch-size", type=int, default=cfg.TRAIN_MLX["batch_size"])
     ap.add_argument("--num-layers", type=int, default=cfg.TRAIN_MLX["num_layers"])
     ap.add_argument("--lr", type=float, default=cfg.TRAIN_MLX["learning_rate"])
+    ap.add_argument("--lora-rank", type=int, default=cfg.TRAIN_MLX["lora_rank"])
+    ap.add_argument("--lora-scale", type=float, default=cfg.TRAIN_MLX["lora_scale"])
+    ap.add_argument(
+        "--lora-dropout", type=float, default=cfg.TRAIN_MLX["lora_dropout"]
+    )
     ap.add_argument("--max-seq-length", type=int, default=None)
     ap.add_argument(
         "--steps-per-eval", type=int, default=cfg.TRAIN_MLX["steps_per_eval"]

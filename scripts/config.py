@@ -112,9 +112,14 @@ TRAIN = {
     "grad_accum": 8, "lora_r": 16, "lora_alpha": 16,
 }
 # mlx-lm lora defaults for a 24 GB Apple Silicon machine (train_mlx.py).
+# lora_rank/lora_scale exist because mlx_lm takes LoRA parameters only through a
+# YAML config, never a CLI flag — train_mlx.py writes one. v1 trained at mlx_lm's
+# own defaults (rank 8, scale 20); they are named here so a run records what it
+# used instead of inheriting a library default silently.
 TRAIN_MLX = {
     "iters": 600, "batch_size": 1, "num_layers": 16, "learning_rate": 1e-4,
     "steps_per_eval": 100, "save_every": 100,
+    "lora_rank": 8, "lora_scale": 20.0, "lora_dropout": 0.0,
 }
 
 # ── Labelling models (scripts/triage/labeller.py) ────────────────────────────

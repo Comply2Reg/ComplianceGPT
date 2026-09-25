@@ -1,4 +1,9 @@
 # Descriptive record of scripts/triage/train_triage.py defaults (scripts/config.py TRAIN).
+# NOTE: v1 was NOT trained with these. It was trained on Apple Silicon with
+# scripts/triage/train_mlx.py (scripts/config.py TRAIN_MLX): 1,700 iterations at
+# batch size 1 (~1 epoch), constant lr 1e-4, no warmup, grad checkpointing, 4-bit
+# MLX base, loss masked to the assistant turn. The authoritative record of that
+# run is models/uk-triage-v1-qwen3-4b-instruct-mlx/train_report_v1_*.json.
 training:
   epochs: 3
   learning_rate: 1.0e-4

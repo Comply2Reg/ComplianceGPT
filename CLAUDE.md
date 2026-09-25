@@ -178,6 +178,15 @@ python -m scripts.triage.obligation_adapter --corpus-dir <corpus> --out data/uk/
   `train_triage.py` is the CUDA path. Both score with `metrics.py`.
 - `analyze_dataset.py` is the pre-training quality report (token lengths, rare classes,
   diversity, repetition); run it before every training run.
+- **Publishing is `model_card.py` then `publish_model.py`, never `mlx_lm fuse
+  --upload-repo`** — that flag's `upload_to_hub` overwrites the card body with
+  boilerplate. `model_card.py` builds the card from the eval/stats/train artefacts so a
+  metric cannot be typed in by hand, and fails if the fused model regressed past
+  tolerance; `publish_model.py --dry-run` validates without touching the network and
+  creates repos **private** (public needs `--public --i-have-checked-licensing`). Needs
+  `HF_TOKEN` in `.env`. Fusing into 4-bit re-quantizes and is therefore lossy: evaluate
+  the fused weights with `train_mlx eval --model-path`, and publish those numbers.
+  `docs/uk-datasets.md` has the full sequence.
 - `scripts/triage/` never imports `src.obligation_pipeline` from `main`
   (`tests/test_no_private_imports.py`); the branches have no common ancestor.
 

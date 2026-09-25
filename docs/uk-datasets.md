@@ -19,6 +19,30 @@ worktree — the branches have no common ancestor and are never merged).
 The corpus is validated with `python scripts/validate_data.py --source uk_alerts
 --corpus-dir <corpus> --strict --skip-raw` before anything below runs.
 
+## Labelling throughput — what actually limits it
+
+OpenAI meters **per model**, so N processes on one model share one bucket and simply
+collide: the first gpt-4o run spent its time retrying 429s (that tier is 30,000 TPM —
+about 9 documents/minute) and hung on a stalled socket. Measured on this key,
+2026-09-25:
+
+| model | RPM | TPM | docs/min | $/doc | 2,284 docs |
+|---|---:|---:|---:|---:|---:|
+| gpt-4o | 500 | 30,000 | ~9 | $0.0093 | 4.5 h, $21 |
+| gpt-4o-mini | 10,000 | 200,000 | ~50 | $0.0006 | 50 min, $1.31 |
+| **gpt-5.4-mini** | 500 | 200,000 | ~55 | $0.0031 | ~40 min, $7 |
+
+So the levers are, in order: pick a model whose bucket is big (`--probe-limits` prints
+it); pace to it (`--tpm`, a sliding-window bucket that reserves an estimate and settles
+to the real usage once the call returns — without settling it leaves a quarter of the
+budget unspent); and split the work (`--shard i/N`) so one process's latency does not
+idle the budget. Shards each write `triage_<v>.shard<i>.jsonl`; `--cache-only` merges
+them and names anything still missing.
+
+Different models *do* have separate buckets, so a second model can label the same
+documents in parallel at no cost in wall-clock — which is how the second opinion in the
+next section is free.
+
 ## Licence tiers — the one rule that matters
 
 Every manifest row and chunk carries `tier`: **GREEN** (HM Treasury, CMA, ICO,
@@ -39,10 +63,19 @@ CORPUS=../../09-inventory-kit/c2r-inventory-kit/data/alert_corpus
 # 0. free baseline labels from the registry and titles
 python -m scripts.triage.weak_labels --corpus-dir $CORPUS --version v1
 
-# 1. smoke, then the GREEN pass (~2,300 docs); re-runs are free (cache)
-python -m scripts.triage.labeller --corpus-dir $CORPUS --version v1 --tier GREEN --dry-run
-python -m scripts.triage.labeller --corpus-dir $CORPUS --version v1 --tier GREEN --limit 50
-python -m scripts.triage.labeller --corpus-dir $CORPUS --version v1 --tier GREEN
+# 1. labelling: check the account's limits, smoke 5, then shard the bulk
+python -m scripts.triage.labeller --probe-limits --model gpt-5.4-mini
+python -m scripts.triage.labeller --corpus-dir $CORPUS --version smoke --tier GREEN \
+    --model gpt-5.4-mini --sample 5                      # inspect these by hand
+for i in 0 1 2; do
+  nohup python -m scripts.triage.labeller --corpus-dir $CORPUS --version v1 --tier GREEN \
+      --model gpt-5.4-mini --shard $i/3 --concurrency 3 --tpm 60000 \
+      > logs/label-green-v1-s$i.out 2>&1 &
+done
+python -m scripts.triage.labeller --corpus-dir $CORPUS --version v1 --tier GREEN \
+    --model gpt-5.4-mini --cache-only                    # merge the shards; reports gaps
+python -m scripts.triage.labeller --corpus-dir $CORPUS --version v1 --tier GREEN \
+    --model gpt-5.4-mini                                 # fill any gap (cached = free)
 
 # 2. datasets, gates, report, gold sheet
 python -m scripts.triage.build_dataset --labels data/uk/labels/triage_v1.jsonl \
@@ -149,6 +182,28 @@ nothing oversampled). `all_<v>.jsonl` = train + val; test never enters it.
 | tokenizer / budget | Qwen3-4B-Instruct-2507 tokenizer, 2048 tokens; `stats_<v>.json` and `analyze_<v>.md` report p50/p95/max and whole-document sizes |
 | split | stratum × date; test = latest two months; no hash in two splits; test never in `all_<v>.jsonl` |
 | quality report | `analyze_dataset.py`: class coverage (rare classes < 30), diversity (unique 8-gram ratio), internal repetition, dates, label sources, corpus dedupe/furniture figures |
+
+## Choosing what the strong model labels
+
+Two models disagreeing is a better gold-candidate signal than either disagreeing with
+the registry: it needs no ground truth and it points at genuinely ambiguous documents
+(the A11↔A3 and A4↔A2 boundaries, in practice).
+
+```bash
+# after two models have labelled the corpus (their caches are separate)
+python -m scripts.triage.report --labels data/uk/labels/triage_v1.jsonl \
+    --weak data/uk/labels/weak_v1.jsonl --cost data/uk/labels/cost_v1.json
+#   -> report_v1.md gains a model-vs-model section
+#   -> disputed_v1.txt lists the doc_ids where the classes differ
+
+python -m scripts.triage.labeller --corpus-dir $CORPUS --version v1 --tier GREEN \
+    --model gpt-5.4 --ids-file data/uk/labels/disputed_v1.txt    # strong model, few docs
+python -m scripts.triage.labeller --corpus-dir $CORPUS --version v1 --tier GREEN \
+    --cache-only --prefer-models gpt-5.4,gpt-5.4-mini,gpt-4o-mini
+
+python -m scripts.triage.build_dataset ... --disputed-file data/uk/labels/disputed_v1.txt
+#   those rows join the gold sheet flagged 'models_disagree'
+```
 
 ## Training on a Mac
 

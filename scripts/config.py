@@ -117,14 +117,90 @@ TRAIN_MLX = {
     "steps_per_eval": 100, "save_every": 100,
 }
 
+# ── Labelling models (scripts/triage/labeller.py) ────────────────────────────
+# Distinct from MODELS above: those are the models we FINE-TUNE, these are the
+# ones that produce the training labels. The gpt-5 family is a reasoning family
+# and takes a different parameter set: max_completion_tokens instead of
+# max_tokens, no temperature/top_p, and a reasoning_effort knob whose tokens
+# bill as completion tokens and count against the cap — so max_output must be
+# generous or the JSON is silently truncated.
+# Prices are USD per 1K tokens (prompt, completion), checked 2026-09-25.
+# tpm: the account's tokens-per-minute ceiling where measured (--probe-limits).
+LABEL_MODELS = {
+    "gpt-5.4-mini": {
+        "token_param": "max_completion_tokens",
+        "temperature": False,
+        # gpt-5.4 takes none|low|medium|high|xhigh ("minimal" was gpt-5.0);
+        # "none" spends no reasoning tokens, which is what a structured
+        # classification wants — the whole cap goes to the JSON.
+        "reasoning_effort": "none",
+        "max_output": 1200,
+        "price_per_1k": (0.00075, 0.0045),
+        "tpm": None,
+    },
+    "gpt-5.4": {
+        "token_param": "max_completion_tokens",
+        "temperature": False,
+        "reasoning_effort": "low",
+        "max_output": 2000,
+        "price_per_1k": (0.00375, 0.030),
+        "tpm": None,
+    },
+    "gpt-4o-mini": {
+        "token_param": "max_tokens",
+        "temperature": True,
+        "reasoning_effort": None,
+        "max_output": 800,
+        "price_per_1k": (0.00015, 0.0006),
+        "tpm": 200000,
+    },
+    "gpt-4o-2024-08-06": {
+        "token_param": "max_tokens",
+        "temperature": True,
+        "reasoning_effort": None,
+        "max_output": 800,
+        "price_per_1k": (0.0025, 0.010),
+        "tpm": 30000,
+    },
+    "gpt-4.1-mini": {
+        "token_param": "max_tokens",
+        "temperature": True,
+        "reasoning_effort": None,
+        "max_output": 800,
+        "price_per_1k": (0.0004, 0.0016),
+        "tpm": None,
+    },
+}
+DEFAULT_LABEL_MODEL = "gpt-5.4-mini"
+
+# A model we have not listed still works: reasoning families are recognised by
+# name and get the reasoning parameter set, everything else the classic one.
+_REASONING_PREFIXES = ("gpt-5", "gpt-6", "o1", "o3", "o4")
+
+
+def label_model_spec(model: str) -> dict:
+    """Parameter profile for a labelling model, guessed if it is not listed."""
+    if model in LABEL_MODELS:
+        return dict(LABEL_MODELS[model])
+    reasoning = model.startswith(_REASONING_PREFIXES)
+    return {
+        "token_param": "max_completion_tokens" if reasoning else "max_tokens",
+        "temperature": not reasoning,
+        "reasoning_effort": "none" if reasoning else None,
+        "max_output": 1200 if reasoning else 800,
+        "price_per_1k": None,
+        "tpm": None,
+    }
+
+
 # USD per 1K tokens (prompt, completion); used only for the cost estimate.
 PRICE_PER_1K = {
-    "gpt-4o-2024-08-06": (0.0025, 0.010),
-    "gpt-4o": (0.0025, 0.010),
-    "gpt-4o-mini": (0.00015, 0.0006),
-    "gpt-4.1": (0.002, 0.008),
-    "gpt-4.1-mini": (0.0004, 0.0016),
+    model: spec["price_per_1k"]
+    for model, spec in LABEL_MODELS.items()
+    if spec.get("price_per_1k")
 }
+PRICE_PER_1K["gpt-4o"] = (0.0025, 0.010)
+PRICE_PER_1K["gpt-4.1"] = (0.002, 0.008)
 
 # Env var names expected for DB (GraphRAG DB_* and this project's MYSQL_*).
 DB_ENV_NAMES = (

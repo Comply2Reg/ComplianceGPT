@@ -222,16 +222,20 @@ def write_gold_sheet(
     records: List[Dict],
     labels_by_hash: Dict[str, Dict],
     split_of: Dict[str, str],
+    disputed: Optional[set] = None,
 ) -> int:
     path.parent.mkdir(parents=True, exist_ok=True)
     rows = []
     for r in records:
         h = r["metadata"]["doc_hash"]
         lab = labels_by_hash[h]
-        flags = lab.get("flags", [])
+        flags = list(lab.get("flags", []))
+        if disputed and lab["doc_id"] in disputed:
+            flags.append("models_disagree")
         split = split_of[h]
         if split != "test" and not (
-            {"class_disagrees_with_registry", "low_confidence"} & set(flags)
+            {"class_disagrees_with_registry", "low_confidence", "models_disagree"}
+            & set(flags)
         ):
             continue
         rows.append(
@@ -295,6 +299,14 @@ def main(argv=None) -> int:
         help="override the registry max_seq_length",
     )
     ap.add_argument("--apply-gold", type=Path, default=None)
+    ap.add_argument(
+        "--disputed-file",
+        type=Path,
+        default=None,
+        help="doc_ids where two labelling models chose different classes "
+        "(written by report.py); they join the gold sheet flagged "
+        "'models_disagree'",
+    )
     ap.add_argument(
         "--gold-out",
         type=Path,
@@ -440,8 +452,20 @@ def main(argv=None) -> int:
         args.gold_out
         or Path(cfg.TRIAGE["gold_dir"]) / f"gold_candidates_{args.version}.csv"
     )
+    disputed = set()
+    if args.disputed_file and args.disputed_file.exists():
+        disputed = {
+            int(line)
+            for line in args.disputed_file.read_text().split("\n")
+            if line.strip().isdigit()
+        }
+        log.info("%d disputed documents joined the gold sheet", len(disputed))
     n_gold = write_gold_sheet(
-        gold_path, train + splits["val"] + splits["test"], labels_by_hash, split_of
+        gold_path,
+        train + splits["val"] + splits["test"],
+        labels_by_hash,
+        split_of,
+        disputed,
     )
 
     card = [

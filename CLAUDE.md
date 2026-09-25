@@ -157,6 +157,19 @@ python -m scripts.triage.obligation_adapter --corpus-dir <corpus> --out data/uk/
 - `scripts/triage/taxonomy.py` transcribes `c2r-inventory-kit/docs/alert-taxonomy.md`
   and copies the exporter's `CLASS_TO_STRATUM`/`TARGET_MIX`; keep them identical.
 - No regex fallback anywhere: a failed API call lands in `failures_<v>.jsonl`.
+- **Labelling throughput is capped per model by the account's TPM, not by concurrency** —
+  several processes on one model just collide. `--probe-limits` prints the ceiling,
+  `--tpm` paces to it, `--shard i/N` splits the work, `--cache-only` merges the shards
+  and names what is missing. Measured 2026-09-25: gpt-4o 30k TPM (~9 docs/min),
+  gpt-4o-mini and gpt-5.4-mini 200k (~50).
+- `config.LABEL_MODELS` holds the per-model call profile (these are the models that
+  *produce labels*; `config.MODELS` is the model we *fine-tune*). The gpt-5 family needs
+  `max_completion_tokens`, refuses `temperature`, and takes `reasoning_effort`
+  (`none|low|medium|high|xhigh` — not the gpt-5.0 `minimal`); its reasoning tokens bill
+  as output and count against the cap, so a truncated answer is failed, never cached.
+- Two labelling models disagreeing is the gold-candidate signal: `report.py` writes
+  `disputed_<v>.txt`, the strong model re-labels exactly those (`--ids-file`), and
+  `--prefer-models` merges strongest-first.
 - **Target model is `Qwen/Qwen3-4B-Instruct-2507`** (`config.MODELS`, fallback Gemma 4 E4B).
   Records carry `messages` and are rendered with the model's own `apply_chat_template`;
   `train_triage.py` trains response-only at 2048 tokens. The `main` notebook is not used

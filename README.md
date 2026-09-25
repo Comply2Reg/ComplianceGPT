@@ -22,7 +22,7 @@
 
 The first public release introduces a **Gemma 4 E2B IT** model fine-tuned specifically for **Regulatory Obligation Extraction**, transforming unstructured legal and regulatory text into structured JSON suitable for downstream Governance, Risk, and Compliance (GRC) systems.
 
-A second model, **Qwen3-4B – UK Regulatory Alert Triage**, extends the platform to the step that comes before extraction: deciding what an incoming publication *is*, how urgent it is, and which function owns the response. Both models emit structured JSON, and both are trained with parameter-efficient fine-tuning on modest hardware.
+A second model, **Qwen3-4B – Regulatory Alert Triage**, extends the platform to the step that comes before extraction: deciding what an incoming publication *is*, how urgent it is, and which function owns the response. Both models emit structured JSON, and both are trained with parameter-efficient fine-tuning on modest hardware.
 
 ---
 
@@ -131,7 +131,9 @@ The released model is available on Hugging Face:
 
 **https://huggingface.co/PrinceRansom7/gemma4-e2b-it-regulatory-obligation-v1**
 
-## Qwen3-4B – UK Regulatory Alert Triage v1
+## Qwen3-4B – Regulatory Alert Triage v1
+
+The name is deliberately jurisdiction-neutral because the task is not, but **v1 is trained and evaluated entirely on UK sources**. Treat it as a UK model until a release says otherwise.
 
 The second model addresses a different stage of the compliance lifecycle. Where obligation extraction reads a document that has already been selected for attention, triage decides which documents deserve attention at all.
 
@@ -300,7 +302,7 @@ The triage model runs through MLX on Apple Silicon. While the repository is priv
 from mlx_lm import load, generate
 from mlx_lm.sample_utils import make_sampler
 
-model, tokenizer = load("Comply2Reg/uk-alert-triage-qwen3-4b-v1")
+model, tokenizer = load("Comply2Reg/regulatory-alert-triage-qwen3-4b-v1")
 
 prompt = tokenizer.apply_chat_template(
     [

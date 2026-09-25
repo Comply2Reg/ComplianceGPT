@@ -9,11 +9,11 @@ Model weights are **not stored in this repository**. They are hosted on Hugging 
 | Model | Task | Base | Availability |
 |--------|------|------|--------------|
 | **ComplianceGPT v1** | Regulatory Obligation Extraction | Gemma 4 E2B IT | Public |
-| **UK Alert Triage v1** | UK Regulatory Alert Triage | Qwen3-4B-Instruct-2507 | Private, pending licensing review |
+| **Regulatory Alert Triage v1** | Regulatory alert triage (UK sources in v1) | Qwen3-4B-Instruct-2507 | Private, pending licensing review |
 
 Detailed documentation for each model:
 
-- [uk-alert-triage-qwen3-4b-v1.md](uk-alert-triage-qwen3-4b-v1.md)
+- [regulatory-alert-triage-qwen3-4b-v1.md](regulatory-alert-triage-qwen3-4b-v1.md)
 
 ## ComplianceGPT v1 — Regulatory Obligation Extraction
 
@@ -44,11 +44,11 @@ model = AutoModelForCausalLM.from_pretrained(
 )
 ```
 
-## UK Alert Triage v1
+## Regulatory Alert Triage v1
 
 **Model Repository**
 
-`Comply2Reg/uk-alert-triage-qwen3-4b-v1` — private while the training-corpus licensing is reviewed. Access is available to Comply2Reg members on request.
+`Comply2Reg/regulatory-alert-triage-qwen3-4b-v1` — private while the training-corpus licensing is reviewed. Access is available to Comply2Reg members on request.
 
 | Property | Value |
 |----------|-------|
@@ -64,10 +64,10 @@ model = AutoModelForCausalLM.from_pretrained(
 ```python
 from mlx_lm import load, generate
 
-model, tokenizer = load("Comply2Reg/uk-alert-triage-qwen3-4b-v1")
+model, tokenizer = load("Comply2Reg/regulatory-alert-triage-qwen3-4b-v1")
 ```
 
-Requires Apple Silicon. See [uk-alert-triage-qwen3-4b-v1.md](uk-alert-triage-qwen3-4b-v1.md) for the prompt format, output schema, evaluation and limitations.
+Requires Apple Silicon. See [regulatory-alert-triage-qwen3-4b-v1.md](regulatory-alert-triage-qwen3-4b-v1.md) for the prompt format, output schema, evaluation and limitations.
 
 ## Future Models
 

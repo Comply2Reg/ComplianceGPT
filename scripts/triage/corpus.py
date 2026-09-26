@@ -10,7 +10,7 @@ import json
 from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, Iterable, Iterator, List, Optional
+from typing import Dict, Iterable, Iterator, List, Optional, Tuple
 
 TIERS = ("GREEN", "AMBER", "RED")
 
@@ -112,3 +112,69 @@ def read_jsonl(path: Path) -> List[Dict]:
         return []
     with path.open(encoding="utf-8") as fh:
         return [json.loads(line) for line in fh.read().split("\n") if line.strip()]
+
+
+@dataclass(frozen=True)
+class MultiCorpus:
+    """Several jurisdiction corpora addressed as one.
+
+    Document ids are per-database and collide across jurisdictions — the UK
+    and US exports share 5,989 of them — so anything that merges corpora must
+    key on the content hash, which is globally unique by construction. Keying
+    on the id would silently pair a document with another country's text.
+    """
+
+    corpora: Tuple[Corpus, ...]
+
+    @classmethod
+    def of(cls, roots: Iterable[Path]) -> "MultiCorpus":
+        return cls(tuple(Corpus(Path(r)) for r in roots))
+
+    def check(self) -> None:
+        for c in self.corpora:
+            c.check()
+        seen: Dict[str, Path] = {}
+        for c in self.corpora:
+            for row in c.manifest():
+                h = row.get("sha256") or row.get("doc_hash")
+                if not h:
+                    continue
+                if h in seen and seen[h] != c.root:
+                    raise ValueError(
+                        f"content hash {h[:12]} appears in both {seen[h].name} "
+                        f"and {c.root.name}; corpora must not overlap"
+                    )
+                seen[h] = c.root
+
+    def _index(self) -> Dict[str, Tuple[Corpus, int]]:
+        out: Dict[str, Tuple[Corpus, int]] = {}
+        for c in self.corpora:
+            for row in c.manifest():
+                h = row.get("sha256") or row.get("doc_hash")
+                if h:
+                    out[h] = (c, int(row["id"]))
+        return out
+
+    def manifest(self) -> List[Dict]:
+        """Every corpus's manifest, each row tagged with the corpus it came
+        from so a later lookup does not have to guess."""
+        rows: List[Dict] = []
+        for c in self.corpora:
+            for row in c.manifest():
+                rows.append({**row, "_corpus": str(c.root)})
+        return rows
+
+    def canonical_by_hash(self, doc_hash: str) -> str:
+        c, doc_id = self._index()[doc_hash]
+        return c.canonical(doc_id)
+
+    def chunks_by_hash(self) -> Dict[str, List[Dict]]:
+        """Chunks keyed by the document's content hash, not its id."""
+        out: Dict[str, List[Dict]] = defaultdict(list)
+        for c in self.corpora:
+            by_id = c.chunks_by_doc()
+            for row in c.manifest():
+                h = row.get("sha256") or row.get("doc_hash")
+                if h:
+                    out[h].extend(by_id.get(int(row["id"]), []))
+        return out

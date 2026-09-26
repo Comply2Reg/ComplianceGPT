@@ -34,7 +34,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 from scripts import config as cfg  # noqa: E402
-from scripts.triage.corpus import Corpus, read_jsonl, write_jsonl  # noqa: E402
+from scripts.triage.corpus import Corpus, MultiCorpus, read_jsonl, write_jsonl  # noqa: E402
 from scripts.triage.prompts import INSTRUCTION_TEMPLATES  # noqa: E402
 from scripts.triage.render import (  # noqa: E402
     clean_prose,
@@ -112,9 +112,15 @@ def to_record(rec: Dict, head: str, stratum: str, stratum_source: str) -> Dict:
     label = rec["label"]
     output = {k: label[k] for k in OUTPUT_FIELDS if k in label}
     instruction = INSTRUCTION_TEMPLATES[rec["doc_id"] % len(INSTRUCTION_TEMPLATES)]
+    # The header is exactly four lines and everything downstream relies on
+    # that: split_context counts lines to separate header from body, and
+    # fit_to_budget trims only the body. A title carrying its own newline —
+    # which happens when a publisher wraps a long one — shifts the boundary
+    # and the trimmer starts eating the header instead.
+    title = " ".join((rec.get("title") or "").split())
     input_text = (
         f"Regulator: {rec['regulator']}\nPublication type: {rec['document_type']}\n"
-        f"Title: {rec.get('title') or ''}\n"
+        f"Title: {title}\n"
         f"Published: {rec.get('release_date') or 'unknown'}\n\n"
         f"{clean_prose(head)}"
     )
@@ -276,8 +282,15 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
-    ap.add_argument("--labels", type=Path, required=True)
-    ap.add_argument("--corpus-dir", type=Path, default=Path(cfg.TRIAGE["corpus_dir"]))
+    ap.add_argument("--labels", type=Path, nargs="+", required=True)
+    ap.add_argument(
+        "--corpus-dir",
+        type=Path,
+        nargs="+",
+        default=[Path(cfg.TRIAGE["corpus_dir"])],
+        help="one or more corpus folders; several are addressed by content "
+             "hash because document ids collide across jurisdictions",
+    )
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--version", default="v1")
     ap.add_argument("--tier", nargs="+", default=["GREEN"])
@@ -320,15 +333,20 @@ def main(argv=None) -> int:
 
     tiers = {t.upper() for t in args.tier}
     labels = [
-        lab for lab in read_jsonl(args.labels) if str(lab.get("tier")).upper() in tiers
+        lab
+        for path in args.labels
+        for lab in read_jsonl(path)
+        if str(lab.get("tier")).upper() in tiers
     ]
+    log.info("%d labels from %d file(s)", len(labels), len(args.labels))
     if args.apply_gold:
         log.info(
             "applied %d human labels from %s",
             apply_gold(labels, args.apply_gold),
             args.apply_gold,
         )
-    corpus = Corpus(args.corpus_dir)
+    corpus = MultiCorpus.of(args.corpus_dir)
+    # Refuses overlapping corpora rather than silently preferring one.
     corpus.check()
     tokenizer = load_tokenizer(args.model)
     budget = args.max_tokens or cfg.MODELS[args.model]["max_seq_length"]
@@ -351,9 +369,12 @@ def main(argv=None) -> int:
             stratum = CLASS_TO_STRATUM.get(lab["label"]["alert_class"], "intelligence")
             source = "model"
         try:
-            canonical = corpus.canonical(lab["doc_id"])
-        except OSError:
-            log.warning("no canonical text for doc %s; skipped", lab["doc_id"])
+            # By hash, never by doc_id: the UK and US exports share 5,989 ids
+            # because they come from different databases, so an id lookup
+            # would pair a document with another country's text.
+            canonical = corpus.canonical_by_hash(h)
+        except (OSError, KeyError):
+            log.warning("no canonical text for doc_hash %s; skipped", h[:12])
             continue
         rec = to_record(lab, canonical[: args.head_chars], stratum, source)
         rec, n_tokens, trimmed = fit_to_budget(rec, tokenizer, args.model, budget)
@@ -409,7 +430,8 @@ def main(argv=None) -> int:
     stats = {
         "version": args.version,
         "generated_at": dt.datetime.now(dt.UTC).isoformat(),
-        "labels_file": str(args.labels),
+        "labels_file": [str(p) for p in args.labels],
+        "corpus_dirs": [str(p) for p in args.corpus_dir],
         "tiers": sorted(tiers),
         "gold_months": args.gold_months,
         "val_frac": args.val_frac,

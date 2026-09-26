@@ -272,3 +272,39 @@ def test_apply_gold_overrides_model_labels(tmp_path: Path) -> None:
     assert doc1["classification"] == "A5"
     assert doc1["output"]["primary_functions"] == ["Board", "Risk"]
     assert doc1["metadata"]["label_source"] == "human"
+
+
+def test_a_title_containing_a_newline_does_not_shift_the_header_boundary():
+    """input_text must be exactly four header lines then a blank then the body.
+    split_context counts lines, and fit_to_budget trims only the body, so a
+    publisher-wrapped title used to push 'Published:' into the body and let the
+    trimmer eat the header."""
+    from scripts.triage.build_dataset import to_record
+    from scripts.triage.render import split_context
+
+    rec = {
+        "doc_id": 1,
+        "document_id": "ico:pub#1",
+        "doc_hash": "h" * 64,
+        "regulator": "ICO",
+        "document_type": "govuk_publications",
+        "title": "Processing of personal data\nunder the Data Protection Act 2018",
+        "release_date": "2024-03-27",
+        "url": "https://x/1",
+        "tier": "GREEN",
+        "licence": "uk_ogl_v3",
+        "model": "m",
+        "label": {
+            "alert_class": "A4", "alert_class_confidence": "high", "priority": "P2",
+            "primary_functions": ["Privacy"], "secondary_functions": [],
+            "lines_of_defence": [2], "summary": "s", "key_dates": [],
+            "applicability": [], "obligations_present": False,
+            "jurisdiction": "GB", "frameworks": [], "rationale": "r",
+        },
+    }
+    out = to_record(rec, "BODY TEXT HERE", "guidance", "registry")
+    header, body = split_context(out["input_text"])
+    assert header.count("\n") == 3, header       # exactly four lines
+    assert "\n" not in out["input_text"].split("Title: ")[1].split("\n")[0]
+    assert body.startswith("BODY TEXT HERE")     # not 'Published:'
+    assert "Data Protection Act 2018" in header  # the title survives, unwrapped

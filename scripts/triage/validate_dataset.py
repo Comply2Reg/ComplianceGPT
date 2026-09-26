@@ -29,7 +29,7 @@ sys.path.insert(0, str(ROOT))
 from scripts import config as cfg  # noqa: E402
 from scripts.triage.corpus import read_jsonl  # noqa: E402
 from scripts.triage.schema import OUTPUT_FIELDS  # noqa: E402
-from scripts.triage.render import parse_assistant_json  # noqa: E402
+from scripts.triage.render import parse_assistant_json, split_context  # noqa: E402
 from scripts.triage.taxonomy import ALERT_CLASSES  # noqa: E402
 
 ENVELOPE = (
@@ -79,8 +79,17 @@ def check_record(
             if out.get("alert_class") != rec["classification"]:
                 errs.append(f"{where}: output.alert_class != classification")
         # head + the 4 header lines; allow a little slack for the header
-        if len(rec["input_text"]) > head_chars + 400:
-            errs.append(f"{where}: input_text {len(rec['input_text'])} > head-chars")
+        # input_text is a four-line header (regulator / type / title / date)
+        # plus the trimmed body. Measure the header rather than allowing a
+        # fixed margin for it: US Federal Register titles run far longer than
+        # the UK ones the old 400-character allowance was tuned on, so the
+        # check failed on documents that were trimmed perfectly correctly.
+        body = split_context(rec["input_text"])[1]
+        if len(body) > head_chars:
+            errs.append(
+                f"{where}: body {len(body)} > head-chars {head_chars} "
+                f"(input_text {len(rec['input_text'])})"
+            )
         if "doc_hash" not in rec["metadata"]:
             errs.append(f"{where}: metadata.doc_hash missing")
         msgs = rec.get("messages")
@@ -155,6 +164,20 @@ def main(argv=None) -> int:
             f"no {{train,val,test}}_{args.version}.jsonl under {args.dataset_dir}"
         )
 
+    # Prefer the value the build actually used over the flag default: the two
+    # drifting apart is a false failure, not a real one.
+    head_chars = args.head_chars
+    stats_path = args.dataset_dir / f"stats_{args.version}.json"
+    if stats_path.exists():
+        try:
+            recorded = json.loads(stats_path.read_text(encoding="utf-8")).get(
+                "head_chars"
+            )
+            if recorded:
+                head_chars = int(recorded)
+        except (OSError, ValueError):
+            pass
+
     max_tokens = args.max_tokens or cfg.MODELS[args.model]["max_seq_length"]
     for name, rows in splits.items():
         for i, rec in enumerate(rows):
@@ -162,7 +185,7 @@ def main(argv=None) -> int:
                 check_record(
                     rec,
                     args.task,
-                    args.head_chars,
+                    head_chars,
                     i,
                     name,
                     max_tokens if args.task == "triage" else 0,

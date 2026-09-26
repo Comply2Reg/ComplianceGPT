@@ -69,6 +69,8 @@ def test_schema_round_trip() -> None:
         key_dates=[{"label": "in force", "date": "2027-01-01"}],
         applicability=["banks"],
         obligations_present=True,
+        jurisdiction="GB",
+        frameworks=["Basel III"],
         rationale="It is a PS.",
     )
     again = TriageRecord.model_validate_json(rec.model_dump_json())
@@ -165,3 +167,55 @@ def test_title_heuristics(title, expected) -> None:
 
 def test_prompt_is_json_safe() -> None:
     json.dumps(build_messages(build_doc_input(_row(), "x", [])))
+
+
+# ── jurisdiction neutrality ─────────────────────────────────────────────────
+
+
+def test_no_uk_regime_code_reaches_the_labelling_prompt() -> None:
+    """FUNCTION_DESCRIPTIONS is rendered into the system prompt. While the SMF
+    codes lived there the model learned that financial crime means SMF17,
+    which is true in the UK and meaningless anywhere else."""
+    from scripts.triage.prompts import SYSTEM_PROMPT
+    from scripts.triage.taxonomy import FUNCTION_DESCRIPTIONS
+
+    for marker in ("SMF", "SM&CR", "FSMA", "NYDFS", "31 CFR"):
+        assert not any(marker in d for d in FUNCTION_DESCRIPTIONS.values()), marker
+        assert marker not in SYSTEM_PROMPT, marker
+
+
+def test_the_regime_codes_are_kept_as_a_per_jurisdiction_overlay() -> None:
+    """Neutral does not mean lost: a UK-specific consumer still needs them."""
+    from scripts.triage.taxonomy import regime_names
+
+    assert "SMF17" in regime_names("GB")["Financial crime"]
+    assert "SMF1" in regime_names("gb")["Board"]  # case-insensitive
+    assert "31 CFR" in regime_names("US")["Financial crime"]
+    assert regime_names("SG") == {}  # unmapped, not guessed
+    assert regime_names("") == {}
+
+
+def test_the_prompt_no_longer_asserts_every_document_is_uk() -> None:
+    from scripts.triage.prompts import SYSTEM_PROMPT
+
+    assert "UK financial-services regulatory publications" not in SYSTEM_PROMPT
+    assert "internationally active" in SYSTEM_PROMPT
+    # and it must ask for the two new fields
+    assert "jurisdiction:" in SYSTEM_PROMPT
+    assert "frameworks:" in SYSTEM_PROMPT
+
+
+def test_the_record_can_say_which_country_it_binds() -> None:
+    """The v1 model had no such field, which is why it read ADGM rulebook text
+    as UK intelligence."""
+    assert "jurisdiction" in OUTPUT_FIELDS
+    assert "frameworks" in OUTPUT_FIELDS
+
+
+def test_bumping_the_prompt_version_invalidates_v1_labels() -> None:
+    """The label cache is keyed by prompt version. A v1 label has no
+    jurisdiction and was produced under a UK-only premise, so it must not be
+    reused for v2."""
+    from scripts.triage.prompts import PROMPT_VERSION
+
+    assert PROMPT_VERSION == "triage-v2"

@@ -20,11 +20,12 @@ from scripts.triage.schema import OUTPUT_FIELDS
 log = logging.getLogger("triage.render")
 
 TRAIN_SYSTEM_PROMPT = (
-    "You triage UK financial-services regulatory publications for a bank. Return a "
-    "JSON triage record with exactly these keys: alert_class (A1-A14), "
-    "alert_class_confidence, priority (P1-P3), primary_functions, "
-    "secondary_functions, lines_of_defence, summary, key_dates, applicability, "
-    "obligations_present, thought_trace."
+    "You triage financial-services regulatory publications for an "
+    "internationally active bank. Return a JSON triage record with exactly "
+    "these keys: alert_class (A1-A14), alert_class_confidence, priority "
+    "(P1-P3), primary_functions, secondary_functions, lines_of_defence, "
+    "summary, key_dates, applicability, obligations_present, jurisdiction, "
+    "frameworks, thought_trace."
 )
 PROMPT_META_KEYS = ("regulator", "doc_type", "regulation_name", "release_date")
 CONTEXT_HEADER_LINES = 4  # regulator / type / title / date lines in input_text

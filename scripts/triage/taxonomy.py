@@ -32,18 +32,20 @@ ALERT_CLASSES: Dict[str, str] = {
     "A2": "Final rule / policy statement",
     "A3": "Proposed rule / consultation / discussion paper / call for input",
     "A4": "Supervisory guidance (supervisory statement, statement of policy, "
-    "finalised guidance)",
-    "A5": "Supervisory communication (Dear CEO / portfolio letter, supervisory "
-    "priorities)",
-    "A6": "Enforcement action (final, decision or warning notice, penalty)",
+    "finalised guidance, bulletin, circular)",
+    "A5": "Supervisory communication (letter to firms, portfolio or priorities "
+    "letter, supervisory advisory)",
+    "A6": "Enforcement action (notice, order, consent order, penalty, "
+    "settlement)",
     "A7": "Sanctions / watchlist delta",
     "A8": "Reporting, returns or taxonomy change",
     "A9": "Market or operational notice",
     "A10": "Thematic review, multi-firm review or market study",
     "A11": "Intelligence: speech, blog, press release, research, working paper",
-    "A12": "Codified rulebook or handbook, point-in-time",
+    "A12": "Codified rulebook, handbook or code, point-in-time",
     "A13": "Court or tribunal determination",
-    "A14": "Perimeter, register or authorisation change (warning list, waivers)",
+    "A14": "Perimeter, register or authorisation change (warning list, waiver, "
+    "modification, licence grant or revocation)",
 }
 
 Function = Literal[
@@ -81,21 +83,54 @@ FUNCTIONS: Tuple[str, ...] = (
 )
 
 FUNCTION_DESCRIPTIONS: Dict[str, str] = {
-    "Board": "Board / ExCo (governing body, SMF1/SMF9)",
-    "Regulatory change": "Regulatory change management (SMF16)",
-    "Compliance": "Compliance monitoring (SMF16)",
-    "Financial crime": "AML, sanctions, fraud, market abuse (SMF17 MLRO)",
-    "Risk": "Enterprise, operational, credit and market risk (SMF4)",
-    "Prudential": "Prudential / treasury / finance (SMF2 CFO)",
-    "Operational resilience": "Operational resilience, ICT, third parties (SMF24)",
-    "InfoSec": "Information security / cyber (CISO)",
+    "Board": "Board / ExCo (governing body)",
+    "Regulatory change": "Regulatory change management",
+    "Compliance": "Compliance monitoring",
+    "Financial crime": "AML, sanctions, fraud, market abuse",
+    "Risk": "Enterprise, operational, credit and market risk",
+    "Prudential": "Prudential / treasury / finance",
+    "Operational resilience": "Operational resilience, ICT, third parties",
+    "InfoSec": "Information security / cyber",
     "Legal": "Legal / general counsel",
     "Product": "Product, business line, distribution (1st line)",
     "Ops": "Operations / client onboarding (1st line)",
-    "Privacy": "Data protection / privacy (DPO)",
-    "HR": "HR, remuneration, certification (SMF12/SMF18)",
-    "Internal audit": "Internal audit (SMF5, 3rd line)",
+    "Privacy": "Data protection / privacy",
+    "HR": "HR, remuneration, certification",
+    "Internal audit": "Internal audit",
 }
+
+# The senior-manager regime that names each function, per jurisdiction. These
+# used to be inside FUNCTION_DESCRIPTIONS, which meant they were rendered into
+# the labelling prompt and the model learned "Financial crime = SMF17 MLRO" —
+# true in the UK and meaningless anywhere else. They are an overlay now, so a
+# UK-specific prompt can still carry them and a global one need not.
+FUNCTION_REGIME_OVERLAY: Dict[str, Dict[str, str]] = {
+    "GB": {  # Senior Managers & Certification Regime
+        "Board": "SMF1 Chief Executive, SMF9 Chair",
+        "Regulatory change": "SMF16",
+        "Compliance": "SMF16 Compliance Oversight",
+        "Financial crime": "SMF17 MLRO",
+        "Risk": "SMF4 Chief Risk",
+        "Prudential": "SMF2 CFO",
+        "Operational resilience": "SMF24 Chief Operations",
+        "InfoSec": "CISO, under SMF24",
+        "HR": "SMF12/SMF18",
+        "Internal audit": "SMF5 Head of Internal Audit",
+    },
+    "US": {
+        "Financial crime": "BSA/AML Officer (31 CFR 1020.210), OFAC officer",
+        "InfoSec": "CISO (NYDFS Part 500.4)",
+        "Internal audit": "Chief Audit Executive",
+        "Board": "Board / CEO",
+        "Prudential": "CFO",
+    },
+}
+
+
+def regime_names(jurisdiction: str) -> Dict[str, str]:
+    """Senior-manager equivalents for a jurisdiction, empty when unmapped."""
+    return FUNCTION_REGIME_OVERLAY.get((jurisdiction or "").upper(), {})
+
 
 # Line of defence per function; Board is the governing body (no line).
 FUNCTION_LINE: Dict[str, int | None] = {

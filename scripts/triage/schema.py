@@ -52,6 +52,22 @@ class TriageRecord(BaseModel):
         description="True if the text itself creates or changes obligations "
         "(shall/must), not merely reports on them"
     )
+    # Added for multi-jurisdiction coverage. The v1 model had no way to say
+    # which country a document binds, which is why it read ADGM rulebook text
+    # as UK intelligence.
+    jurisdiction: str = Field(
+        description="ISO-style code for the jurisdiction this publication "
+        "binds: GB, US, EU, IN, SG, AU, CA, HK, JP, CH, AE, ZZ if unclear. "
+        "An EU instrument binds EU even when a national regulator republishes it."
+    )
+    frameworks: List[str] = Field(
+        description="International standards or cross-border regimes this text "
+        "implements, amends or responds to, from: Basel III, Basel IV, FATF, "
+        "IOSCO, IAIS, FSB, DORA, NIS2, GDPR, PSD2, MiFID, EMIR, Solvency II, "
+        "CRR/CRD, AIFMD, MiCA, CSRD, AI Act, SOX, Dodd-Frank, BSA/AML, "
+        "ISO 27001, NIST CSF. Empty when the text stands alone. This is what "
+        "links a rule in one country to its equivalent in another."
+    )
     rationale: str = Field(
         description="One to three sentences on why this class and priority"
     )

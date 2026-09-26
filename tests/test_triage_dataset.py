@@ -95,6 +95,8 @@ def _make_corpus(tmp_path: Path, n: int = 60):
                     "key_dates": [],
                     "applicability": ["banks"],
                     "obligations_present": cls in ("A1", "A2"),
+                    "jurisdiction": "GB",
+                    "frameworks": [],
                     "rationale": "because",
                 },
                 "flags": ["low_confidence"] if not i % 5 else [],

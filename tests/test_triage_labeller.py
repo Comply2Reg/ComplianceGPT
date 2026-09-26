@@ -310,3 +310,38 @@ def test_cost_is_priced_per_model_not_at_the_default_rate(tmp_path: Path) -> Non
     assert cost["estimated_usd"] == pytest.approx(cheap + dear, rel=1e-3)
     assert set(cost["by_model"]) == {"gpt-4o-mini", "gpt-5.4-mini"}
     assert cost["by_model"]["gpt-5.4-mini"]["documents"] == 2
+
+
+# ── a hung call must not stop the run ───────────────────────────────────────
+
+
+def test_the_call_ceiling_is_short_enough_not_to_block_the_run() -> None:
+    """The API call happens inside the concurrency semaphore, so the ceiling
+    bounds how long one stuck document can hold a slot. A healthy call takes
+    2-5s; at 420s with six retries one document held a slot for 42 minutes and
+    a handful of them stopped the run."""
+    assert labeller.HARD_CALL_TIMEOUT <= 120
+    worst_case = labeller.HARD_CALL_TIMEOUT * labeller.MAX_RETRIES
+    assert labeller.DOC_DEADLINE_SECS < worst_case, (
+        "the per-document deadline must actually bite before the retry ladder "
+        "runs to its end"
+    )
+
+
+def test_a_timeout_is_retryable_like_any_other_transient_failure() -> None:
+    import inspect
+
+    src = inspect.getsource(labeller.label_one)
+    retryable = src[src.index("retryable = name in"):src.index(")", src.index("retryable = name in"))]
+    for name in ("TimeoutError", "RateLimitError", "APIConnectionError"):
+        assert name in retryable, name
+
+
+def test_retries_are_logged_rather_than_silent(caplog) -> None:
+    """A run crawling along because every other call hung looked identical to
+    a healthy one, because retries said nothing and the count of failures
+    stayed at zero."""
+    import inspect
+
+    src = inspect.getsource(labeller.label_one)
+    assert "log.warning" in src, "a retry must say so"

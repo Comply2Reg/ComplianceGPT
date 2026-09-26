@@ -119,12 +119,22 @@ def parse_shard(value: Optional[str]) -> Optional[tuple]:
 # Ceiling for one labelling call, above the client's own 60s timeout. Exists
 # because the client timeout has been seen not to fire, and the call holds a
 # semaphore slot while it waits.
-# 150s cancelled calls that were about to succeed on the longer UK documents:
-# 97 responses came back 200 while only 75 were counted, because wait_for had
-# already given up on them and the retry started over. Generous enough not to
-# race a slow-but-healthy call, still bounded so a genuinely hung one releases
-# its semaphore slot instead of deadlocking the run.
-HARD_CALL_TIMEOUT = 420.0
+# A healthy labelling call takes 2-5 seconds, so 90 is 20-40x headroom and any
+# call that exceeds it is hung rather than slow.
+#
+# This was briefly 420, on a misreading: a run showed 97 responses against 75
+# counted documents and it looked like the ceiling was cancelling calls about
+# to succeed. It was not — the extra 22 were retries of genuinely hung calls.
+# Raising the ceiling made it strictly worse, because the call happens inside
+# the concurrency semaphore: at 420s with MAX_RETRIES=6 one stuck document can
+# hold a slot for 42 minutes, and with the default concurrency a handful of
+# them stop the run dead. That is what produced the 20-minute silent gaps.
+HARD_CALL_TIMEOUT = 90.0
+
+# Nothing may spend longer than this on one document, however the retries fall.
+# Without it, six attempts plus backoff is over ten minutes of a slot for a
+# single record.
+DOC_DEADLINE_SECS = 300.0
 
 
 class TokenBucket:
@@ -223,6 +233,7 @@ async def label_one(
     messages = build_messages(doc)
     call_kwargs = call_kwargs if call_kwargs is not None else {"max_tokens": 800}
     last_error = None
+    call_started = time.monotonic()
     for attempt in range(1, MAX_RETRIES + 1):
         try:
             reservation = None
@@ -287,6 +298,15 @@ async def label_one(
                 "CancelledError",
             )
             if not retryable or attempt == MAX_RETRIES:
+                break
+            # Log it. Retries used to be silent, so a run crawling along
+            # because every other call hung looked exactly like a healthy one,
+            # and the cause stayed invisible until someone diffed log
+            # timestamps. "0 failed" is not the same as "nothing went wrong".
+            log.warning("retry %d/%d after %s", attempt, MAX_RETRIES, last_error)
+            if time.monotonic() - call_started > DOC_DEADLINE_SECS:
+                log.warning("giving up on this document after %.0fs",
+                            time.monotonic() - call_started)
                 break
             await asyncio.sleep(min(90, RETRY_BASE_SECS * 2**attempt + random.random()))
     return {"error": last_error or "unknown", "attempts": MAX_RETRIES}
@@ -449,7 +469,16 @@ async def run(args) -> int:
 
         # Our own ladder handles retries; a hung socket must not block for the
         # SDK's default 10 minutes.
-        client = AsyncOpenAI(max_retries=0, timeout=60.0)
+        import httpx
+
+        # Explicit per-phase timeouts. A bare float covers all four, but the
+        # pool phase is the one that matters here: a request waiting on an
+        # exhausted connection pool is the shape of hang we saw, and it should
+        # fail fast rather than sit inside the semaphore.
+        client = AsyncOpenAI(
+            max_retries=0,
+            timeout=httpx.Timeout(60.0, connect=15.0, read=60.0, pool=30.0),
+        )
         bucket = TokenBucket(args.tpm)
         sem = asyncio.Semaphore(args.concurrency)
         started = time.monotonic()

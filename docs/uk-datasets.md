@@ -407,6 +407,36 @@ cross-jurisdiction equivalence catalogue.
 material binding no one directly; the EU ones are UK pages republishing EU instruments,
 which is the field working as intended.
 
+### Long runs: use caffeinate, and pace to the TPM limit
+
+**A labelling run that appears to stall is almost certainly the Mac sleeping.** This cost
+most of a day to find, so it is worth stating plainly.
+
+The symptom is a process alive at 0% CPU, no network, no log output, silent gaps of
+twenty minutes, and — the tell — **zero failures afterwards**. It looks exactly like a
+hung socket or a deadlock, and it is neither.
+
+The evidence that settles it is the two clocks disagreeing. The labeller's own
+`time.monotonic()` counter said 25 documents in 91 seconds while the wall clock said 32
+minutes. `monotonic()` does not advance while macOS is asleep, so the difference is
+exactly the time the process spent suspended. `pmset -g log` showed 443 sleep/wake cycles.
+
+```bash
+caffeinate -i python -m scripts.triage.labeller ... --tpm 200000
+```
+
+Same 474 documents, uninterrupted: **366 seconds, 0.77s each**. Against roughly 80s each
+when the machine was free to sleep.
+
+`--tpm` matters once the run is actually fast. Unpaced, 474 documents produced 29 rate-limit
+failures on the 200,000 TPM ceiling; paced, the same work finished with none.
+
+Two things chased before the real cause, both dead ends, recorded so nobody repeats them:
+the request timeout (raising it made matters worse, since the call sits inside the
+concurrency semaphore) and prompt size (p50 is 6,300 characters, which is fine). The
+schema, the model and the API were all healthy throughout — isolated calls measured 2-3
+seconds the whole time.
+
 ### Running it
 
 ```bash

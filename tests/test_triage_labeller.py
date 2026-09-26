@@ -315,17 +315,10 @@ def test_cost_is_priced_per_model_not_at_the_default_rate(tmp_path: Path) -> Non
 # ── a hung call must not stop the run ───────────────────────────────────────
 
 
-def test_the_call_ceiling_is_short_enough_not_to_block_the_run() -> None:
-    """The API call happens inside the concurrency semaphore, so the ceiling
-    bounds how long one stuck document can hold a slot. A healthy call takes
-    2-5s; at 420s with six retries one document held a slot for 42 minutes and
-    a handful of them stopped the run."""
-    assert labeller.HARD_CALL_TIMEOUT <= 120
-    worst_case = labeller.HARD_CALL_TIMEOUT * labeller.MAX_RETRIES
-    assert labeller.DOC_DEADLINE_SECS < worst_case, (
-        "the per-document deadline must actually bite before the retry ladder "
-        "runs to its end"
-    )
+def test_one_document_cannot_monopolise_a_concurrency_slot() -> None:
+    """The call happens inside the semaphore, so an unbounded retry ladder on
+    one record starves the run."""
+    assert labeller.DOC_DEADLINE_SECS <= 300
 
 
 def test_a_timeout_is_retryable_like_any_other_transient_failure() -> None:

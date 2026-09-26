@@ -119,21 +119,8 @@ def parse_shard(value: Optional[str]) -> Optional[tuple]:
 # Ceiling for one labelling call, above the client's own 60s timeout. Exists
 # because the client timeout has been seen not to fire, and the call holds a
 # semaphore slot while it waits.
-# A healthy labelling call takes 2-5 seconds, so 90 is 20-40x headroom and any
-# call that exceeds it is hung rather than slow.
-#
-# This was briefly 420, on a misreading: a run showed 97 responses against 75
-# counted documents and it looked like the ceiling was cancelling calls about
-# to succeed. It was not — the extra 22 were retries of genuinely hung calls.
-# Raising the ceiling made it strictly worse, because the call happens inside
-# the concurrency semaphore: at 420s with MAX_RETRIES=6 one stuck document can
-# hold a slot for 42 minutes, and with the default concurrency a handful of
-# them stop the run dead. That is what produced the 20-minute silent gaps.
-HARD_CALL_TIMEOUT = 90.0
-
 # Nothing may spend longer than this on one document, however the retries fall.
-# Without it, six attempts plus backoff is over ten minutes of a slot for a
-# single record.
+# The SDK's own timeout bounds a single call; this bounds the ladder.
 DOC_DEADLINE_SECS = 300.0
 
 
@@ -240,20 +227,11 @@ async def label_one(
             async with sem:
                 if bucket is not None:
                     reservation = await bucket.wait(est_tokens)
-                # A hard ceiling on top of the client's own timeout. The
-                # call is inside the semaphore, so a request that hangs
-                # holds its slot forever and enough of them deadlock the
-                # whole run — observed twice on the UK corpus, stalling at
-                # 0% CPU with no further output. The client is configured
-                # timeout=60 and that did not always fire.
-                completion = await asyncio.wait_for(
-                    client.beta.chat.completions.parse(
-                        model=model,
-                        messages=messages,
-                        response_format=TriageRecord,
-                        **call_kwargs,
-                    ),
-                    timeout=HARD_CALL_TIMEOUT,
+                completion = await client.beta.chat.completions.parse(
+                    model=model,
+                    messages=messages,
+                    response_format=TriageRecord,
+                    **call_kwargs,
                 )
             choice = completion.choices[0]
             if choice.message.refusal:
@@ -469,16 +447,7 @@ async def run(args) -> int:
 
         # Our own ladder handles retries; a hung socket must not block for the
         # SDK's default 10 minutes.
-        import httpx
-
-        # Explicit per-phase timeouts. A bare float covers all four, but the
-        # pool phase is the one that matters here: a request waiting on an
-        # exhausted connection pool is the shape of hang we saw, and it should
-        # fail fast rather than sit inside the semaphore.
-        client = AsyncOpenAI(
-            max_retries=0,
-            timeout=httpx.Timeout(60.0, connect=15.0, read=60.0, pool=30.0),
-        )
+        client = AsyncOpenAI(max_retries=0, timeout=60.0)
         bucket = TokenBucket(args.tpm)
         sem = asyncio.Semaphore(args.concurrency)
         started = time.monotonic()

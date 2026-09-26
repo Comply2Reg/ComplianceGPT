@@ -368,6 +368,58 @@ python -m scripts.triage.bench compare --task ledgar
   not classification). `main`'s notebook cites `rcraigfieldwork/ObliQA`, which does not
   exist — the real id is `RegNLP/ObliQA`.
 
+## Multi-jurisdiction corpus, 2026-09-26
+
+The corpus is no longer UK-only. 2,727 US federal documents were crawled from twelve
+regulators, exported as 2,362 documents / 60,153 chunks, and labelled; the UK set was
+relabelled under the same prompt so the two agree.
+
+| | UK v1 | UK+US v2 |
+|---|---:|---:|
+| documents | 2,284 | 4,646 |
+| majority class share | 49% (A11) | 34% (A11) |
+| classes with ≥50 examples | 5 | 11 |
+| classes with <10 examples | 3 | 0 |
+
+The classes the v1 model scored zero on are the ones that moved most:
+
+| class | UK v1 | now |
+|---|---:|---:|
+| A2 final rules | 22 | 463 |
+| A3 consultations | 228 | 825 |
+| A7 sanctions | 4 | 228 |
+| A8 reporting changes | 4 | 293 |
+| A14 perimeter changes | 38 | 200 |
+| A5 supervisory letters | 0 | 27 |
+
+**Relabelling was conservative.** 86.9% of UK alert classes and 90.9% of priorities are
+unchanged from v1. Where a class moved it was mostly A11 giving way to something more
+specific — A10, A4, A6 — which is the right direction, since A11 over-use was the v1
+model's central weakness.
+
+**Cost:** $8.17 for the US set, $8.08 for the UK relabel, 0 failures either side.
+
+**Frameworks.** 1,048 US and 327 UK documents name an international standard, led by
+BSA/AML, Dodd-Frank, FATF, Basel III and MiFID. That field is the seed for the
+cross-jurisdiction equivalence catalogue.
+
+**Jurisdiction.** GB 2,212 / US 2,361 / ZZ 66 / EU 7. The ZZ rows are standard-setter
+material binding no one directly; the EU ones are UK pages republishing EU instruments,
+which is the field working as intended.
+
+### Running it
+
+```bash
+# US: crawl, export, label
+python run_scraper.py --regulator occ --type final_rules --max-items 120   # per source
+python scripts/export_alert_corpus.py --jurisdiction US --tier GREEN --out data/us_corpus
+python -m scripts.triage.labeller --corpus-dir <us_corpus> --out data/uk/labels \
+    --version us_v1 --tier GREEN --model gpt-5.4-mini
+```
+
+Labels cache per document and per prompt version, so an interrupted run resumes without
+re-paying. That mattered: the UK relabel stalled twice and lost nothing.
+
 ## Known caveats
 
 - `main`'s `run_extract.py` falls back silently to a regex labeller on API

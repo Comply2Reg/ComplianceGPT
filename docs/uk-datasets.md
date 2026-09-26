@@ -368,7 +368,40 @@ python -m scripts.triage.bench compare --task ledgar
   not classification). `main`'s notebook cites `rcraigfieldwork/ObliQA`, which does not
   exist — the real id is `RegNLP/ObliQA`.
 
-## Multi-jurisdiction corpus, 2026-09-26
+## Multi-jurisdiction corpus, 2026-09-27
+
+**7,734 labelled documents** — UK 2,284, US 5,450 — from 6,453 US rows crawled across
+thirteen federal regulators. $18.49 for the US half, $8.08 for the UK relabel, no
+failures.
+
+| | UK only | UK + US |
+|---|---:|---:|
+| documents | 2,284 | 7,734 |
+| majority class share | 49% | 31% |
+| classes under 10 examples | 3 | 0 |
+| classes under 50 examples | 6 | 2 |
+
+The classes the v1 model scored zero on:
+
+| class | UK only | now |
+|---|---:|---:|
+| A2 final rules | 22 | 742 |
+| A3 consultations | 228 | 1,310 |
+| A7 sanctions | 4 | 820 |
+| A8 reporting changes | 4 | 785 |
+| A14 perimeter changes | 38 | 588 |
+| A5 supervisory letters | 0 | 34 |
+
+Priorities are now near-balanced (P1 2,454 / P2 2,071 / P3 3,209) where the UK set skewed
+heavily to awareness-only. 2,507 documents name an international framework, led by
+BSA/AML (1,133), Dodd-Frank (686), FATF (489) and Basel III (223) — the seed for the
+cross-jurisdiction equivalence catalogue.
+
+Still thin: A13 court determinations (20) and A5 supervisory letters (34). Both are
+publication types the US federal sources carry rarely and UK AMBER sources carry often,
+so they stay blocked on the licensing review.
+
+## Earlier snapshot, 2026-09-26
 
 The corpus is no longer UK-only. 2,727 US federal documents were crawled from twelve
 regulators, exported as 2,362 documents / 60,153 chunks, and labelled; the UK set was

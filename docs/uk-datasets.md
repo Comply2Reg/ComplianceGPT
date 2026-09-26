@@ -483,6 +483,51 @@ python -m scripts.triage.labeller --corpus-dir <us_corpus> --out data/uk/labels 
 Labels cache per document and per prompt version, so an interrupted run resumes without
 re-paying. That mattered: the UK relabel stalled twice and lost nothing.
 
+## Cross-jurisdiction links: what the labels support, and what blocks them
+
+The `frameworks` field gives real evidence that cross-border links exist to be
+made. Eleven international frameworks name documents in both jurisdictions:
+
+| framework | GB docs | US docs |
+|---|---:|---:|
+| BSA/AML | 34 | 1,098 |
+| FATF | 38 | 449 |
+| Basel III | 35 | 187 |
+| MiFID | 95 | 20 |
+| GDPR | 28 | 66 |
+| CRR/CRD | 31 | 12 |
+| Dodd-Frank | 5 | 681 |
+| PSD2 | 27 | 3 |
+| Basel IV | 8 | 22 |
+| FSB | 8 | 13 |
+| TCFD | 4 | 3 |
+
+**The machinery to use this already exists and is empty.**
+`c2r_cga_api/ai/knowledge/graph/cross_document_rules.py` defines COVERS_TOPIC,
+EQUIVALENT_TO, SIMILAR_TO, DERIVED_FROM, INSPIRED_BY and
+HAS_EQUIVALENT_OBLIGATION and merges them into Neo4j. The catalogue file it
+reads has never existed, so the loader logs "Catalog not found" and returns
+nothing.
+
+**What blocks filling it.** The matcher can only test properties a Regulation
+node carries — title, regulator, jurisdiction_code, document_type. It cannot
+express "documents tagged Basel III", because `frameworks` is not on the node.
+
+`scripts/triage/build_cross_doc_catalog.py` tried to bridge that with title
+terms that discriminate the tagged documents. **It does not work well enough to
+ship.** At several thresholds the output is mostly noise: "Basel III: GB
+'financial services' → US 'renewal'", "BSA/AML: GB 'laundering' → US 'renewal
+without'", the latter being Treasury title boilerplate. Some links are right
+(FATF: GB 'laundering' → US 'laundering') but not enough of them, so nothing
+was written into the API repo. The script is kept because it produced that
+evidence and becomes a handful of exact rules once the blocker is gone.
+
+**The fix is one step, not a cleverer heuristic:** write `frameworks` onto
+Regulation nodes at index time, then match on the field directly. Note also
+that `TRANSPOSES` and `IMPLEMENTS` (regulation to regulation) are absent from
+the relation vocabulary, and Basel III → CRR/CRD → a national rulebook is a
+transposition chain that needs a name.
+
 ## Known caveats
 
 - `main`'s `run_extract.py` falls back silently to a regex labeller on API

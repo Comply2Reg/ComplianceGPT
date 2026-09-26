@@ -116,6 +116,17 @@ def parse_shard(value: Optional[str]) -> Optional[tuple]:
     return i, n
 
 
+# Ceiling for one labelling call, above the client's own 60s timeout. Exists
+# because the client timeout has been seen not to fire, and the call holds a
+# semaphore slot while it waits.
+# 150s cancelled calls that were about to succeed on the longer UK documents:
+# 97 responses came back 200 while only 75 were counted, because wait_for had
+# already given up on them and the retry started over. Generous enough not to
+# race a slow-but-healthy call, still bounded so a genuinely hung one releases
+# its semaphore slot instead of deadlocking the run.
+HARD_CALL_TIMEOUT = 420.0
+
+
 class TokenBucket:
     """Sliding-window tokens-per-minute throttle.
 
@@ -218,11 +229,20 @@ async def label_one(
             async with sem:
                 if bucket is not None:
                     reservation = await bucket.wait(est_tokens)
-                completion = await client.beta.chat.completions.parse(
-                    model=model,
-                    messages=messages,
-                    response_format=TriageRecord,
-                    **call_kwargs,
+                # A hard ceiling on top of the client's own timeout. The
+                # call is inside the semaphore, so a request that hangs
+                # holds its slot forever and enough of them deadlock the
+                # whole run — observed twice on the UK corpus, stalling at
+                # 0% CPU with no further output. The client is configured
+                # timeout=60 and that did not always fire.
+                completion = await asyncio.wait_for(
+                    client.beta.chat.completions.parse(
+                        model=model,
+                        messages=messages,
+                        response_format=TriageRecord,
+                        **call_kwargs,
+                    ),
+                    timeout=HARD_CALL_TIMEOUT,
                 )
             choice = completion.choices[0]
             if choice.message.refusal:
@@ -261,6 +281,10 @@ async def label_one(
                 "APITimeoutError",
                 "InternalServerError",
                 "APIStatusError",
+                # asyncio.wait_for firing: the hard ceiling above. Transient
+                # like any other timeout, so it gets the same backoff.
+                "TimeoutError",
+                "CancelledError",
             )
             if not retryable or attempt == MAX_RETRIES:
                 break

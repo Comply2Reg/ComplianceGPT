@@ -198,6 +198,70 @@ regression if that becomes interesting.
 
 ---
 
+## v2: retrained on the multi-jurisdiction corpus, 2026-09-27
+
+4,114 training examples across GB and US against v1's 1,683, one epoch, 4,100
+iterations, 5h48m on the M4 Pro. Validation loss 2.777 → 0.699 at its best.
+
+**The headline is macro-F1, which nearly doubled.** That was the metric worth
+quoting for v1 and it is the one that moved.
+
+| Metric | v1 (UK, n=104) | v2 (UK+US, n=759) | Change |
+|---|---:|---:|---:|
+| alert_class macro-F1 | 0.244 | **0.431** | **+0.187** |
+| alert_class accuracy | 0.644 | 0.656 | +0.012 |
+| primary_functions | 0.574 | 0.584 | +0.009 |
+| JSON validity | 1.000 | 0.976 | −0.024 |
+| obligations_present | 0.913 | 0.851 | −0.062 |
+| priority | 0.760 | 0.677 | −0.082 |
+
+**The test sets are not the same**, so this is not a controlled comparison. v2
+is measured on 759 documents spanning two jurisdictions; v1 on 104 UK ones.
+The v2 split is broader and harder, which makes the macro-F1 gain more
+convincing and the accuracy gain less so.
+
+**Classes the model can actually do went from four to eight.** The new ones are
+exactly those that had no training data before.
+
+| class | v1 | v2 |
+|---|---|---|
+| A2 final rules | — | 32/67 |
+| A7 sanctions | — | 29/33 |
+| A8 reporting | 0/1 | 45/77 |
+| A14 perimeter | 0/5 | 33/60 |
+| A3 consultations | 5/7 | 174/239 |
+| A6 enforcement | 5/6 | 36/45 |
+| A11 intelligence | 52/56 | 148/184 |
+
+A7 at 29/33 is the standout. Still zero: A4, A5, A9, A12, A13. A10 regressed
+from 5/17 to 0/9, which is a real loss and the one result here that argues
+against simply adding more data.
+
+### The out-of-distribution probe: improved, not solved
+
+This was the sharpest v1 failure — on 198 Abu Dhabi rulebook passages it
+emitted perfect JSON and assigned A11 to every single one, flagging an
+obligation in 1 of 198, on text that is obligation-bearing by construction.
+
+| | base | v1 | v2 |
+|---|---:|---:|---:|
+| produced triage JSON | 0.015 | 0.990 | 1.000 |
+| flagged an obligation | 0.0% | 0.5% | **36.5%** |
+| distinct classes used | 1 | 1 | 3 |
+| majority class share | — | 100% | 88% |
+
+**The obligation collapse is substantially fixed** — 0.5% to 36.5%. **The class
+collapse is only partly fixed**: still 88% A11, but the model now reaches for
+A1 (legislation, 16) and A2 (final rule, 9), both of which are plausible
+readings of rulebook text where A11 never was.
+
+So more data and a jurisdiction field moved this a long way and did not finish
+the job. Treating non-UK, non-US regulation as supported still needs either
+training data from that jurisdiction or an explicit distribution check in front
+of the model.
+
+---
+
 ## Reproducing
 
 ```bash

@@ -381,8 +381,8 @@ def _class_table(stats: Dict, fused: Dict) -> str:
         tr = train.get(code, 0)
         te = test_gold.get(code, 0)
         ok = correct.get(code, 0) if te else 0
-        cell = f"{ok}/{te}" if te else "—"
-        lines.append(f"| {code} | {meaning} | {tr} | {te or '—'} | {cell} |")
+        cell = f"{ok}/{te}" if te else "-"
+        lines.append(f"| {code} | {meaning} | {tr} | {te or '-'} | {cell} |")
     return "\n".join(lines)
 
 
@@ -405,7 +405,7 @@ def _function_table() -> str:
     lines = ["| Function | Covers | Line of defence |", "|---|---|:--:|"]
     for fn, desc in FUNCTION_DESCRIPTIONS.items():
         line = FUNCTION_LINE[fn]
-        lines.append(f"| {fn} | {desc} | {line if line else '—'} |")
+        lines.append(f"| {fn} | {desc} | {line if line else '-'} |")
     return "\n".join(lines)
 
 
@@ -429,7 +429,7 @@ def _comparison_table(
         cells = []
         for _, key in HEADLINE_SHORT:
             v = data.get(key)
-            cells.append(f"{v:.3f}" if isinstance(v, (int, float)) else "—")
+            cells.append(f"{v:.3f}" if isinstance(v, (int, float)) else "-")
         lines.append(f"| {label} | " + " | ".join(cells) + " |")
     return "\n".join(lines)
 
@@ -509,7 +509,7 @@ record = json.loads(text[text.find("{"): text.rfind("}") + 1])
 
 SCHEMA_BLOCK = '''| Field | Type | Meaning |
 |---|---|---|
-| `alert_class` | `A1`–`A14` | what kind of publication this is |
+| `alert_class` | `A1` to `A14` | what kind of publication this is |
 | `alert_class_confidence` | `high` / `medium` / `low` | the model's own confidence |
 | `priority` | `P1` / `P2` / `P3` | how urgently a desk should act |
 | `primary_functions` | list of function names | who owns the response |
@@ -724,17 +724,28 @@ known cost of LoRA fine-tuning on a single narrow task without replay data."""
         )
     curve_iters = ", ".join(str(i) for i, _ in curve) if curve else ""
     n_priority = len(PRIORITY_RULES)
+    # Title, citation key and changelog used to hard-code "v1", so a card built
+    # for any later model was titled for the first one. Read it off the dataset
+    # stats instead, which is the same file the numbers come from.
+    version_label = stats.get("version") or "v1"
+    version_key = re.sub(r"[^0-9a-z]+", "_", version_label.lower()).strip("_")
+    release_date = (train_report.get("finished_at") or "")[:10] or "unreleased"
+    release_note = "First release. " if version_label == "v1" else ""
+    # PRIORITY_RULES is interpolated into the labelling prompt sent to OpenAI and
+    # is a transcription of the crawler's alert-taxonomy.md, so it is rewritten
+    # for display here rather than edited at the source.
+
 
     parts: List[str] = []
 
     parts.append(
-        f"""# Regulatory Alert Triage — Qwen3-4B (v1)
+        f"""# Regulatory Alert Triage: Qwen3-4B ({version_label})
 
 Reads a UK regulatory publication and returns a structured triage record: what
 kind of document it is, how urgent it is, which bank functions own the response,
 and whether it creates an obligation. It is a working first release trained on
 openly-licensed UK sources, published so the approach can be reviewed and built
-on — not a finished product.
+on. It is not a finished product.
 
 Fine-tuned by [Comply2Reg](https://comply2reg.com) from
 `{train_report["mlx_id"]}` with LoRA, then fused back into standalone 4-bit
@@ -747,7 +758,7 @@ weights. Runs on Apple Silicon through MLX.
 | Method | LoRA rank {train_report.get("lora_rank", 8)}, {train_report["num_layers"]} of 36 layers, fused into the base |
 | Precision | 4-bit, group size 64 (unchanged from the base) |
 | Training data | {counts["train"]:,} documents from UK public bodies under the Open Government Licence |
-| Test set | {counts["test"]} documents, {test_from} to {test_to} — later than everything trained on |
+| Test set | {counts["test"]} documents, {test_from} to {test_to}, later than everything trained on |
 | Headline | alert-class accuracy **{headline_accuracy}**, macro-F1 **{fused["alert_class_macro_f1"]:.3f}**, JSON validity **{fused["json_valid_rate"]:.3f}** |
 
 **Read the macro-F1, not the accuracy.** The test set is {share:.0%} one class, so
@@ -760,7 +771,7 @@ Requires Apple Silicon and `pip install mlx-lm`.
 
 {QUICKSTART.replace("REPO_ID", repo_id)}
 
-The model opens every answer with an empty `<think></think>` block — inherited
+The model opens every answer with an empty `<think></think>` block. That comes
 from the base model, not from the training data, which contained none. It did so
 on {fused["records"]}/{fused["records"]} test documents, and the JSON that follows
 parsed every time. Take the substring from the first `{{` to the last `}}`.
@@ -802,7 +813,7 @@ of the three lines of defence those sit in.
 
 ### Priority
 
-{chr(10).join("- " + rule for rule in PRIORITY_RULES)}
+{chr(10).join("- " + rule.replace(" — ", ": ") for rule in PRIORITY_RULES)}
 
 ## Intended use
 
@@ -813,8 +824,8 @@ deadline or a duty. The structured output is meant to be reviewed, not executed.
 **Out of scope.** This is not legal advice and not a compliance decision. It does
 not replace a compliance officer's reading of the source document. It is not
 calibrated for non-UK regulators, for material published before 2022, or for the
-FCA and PRA — whose publications were deliberately excluded from training, as
-explained below. Nothing it produces carries any official or endorsed status.
+FCA and PRA, whose publications were deliberately excluded from training (see
+below). Nothing it produces carries any official or endorsed status.
 
 ## Training data
 
@@ -836,9 +847,9 @@ Only **openly-licensed** sources were used: HM Treasury, the Competition and
 Markets Authority, the Information Commissioner's Office and legislation.gov.uk,
 all published under the Open Government Licence v3.0. Publications from the FCA,
 PRA, Bank of England, Ofcom and the DRCF sit under terms that do not clearly
-permit this use, so they were held back pending a licensing review — which is the
-single largest constraint on the model's quality, and the reason several classes
-below have almost no training data.
+permit this use, so they were held back pending a licensing review. That review
+is the single largest constraint on the model's quality, and the reason several
+classes below have almost no training data.
 
 **Labels.** Every document was labelled by OpenAI's `gpt-5.4-mini` against the
 taxonomy, one call per document, cached by content hash. A second model labelled
@@ -849,8 +860,8 @@ wrong.
 
 **Preparation.** Documents were cleaned of page furniture (running headers, page
 numbers, tables of contents, boilerplate addresses) before anything else, so
-stored offsets and hashes refer to the cleaned text —
-{coverage["furniture"]["chars_removed"]:,} characters removed across
+stored offsets and hashes refer to the cleaned text.
+{coverage["furniture"]["chars_removed"]:,} characters were removed across
 {coverage["furniture"]["docs_cleaned"]:,} documents. Exact duplicates were removed
 by content hash ({coverage["deduped"]["content_sha256"]}) and near-duplicates by
 MinHash within a regulator and document type
@@ -869,7 +880,7 @@ enforcement material:
 {_stratum_table(stats)}
 
 **Input format.** The model sees the regulator, publication type, title, date and
-the first ~1,500 characters of the document — not the full text. Median training
+the first ~1,500 characters of the document, not the full text. Median training
 prompt {stats["tokens"]["train"]["p50"]} tokens, 95th percentile
 {stats["tokens"]["train"]["p95"]}, budget {stats["max_seq_length"]}, nothing
 truncated.
@@ -917,7 +928,7 @@ inherited from the adapter.
 Two things in that table are worth stating plainly.
 
 **Fine-tuning bought the format.** The untuned base model produced no parseable
-triage record at all on a {base["records"]}-document probe — it answers in prose.
+triage record at all on a {base["records"]}-document probe. It answers in prose.
 Everything downstream depends on the JSON being there, so this is the change that
 makes the model usable.
 
@@ -933,7 +944,7 @@ was selected on task metrics, not loss.
 **It has not learned most of the taxonomy.** Macro-F1 is
 {fused["alert_class_macro_f1"]:.3f}. Of the classes present in the test set, the
 model gets a non-zero score on {len(fused["per_class_tp"])}. Classes with roughly
-twenty training examples — A9, A13, A14 — score zero. Four further classes have
+twenty training examples (A9, A13, A14) score zero. Four further classes have
 one or two test documents each, too few to say anything about.
 
 **One class dominates.** {cls} is {share:.0%} of the test set and
@@ -957,8 +968,8 @@ labeller are reproduced in the model, and the evaluation shares that bias becaus
 its labels came from the same source.
 
 **No calibration.** `alert_class_confidence` is what the labelling model said and
-the fine-tune imitated. It has not been checked against observed accuracy — do not
-threshold on it.{ood_text}{forgetting_text}
+the fine-tune imitated. It has not been checked against observed accuracy, so do
+not threshold on it.{ood_text}{forgetting_text}
 
 ## Licence, attribution and provenance
 
@@ -981,8 +992,8 @@ output to the customer.
 ## Citation
 
 ```bibtex
-@misc{{comply2reg_regulatory_alert_triage_qwen3_4b_v1,
-  title  = {{Regulatory Alert Triage — Qwen3-4B (v1)}},
+@misc{{comply2reg_regulatory_alert_triage_qwen3_4b_{version_key},
+  title  = {{Regulatory Alert Triage: Qwen3-4B ({version_label})}},
   author = {{Comply2Reg}},
   year   = {{2026}},
   url    = {{https://huggingface.co/{repo_id}}}
@@ -991,7 +1002,7 @@ output to the customer.
 
 ## Changelog
 
-**v1 — 2026-09-25.** First release. GREEN-tier (Open Government Licence) sources
+**{version_label}, {release_date}.** {release_note}GREEN-tier (Open Government Licence) sources
 only, {counts["train"]:,} training documents, LoRA fused into 4-bit weights.
 Known gap: no FCA or PRA material, and seven alert classes with too little data to
 learn.

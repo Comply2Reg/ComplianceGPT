@@ -347,6 +347,82 @@ classes. Two causes, both fixable and neither of them corpus size:
    out-of-distribution text. A compact one-line-per-class taxonomy costs 208
    tokens against a 2,048 budget where train p95 is 1,023.
 
+## v3: class balance plus the taxonomy in the prompt, 2026-09-27
+
+3,194 training examples (v2: 4,114), one epoch, 3,200 iterations, 4h23m on the
+M4 Pro. Val loss 2.691 to 0.684, improving monotonically from iter 1000; v2's
+best was 0.699 at iter 2000 and then worsened. Evaluated as the **adapter**, the
+way v2 was, on the same 759 held-out documents.
+
+| Metric | v1 | v2 | v3 | v3 - v2 |
+|---|---:|---:|---:|---:|
+| alert-class accuracy | 0.302 | 0.656 | **0.693** | +0.037 |
+| priority accuracy | 0.431 | 0.677 | **0.715** | +0.038 |
+| obligations_present | 0.816 | 0.851 | **0.864** | +0.013 |
+| JSON validity | 0.991 | 0.976 | **0.995** | +0.018 |
+| weighted F1 | 0.225 | 0.650 | **0.676** | +0.026 |
+| macro-F1, gold >= 20 | 0.223 | 0.720 | 0.717 | -0.003 |
+| primary_functions Jaccard | 0.311 | 0.584 | 0.572 | -0.012 |
+| macro-F1, all classes | 0.117 | 0.431 | 0.411 | **-0.020** |
+
+**The macro-F1 fall is one document.** A1 has a single gold item in this split.
+v2 happened to get it right (F1 1.000), v3 got it wrong (F1 0.000), and one of
+fourteen classes swinging the full range moves macro-F1 by 1/14 = 0.071.
+Excluding A1, macro-F1 goes **0.388 to 0.443, up 0.055**. This is the exact
+pathology `macro_f1_by_min_support` exists to expose, and it is worth noting the
+metric misled in v2's favour this time and against it last time.
+
+**The head-class collapse is fixed, and overshot.**
+
+| | v1 | v2 | v3 | gold |
+|---|---:|---:|---:|---:|
+| distinct classes predicted | 7 | 8 | **12** | 14 |
+| A11 predictions | 606 (80%) | 322 (42%) | **82 (11%)** | 184 (24%) |
+
+A11 precision went 0.46 to 0.95 while recall fell 0.80 to 0.42. Capping A11 at
+400 from 1,223 did not just remove the bias, it reversed it: the model now
+under-predicts A11 by more than half.
+
+**Four of the six silent classes now emit.**
+
+| class | gold | v2 pred | v3 pred | v3 F1 |
+|---|---:|---:|---:|---:|
+| A10 | 9 | 0 | 13 | **0.545** |
+| A4 | 2 | 0 | 19 | 0.191 |
+| A12 | 15 | 0 | 14 | 0.000 |
+| A13 | 3 | 0 | 1 | 0.000 |
+| A5 | 9 | 0 | 0 | 0.000 |
+| A9 | 15 | 0 | 0 | 0.000 |
+
+A10 going 0.000 to 0.545 is the clearest single result here: it was the class
+ranked as the reason not to add data, and rebalancing recovered it outright. A12
+and A13 now produce predictions but hit nothing, so they have learned that the
+class exists without learning what belongs in it. **A5 and A9 are still
+completely silent** at 19 and 49 training examples, which is the floor below
+which a class does not survive.
+
+**The imbalance moved rather than went away.** Predictions over gold, v3:
+
+| class | pred / gold |
+|---|---:|
+| A4 | 9.50 |
+| A14 | 1.98 |
+| A8 | 1.48 |
+| A11 | 0.45 |
+| A2 | 0.42 |
+
+A14 went from 167 to 400 training examples and its precision fell 0.80 to 0.46;
+A8 went 195 to 400 and fell 0.73 to 0.60. A single flat cap ignores a class's
+true base rate, so it over-represents whatever was previously scarce. A v4 should
+either set the cap per class against the observed frequency, or leave the data
+alone and weight the loss instead, which changes the gradient without throwing
+away 2,164 labelled documents.
+
+**Net.** Five metrics up, one flat, one down by 0.012, and the headline down only
+because of one document. The two changes did what they were aimed at. Neither is
+finished: the taxonomy is in the prompt but A5 and A9 still have no data, and the
+cap traded one skew for a smaller one.
+
 ---
 
 ## Reproducing

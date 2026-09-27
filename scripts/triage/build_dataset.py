@@ -12,9 +12,17 @@ notebooks/ComplianceGPT_v1_Training.ipynb loads it unchanged.
 
 Split is stratified by stratum AND date: the latest --gold-months of each
 stratum become `test` (the gold candidates), the next --val-frac by date
-`val`, the rest `train`. Only train is balanced towards TARGET_MIX (rule_final
-taken whole, others capped, never oversampled). `all_<v>.jsonl` = train+val is
-what the notebook's data_path points at; test is kept out of it on purpose.
+`val`, the rest `train`. Only train is balanced -- never oversampled --
+either towards TARGET_MIX (`--balance-by stratum`, the default) or by capping
+each alert class at --class-cap (`--balance-by class`). `all_<v>.jsonl` =
+train+val is what the notebook's data_path points at; test is kept out of it
+on purpose.
+
+Stratum balance does not control class balance: the two are orthogonal, and
+v2 balanced to TARGET_MIX while still training on 30% A11 and 6 A5 examples.
+The model then emitted 8 of the 14 classes and routed the rest into A11, so
+`--balance-by class` exists to cap the head instead of the stratum. It yields
+a *smaller* train set that covers more classes.
 """
 
 from __future__ import annotations
@@ -223,6 +231,57 @@ def balance(train: List[Dict], seed: int) -> Tuple[List[Dict], Dict]:
     return kept, report
 
 
+def balance_by_class(
+    train: List[Dict], cap: int, seed: int
+) -> Tuple[List[Dict], Dict]:
+    """Cap every alert class at `cap`; classes below it are taken whole.
+
+    Downsampling only, like `balance`: an oversampled rare class teaches the
+    model the duplicate rather than the class.
+    """
+    by_class: Dict[str, List[Dict]] = defaultdict(list)
+    for r in train:
+        by_class[r["classification"]].append(r)
+    rng = random.Random(seed)
+    kept: List[Dict] = []
+    report = {}
+    for cls in sorted(by_class):  # sorted so the rng draw is reproducible
+        rows = by_class[cls]
+        available = len(rows)
+        if available > cap:
+            rows = sorted(rows, key=lambda r: r["metadata"]["doc_hash"])
+            rng.shuffle(rows)
+            rows = rows[:cap]
+        report[cls] = {
+            "available": available,
+            "cap": cap,
+            "kept": len(rows),
+            "shortfall": max(0, cap - available),
+        }
+        kept.extend(rows)
+    kept.sort(key=lambda r: r["metadata"]["doc_hash"])
+    return kept, report
+
+
+def stratum_view(original: List[Dict], kept: List[Dict]) -> Dict:
+    """What class-capping did to the strata, in `balance`'s shape.
+
+    Keeps `stats["balance"]` readable by model_card.py's stratum table
+    whichever mode built the dataset.
+    """
+    available = Counter(r["metadata"]["stratum"] for r in original)
+    got = Counter(r["metadata"]["stratum"] for r in kept)
+    return {
+        s: {
+            "available": available.get(s, 0),
+            "cap": None,
+            "kept": got.get(s, 0),
+            "shortfall": 0,
+        }
+        for s in list(STRATA) + sorted(set(available) - set(STRATA))
+    }
+
+
 def write_gold_sheet(
     path: Path,
     records: List[Dict],
@@ -298,6 +357,19 @@ def main(argv=None) -> int:
     ap.add_argument("--val-frac", type=float, default=0.10)
     ap.add_argument("--head-chars", type=int, default=1500)
     ap.add_argument("--seed", type=int, default=42)
+    ap.add_argument(
+        "--balance-by",
+        choices=("stratum", "class"),
+        default="stratum",
+        help="stratum: cap towards TARGET_MIX (v1/v2 behaviour). "
+        "class: cap each alert class at --class-cap",
+    )
+    ap.add_argument(
+        "--class-cap",
+        type=int,
+        default=400,
+        help="--balance-by class: maximum train examples per alert class",
+    )
     ap.add_argument(
         "--model",
         default=cfg.FOCUS_MODEL,
@@ -388,7 +460,14 @@ def main(argv=None) -> int:
         labels_by_hash[h] = lab
 
     splits = split_by_date(records, args.gold_months, args.val_frac)
-    train, balance_report = balance(splits["train"], args.seed)
+    if args.balance_by == "class":
+        train, class_report = balance_by_class(
+            splits["train"], args.class_cap, args.seed
+        )
+        balance_report = stratum_view(splits["train"], train)
+    else:
+        train, balance_report = balance(splits["train"], args.seed)
+        class_report = None
     split_of = {
         r["metadata"]["doc_hash"]: name for name, rows in splits.items() for r in rows
     }
@@ -460,7 +539,10 @@ def main(argv=None) -> int:
         },
         "counts": counts,
         "target_mix": TARGET_MIX,
+        "balance_mode": args.balance_by,
+        "class_cap": args.class_cap if args.balance_by == "class" else None,
         "balance": balance_report,
+        "class_balance": class_report,
         "train": breakdown(train),
         "val": breakdown(splits["val"]),
         "test": breakdown(splits["test"]),
@@ -500,14 +582,39 @@ def main(argv=None) -> int:
         "|---|---:|",
         *(f"| {k} | {v} |" for k, v in counts.items()),
         "",
-        "## Train balance vs target",
-        "",
-        "| stratum | available | cap | kept | shortfall | target |",
-        "|---|---:|---:|---:|---:|---:|",
         *(
-            f"| {s} | {b['available']} | {b['cap']} | {b['kept']} | {b['shortfall']} | "
-            f"{int(TARGET_MIX.get(s, 0) * 100)}% |"
-            for s, b in balance_report.items()
+            [
+                f"## Train balance: each class capped at {args.class_cap}",
+                "",
+                "| class | available | cap | kept | shortfall |",
+                "|---|---:|---:|---:|---:|",
+                *(
+                    f"| {c} | {b['available']} | {b['cap']} | {b['kept']} "
+                    f"| {b['shortfall']} |"
+                    for c, b in class_report.items()
+                ),
+                "",
+                "Resulting stratum mix (not targeted in this mode):",
+                "",
+                "| stratum | available | kept |",
+                "|---|---:|---:|",
+                *(
+                    f"| {s} | {b['available']} | {b['kept']} |"
+                    for s, b in balance_report.items()
+                ),
+            ]
+            if class_report
+            else [
+                "## Train balance vs target",
+                "",
+                "| stratum | available | cap | kept | shortfall | target |",
+                "|---|---:|---:|---:|---:|---:|",
+                *(
+                    f"| {s} | {b['available']} | {b['cap']} | {b['kept']} "
+                    f"| {b['shortfall']} | {int(TARGET_MIX.get(s, 0) * 100)}% |"
+                    for s, b in balance_report.items()
+                ),
+            ]
         ),
         "",
         f"Test = latest {args.gold_months} months per stratum; val = next "

@@ -220,6 +220,12 @@ is measured on 759 documents spanning two jurisdictions; v1 on 104 UK ones.
 The v2 split is broader and harder, which makes the macro-F1 gain more
 convincing and the accuracy gain less so.
 
+> **Superseded — do not read this table as a v1→v2 delta.** v1 has since been
+> scored on v2's own 759-document split, and the three apparent regressions in
+> priority, obligations and JSON validity are artefacts of the differing splits:
+> priority is genuinely **+0.246**, not −0.082. See *The controlled v1-vs-v2
+> comparison* below.
+
 **Classes the model can actually do went from four to eight.** The new ones are
 exactly those that had no training data before.
 
@@ -233,9 +239,15 @@ exactly those that had no training data before.
 | A6 enforcement | 5/6 | 36/45 |
 | A11 intelligence | 52/56 | 148/184 |
 
-A7 at 29/33 is the standout. Still zero: A4, A5, A9, A12, A13. A10 regressed
-from 5/17 to 0/9, which is a real loss and the one result here that argues
-against simply adding more data.
+A7 at 29/33 is the standout. Still zero: A4, A5, A9, A12, A13.
+
+> **The A10 claim below was wrong.** Measured on one split, v1 scores 2/9 and v2
+> 0/9, and v1 got there with 40 A10 predictions (precision 0.05). It is a
+> two-document difference between two models that both fail the class, not a
+> capability v2 lost.
+
+~~A10 regressed from 5/17 to 0/9, which is a real loss and the one result here
+that argues against simply adding more data.~~
 
 ### The out-of-distribution probe: improved, not solved
 
@@ -259,6 +271,81 @@ So more data and a jurisdiction field moved this a long way and did not finish
 the job. Treating non-UK, non-US regulation as supported still needs either
 training data from that jurisdiction or an explicit distribution check in front
 of the model.
+
+## The controlled v1-vs-v2 comparison, 2026-09-27
+
+The v2 section above compares two models on two different test sets and says so.
+This is the same comparison done properly: **v1's published fused weights scored
+on v2's own 759-document test split**, which it has provably never seen
+(`train_v1 ∩ test_v2` is empty — check it by `doc_hash`, not `document_id`,
+because the UK and US exports share 5,989 ids). No retraining, one eval run,
+1h02m.
+
+| Metric | v1 | v2 | Change |
+|---|---:|---:|---:|
+| alert-class accuracy | 0.302 | **0.656** | **+0.354** |
+| macro-F1, all classes | 0.117 | **0.431** | **+0.314** |
+| macro-F1, gold ≥ 20 | 0.223 | **0.720** | **+0.497** |
+| weighted F1 | 0.225 | **0.650** | **+0.425** |
+| priority accuracy | 0.431 | **0.677** | **+0.246** |
+| obligations_present | 0.816 | **0.851** | **+0.036** |
+| primary_functions Jaccard | 0.311 | **0.584** | **+0.273** |
+| JSON validity | 0.991 | 0.976 | −0.015 |
+
+**Three of the four "v2 regressions" were artefacts of the split, not results.**
+Priority was reported as −0.082 and is actually **+0.246**; obligations_present as
+−0.062 and is actually **+0.036**. Only JSON validity really fell, by 0.015 — two
+malformed records. Comparing across test sets did not merely blur the picture, it
+inverted the sign on two metrics. Do not quote the cross-split table above as a
+v1-to-v2 delta.
+
+**A10 was not a capability loss.** The ranked worry was "A10 regressed 5/17 → 0/9,
+a class v1 could do and v2 cannot". On the same 759 documents v1 scores 2/9 and
+v2 0/9. v1 reached that 2 by predicting A10 **40 times** — precision 0.05. It was
+spraying the label, not recognising the class, and the difference between the two
+models is two documents.
+
+**What v2 actually fixed is the head-class collapse, halfway.** v1 answered A11
+for **606 of 759 documents (80%)** and used 7 classes at all; v2 answers A11 322
+times (42%) and uses 8. v1's headline 0.644 accuracy on its own 104-document UK
+split is 0.302 here — the out-of-distribution weakness, quantified on documents
+it was never asked about.
+
+### Read macro-F1 with its support
+
+`alert_class_macro_f1` averages every class the split touches, and this split has
+A1 with 1 gold item, A4 with 2 and A13 with 3. One prediction on a 1-item class
+moves the headline by ~7 points. `metrics.py` now also emits
+`macro_f1_by_min_support` and `weighted_f1`:
+
+| gold support floor | classes | v2 macro-F1 |
+|---|---:|---:|
+| ≥ 1 (the headline) | 14 | 0.431 |
+| ≥ 5 | 11 | 0.458 |
+| ≥ 10 | 9 | 0.560 |
+| ≥ 20 | 7 | **0.720** |
+
+Both figures are honest and they answer different questions: 0.431 is "how does
+it do across the whole taxonomy including classes we barely have", 0.720 is "how
+does it do where the test set can actually measure it". Quote the pair.
+
+### Six classes are never emitted at all
+
+A4, A5, A9, A10, A12 and A13 have `pred = 0` — not low precision, *no predictions
+whatsoever*. For 35 of those 53 gold documents v2 answers A11 or A3, the two head
+classes. Two causes, both fixable and neither of them corpus size:
+
+1. **The train mix.** v2 balanced towards `TARGET_MIX`, which is stratum-shaped
+   and orthogonal to class, and so trained on 30% A11 and 6 A5 examples. See the
+   v3 section of `docs/uk-datasets.md`.
+2. **The training prompt never defines the taxonomy.** `prompts.SYSTEM_PROMPT`
+   (5,228 chars, all 14 classes described) is what the *labeller* sends to OpenAI.
+   `render.TRAIN_SYSTEM_PROMPT`, the system turn of every training record, is 74
+   tokens and names the classes only as the range "A1-A14". The model has to infer
+   14 class meanings from examples alone, and has no definitions at inference
+   either — which is also the most likely reason it collapses to A11 on
+   out-of-distribution text. A compact one-line-per-class taxonomy costs 208
+   tokens against a 2,048 budget where train p95 is 1,023.
 
 ---
 

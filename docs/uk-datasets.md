@@ -401,6 +401,91 @@ Still thin: A13 court determinations (20) and A5 supervisory letters (34). Both 
 publication types the US federal sources carry rarely and UK AMBER sources carry often,
 so they stay blocked on the licensing review.
 
+## v3: class balance + the taxonomy in the training prompt, 2026-09-27
+
+v2 balanced the train split towards `TARGET_MIX` and still trained on 30% A11 and
+6 A5 examples, because **stratum balance and class balance are orthogonal**. The
+trained model then emitted 8 of the 14 classes and routed the other six into A11
+(predicted 322 times against 184 gold, precision 0.460). Six classes had `pred = 0`
+at every threshold: A4, A5, A9, A10, A12, A13.
+
+`--balance-by class --class-cap N` caps each alert class instead of each stratum.
+Downsampling only, like the stratum path — an oversampled rare class teaches the
+duplicate, not the class.
+
+```bash
+python -m scripts.triage.build_dataset \
+    --labels data/uk/labels/triage_uk_v2.jsonl data/uk/labels/triage_us_v1.jsonl \
+    --corpus-dir ../../09-inventory-kit/c2r-inventory-kit/data/alert_corpus \
+                 ../../09-inventory-kit/c2r-inventory-kit/data/us_corpus \
+    --out data/uk/datasets/global --version v3 --tier GREEN \
+    --gold-months 2 --val-frac 0.10 --head-chars 1500 --seed 42 \
+    --balance-by class --class-cap 400
+```
+
+**The better train split is smaller than the worse one.** Same labels, same
+corpus, same seed:
+
+| | v2 (stratum) | v3 (class, cap 400) |
+|---|---:|---:|
+| train | 4,114 | **3,194** |
+| majority class share | 29.7% | **12.5%** |
+| classes with ≥50 train examples | 11 | 11 |
+| A4 / A5 / A9 / A10 | 37 / 6 / 28 / 24 | **90 / 19 / 49 / 80** |
+| A11 | 1,223 | 400 |
+| val / test | 697 / 759 | 697 / 759, **byte-identical** |
+
+Keeping val and test identical is the point of passing the same
+`--gold-months/--val-frac/--seed`: `split_by_date` runs before `balance`, so only
+the train split moves and v1, v2 and v3 are all scored on the same 759 held-out
+documents. Verify it rather than assume it — compare the `doc_hash` sets, and
+confirm `train ∩ test` is empty.
+
+**What this costs.** Capping by class lets the stratum mix drift a long way from
+target — guidance goes to 46.3% against a 15% target, enforcement falls to 2.9%
+against 15%. That is the deliberate trade: the measured failure was class-level,
+and stratum balancing was not touching it. If a later failure turns out to be
+stratum-shaped, the two need to be balanced jointly rather than one after the other.
+
+### The second change: the training prompt now defines the classes
+
+`prompts.SYSTEM_PROMPT` — 5,228 chars, every class described — is what the
+**labeller** sends to OpenAI. `render.TRAIN_SYSTEM_PROMPT`, the system turn of
+every **training** record, named the classes only as the range "A1-A14". The
+model was left to infer fourteen class meanings from examples alone, and had no
+label semantics at inference either. That is the most likely reason it answered
+A11 for 42% of everything and for 88% of the out-of-distribution Abu Dhabi probe:
+shown unfamiliar text with no definitions, the only move available is the class
+it saw most.
+
+`TRAIN_SYSTEM_PROMPT` now appends one line per class, transcribed from
+`taxonomy.ALERT_CLASSES` rather than restated, so it cannot drift from the
+labeller's taxonomy or the crawler's `alert-taxonomy.md`. 74 → **287 tokens**,
+against a 2,048 budget where train p95 is 1,023.
+
+v3 therefore carries **two** changes. They were deliberately not isolated: a run
+is ~4.5h on the M4 Pro, both changes add information rather than remove it, and
+v2 is now measured on the identical 759-document test split, so the combined
+result is interpretable against a solid baseline. To ablate, revert the
+`_CLASS_LINES` append in `render.py` and rebuild — the split is deterministic
+under the same `--seed/--gold-months/--val-frac`, so only the prompt moves.
+
+**Everything downstream picks this up automatically**, because `to_messages`
+stores the system turn in each record and `train_mlx eval` replays
+`messages[:2]`. A model trained on v3 is therefore a model *plus* a prompt; do
+not serve it behind the old 74-token system turn.
+
+**Two caveats to read before quoting the mix.** A7 and A8 are heavily templated
+(unique 8-gram ratios 0.248 and 0.304 in `analysis_v3.md`), so 400 OFAC sanctions
+deltas carry far less signal than 400 consultations — consider deduping within a
+class before capping it. And A13 (16) and A5 (19) are still below any useful
+threshold; those are genuine supply gaps, not sampling artefacts, and no
+rebalancing fixes them.
+
+**`train_mlx.py export` writes to a fixed `mlx/` directory** with no version in
+the filenames, so exporting v3 overwrites v2's training input. Re-export the
+version you mean before resuming an older run.
+
 ## Earlier snapshot, 2026-09-26
 
 The corpus is no longer UK-only. 2,727 US federal documents were crawled from twelve

@@ -33,3 +33,6 @@ data/uk/obligation/
 models/
 data/uk/datasets/*/mlx/
 data/uk/datasets/*/eval_*
+
+# macOS directory metadata
+.DS_Store

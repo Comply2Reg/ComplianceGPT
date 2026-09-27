@@ -16,8 +16,19 @@ from typing import Dict, List, Optional, Tuple
 
 from scripts import config as cfg
 from scripts.triage.schema import OUTPUT_FIELDS
+from scripts.triage.taxonomy import ALERT_CLASSES
 
 log = logging.getLogger("triage.render")
+
+# The system turn used to name the classes only as the range "A1-A14", which
+# left the model to infer fourteen class meanings from examples alone and gave
+# it no label semantics at inference. Measured consequence on v2: six classes
+# were never emitted at all (A4, A5, A9, A10, A12, A13) and A11 absorbed 42% of
+# every prediction. The definitions are transcribed from taxonomy.py rather
+# than restated here, so they cannot drift from the labeller's taxonomy or the
+# crawler's alert-taxonomy.md. The system turn goes from 74 to 287 tokens,
+# against a 2,048 budget where train p95 is 1,023. See docs/benchmarks.md.
+_CLASS_LINES = "\n".join(f"{code}: {label}" for code, label in ALERT_CLASSES.items())
 
 TRAIN_SYSTEM_PROMPT = (
     "You triage financial-services regulatory publications for an "
@@ -25,7 +36,7 @@ TRAIN_SYSTEM_PROMPT = (
     "these keys: alert_class (A1-A14), alert_class_confidence, priority "
     "(P1-P3), primary_functions, secondary_functions, lines_of_defence, "
     "summary, key_dates, applicability, obligations_present, jurisdiction, "
-    "frameworks, thought_trace."
+    "frameworks, thought_trace.\n\nThe alert classes are:\n" + _CLASS_LINES
 )
 PROMPT_META_KEYS = ("regulator", "doc_type", "regulation_name", "release_date")
 CONTEXT_HEADER_LINES = 4  # regulator / type / title / date lines in input_text

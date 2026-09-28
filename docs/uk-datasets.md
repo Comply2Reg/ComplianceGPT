@@ -486,6 +486,89 @@ rebalancing fixes them.
 the filenames, so exporting v3 overwrites v2's training input. Re-export the
 version you mean before resuming an older run.
 
+## Hand-labelling: the gold worklist, 2026-09-28
+
+Every number this project has ever quoted is agreement with a GPT labeller whose
+inter-labeller agreement is 0.702. There are **zero human labels**. Until there
+are, "0.693 accuracy" means "agrees with gpt-5.4-mini 69% of the time", which is
+not the same claim.
+
+`data/uk/gold/gold_worklist_v3.csv`, 217 rows, tiered so it can be stopped early.
+Each row is self-contained: title, regulator, date, the proposed class **with its
+definition**, the model summary, the v3 prediction, and ~1,100 characters of the
+document text, so nothing needs a browser.
+
+| tier | rows | what it buys |
+|---|---:|---|
+| `1-A5-all-splits` | 34 | every A5 label there is |
+| `1-A9-all-splits` | 74 | every A9 label there is |
+| `2-A{4,10,12,13}-test` | 29 | the other classes v2 never emitted |
+| `3-A11-sample`, `3-A3-sample` | 80 | the label-noise ceiling on the two head classes |
+
+**Tier 1 is the one with a concrete payoff.** `apply_gold` rewrites the labels
+file, which feeds train, val and test, so hand-labelling all 34 A5 and all 74 A9
+rows makes those two classes trainable rather than merely re-scoring them. They
+are the only two classes v3 still never emits.
+
+Fill `human_alert_class` (and optionally `human_priority`, `human_functions`
+semicolon-separated, `human_notes`). **Leave the row blank to accept the proposed
+class** -- blank is ignored, not treated as a verdict. Then:
+
+```bash
+python -m scripts.triage.build_dataset --labels ... --corpus-dir ... \
+    --out data/uk/datasets/global --version v4 --tier GREEN \
+    --balance-by class --class-cap 400 \
+    --apply-gold data/uk/gold/gold_worklist_v3.csv
+```
+
+### Two label problems to expect, found while auditing these classes
+
+**A5 is three different things.** Of its 34 labels, only the 15 FDIC Financial
+Institution Letters are supervisory communications, and 8 of those 15 are the same
+"Supervisory Relief to Help Financial Institutions" template. The rest are 8
+copies of an FRB "Formations of, Acquisitions by, and Mergers of Bank Holding
+Companies" notice, which is a perimeter change (A14), plus "Reappointment of
+Financial Conduct Authority Chief Executive Officer" (a press release, A11) and
+"Sunshine Act Meetings" (a meeting notice, A9). Effective distinct signal is about
+seven documents.
+
+**A9 is mostly CMA merger inquiries.** At least 17 of the first 20: Danone / Huel,
+eBay / Depop, Barratt / Redrow. A9 means market or operational notice; a
+competition merger inquiry is not one. A9 does not lack data, it has 74 examples
+of the wrong concept.
+
+So the model declining to emit A5 and A9 is arguably correct behaviour, and
+labelling more against the same definitions would reproduce the confusion. Fix the
+verdicts first; consider new data second.
+
+### Where real A5 material would come from
+
+Not the UK: in the UK corpus every A5 and A9 candidate is AMBER (233 and 65, zero
+GREEN), because those are FCA and PRA publication types by nature. The US federal
+equivalents are GREEN under 17 U.S.C. 105 and are already configured and enabled
+in the crawler, but barely collected, because the feeds only carry recent items:
+
+| source | held | |
+|---|---:|---|
+| OCC `bulletins` | 1 | "the OCC's guidance instrument, carries most of its supervisory guidance" |
+| FRB `sr_ca_letters` | 0 | US supervisory letters |
+| FDIC `financial_institution_letters` | 25 | "the US counterpart of a Dear CEO letter" |
+
+Against FRB `notices` 582 and OCC `notices` 312. Collecting those back-catalogues
+is the cheapest real source of A5, and it needs archive crawling rather than a
+re-run.
+
+### The doc_id trap
+
+`apply_gold` used to key on `doc_id`, which is **not unique across
+jurisdictions**: the UK and US label files share 1,321 of them. 52 of the 217
+worklist rows carry a shared id, so labelling "CMA letter to HSBC about breaching
+Part 7 of the Retail Banking Order" as A14 also relabelled "Section 45V Credit for
+Production of Clean Hydrogen" at US Treasury. It now keys on `doc_hash`, which
+`write_gold_sheet` emits, and a legacy sheet without the column has its ambiguous
+ids refused rather than guessed. Regression test:
+`test_apply_gold_keys_on_hash_not_doc_id`.
+
 ## Earlier snapshot, 2026-09-26
 
 The corpus is no longer UK-only. 2,727 US federal documents were crawled from twelve

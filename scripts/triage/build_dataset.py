@@ -57,6 +57,7 @@ from scripts.triage.taxonomy import CLASS_TO_STRATUM, STRATA, TARGET_MIX  # noqa
 log = logging.getLogger("triage.build_dataset")
 GOLD_COLUMNS = (
     "doc_id",
+    "doc_hash",
     "document_id",
     "title",
     "regulator",
@@ -86,15 +87,45 @@ def month_index(date: Optional[str]) -> Optional[int]:
 
 
 def apply_gold(labels: List[Dict], gold_csv: Path) -> int:
-    """Human labels win over model labels; rows without a human class are ignored."""
-    overrides = {}
+    """Human labels win over model labels; rows without a human class are ignored.
+
+    Keyed on `doc_hash`. `doc_id` is not unique across jurisdictions -- the UK and
+    US label files share 1,321 of them because they come from different databases
+    -- so keying on it applied one human judgement to two unrelated documents.
+    A sheet written before `doc_hash` existed still works, but any of its ids that
+    is ambiguous is refused rather than guessed at.
+    """
+    by_hash: Dict[str, Dict] = {}
+    by_id: Dict[int, Dict] = {}
     with gold_csv.open(encoding="utf-8", newline="") as fh:
         for row in csv.DictReader(fh):
-            if (row.get("human_alert_class") or "").strip():
-                overrides[int(row["doc_id"])] = row
+            if not (row.get("human_alert_class") or "").strip():
+                continue
+            if (row.get("doc_hash") or "").strip():
+                by_hash[row["doc_hash"].strip()] = row
+            else:
+                by_id[int(row["doc_id"])] = row
+    if by_id:
+        ambiguous = {
+            doc_id
+            for doc_id, count in Counter(r["doc_id"] for r in labels).items()
+            if count > 1
+        } & set(by_id)
+        for doc_id in sorted(ambiguous):
+            log.error(
+                "gold row for doc_id %s matches %d documents and has no doc_hash; "
+                "skipped. Re-export the gold sheet to get the hash column.",
+                doc_id,
+                sum(1 for r in labels if r["doc_id"] == doc_id),
+            )
+            by_id.pop(doc_id)
+        log.warning(
+            "%d gold rows matched by doc_id because the sheet has no doc_hash "
+            "column", len(by_id)
+        )
     n = 0
     for rec in labels:
-        g = overrides.get(rec["doc_id"])
+        g = by_hash.get(rec["doc_hash"]) or by_id.get(rec["doc_id"])
         if not g:
             continue
         lab = rec["label"]
@@ -306,6 +337,7 @@ def write_gold_sheet(
         rows.append(
             {
                 "doc_id": lab["doc_id"],
+                "doc_hash": h,
                 "document_id": lab["document_id"],
                 "title": lab.get("title"),
                 "regulator": lab["regulator"],

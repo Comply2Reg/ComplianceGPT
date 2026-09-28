@@ -308,3 +308,56 @@ def test_a_title_containing_a_newline_does_not_shift_the_header_boundary():
     assert "\n" not in out["input_text"].split("Title: ")[1].split("\n")[0]
     assert body.startswith("BODY TEXT HERE")     # not 'Published:'
     assert "Data Protection Act 2018" in header  # the title survives, unwrapped
+
+
+def test_apply_gold_keys_on_hash_not_doc_id(tmp_path: Path) -> None:
+    """One human judgement must not land on two documents.
+
+    The UK and US label files share 1,321 doc_ids because they come from
+    different databases, so a gold sheet keyed on doc_id applied a single
+    verdict to an unrelated document in the other jurisdiction.
+    """
+    shared_id = 7328
+    labels = [
+        {
+            "doc_id": shared_id,
+            "doc_hash": "a" * 64,
+            "document_id": "cma:publications#7328/letter",
+            "regulator": "CMA",
+            "document_type": "publications",
+            "label": {"alert_class": "A5", "priority": "P2", "primary_functions": []},
+        },
+        {
+            "doc_id": shared_id,
+            "doc_hash": "b" * 64,
+            "document_id": "treas:notices#7328/hydrogen",
+            "regulator": "TREAS",
+            "document_type": "notices",
+            "label": {"alert_class": "A2", "priority": "P1", "primary_functions": []},
+        },
+    ]
+    sheet = tmp_path / "gold.csv"
+    with sheet.open("w", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=["doc_id", "doc_hash", "human_alert_class"])
+        w.writeheader()
+        w.writerow({"doc_id": shared_id, "doc_hash": "a" * 64,
+                    "human_alert_class": "A14"})
+    assert build_dataset.apply_gold(labels, sheet) == 1
+    assert labels[0]["label"]["alert_class"] == "A14"
+    assert labels[1]["label"]["alert_class"] == "A2"  # untouched
+
+    # a legacy sheet with no doc_hash refuses the ambiguous id rather than guessing
+    legacy = tmp_path / "legacy.csv"
+    with legacy.open("w", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=["doc_id", "human_alert_class"])
+        w.writeheader()
+        w.writerow({"doc_id": shared_id, "human_alert_class": "A9"})
+    labels[0]["label"]["alert_class"] = "A5"
+    assert build_dataset.apply_gold(labels, legacy) == 0
+    assert labels[0]["label"]["alert_class"] == "A5"
+    assert labels[1]["label"]["alert_class"] == "A2"
+
+
+def test_gold_sheet_carries_the_hash(tmp_path: Path) -> None:
+    """Without doc_hash in the sheet, apply_gold has no safe key to match on."""
+    assert "doc_hash" in build_dataset.GOLD_COLUMNS

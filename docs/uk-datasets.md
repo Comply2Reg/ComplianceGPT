@@ -539,6 +539,15 @@ a template and cover different substance, so near-dedupe correctly kept them and
 they are 17 usable examples, not 2. What is wrong with them is the class, not the
 document.
 
+**A4 versus A5 is the subtle one.** Both carry `instrument_tier:
+supervisory_guidance`; they differ on `ContentCategory`. A4 is `FINAL_POLICY`, a
+durable guidance *instrument* addressed to the market (PRA SS/SoP, FCA FG, Fed SR
+letter, OCC bulletin, CFPB circular, FFIEC manual). A5 is `SUPERVISION`, a
+time-bound *communication* addressed to firms (Dear CEO or portfolio letter,
+supervisory priorities, FinCEN advisory, FDIC FIL). Durable instrument versus dated
+letter is the test, and it is exactly the line a labeller working from a one-line
+description will blur.
+
 **A9 is mostly CMA merger inquiries.** At least 17 of the first 20: Danone / Huel,
 eBay / Depop, Barratt / Redrow. A9 means market or operational notice; a
 competition merger inquiry is not one. A9 does not lack data, it has 74 examples
@@ -548,22 +557,27 @@ So the model declining to emit A5 and A9 is arguably correct behaviour, and
 labelling more against the same definitions would reproduce the confusion. Fix the
 verdicts first; consider new data second.
 
-### Where real A5 material would come from
+### Where real A4 and A5 material would come from
 
 Not the UK: in the UK corpus every A5 and A9 candidate is AMBER (233 and 65, zero
 GREEN), because those are FCA and PRA publication types by nature. The US federal
-equivalents are GREEN under 17 U.S.C. 105 and are already configured and enabled
-in the crawler, but barely collected, because the feeds only carry recent items:
+equivalents are GREEN under 17 U.S.C. 105 and are already configured and
+`enabled: true` in the crawler, but barely collected, because those feeds only
+carry recent items (FDIC publishes no RSS of its own; GovDelivery is the only
+route):
 
-| source | held | |
+| source | held | class per `alert-taxonomy.md` |
 |---|---:|---|
-| OCC `bulletins` | 1 | "the OCC's guidance instrument, carries most of its supervisory guidance" |
-| FRB `sr_ca_letters` | 0 | US supervisory letters |
-| FDIC `financial_institution_letters` | 25 | "the US counterpart of a Dear CEO letter" |
+| FDIC `financial_institution_letters` | 25 | **A5** -- "the US counterpart of a Dear CEO letter" |
+| OCC `bulletins` | 1 | **A4** -- "the OCC's guidance instrument" |
+| FRB `sr_ca_letters` | 0 | **A4** -- Fed SR letter |
 
-Against FRB `notices` 582 and OCC `notices` 312. Collecting those back-catalogues
-is the cheapest real source of A5, and it needs archive crawling rather than a
-re-run.
+Against FRB `notices` 582 and OCC `notices` 312. Note which class each feeds: the
+canonical taxonomy puts Fed SR letters and OCC bulletins in **A4**, not A5, and
+only the FDIC FIL in A5. So the back-catalogue crawl helps A4 (98 labelled, 90
+train, does emit) and A5 (34 labelled, 19 train, silent) in different measure, and
+FDIC FILs are the only one of the three that addresses A5 directly. Collecting
+these needs archive crawling rather than a re-run.
 
 ### The doc_id trap
 

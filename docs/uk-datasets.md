@@ -523,14 +523,21 @@ python -m scripts.triage.build_dataset --labels ... --corpus-dir ... \
 
 ### Two label problems to expect, found while auditing these classes
 
-**A5 is three different things.** Of its 34 labels, only the 15 FDIC Financial
-Institution Letters are supervisory communications, and 8 of those 15 are the same
-"Supervisory Relief to Help Financial Institutions" template. The rest are 8
-copies of an FRB "Formations of, Acquisitions by, and Mergers of Bank Holding
-Companies" notice, which is a perimeter change (A14), plus "Reappointment of
-Financial Conduct Authority Chief Executive Officer" (a press release, A11) and
-"Sunshine Act Meetings" (a meeting notice, A9). Effective distinct signal is about
-seven documents.
+**A5 is three different things.** Of its 34 labels, the 15 FDIC Financial
+Institution Letters are the only genuine supervisory communications. The rest are
+8 FRB "Formations of, Acquisitions by, and Mergers of Bank Holding Companies"
+notices, which are perimeter changes (A14), plus "Reappointment of Financial
+Conduct Authority Chief Executive Officer" (a press release, A11) and "Sunshine
+Act Meetings" (a meeting notice, A9).
+
+The repeated titles are **not duplicates**, which was worth checking before
+proposing to drop any of them: the 9 "Supervisory Relief" FILs have 9 distinct
+content hashes, lengths 1,184 to 1,372 characters, dates spread across July and
+August 2026, and pairwise 5-gram Jaccard of 0.52 to 0.66. The 8 FRB notices are
+0.42 to 0.77 across 18 months, each naming different holding companies. They share
+a template and cover different substance, so near-dedupe correctly kept them and
+they are 17 usable examples, not 2. What is wrong with them is the class, not the
+document.
 
 **A9 is mostly CMA merger inquiries.** At least 17 of the first 20: Danone / Huel,
 eBay / Depop, Barratt / Redrow. A9 means market or operational notice; a

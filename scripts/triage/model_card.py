@@ -768,6 +768,81 @@ known cost of LoRA fine-tuning on a single narrow task without replay data."""
         (c for c, v in fused.get("per_class", {}).items() if v["gold"] and not v["pred"]),
         key=lambda c: int(c[1:]),
     )
+    # Both of these used to be prose stating v1's findings: that the base model
+    # emitted no JSON, and that the iteration-1200 checkpoint had the best
+    # validation loss and the worst task metrics. Neither is true of every run --
+    # v3's validation loss improved monotonically to the end -- so each is now
+    # written only when its own artefact was measured, and from that artefact.
+    # These three were prose naming v1's classes and regulators. A14 later had 400
+    # training examples and a 0.615 F1 while the sentence still called it starved,
+    # so they are now read off this run's own eval and stats.
+    train_counts = stats["train"]["classification"]
+    zeros = sorted(
+        (c for c, v in fused.get("per_class", {}).items() if v["gold"] and not v["f1"]),
+        key=lambda c: int(c[1:]),
+    )
+    zero_text = (
+        "Scoring zero: "
+        + ", ".join(f"{c} ({train_counts.get(c, 0)} training examples)" for c in zeros)
+        + "."
+        if zeros
+        else "Every class present in the test set scores above zero."
+    )
+    thin = sorted(
+        (c for c, v in fused.get("per_class", {}).items() if 0 < v["gold"] <= 2),
+        key=lambda c: int(c[1:]),
+    )
+    thin_text = (
+        f"{len(thin)} further {'class has' if len(thin) == 1 else 'classes have'} "
+        f"two or fewer test documents ({', '.join(thin)}), too few to say anything "
+        f"about."
+        if thin
+        else ""
+    )
+    top_tr = sorted(stats["train"]["regulator"].items(), key=lambda kv: -kv[1])[:2]
+    top_te = sorted(stats["test"]["regulator"].items(), key=lambda kv: -kv[1])[:2]
+    n_te = sum(stats["test"]["regulator"].values())
+    drift_text = (
+        "Training is mostly "
+        + " and ".join(r for r, _ in top_tr)
+        + "; the test window is mostly "
+        + f"{top_te[0][0]} ({top_te[0][1]} of {n_te} documents)."
+    )
+    notes: List[str] = []
+    if base:
+        if base.get("json_valid_rate") == 0:
+            notes.append(
+                f"**Fine-tuning bought the format.** The untuned base model "
+                f"produced no parseable triage record at all on a "
+                f"{base['records']}-document probe. It answers in prose. "
+                f"Everything downstream depends on the JSON being there, so this "
+                f"is the change that makes the model usable."
+            )
+        else:
+            notes.append(
+                f"**Against the untuned base model.** On the same "
+                f"{base['records']} documents the base model reaches "
+                f"{base['json_valid_rate']:.3f} JSON validity and "
+                f"{base['alert_class_accuracy']:.3f} alert-class accuracy, "
+                f"against {fused['json_valid_rate']:.3f} and "
+                f"{fused['alert_class_accuracy']:.3f} here."
+            )
+    if checkpoint and curve:
+        best_iter = min(curve, key=lambda iv: iv[1])[0]
+        notes.append(
+            f"**Lower validation loss did not mean a better model.** The "
+            f"iteration-{best_iter} checkpoint had the best validation loss of "
+            f"the run ({min(v for _, v in curve):.3f} against "
+            f"{curve[-1][1]:.3f} at the end) and scored "
+            f"{checkpoint['alert_class_accuracy']:.3f} alert-class accuracy "
+            f"against {fused['alert_class_accuracy']:.3f} for the released "
+            f"weights. The adapter was selected on task metrics, not loss."
+        )
+    table_notes = (
+        "Worth stating plainly.\n\n" + "\n\n".join(notes) + "\n"
+        if notes
+        else ""
+    )
     silent_text = (
         f"{len(silent)} alert classes the model never predicts "
         f"({', '.join(silent)})"
@@ -977,27 +1052,14 @@ inherited from the adapter.
 
 {_comparison_table(fused, adapter, checkpoint, base)}
 
-Two things in that table are worth stating plainly.
-
-**Fine-tuning bought the format.** The untuned base model produced no parseable
-triage record at all on a {base["records"]}-document probe. It answers in prose.
-Everything downstream depends on the JSON being there, so this is the change that
-makes the model usable.
-
-**Lower validation loss did not mean a better model.** The iteration-1200
-checkpoint had the best validation loss of the run ({min(v for _, v in curve):.3f}
-against {curve[-1][1]:.3f} at the end) and scored worse on every task metric,
-because it had collapsed toward predicting the majority class. The final adapter
-was selected on task metrics, not loss.
-
+{table_notes}
 {band_section}{bench_section}
 ## Limitations
 
 **It has not learned most of the taxonomy.** Macro-F1 is
 {fused["alert_class_macro_f1"]:.3f}. Of the classes present in the test set, the
-model gets a non-zero score on {len(fused["per_class_tp"])}. Classes with roughly
-twenty training examples (A9, A13, A14) score zero. Four further classes have
-one or two test documents each, too few to say anything about.
+model gets a non-zero score on {len(fused["per_class_tp"])}. {zero_text}
+{thin_text}
 
 **One class dominates.** {cls} is {share:.0%} of the test set and
 {stats["train"]["classification"].get(cls, 0) / counts["train"]:.0%} of training.
@@ -1005,10 +1067,9 @@ An always-{cls} baseline scores {share:.3f} accuracy, so the
 {fused["alert_class_accuracy"] - share:+.3f} the model adds is the honest measure
 of the accuracy figure.
 
-**Train and test come from different regulators.** Training is mostly HM Treasury
-and legislation.gov.uk; the test window is mostly CMA. That makes the evaluation
-harder than the training distribution, and it means the scores say little about
-regulators the model barely saw.
+**Train and test come from different regulators.** {drift_text} That makes the
+evaluation harder than the training distribution, and it means the scores say
+little about regulators the model barely saw.
 
 **The two jurisdictions are not equally financial-services.** The US half is:
 the SEC, Federal Reserve Board, OCC, FDIC, CFTC, CFPB, FinCEN, NCUA and OFAC are

@@ -331,6 +331,7 @@ tags:
 - regtech
 - regulatory-compliance
 - united-kingdom
+- united-states
 - text-classification
 - structured-output
 - json
@@ -339,10 +340,10 @@ model-index:
   results:
   - task:
       type: text-classification
-      name: UK regulatory alert triage
+      name: UK and US federal regulatory alert triage
     dataset:
       type: private
-      name: UK regulatory alerts, GREEN tier (internal)
+      name: UK and US federal regulatory alerts, openly-licensed tier (internal)
       split: test
     metrics:
 {metrics}
@@ -620,14 +621,16 @@ def ood_warning(comparisons: List[Dict]) -> str:
     return f"""
 
 **It fails silently on regulation it was not trained on.** Given
-{total} passages from a non-UK financial regulator's rulebook, the model produced
+{total} passages from a financial regulator outside its training jurisdictions,
+the model produced
 well-formed triage JSON {produced:.0%} of the time and then assigned **{top} to
 {count} of {total}** of them, flagging an obligation in {obligations:.1%}. That
 class means "intelligence: speech, blog, press release"; the passages are
 rulebook text and obligation-bearing by construction. The summaries were often a
 correct reading of the text while every structured field contradicted them, so
-nothing downstream could detect the failure from the output alone. Outside UK
-open-licence sources, evaluate before trusting it."""
+nothing downstream could detect the failure from the output alone. Outside the
+open-licence UK and US federal sources it was trained on, evaluate before
+trusting it."""
 
 
 def _bench_section(comparisons: List[Dict]) -> str:
@@ -651,6 +654,33 @@ returned JSON for a label before counting the answer wrong, and reports how ofte
 answer appeared at all.
 
 """
+
+
+def merge_coverage(paths: List[Path]) -> Dict:
+    """Sum the corpus coverage files a multi-jurisdiction model was built from.
+
+    v1 came from one corpus, so the card read one file. v3 is trained on the UK
+    and US exports together, and quoting either one alone understates the corpus
+    the model was drawn from. Counts add; `since` is the earliest of them.
+    """
+    merged: Dict = {}
+    for path in paths:
+        cov = load_json(path)
+        if not merged:
+            merged = {k: (dict(v) if isinstance(v, dict) else v) for k, v in cov.items()}
+            continue
+        for key in ("documents", "chunks", "unclassified"):
+            if isinstance(cov.get(key), int):
+                merged[key] = merged.get(key, 0) + cov[key]
+        for key in ("by_tier", "deduped", "furniture", "by_regulator", "by_alert_class"):
+            if isinstance(cov.get(key), dict):
+                into = merged.setdefault(key, {})
+                for k, v in cov[key].items():
+                    if isinstance(v, int):
+                        into[k] = into.get(k, 0) + v
+        sinces = [d for d in (merged.get("since"), cov.get("since")) if d]
+        merged["since"] = min(sinces) if sinces else None
+    return merged
 
 
 def body(
@@ -731,6 +761,19 @@ known cost of LoRA fine-tuning on a single narrow task without replay data."""
     version_key = re.sub(r"[^0-9a-z]+", "_", version_label.lower()).strip("_")
     release_date = (train_report.get("finished_at") or "")[:10] or "unreleased"
     release_note = "First release. " if version_label == "v1" else ""
+    # Named from the eval rather than stated in prose: a class the model never
+    # emits is the gap a reader most needs, and hard-coding the list is how v1's
+    # card ended up quoting a count that later releases had moved past.
+    silent = sorted(
+        (c for c, v in fused.get("per_class", {}).items() if v["gold"] and not v["pred"]),
+        key=lambda c: int(c[1:]),
+    )
+    silent_text = (
+        f"{len(silent)} alert classes the model never predicts "
+        f"({', '.join(silent)})"
+        if silent
+        else "every alert class present in the test set is predicted at least once"
+    )
     # PRIORITY_RULES is interpolated into the labelling prompt sent to OpenAI and
     # is a transcription of the crawler's alert-taxonomy.md, so it is rewritten
     # for display here rather than edited at the source.
@@ -741,11 +784,11 @@ known cost of LoRA fine-tuning on a single narrow task without replay data."""
     parts.append(
         f"""# Regulatory Alert Triage: Qwen3-4B ({version_label})
 
-Reads a UK regulatory publication and returns a structured triage record: what
-kind of document it is, how urgent it is, which bank functions own the response,
-and whether it creates an obligation. It is a working first release trained on
-openly-licensed UK sources, published so the approach can be reviewed and built
-on. It is not a finished product.
+Reads a UK or US federal regulatory publication and returns a structured triage
+record: what kind of document it is, how urgent it is, which bank functions own
+the response, and whether it creates an obligation. It is a working release
+trained on openly-licensed UK and US federal sources, published so the approach
+can be reviewed and built on. It is not a finished product.
 
 Fine-tuned by [Comply2Reg](https://comply2reg.com) from
 `{train_report["mlx_id"]}` with LoRA, then fused back into standalone 4-bit
@@ -753,11 +796,11 @@ weights. Runs on Apple Silicon through MLX.
 
 | | |
 |---|---|
-| Task | Multi-field triage of UK regulatory publications, emitted as JSON |
+| Task | Multi-field triage of UK and US federal regulatory publications, emitted as JSON |
 | Base model | [`{train_report["mlx_id"]}`](https://huggingface.co/{train_report["mlx_id"]}) |
 | Method | LoRA rank {train_report.get("lora_rank", 8)}, {train_report["num_layers"]} of 36 layers, fused into the base |
 | Precision | 4-bit, group size 64 (unchanged from the base) |
-| Training data | {counts["train"]:,} documents from UK public bodies under the Open Government Licence |
+| Training data | {counts["train"]:,} documents from UK public bodies (Open Government Licence) and US federal agencies (17 U.S.C. 105) |
 | Test set | {counts["test"]} documents, {test_from} to {test_to}, later than everything trained on |
 | Headline | alert-class accuracy **{headline_accuracy}**, macro-F1 **{fused["alert_class_macro_f1"]:.3f}**, JSON validity **{fused["json_valid_rate"]:.3f}** |
 
@@ -797,7 +840,7 @@ A real test document, and this model's actual output for it:
 ### Alert classes
 
 Fourteen document kinds, from the taxonomy Comply2Reg's crawler applies across UK
-regulators.
+and US federal regulators.
 
 {_class_table(stats, fused)}
 
@@ -822,17 +865,18 @@ publications, route each to the right function, and flag the ones that carry a
 deadline or a duty. The structured output is meant to be reviewed, not executed.
 
 **Out of scope.** This is not legal advice and not a compliance decision. It does
-not replace a compliance officer's reading of the source document. It is not
-calibrated for non-UK regulators, for material published before 2022, or for the
-FCA and PRA, whose publications were deliberately excluded from training (see
-below). Nothing it produces carries any official or endorsed status.
+not replace a compliance officer's reading of the source document. It is
+calibrated only for the UK and US federal sources listed below: not for other
+jurisdictions, not for US state regulators, not for material published before
+2022, and not for the FCA and PRA, whose publications were deliberately excluded
+from training. Nothing it produces carries any official or endorsed status.
 
 ## Training data
 
 {counts["train"]:,} training, {counts["val"]} validation and {counts["test"]} test
 documents, drawn from a corpus of
-{coverage["documents"]:,} UK regulatory documents published since {coverage["since"]}
-that Comply2Reg's crawler collected and Comply2Reg labelled.
+{coverage["documents"]:,} UK and US federal regulatory documents published since
+{coverage["since"]} that Comply2Reg's crawler collected and Comply2Reg labelled.
 
 | Regulator | Train | Test |
 |---|---:|---:|
@@ -843,12 +887,20 @@ that Comply2Reg's crawler collected and Comply2Reg labelled.
 
     parts.append(
         f"""
-Only **openly-licensed** sources were used: HM Treasury, the Competition and
-Markets Authority, the Information Commissioner's Office and legislation.gov.uk,
-all published under the Open Government Licence v3.0. Publications from the FCA,
-PRA, Bank of England, Ofcom and the DRCF sit under terms that do not clearly
-permit this use, so they were held back pending a licensing review. That review
-is the single largest constraint on the model's quality, and the reason several
+Only **openly-licensed** sources were used, under two regimes:
+
+- **UK**, Open Government Licence v3.0: HM Treasury, the Competition and Markets
+  Authority, the Information Commissioner's Office and legislation.gov.uk.
+- **US federal**, not subject to copyright under 17 U.S.C. 105: the SEC, Federal
+  Reserve Board, OCC, FDIC, CFTC, CFPB, FinCEN, NCUA, FFIEC, OFAC and the
+  Treasury. This covers federal agencies only. It does not extend to US state
+  regulators such as NYDFS, nor to the regional Reserve Banks, and none are in
+  this dataset.
+
+Publications from the FCA, PRA, Bank of England, Ofcom and the DRCF sit under
+terms that do not clearly permit this use, so they were held back pending a
+licensing review. That review remains the single largest constraint on the
+model's quality for UK conduct and prudential material, and the reason several
 classes below have almost no training data.
 
 **Labels.** Every document was labelled by OpenAI's `gpt-5.4-mini` against the
@@ -958,10 +1010,20 @@ and legislation.gov.uk; the test window is mostly CMA. That makes the evaluation
 harder than the training distribution, and it means the scores say little about
 regulators the model barely saw.
 
-**It is not really a financial-services model yet.** The open-licence sources are
-cross-sector: Treasury policy, competition cases, data protection, statutory
-instruments. The FCA and PRA conduct and prudential material a UK bank most cares
-about is exactly what is missing.
+**The two jurisdictions are not equally financial-services.** The US half is:
+the SEC, Federal Reserve Board, OCC, FDIC, CFTC, CFPB, FinCEN, NCUA and OFAC are
+financial regulators and supply most of the training data. The UK half is not,
+because the openly-licensed UK sources are cross-sector: Treasury policy,
+competition cases, data protection, statutory instruments. The FCA and PRA
+conduct and prudential material a UK bank most cares about is still exactly what
+is missing, so expect materially weaker performance on UK conduct and prudential
+text than the headline suggests.
+
+**General legal ability was not re-measured for this release.** On an earlier
+version, fine-tuning cost accuracy on LexGLUE LEDGAR (0.610 base to 0.418
+tuned), which is capability loss rather than format lock. The public benchmarks
+have not been re-run against these weights, so treat that regression as unquantified
+here rather than as fixed.
 
 **The labels are model-generated.** No human adjudicated them. Errors in the
 labeller are reproduced in the model, and the evaluation shares that bias because
@@ -976,15 +1038,22 @@ not threshold on it.{ood_text}{forgetting_text}
 The weights are released under Apache 2.0, inherited from
 [Qwen3-4B-Instruct-2507](https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507).
 
-Training text came from UK public bodies under the
+Training text came from two sources, under two regimes.
+
+**UK**, under the
 [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/):
 
 > {OGL_ATTRIBUTION}
 
+**US federal**: works of the United States Government are not subject to
+copyright protection under 17 U.S.C. 105 and are in the public domain. This
+applies to the federal agencies listed above, and not to US state regulators or
+the regional Reserve Banks, none of which are in this dataset.
+
 The Open Government Licence requires that the use not suggest official status or
-endorsement. This model is not endorsed by, affiliated with or connected to any UK
-regulator or government body, and its output is not an official interpretation of
-anything.
+endorsement. This model is not endorsed by, affiliated with or connected to any
+UK or US regulator or government body, and its output is not an official
+interpretation of anything.
 
 Training labels were generated with OpenAI models under terms that assign the
 output to the customer.
@@ -1002,10 +1071,11 @@ output to the customer.
 
 ## Changelog
 
-**{version_label}, {release_date}.** {release_note}GREEN-tier (Open Government Licence) sources
-only, {counts["train"]:,} training documents, LoRA fused into 4-bit weights.
-Known gap: no FCA or PRA material, and seven alert classes with too little data to
-learn.
+**{version_label}, {release_date}.** {release_note}Openly-licensed sources only
+(UK Open Government Licence and US federal public domain), {counts["train"]:,}
+training documents, LoRA fused into 4-bit weights. Known gaps: no FCA or PRA
+material, {silent_text}, and no human-adjudicated labels anywhere in the training
+or test data.
 
 ---
 
@@ -1086,7 +1156,14 @@ def build_parser() -> argparse.ArgumentParser:
     )
     ap.add_argument("--train-report", type=Path, required=True)
     ap.add_argument("--train-log", type=Path, default=None)
-    ap.add_argument("--coverage", type=Path, default=None)
+    ap.add_argument(
+        "--coverage",
+        type=Path,
+        nargs="+",
+        default=None,
+        help="corpus coverage.json; pass one per corpus the model was trained "
+        "on and the counts are summed",
+    )
     ap.add_argument(
         "--rescore",
         type=Path,
@@ -1140,7 +1217,7 @@ def main(argv=None) -> int:
     base = optional("base")
     stats = load_json(args.dataset_dir / f"stats_{args.version}.json")
     train_report = load_json(args.train_report)
-    coverage = load_json(args.coverage) if args.coverage else None
+    coverage = merge_coverage(args.coverage) if args.coverage else None
     curve = val_loss_curve(args.train_log)
     rescore_data = load_json(args.rescore) if args.rescore and args.rescore.exists() else None
     band = error_bar(rescore_data)

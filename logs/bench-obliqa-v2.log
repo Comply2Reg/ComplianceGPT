@@ -1,0 +1,41 @@
+2026-09-27 09:26:19,431 INFO obliqa: ADGM financial regulation, behavioural probe (not graded)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-09-27 09:26:19,817 WARNING Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-09-27 09:26:23,029 INFO 200 of 2786 rows (seed 42)
+2026-09-27 09:26:26,032 INFO loading models/publish/regulatory-alert-triage-qwen3-4b-v2
+2026-09-27 09:29:03,296 INFO 25/200
+2026-09-27 09:30:39,153 INFO 50/200
+2026-09-27 09:33:03,479 INFO 75/200
+2026-09-27 09:35:24,134 INFO 100/200
+2026-09-27 09:37:44,782 INFO 125/200
+2026-09-27 09:40:11,547 INFO 150/200
+2026-09-27 09:42:31,034 INFO 175/200
+2026-09-27 09:44:54,135 INFO 200/200
+2026-09-27 09:44:54,144 INFO -> data/uk/bench/bench_obliqa_regulatory-alert-triage-qwen3-4b-v2.json
+{
+  "task": "obliqa",
+  "about": "ADGM financial regulation, behavioural probe (not graded)",
+  "dataset": "RegNLP/ObliQA",
+  "config": "default",
+  "split": "test",
+  "model": "models/publish/regulatory-alert-triage-qwen3-4b-v2",
+  "is_base": false,
+  "n_sampled": 200,
+  "n_available": 2786,
+  "seed": 42,
+  "max_new_tokens": 400,
+  "seconds": 1107,
+  "evaluated_at": "2026-09-27T04:14:54.137083+00:00",
+  "metrics": {
+    "n": 200,
+    "produced_triage_json": 1.0,
+    "obligations_present_rate": 0.365,
+    "alert_class_distribution": {
+      "A11": 175,
+      "A1": 16,
+      "A2": 9
+    },
+    "descriptive_only": true
+  }
+}
+EXIT=0

@@ -1,0 +1,23 @@
+{
+  "task": "unfair_tos",
+  "about": "8-class multi-label unfair terms-of-service clauses (LexGLUE)",
+  "dataset": "coastalcph/lex_glue",
+  "config": "unfair_tos",
+  "split": "test",
+  "model": "models/publish/regulatory-alert-triage-qwen3-4b-v1",
+  "is_base": false,
+  "n_sampled": 500,
+  "n_available": 1607,
+  "seed": 42,
+  "max_new_tokens": 64,
+  "seconds": 399,
+  "evaluated_at": "2026-09-25T17:10:09.553808+00:00",
+  "metrics": {
+    "n": 500,
+    "micro_f1": 0.1462,
+    "micro_precision": 0.0795,
+    "micro_recall": 0.9091,
+    "exact_set_match": 0.64,
+    "answered_rate": 1.0
+  }
+}

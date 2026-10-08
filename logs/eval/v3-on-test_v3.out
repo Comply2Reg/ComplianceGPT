@@ -1,0 +1,229 @@
+2026-09-27 22:49:50,109 INFO HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-4B-Instruct-2507-4bit/revision/main "HTTP/1.1 200 OK"
+Fetching 11 files:   0%|          | 0/11 [00:00<?, ?it/s]Fetching 11 files: 100%|██████████| 11/11 [00:00<00:00, 149.93it/s]
+2026-09-27 22:50:46,381 INFO 10/759 generated
+2026-09-27 22:51:41,756 INFO 20/759 generated
+2026-09-27 22:52:40,182 INFO 30/759 generated
+2026-09-27 22:53:45,834 INFO 40/759 generated
+2026-09-27 22:54:55,033 INFO 50/759 generated
+2026-09-27 22:56:03,355 INFO 60/759 generated
+2026-09-27 22:57:07,211 INFO 70/759 generated
+2026-09-27 22:58:08,413 INFO 80/759 generated
+2026-09-27 22:59:10,065 INFO 90/759 generated
+2026-09-27 23:00:14,665 INFO 100/759 generated
+2026-09-27 23:01:23,490 INFO 110/759 generated
+2026-09-27 23:02:27,958 INFO 120/759 generated
+2026-09-27 23:06:45,085 INFO 130/759 generated
+2026-09-27 23:12:14,764 INFO 140/759 generated
+2026-09-27 23:17:54,897 INFO 150/759 generated
+2026-09-27 23:22:55,886 INFO 160/759 generated
+2026-09-27 23:31:09,266 INFO 170/759 generated
+2026-09-27 23:38:01,299 INFO 180/759 generated
+2026-09-27 23:44:01,775 INFO 190/759 generated
+2026-09-27 23:50:02,855 INFO 200/759 generated
+2026-09-27 23:53:53,795 INFO 210/759 generated
+2026-09-27 23:55:52,201 INFO 220/759 generated
+2026-09-27 23:57:33,160 INFO 230/759 generated
+2026-09-27 23:59:28,948 INFO 240/759 generated
+2026-09-28 00:01:17,727 INFO 250/759 generated
+2026-09-28 00:03:08,036 INFO 260/759 generated
+2026-09-28 00:04:50,807 INFO 270/759 generated
+2026-09-28 00:06:53,068 INFO 280/759 generated
+2026-09-28 00:08:57,389 INFO 290/759 generated
+2026-09-28 00:10:58,658 INFO 300/759 generated
+2026-09-28 00:13:04,362 INFO 310/759 generated
+2026-09-28 00:15:07,172 INFO 320/759 generated
+2026-09-28 00:17:14,944 INFO 330/759 generated
+2026-09-28 00:19:16,189 INFO 340/759 generated
+2026-09-28 00:21:26,078 INFO 350/759 generated
+2026-09-28 00:23:27,999 INFO 360/759 generated
+2026-09-28 00:25:32,665 INFO 370/759 generated
+2026-09-28 00:27:37,102 INFO 380/759 generated
+2026-09-28 00:29:38,296 INFO 390/759 generated
+2026-09-28 00:31:44,183 INFO 400/759 generated
+2026-09-28 00:33:40,323 INFO 410/759 generated
+2026-09-28 00:35:31,091 INFO 420/759 generated
+2026-09-28 00:37:18,800 INFO 430/759 generated
+2026-09-28 00:38:55,999 INFO 440/759 generated
+2026-09-28 00:40:29,049 INFO 450/759 generated
+2026-09-28 00:42:05,218 INFO 460/759 generated
+2026-09-28 00:43:36,943 INFO 470/759 generated
+2026-09-28 00:45:09,105 INFO 480/759 generated
+2026-09-28 00:46:43,315 INFO 490/759 generated
+2026-09-28 00:47:46,603 INFO 500/759 generated
+2026-09-28 00:48:42,030 INFO 510/759 generated
+2026-09-28 00:49:59,354 INFO 520/759 generated
+2026-09-28 00:51:29,341 INFO 530/759 generated
+2026-09-28 00:53:06,086 INFO 540/759 generated
+2026-09-28 00:54:42,016 INFO 550/759 generated
+2026-09-28 00:56:21,377 INFO 560/759 generated
+2026-09-28 00:58:05,968 INFO 570/759 generated
+2026-09-28 00:59:46,892 INFO 580/759 generated
+2026-09-28 01:01:35,224 INFO 590/759 generated
+2026-09-28 01:03:25,448 INFO 600/759 generated
+2026-09-28 01:05:24,690 INFO 610/759 generated
+2026-09-28 01:07:28,704 INFO 620/759 generated
+2026-09-28 01:09:32,252 INFO 630/759 generated
+2026-09-28 01:11:40,550 INFO 640/759 generated
+2026-09-28 01:13:42,011 INFO 650/759 generated
+2026-09-28 01:15:45,634 INFO 660/759 generated
+2026-09-28 01:17:48,593 INFO 670/759 generated
+2026-09-28 01:19:52,323 INFO 680/759 generated
+2026-09-28 01:21:58,305 INFO 690/759 generated
+2026-09-28 01:23:59,876 INFO 700/759 generated
+2026-09-28 01:25:49,643 INFO 710/759 generated
+2026-09-28 01:27:44,974 INFO 720/759 generated
+2026-09-28 01:29:29,716 INFO 730/759 generated
+2026-09-28 01:31:09,073 INFO 740/759 generated
+2026-09-28 01:32:54,007 INFO 750/759 generated
+{
+  "records": 759,
+  "json_valid_rate": 0.9947,
+  "alert_class_accuracy": 0.693,
+  "alert_class_macro_f1": 0.4111,
+  "priority_accuracy": 0.7154,
+  "obligations_present_accuracy": 0.8643,
+  "primary_function_jaccard": 0.5719,
+  "macro_f1_by_min_support": {
+    "1": {
+      "macro_f1": 0.4111,
+      "classes": 14
+    },
+    "5": {
+      "macro_f1": 0.5059,
+      "classes": 11
+    },
+    "10": {
+      "macro_f1": 0.5577,
+      "classes": 9
+    },
+    "20": {
+      "macro_f1": 0.7171,
+      "classes": 7
+    }
+  },
+  "weighted_f1": 0.6765,
+  "per_class": {
+    "A1": {
+      "gold": 1,
+      "pred": 1,
+      "tp": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "A2": {
+      "gold": 67,
+      "pred": 28,
+      "tp": 28,
+      "precision": 1.0,
+      "recall": 0.4179,
+      "f1": 0.5895
+    },
+    "A3": {
+      "gold": 239,
+      "pred": 275,
+      "tp": 220,
+      "precision": 0.8,
+      "recall": 0.9205,
+      "f1": 0.856
+    },
+    "A4": {
+      "gold": 2,
+      "pred": 19,
+      "tp": 2,
+      "precision": 0.1053,
+      "recall": 1.0,
+      "f1": 0.1905
+    },
+    "A5": {
+      "gold": 9,
+      "pred": 0,
+      "tp": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "A6": {
+      "gold": 45,
+      "pred": 52,
+      "tp": 39,
+      "precision": 0.75,
+      "recall": 0.8667,
+      "f1": 0.8041
+    },
+    "A7": {
+      "gold": 33,
+      "pred": 37,
+      "tp": 30,
+      "precision": 0.8108,
+      "recall": 0.9091,
+      "f1": 0.8571
+    },
+    "A8": {
+      "gold": 77,
+      "pred": 114,
+      "tp": 68,
+      "precision": 0.5965,
+      "recall": 0.8831,
+      "f1": 0.712
+    },
+    "A9": {
+      "gold": 15,
+      "pred": 0,
+      "tp": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "A10": {
+      "gold": 9,
+      "pred": 13,
+      "tp": 6,
+      "precision": 0.4615,
+      "recall": 0.6667,
+      "f1": 0.5455
+    },
+    "A11": {
+      "gold": 184,
+      "pred": 82,
+      "tp": 78,
+      "precision": 0.9512,
+      "recall": 0.4239,
+      "f1": 0.5865
+    },
+    "A12": {
+      "gold": 15,
+      "pred": 14,
+      "tp": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "A13": {
+      "gold": 3,
+      "pred": 1,
+      "tp": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "A14": {
+      "gold": 60,
+      "pred": 119,
+      "tp": 55,
+      "precision": 0.4622,
+      "recall": 0.9167,
+      "f1": 0.6145
+    }
+  },
+  "classes_scored": 9,
+  "classes_present": 14,
+  "version": "v3",
+  "model": "qwen3-4b-instruct",
+  "backend": "mlx-lm",
+  "mlx_id": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "adapter": "models/triage-v3-global-qwen3-4b-mlx",
+  "seconds": 9865,
+  "chars_per_second": 82.4,
+  "evaluated_at": "2026-09-27T20:04:16.820914+00:00"
+}

@@ -1,0 +1,21 @@
+{
+  "task": "ledgar",
+  "about": "100-class contract provision classification (LexGLUE)",
+  "dataset": "coastalcph/lex_glue",
+  "config": "ledgar",
+  "split": "test",
+  "model": "models/publish/regulatory-alert-triage-qwen3-4b-v1",
+  "is_base": false,
+  "n_sampled": 500,
+  "n_available": 10000,
+  "seed": 42,
+  "max_new_tokens": 32,
+  "seconds": 512,
+  "evaluated_at": "2026-09-25T17:00:11.520387+00:00",
+  "metrics": {
+    "n": 500,
+    "accuracy": 0.418,
+    "answered_rate": 0.846,
+    "accuracy_when_answered": 0.4941
+  }
+}

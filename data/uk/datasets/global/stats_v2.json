@@ -1,0 +1,233 @@
+{
+  "version": "v2",
+  "generated_at": "2026-09-26T19:59:29.748602+00:00",
+  "labels_file": [
+    "data/uk/labels/triage_uk_v2.jsonl",
+    "data/uk/labels/triage_us_v1.jsonl"
+  ],
+  "corpus_dirs": [
+    "../../09-inventory-kit/c2r-inventory-kit/data/alert_corpus",
+    "../../09-inventory-kit/c2r-inventory-kit/data/us_corpus"
+  ],
+  "tiers": [
+    "GREEN"
+  ],
+  "gold_months": 2,
+  "val_frac": 0.1,
+  "head_chars": 1500,
+  "seed": 42,
+  "target_model": "qwen3-4b-instruct",
+  "token_counter": "Qwen/Qwen3-4B-Instruct-2507",
+  "max_seq_length": 2048,
+  "context_trimmed": 0,
+  "tokens": {
+    "train": {
+      "p50": 836,
+      "p95": 1026,
+      "max": 1384,
+      "over_budget": 0
+    },
+    "val": {
+      "p50": 847,
+      "p95": 1019,
+      "max": 1180,
+      "over_budget": 0
+    },
+    "test": {
+      "p50": 867,
+      "p95": 1029,
+      "max": 1824,
+      "over_budget": 0
+    }
+  },
+  "counts": {
+    "train": 4114,
+    "val": 697,
+    "test": 759,
+    "all": 4811
+  },
+  "target_mix": {
+    "rule_final": 0.35,
+    "consultation": 0.2,
+    "guidance": 0.15,
+    "enforcement": 0.15,
+    "intelligence": 0.15
+  },
+  "balance": {
+    "rule_final": {
+      "available": 1791,
+      "cap": 1791,
+      "kept": 1791,
+      "shortfall": 0
+    },
+    "consultation": {
+      "available": 814,
+      "cap": 1023,
+      "kept": 814,
+      "shortfall": 209
+    },
+    "guidance": {
+      "available": 2932,
+      "cap": 768,
+      "kept": 768,
+      "shortfall": 0
+    },
+    "enforcement": {
+      "available": 93,
+      "cap": 768,
+      "kept": 93,
+      "shortfall": 675
+    },
+    "intelligence": {
+      "available": 648,
+      "cap": 768,
+      "kept": 648,
+      "shortfall": 120
+    }
+  },
+  "train": {
+    "stratum": {
+      "rule_final": 1791,
+      "intelligence": 648,
+      "guidance": 768,
+      "consultation": 814,
+      "enforcement": 93
+    },
+    "classification": {
+      "A11": 1223,
+      "A2": 569,
+      "A1": 559,
+      "A3": 824,
+      "A7": 327,
+      "A14": 167,
+      "A9": 28,
+      "A8": 195,
+      "A12": 59,
+      "A6": 80,
+      "A4": 37,
+      "A5": 6,
+      "A10": 24,
+      "A13": 16
+    },
+    "regulator": {
+      "HMT": 795,
+      "CMA": 555,
+      "SEC": 233,
+      "TREAS": 599,
+      "NCUA": 108,
+      "OFAC": 359,
+      "CFTC": 149,
+      "CFPB": 219,
+      "FRB": 228,
+      "FDIC": 132,
+      "FFIEC": 17,
+      "OCC": 136,
+      "UKLEG": 518,
+      "FINCEN": 53,
+      "ICO": 13
+    },
+    "tier": {
+      "GREEN": 4114
+    },
+    "date_range": [
+      "1948-01-01",
+      "2026-06-30"
+    ]
+  },
+  "val": {
+    "stratum": {
+      "rule_final": 199,
+      "consultation": 90,
+      "intelligence": 72,
+      "enforcement": 10,
+      "guidance": 326
+    },
+    "classification": {
+      "A2": 103,
+      "A8": 48,
+      "A1": 17,
+      "A11": 202,
+      "A12": 16,
+      "A4": 6,
+      "A7": 44,
+      "A3": 189,
+      "A14": 35,
+      "A6": 10,
+      "A9": 10,
+      "A13": 1,
+      "A10": 10,
+      "A5": 6
+    },
+    "regulator": {
+      "FRB": 43,
+      "CFPB": 11,
+      "CFTC": 22,
+      "TREAS": 80,
+      "HMT": 131,
+      "UKLEG": 10,
+      "OCC": 15,
+      "SEC": 213,
+      "CMA": 72,
+      "FDIC": 31,
+      "FINCEN": 9,
+      "NCUA": 13,
+      "OFAC": 46,
+      "ICO": 1
+    },
+    "tier": {
+      "GREEN": 697
+    },
+    "date_range": [
+      "2025-12-15",
+      "2026-07-31"
+    ]
+  },
+  "test": {
+    "stratum": {
+      "rule_final": 57,
+      "consultation": 54,
+      "intelligence": 66,
+      "enforcement": 45,
+      "guidance": 537
+    },
+    "classification": {
+      "A2": 67,
+      "A11": 184,
+      "A12": 15,
+      "A8": 77,
+      "A1": 1,
+      "A7": 33,
+      "A6": 45,
+      "A3": 239,
+      "A14": 60,
+      "A9": 15,
+      "A13": 3,
+      "A10": 9,
+      "A5": 9,
+      "A4": 2
+    },
+    "regulator": {
+      "TREAS": 78,
+      "HMT": 27,
+      "CMA": 63,
+      "NCUA": 13,
+      "SEC": 423,
+      "FINCEN": 4,
+      "OFAC": 35,
+      "CFTC": 27,
+      "OCC": 14,
+      "FDIC": 30,
+      "FRB": 42,
+      "CFPB": 2,
+      "ICO": 1
+    },
+    "tier": {
+      "GREEN": 759
+    },
+    "date_range": [
+      "2026-08-03",
+      "2026-09-28"
+    ]
+  },
+  "unbalanced_train": 6278
+}

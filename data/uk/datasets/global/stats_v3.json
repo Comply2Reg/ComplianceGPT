@@ -1,0 +1,321 @@
+{
+  "version": "v3",
+  "generated_at": "2026-09-27T09:18:08.253443+00:00",
+  "labels_file": [
+    "data/uk/labels/triage_uk_v2.jsonl",
+    "data/uk/labels/triage_us_v1.jsonl"
+  ],
+  "corpus_dirs": [
+    "../../09-inventory-kit/c2r-inventory-kit/data/alert_corpus",
+    "../../09-inventory-kit/c2r-inventory-kit/data/us_corpus"
+  ],
+  "tiers": [
+    "GREEN"
+  ],
+  "gold_months": 2,
+  "val_frac": 0.1,
+  "head_chars": 1500,
+  "seed": 42,
+  "target_model": "qwen3-4b-instruct",
+  "token_counter": "Qwen/Qwen3-4B-Instruct-2507",
+  "max_seq_length": 2048,
+  "context_trimmed": 0,
+  "tokens": {
+    "train": {
+      "p50": 1050,
+      "p95": 1236,
+      "max": 1499,
+      "over_budget": 0
+    },
+    "val": {
+      "p50": 1060,
+      "p95": 1232,
+      "max": 1393,
+      "over_budget": 0
+    },
+    "test": {
+      "p50": 1080,
+      "p95": 1242,
+      "max": 2037,
+      "over_budget": 0
+    }
+  },
+  "counts": {
+    "train": 3194,
+    "val": 697,
+    "test": 759,
+    "all": 3891
+  },
+  "target_mix": {
+    "rule_final": 0.35,
+    "consultation": 0.2,
+    "guidance": 0.15,
+    "enforcement": 0.15,
+    "intelligence": 0.15
+  },
+  "balance_mode": "class",
+  "class_cap": 400,
+  "balance": {
+    "rule_final": {
+      "available": 1791,
+      "cap": null,
+      "kept": 1076,
+      "shortfall": 0
+    },
+    "consultation": {
+      "available": 814,
+      "cap": null,
+      "kept": 360,
+      "shortfall": 0
+    },
+    "guidance": {
+      "available": 2932,
+      "cap": null,
+      "kept": 1479,
+      "shortfall": 0
+    },
+    "enforcement": {
+      "available": 93,
+      "cap": null,
+      "kept": 93,
+      "shortfall": 0
+    },
+    "intelligence": {
+      "available": 648,
+      "cap": null,
+      "kept": 186,
+      "shortfall": 0
+    }
+  },
+  "class_balance": {
+    "A1": {
+      "available": 560,
+      "cap": 400,
+      "kept": 400,
+      "shortfall": 0
+    },
+    "A10": {
+      "available": 80,
+      "cap": 400,
+      "kept": 80,
+      "shortfall": 320
+    },
+    "A11": {
+      "available": 1974,
+      "cap": 400,
+      "kept": 400,
+      "shortfall": 0
+    },
+    "A12": {
+      "available": 60,
+      "cap": 400,
+      "kept": 60,
+      "shortfall": 340
+    },
+    "A13": {
+      "available": 16,
+      "cap": 400,
+      "kept": 16,
+      "shortfall": 384
+    },
+    "A14": {
+      "available": 493,
+      "cap": 400,
+      "kept": 400,
+      "shortfall": 0
+    },
+    "A2": {
+      "available": 572,
+      "cap": 400,
+      "kept": 400,
+      "shortfall": 0
+    },
+    "A3": {
+      "available": 882,
+      "cap": 400,
+      "kept": 400,
+      "shortfall": 0
+    },
+    "A4": {
+      "available": 90,
+      "cap": 400,
+      "kept": 90,
+      "shortfall": 310
+    },
+    "A5": {
+      "available": 19,
+      "cap": 400,
+      "kept": 19,
+      "shortfall": 381
+    },
+    "A6": {
+      "available": 80,
+      "cap": 400,
+      "kept": 80,
+      "shortfall": 320
+    },
+    "A7": {
+      "available": 743,
+      "cap": 400,
+      "kept": 400,
+      "shortfall": 0
+    },
+    "A8": {
+      "available": 660,
+      "cap": 400,
+      "kept": 400,
+      "shortfall": 0
+    },
+    "A9": {
+      "available": 49,
+      "cap": 400,
+      "kept": 49,
+      "shortfall": 351
+    }
+  },
+  "train": {
+    "stratum": {
+      "rule_final": 1076,
+      "intelligence": 186,
+      "guidance": 1479,
+      "consultation": 360,
+      "enforcement": 93
+    },
+    "classification": {
+      "A11": 400,
+      "A2": 400,
+      "A1": 400,
+      "A7": 400,
+      "A14": 400,
+      "A3": 400,
+      "A8": 400,
+      "A9": 49,
+      "A12": 60,
+      "A10": 80,
+      "A5": 19,
+      "A6": 80,
+      "A4": 90,
+      "A13": 16
+    },
+    "regulator": {
+      "HMT": 222,
+      "SEC": 138,
+      "TREAS": 397,
+      "CMA": 381,
+      "OFAC": 421,
+      "FRB": 424,
+      "NCUA": 109,
+      "CFTC": 169,
+      "OCC": 170,
+      "FFIEC": 20,
+      "FDIC": 170,
+      "UKLEG": 372,
+      "CFPB": 155,
+      "FINCEN": 39,
+      "ICO": 7
+    },
+    "tier": {
+      "GREEN": 3194
+    },
+    "date_range": [
+      "1948-01-01",
+      "2026-06-30"
+    ]
+  },
+  "val": {
+    "stratum": {
+      "rule_final": 199,
+      "consultation": 90,
+      "intelligence": 72,
+      "enforcement": 10,
+      "guidance": 326
+    },
+    "classification": {
+      "A2": 103,
+      "A8": 48,
+      "A1": 17,
+      "A11": 202,
+      "A12": 16,
+      "A4": 6,
+      "A7": 44,
+      "A3": 189,
+      "A14": 35,
+      "A6": 10,
+      "A9": 10,
+      "A13": 1,
+      "A10": 10,
+      "A5": 6
+    },
+    "regulator": {
+      "FRB": 43,
+      "CFPB": 11,
+      "CFTC": 22,
+      "TREAS": 80,
+      "HMT": 131,
+      "UKLEG": 10,
+      "OCC": 15,
+      "SEC": 213,
+      "CMA": 72,
+      "FDIC": 31,
+      "FINCEN": 9,
+      "NCUA": 13,
+      "OFAC": 46,
+      "ICO": 1
+    },
+    "tier": {
+      "GREEN": 697
+    },
+    "date_range": [
+      "2025-12-15",
+      "2026-07-31"
+    ]
+  },
+  "test": {
+    "stratum": {
+      "rule_final": 57,
+      "consultation": 54,
+      "intelligence": 66,
+      "enforcement": 45,
+      "guidance": 537
+    },
+    "classification": {
+      "A2": 67,
+      "A11": 184,
+      "A12": 15,
+      "A8": 77,
+      "A1": 1,
+      "A7": 33,
+      "A6": 45,
+      "A3": 239,
+      "A14": 60,
+      "A9": 15,
+      "A13": 3,
+      "A10": 9,
+      "A5": 9,
+      "A4": 2
+    },
+    "regulator": {
+      "TREAS": 78,
+      "HMT": 27,
+      "CMA": 63,
+      "NCUA": 13,
+      "SEC": 423,
+      "FINCEN": 4,
+      "OFAC": 35,
+      "CFTC": 27,
+      "OCC": 14,
+      "FDIC": 30,
+      "FRB": 42,
+      "CFPB": 2,
+      "ICO": 1
+    },
+    "tier": {
+      "GREEN": 759
+    },
+    "date_range": [
+      "2026-08-03",
+      "2026-09-28"
+    ]
+  },
+  "unbalanced_train": 6278
+}

@@ -1,0 +1,500 @@
+{"gold": "Further Assurances", "pred": "Books", "raw": "Books"}
+{"gold": "Warranties", "pred": "Representations", "raw": "Representations"}
+{"gold": "Headings", "pred": "Headings", "raw": "Headings"}
+{"gold": "Headings", "pred": "Headings", "raw": "Headings"}
+{"gold": "No Conflicts", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Liens", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Entire Agreements", "pred": "Entire Agreements", "raw": "Entire Agreements"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Disability", "pred": "Benefits", "raw": "Benefits"}
+{"gold": "Entire Agreements", "pred": "Entire Agreements", "raw": "Entire Agreements"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Insurances", "pred": "Insurances", "raw": "Insurances"}
+{"gold": "Authorizations", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Enforcements", "pred": "Assignments", "raw": "Assignments"}
+{"gold": "Specific Performance", "pred": "Specific Performance", "raw": "Specific Performance"}
+{"gold": "Amendments", "pred": null, "raw": "Letters of Credit"}
+{"gold": "Entire Agreements", "pred": "Entire Agreements", "raw": "Entire Agreements"}
+{"gold": "Litigations", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Entire Agreements", "pred": "Entire Agreements", "raw": "Entire Agreements"}
+{"gold": "Representations", "pred": "Representations", "raw": "Representations"}
+{"gold": "Binding Effects", "pred": "Assignments", "raw": "Assignments"}
+{"gold": "Anti-Corruption Laws", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Confidentiality", "pred": "Confidentiality", "raw": "Confidentiality"}
+{"gold": "Authorizations", "pred": "Enforceability", "raw": "Enforceability"}
+{"gold": "Integration", "pred": "Entire Agreements", "raw": "Entire Agreements"}
+{"gold": "Headings", "pred": "Headings", "raw": "Headings"}
+{"gold": "Notices", "pred": "Notices", "raw": "Notices"}
+{"gold": "Insurances", "pred": "Insurances", "raw": "Insurances"}
+{"gold": "No Conflicts", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Notices", "pred": "Notices", "raw": "Notices"}
+{"gold": "Base Salary", "pred": "Base Salary", "raw": "Base Salary"}
+{"gold": "Liens", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Entire Agreements", "pred": "Entire Agreements", "raw": "Entire Agreements"}
+{"gold": "Indemnity", "pred": "Indemnifications", "raw": "Indemnifications"}
+{"gold": "Integration", "pred": "Entire Agreements", "raw": "Entire Agreements"}
+{"gold": "Interpretations", "pred": "Severability", "raw": "Severability"}
+{"gold": "Notices", "pred": "Notices", "raw": "Notices"}
+{"gold": "Insurances", "pred": "Insurances", "raw": "Insurances"}
+{"gold": "Change In Control", "pred": "Change In Control", "raw": "Change In Control"}
+{"gold": "Closings", "pred": "Closings", "raw": "Closings"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Financial Statements", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Organizations", "pred": "Authority", "raw": "Authority"}
+{"gold": "Use Of Proceeds", "pred": "Use Of Proceeds", "raw": "Use Of Proceeds"}
+{"gold": "No Defaults", "pred": "No Defaults", "raw": "No Defaults"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Terminations", "pred": "Terms", "raw": "Terms"}
+{"gold": "Intellectual Property", "pred": "Confidentiality", "raw": "Confidentiality"}
+{"gold": "Definitions", "pred": "Definitions", "raw": "Definitions"}
+{"gold": "Notices", "pred": "Notices", "raw": "Notices"}
+{"gold": "Benefits", "pred": "Payments", "raw": "Payments"}
+{"gold": "Entire Agreements", "pred": "Entire Agreements", "raw": "Entire Agreements"}
+{"gold": "Use Of Proceeds", "pred": "Use Of Proceeds", "raw": "Use Of Proceeds"}
+{"gold": "Headings", "pred": "Headings", "raw": "Headings"}
+{"gold": "Successors", "pred": "Assignments", "raw": "Assignments"}
+{"gold": "Notices", "pred": "Notices", "raw": "Notices"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Miscellaneous", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Applicable Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Releases", "pred": null, "raw": "Release of Cash Collateral"}
+{"gold": "Payments", "pred": "Payments", "raw": "Payments"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Liens", "pred": "Interests", "raw": "Security Interests"}
+{"gold": "Disclosures", "pred": "Representations", "raw": "Representations"}
+{"gold": "Confidentiality", "pred": "Confidentiality", "raw": "Confidentiality"}
+{"gold": "Expenses", "pred": "Payments", "raw": "Payments"}
+{"gold": "Transactions With Affiliates", "pred": "Transactions With Affiliates", "raw": "Transactions With Affiliates"}
+{"gold": "Subsidiaries", "pred": "Interests", "raw": "Interests"}
+{"gold": "Amendments", "pred": "Amendments", "raw": "Amendments"}
+{"gold": "Authority", "pred": "Authority", "raw": "Authority"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Litigations", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Modifications", "pred": "Amendments", "raw": "Amendments"}
+{"gold": "Tax Withholdings", "pred": "Taxes", "raw": "Taxes"}
+{"gold": "Interests", "pred": null, "raw": "Interest"}
+{"gold": "Survival", "pred": "Survival", "raw": "Survival"}
+{"gold": "Enforcements", "pred": "Binding Effects", "raw": "Binding Effects"}
+{"gold": "Remedies", "pred": "Indemnifications", "raw": "Indemnifications"}
+{"gold": "Erisa", "pred": "Erisa", "raw": "Erisa"}
+{"gold": "Litigations", "pred": "No Conflicts", "raw": "No Conflicts"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Authorizations", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Indemnifications", "pred": "Indemnifications", "raw": "Indemnifications"}
+{"gold": "Remedies", "pred": "Remedies", "raw": "Remedies"}
+{"gold": "Warranties", "pred": "Assignments", "raw": "Assignments"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Remedies", "pred": "Remedies", "raw": "Remedies"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Records", "pred": "Books", "raw": "Books"}
+{"gold": "Modifications", "pred": "Amendments", "raw": "Amendments"}
+{"gold": "Litigations", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Adjustments", "pred": "Cooperation", "raw": "Cooperation"}
+{"gold": "Headings", "pred": "Headings", "raw": "Headings"}
+{"gold": "Definitions", "pred": "Definitions", "raw": "Definitions"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Withholdings", "pred": "Taxes", "raw": "Taxes"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Cooperation", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Transactions With Affiliates", "pred": "Transactions With Affiliates", "raw": "Transactions With Affiliates"}
+{"gold": "Base Salary", "pred": "Base Salary", "raw": "Base Salary"}
+{"gold": "Interests", "pred": null, "raw": "Interest"}
+{"gold": "Terms", "pred": "Terms", "raw": "Terms"}
+{"gold": "Enforcements", "pred": "Remedies", "raw": "Remedies"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Agreements", "pred": "Agreements", "raw": "Agreements"}
+{"gold": "Submission To Jurisdiction", "pred": "Consent To Jurisdiction", "raw": "Consent To Jurisdiction"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Duties", "pred": "Duties", "raw": "Duties"}
+{"gold": "Representations", "pred": "Representations", "raw": "Representations"}
+{"gold": "Sales", "pred": "Sales", "raw": "Sales"}
+{"gold": "Notices", "pred": "Notices", "raw": "Notices"}
+{"gold": "Disclosures", "pred": null, "raw": "Electronic Delivery"}
+{"gold": "Binding Effects", "pred": "Survival", "raw": "Survival"}
+{"gold": "Change In Control", "pred": "Terminations", "raw": "Terminations"}
+{"gold": "Headings", "pred": "Headings", "raw": "Headings"}
+{"gold": "Notices", "pred": "Notices", "raw": "Notices"}
+{"gold": "Adjustments", "pred": "Adjustments", "raw": "Adjustments"}
+{"gold": "Sales", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Vesting", "pred": "Vesting", "raw": "Vesting"}
+{"gold": "Expenses", "pred": "Costs", "raw": "Costs"}
+{"gold": "No Waivers", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Submission To Jurisdiction", "pred": "Submission To Jurisdiction", "raw": "Submission To Jurisdiction"}
+{"gold": "Non-Disparagement", "pred": "Non-Disparagement", "raw": "Non-Disparagement"}
+{"gold": "Venues", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Definitions", "pred": "Definitions", "raw": "Definitions"}
+{"gold": "Survival", "pred": "Survival", "raw": "Survival"}
+{"gold": "Non-Disparagement", "pred": "Non-Disparagement", "raw": "Non-Disparagement"}
+{"gold": "Taxes", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Expenses", "pred": "Benefits", "raw": "Benefits"}
+{"gold": "General", "pred": null, "raw": "Deferral"}
+{"gold": "Confidentiality", "pred": "Confidentiality", "raw": "Confidentiality"}
+{"gold": "Entire Agreements", "pred": "Entire Agreements", "raw": "Entire Agreements"}
+{"gold": "Compliance With Laws", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Survival", "pred": "Survival", "raw": "Survival"}
+{"gold": "Waivers", "pred": "Waivers", "raw": "Waivers"}
+{"gold": "General", "pred": "Definitions", "raw": "Definitions"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Intellectual Property", "pred": "Intellectual Property", "raw": "Intellectual Property"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Confidentiality", "pred": "Confidentiality", "raw": "Confidentiality"}
+{"gold": "Duties", "pred": "Duties", "raw": "Duties"}
+{"gold": "Cooperation", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Notices", "pred": "Notices", "raw": "Notices"}
+{"gold": "Notices", "pred": "Notices", "raw": "Notices"}
+{"gold": "Payments", "pred": "Duties", "raw": "Duties"}
+{"gold": "Representations", "pred": "Representations", "raw": "Representations"}
+{"gold": "Indemnifications", "pred": "Indemnifications", "raw": "Indemnifications"}
+{"gold": "Terms", "pred": "Terms", "raw": "Terms"}
+{"gold": "Sales", "pred": "Duties", "raw": "Duties"}
+{"gold": "Waiver Of Jury Trials", "pred": "Waiver Of Jury Trials", "raw": "Waiver Of Jury Trials"}
+{"gold": "Terms", "pred": "Terms", "raw": "Terms"}
+{"gold": "Terms", "pred": "Terms", "raw": "Terms"}
+{"gold": "Litigations", "pred": "Litigations", "raw": "Litigations"}
+{"gold": "Waivers", "pred": "Waivers", "raw": "Waivers"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "General", "pred": "Agreements", "raw": "Agreements"}
+{"gold": "Confidentiality", "pred": "Confidentiality", "raw": "Confidentiality"}
+{"gold": "Waivers", "pred": "Waivers", "raw": "Waivers"}
+{"gold": "Confidentiality", "pred": "Confidentiality", "raw": "Confidentiality"}
+{"gold": "Warranties", "pred": "Representations", "raw": "Representations"}
+{"gold": "Insurances", "pred": null, "raw": "Insurance"}
+{"gold": "Closings", "pred": "Closings", "raw": "Closings"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Disability", "pred": "Disability", "raw": "Disability"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Expenses", "pred": "Expenses", "raw": "Expenses"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Benefits", "pred": "Benefits", "raw": "Benefits"}
+{"gold": "Submission To Jurisdiction", "pred": "Consent To Jurisdiction", "raw": "Consent To Jurisdiction"}
+{"gold": "Assignments", "pred": "Assignments", "raw": "Assignments"}
+{"gold": "Terms", "pred": "Terms", "raw": "Terms"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Forfeitures", "pred": "Terminations", "raw": "Terminations"}
+{"gold": "Entire Agreements", "pred": "Entire Agreements", "raw": "Entire Agreements"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Indemnity", "pred": "Indemnifications", "raw": "Indemnifications"}
+{"gold": "Amendments", "pred": "Amendments", "raw": "Amendments"}
+{"gold": "Solvency", "pred": "Solvency", "raw": "Solvency"}
+{"gold": "Indemnifications", "pred": "Indemnifications", "raw": "Indemnifications"}
+{"gold": "Waivers", "pred": "Waivers", "raw": "Waivers"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Solvency", "pred": "Solvency", "raw": "Solvency"}
+{"gold": "Defined Terms", "pred": "Definitions", "raw": "Definitions"}
+{"gold": "Compliance With Laws", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Fees", "pred": "Payments", "raw": "Payments"}
+{"gold": "Compliance With Laws", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Solvency", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Terms", "pred": "Terminations", "raw": "Terminations"}
+{"gold": "Modifications", "pred": "Amendments", "raw": "Amendments"}
+{"gold": "Tax Withholdings", "pred": "Taxes", "raw": "Taxes"}
+{"gold": "Binding Effects", "pred": "Binding Effects", "raw": "Binding Effects"}
+{"gold": "Authority", "pred": "Enforceability", "raw": "Enforceability"}
+{"gold": "Titles", "pred": "Positions", "raw": "Positions"}
+{"gold": "Integration", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Waiver Of Jury Trials", "pred": "Waiver Of Jury Trials", "raw": "Waiver Of Jury Trials"}
+{"gold": "Confidentiality", "pred": "Confidentiality", "raw": "Confidentiality"}
+{"gold": "Enforcements", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Adjustments", "pred": "Adjustments", "raw": "Adjustments"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "No Waivers", "pred": "Waivers", "raw": "Waivers"}
+{"gold": "Terminations", "pred": "Terminations", "raw": "Terminations"}
+{"gold": "Terms", "pred": "Intellectual Property", "raw": "Intellectual Property"}
+{"gold": "No Conflicts", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Further Assurances", "pred": "Further Assurances", "raw": "Further Assurances"}
+{"gold": "Successors", "pred": "Successors", "raw": "Successors"}
+{"gold": "Withholdings", "pred": "Taxes", "raw": "Taxes"}
+{"gold": "Notices", "pred": "Notices", "raw": "Notices"}
+{"gold": "Withholdings", "pred": "Taxes", "raw": "Taxes"}
+{"gold": "Withholdings", "pred": "Taxes", "raw": "Taxes"}
+{"gold": "Positions", "pred": "Terminations", "raw": "Terminations"}
+{"gold": "Closings", "pred": "Closings", "raw": "Closings"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Interests", "pred": null, "raw": "Late Charges"}
+{"gold": "Erisa", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Arbitration", "pred": "Arbitration", "raw": "Arbitration"}
+{"gold": "Compliance With Laws", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Notices", "pred": "Notices", "raw": "Notices"}
+{"gold": "Payments", "pred": "Payments", "raw": "Payments"}
+{"gold": "Consents", "pred": "Assignments", "raw": "Assignments"}
+{"gold": "Titles", "pred": "Headings", "raw": "Headings"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "General", "pred": "Benefits", "raw": "Benefits"}
+{"gold": "Death", "pred": "Death", "raw": "Death"}
+{"gold": "Waivers", "pred": "Binding Effects", "raw": "Binding Effects"}
+{"gold": "Taxes", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Survival", "pred": "Survival", "raw": "Survival"}
+{"gold": "Entire Agreements", "pred": "Entire Agreements", "raw": "Entire Agreements"}
+{"gold": "Consents", "pred": "No Conflicts", "raw": "No Conflicts"}
+{"gold": "Binding Effects", "pred": "Assigns", "raw": "Assigns"}
+{"gold": "Tax Withholdings", "pred": "Taxes", "raw": "Taxes"}
+{"gold": "Interpretations", "pred": "Headings", "raw": "Headings"}
+{"gold": "Cooperation", "pred": "Cooperation", "raw": "Cooperation"}
+{"gold": "Enforcements", "pred": "Binding Effects", "raw": "Binding Effects"}
+{"gold": "Submission To Jurisdiction", "pred": "Submission To Jurisdiction", "raw": "Submission To Jurisdiction"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Jurisdictions", "pred": "Consent To Jurisdiction", "raw": "Consent To Jurisdiction"}
+{"gold": "Subsidiaries", "pred": "Intellectual Property", "raw": "Intellectual Property"}
+{"gold": "Successors", "pred": "Successors", "raw": "Successors"}
+{"gold": "Withholdings", "pred": "Taxes", "raw": "Taxes"}
+{"gold": "Compliance With Laws", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Successors", "pred": "Successors", "raw": "Successors"}
+{"gold": "Waiver Of Jury Trials", "pred": "Waiver Of Jury Trials", "raw": "Waiver Of Jury Trials"}
+{"gold": "Construction", "pred": "Definitions", "raw": "Definitions"}
+{"gold": "Applicable Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "No Waivers", "pred": "No Waivers", "raw": "No Waivers"}
+{"gold": "Interpretations", "pred": "Definitions", "raw": "Definitions"}
+{"gold": "Definitions", "pred": "Definitions", "raw": "Definitions"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Entire Agreements", "pred": "Entire Agreements", "raw": "Entire Agreements"}
+{"gold": "Payments", "pred": "Assignments", "raw": "Assignments"}
+{"gold": "Taxes", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Financial Statements", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Disclosures", "pred": "Representations", "raw": "Representations"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Headings", "pred": "Headings", "raw": "Headings"}
+{"gold": "Vacations", "pred": "Vacations", "raw": "Vacations"}
+{"gold": "Headings", "pred": "Headings", "raw": "Headings"}
+{"gold": "Warranties", "pred": "Representations", "raw": "Representations"}
+{"gold": "Representations", "pred": "Representations", "raw": "Representations"}
+{"gold": "Assignments", "pred": "Assignments", "raw": "Assignments"}
+{"gold": "Representations", "pred": "Confidentiality", "raw": "Confidentiality"}
+{"gold": "Compliance With Laws", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Amendments", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Authorizations", "pred": "Authority", "raw": "Authority"}
+{"gold": "Compliance With Laws", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Disclosures", "pred": "Representations", "raw": "Representations"}
+{"gold": "Consent To Jurisdiction", "pred": "Consent To Jurisdiction", "raw": "Consent To Jurisdiction"}
+{"gold": "Insurances", "pred": "Insurances", "raw": "Insurances"}
+{"gold": "Insurances", "pred": "Insurances", "raw": "Insurances"}
+{"gold": "Taxes", "pred": "Definitions", "raw": "Definitions"}
+{"gold": "Consents", "pred": "Approvals", "raw": "Approvals"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Further Assurances", "pred": "Assignments", "raw": "Assignments"}
+{"gold": "Survival", "pred": "Survival", "raw": "Survival"}
+{"gold": "Further Assurances", "pred": "Assignments", "raw": "Assignments"}
+{"gold": "Financial Statements", "pred": "Financial Statements", "raw": "Financial Statements"}
+{"gold": "Notices", "pred": "Notices", "raw": "Notices"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Entire Agreements", "pred": "Entire Agreements", "raw": "Entire Agreements"}
+{"gold": "Tax Withholdings", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Headings", "pred": "Headings", "raw": "Headings"}
+{"gold": "Notices", "pred": "Notices", "raw": "Notices"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Death", "pred": "Benefits", "raw": "Benefits"}
+{"gold": "Benefits", "pred": "Benefits", "raw": "Benefits"}
+{"gold": "Existence", "pred": "Duties", "raw": "Duties"}
+{"gold": "Terms", "pred": "Terms", "raw": "Terms"}
+{"gold": "Taxes", "pred": "Taxes", "raw": "Taxes"}
+{"gold": "Entire Agreements", "pred": "Entire Agreements", "raw": "Entire Agreements"}
+{"gold": "Forfeitures", "pred": "Vesting", "raw": "Vesting"}
+{"gold": "Intellectual Property", "pred": "Intellectual Property", "raw": "Intellectual Property"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Organizations", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Adjustments", "pred": "Adjustments", "raw": "Adjustments"}
+{"gold": "Warranties", "pred": "Survival", "raw": "Survival"}
+{"gold": "Litigations", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Payments", "pred": "Payments", "raw": "Payments"}
+{"gold": "Interpretations", "pred": "Definitions", "raw": "Definitions"}
+{"gold": "Notices", "pred": "Notices", "raw": "Notices"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Waivers", "pred": "Waivers", "raw": "Waivers"}
+{"gold": "Counterparts", "pred": "Headings", "raw": "Headings"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Interpretations", "pred": "Interpretations", "raw": "Interpretations"}
+{"gold": "Binding Effects", "pred": "Assigns", "raw": "Assigns"}
+{"gold": "Brokers", "pred": "Brokers", "raw": "Brokers"}
+{"gold": "Brokers", "pred": "Brokers", "raw": "Brokers"}
+{"gold": "General", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Venues", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Waivers", "pred": "Waivers", "raw": "Waivers"}
+{"gold": "Anti-Corruption Laws", "pred": "Anti-Corruption Laws", "raw": "Anti-Corruption Laws"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Taxes", "pred": "Taxes", "raw": "Taxes"}
+{"gold": "Notices", "pred": "Notices", "raw": "Notices"}
+{"gold": "Positions", "pred": "Positions", "raw": "Positions"}
+{"gold": "Terminations", "pred": "Terminations", "raw": "Terminations"}
+{"gold": "Taxes", "pred": "Taxes", "raw": "Taxes"}
+{"gold": "Indemnity", "pred": "Indemnifications", "raw": "Indemnifications"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Binding Effects", "pred": "Binding Effects", "raw": "Binding Effects"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Indemnifications", "pred": "Indemnifications", "raw": "Indemnifications"}
+{"gold": "Compliance With Laws", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Entire Agreements", "pred": "Entire Agreements", "raw": "Entire Agreements"}
+{"gold": "Assignments", "pred": "Assignments", "raw": "Assignments"}
+{"gold": "Capitalization", "pred": "Definitions", "raw": "Definitions"}
+{"gold": "General", "pred": "Definitions", "raw": "Definitions"}
+{"gold": "Confidentiality", "pred": "Confidentiality", "raw": "Confidentiality"}
+{"gold": "Further Assurances", "pred": "Further Assurances", "raw": "Further Assurances"}
+{"gold": "Erisa", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Authority", "pred": "Arbitration", "raw": "Arbitration"}
+{"gold": "Withholdings", "pred": "Taxes", "raw": "Taxes"}
+{"gold": "Enforcements", "pred": "Binding Effects", "raw": "Binding Effects"}
+{"gold": "Headings", "pred": "Headings", "raw": "Headings"}
+{"gold": "Miscellaneous", "pred": "Amendments", "raw": "Amendments"}
+{"gold": "Change In Control", "pred": "Change In Control", "raw": "Change In Control"}
+{"gold": "Withholdings", "pred": "Taxes", "raw": "Taxes"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Vesting", "pred": "Vesting", "raw": "Vesting"}
+{"gold": "Forfeitures", "pred": "Terminations", "raw": "Terminations"}
+{"gold": "Expenses", "pred": "Costs", "raw": "Costs"}
+{"gold": "Assignments", "pred": "Assignments", "raw": "Assignments"}
+{"gold": "Insurances", "pred": "Insurances", "raw": "Insurances"}
+{"gold": "Binding Effects", "pred": "Assigns", "raw": "Assigns"}
+{"gold": "Solvency", "pred": "Solvency", "raw": "Solvency"}
+{"gold": "Compliance With Laws", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Use Of Proceeds", "pred": "Amendments", "raw": "Amendments"}
+{"gold": "Solvency", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Amendments", "pred": "Amendments", "raw": "Amendments"}
+{"gold": "Vacations", "pred": "Vacations", "raw": "Vacations"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Assignments", "pred": "Assignments", "raw": "Assignments"}
+{"gold": "Remedies", "pred": "Remedies", "raw": "Remedies"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Participations", "pred": "Participations", "raw": "Participations"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Warranties", "pred": "Survival", "raw": "Survival"}
+{"gold": "Agreements", "pred": "Cooperation", "raw": "Cooperation"}
+{"gold": "Disclosures", "pred": "Representations", "raw": "Representations"}
+{"gold": "Miscellaneous", "pred": "Amendments", "raw": "Amendments"}
+{"gold": "Cooperation", "pred": "Cooperation", "raw": "Cooperation"}
+{"gold": "Remedies", "pred": null, "raw": "Injunctive Relief"}
+{"gold": "Headings", "pred": "Headings", "raw": "Headings"}
+{"gold": "Defined Terms", "pred": "Definitions", "raw": "Definitions"}
+{"gold": "Change In Control", "pred": null, "raw": "Standard of Review"}
+{"gold": "Participations", "pred": "Participations", "raw": "Participations"}
+{"gold": "Headings", "pred": "Headings", "raw": "Headings"}
+{"gold": "Assignments", "pred": "Assignments", "raw": "Assignments"}
+{"gold": "Assignments", "pred": "Assignments", "raw": "Assignments"}
+{"gold": "Authority", "pred": "Authority", "raw": "Authority"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Construction", "pred": "Interpretations", "raw": "Interpretations"}
+{"gold": "No Conflicts", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Notices", "pred": "Terminations", "raw": "Terminations"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Notices", "pred": "Notices", "raw": "Notices"}
+{"gold": "Defined Terms", "pred": "Definitions", "raw": "Definitions"}
+{"gold": "No Conflicts", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Further Assurances", "pred": "Further Assurances", "raw": "Further Assurances"}
+{"gold": "No Defaults", "pred": "No Defaults", "raw": "No Defaults"}
+{"gold": "Financial Statements", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Vesting", "pred": "Vesting", "raw": "Vesting"}
+{"gold": "Amendments", "pred": "Amendments", "raw": "Amendments"}
+{"gold": "Headings", "pred": "Headings", "raw": "Headings"}
+{"gold": "Duties", "pred": "Duties", "raw": "Duties"}
+{"gold": "General", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Base Salary", "pred": "Base Salary", "raw": "Base Salary"}
+{"gold": "Closings", "pred": "Sales", "raw": "Sales"}
+{"gold": "Applicable Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Survival", "pred": "Survival", "raw": "Survival"}
+{"gold": "Defined Terms", "pred": "Definitions", "raw": "Definitions"}
+{"gold": "Consents", "pred": "Approvals", "raw": "Approvals"}
+{"gold": "Remedies", "pred": "Terminations", "raw": "Terminations"}
+{"gold": "Notices", "pred": "Notices", "raw": "Notices"}
+{"gold": "Fees", "pred": "Payments", "raw": "Payments"}
+{"gold": "Survival", "pred": "Survival", "raw": "Survival"}
+{"gold": "Entire Agreements", "pred": "Entire Agreements", "raw": "Entire Agreements"}
+{"gold": "Compliance With Laws", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Compliance With Laws", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Compliance With Laws", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "No Defaults", "pred": "No Defaults", "raw": "No Defaults"}
+{"gold": "Modifications", "pred": "Amendments", "raw": "Amendments"}
+{"gold": "Closings", "pred": "Closings", "raw": "Closings"}
+{"gold": "Terms", "pred": "Terms", "raw": "Terms"}
+{"gold": "Further Assurances", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Expenses", "pred": "Benefits", "raw": "Benefits"}
+{"gold": "Vacations", "pred": "Benefits", "raw": "Benefits"}
+{"gold": "Costs", "pred": "Costs", "raw": "Costs"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Assignments", "pred": "Assignments", "raw": "Assignments"}
+{"gold": "Terms", "pred": "Terminations", "raw": "Terminations"}
+{"gold": "Amendments", "pred": "Amendments", "raw": "Amendments"}
+{"gold": "Withholdings", "pred": "Taxes", "raw": "Taxes"}
+{"gold": "Severability", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Venues", "pred": "Consents", "raw": "Consents"}
+{"gold": "Terms", "pred": "Terms", "raw": "Terms"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Enforceability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Employment", "pred": "Employment", "raw": "Employment"}
+{"gold": "Compliance With Laws", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Taxes", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Authority", "pred": "Binding Effects", "raw": "Binding Effects"}
+{"gold": "Organizations", "pred": "Authority", "raw": "Authority"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Indemnifications", "pred": "Indemnifications", "raw": "Indemnifications"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Notices", "pred": "Notices", "raw": "Notices"}
+{"gold": "Headings", "pred": "Headings", "raw": "Headings"}
+{"gold": "Existence", "pred": "Duties", "raw": "Duties"}
+{"gold": "Notices", "pred": "Notices", "raw": "Notices"}
+{"gold": "Successors", "pred": "Assigns", "raw": "Assigns"}
+{"gold": "Remedies", "pred": "Specific Performance", "raw": "Specific Performance"}
+{"gold": "Solvency", "pred": "Solvency", "raw": "Solvency"}
+{"gold": "Remedies", "pred": "Applicable Laws", "raw": "Applicable Laws"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Entire Agreements", "pred": "Entire Agreements", "raw": "Entire Agreements"}
+{"gold": "Binding Effects", "pred": "Assignments", "raw": "Assignments"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Litigations", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Participations", "pred": "Participations", "raw": "Participations"}
+{"gold": "Construction", "pred": "Definitions", "raw": "Definitions"}
+{"gold": "Subsidiaries", "pred": "Intellectual Property", "raw": "Intellectual Property"}
+{"gold": "Employment", "pred": "Positions", "raw": "Positions"}
+{"gold": "Vesting", "pred": "Vesting", "raw": "Vesting"}
+{"gold": "Tax Withholdings", "pred": "Taxes", "raw": "Taxes"}
+{"gold": "Waivers", "pred": "Waivers", "raw": "Waivers"}
+{"gold": "Confidentiality", "pred": "Confidentiality", "raw": "Confidentiality"}
+{"gold": "Interpretations", "pred": "Entire Agreements", "raw": "Entire Agreements"}
+{"gold": "Representations", "pred": "Confidentiality", "raw": "Confidentiality"}
+{"gold": "Authorizations", "pred": "Authority", "raw": "Authority"}
+{"gold": "Waivers", "pred": "Waivers", "raw": "Waivers"}
+{"gold": "Indemnifications", "pred": "Indemnifications", "raw": "Indemnifications"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Survival", "pred": "Survival", "raw": "Survival"}
+{"gold": "Payments", "pred": "Payments", "raw": "Payments"}
+{"gold": "Solvency", "pred": "Solvency", "raw": "Solvency"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Consents", "pred": "Approvals", "raw": "Approvals"}
+{"gold": "Use Of Proceeds", "pred": "Compliance With Laws", "raw": "Compliance With Laws"}
+{"gold": "Severability", "pred": "Severability", "raw": "Severability"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Governing Laws", "pred": "Governing Laws", "raw": "Governing Laws"}
+{"gold": "Governing Laws", "pred": "Entire Agreements", "raw": "Entire Agreements"}
+{"gold": "Base Salary", "pred": "Base Salary", "raw": "Base Salary"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Amendments", "pred": "Amendments", "raw": "Amendments"}
+{"gold": "Counterparts", "pred": "Counterparts", "raw": "Counterparts"}
+{"gold": "Expenses", "pred": "Costs", "raw": "Costs"}
+{"gold": "Withholdings", "pred": "Taxes", "raw": "Taxes"}
+{"gold": "Interpretations", "pred": "Waivers", "raw": "Waivers"}
+{"gold": "Confidentiality", "pred": "Confidentiality", "raw": "Confidentiality"}
+{"gold": "Adjustments", "pred": "Adjustments", "raw": "Adjustments"}
+{"gold": "Intellectual Property", "pred": "Assignments", "raw": "Assignments"}

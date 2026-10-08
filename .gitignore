@@ -36,3 +36,7 @@ data/uk/datasets/*/eval_*
 
 # macOS directory metadata
 .DS_Store
+
+# process ids from background runs
+logs/**/*.pid
+logs/**/*.pids

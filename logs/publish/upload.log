@@ -1,0 +1,24 @@
+INFO validation passed
+INFO HTTP Request: POST https://huggingface.co/api/repos/create "HTTP/1.1 409 Conflict"
+INFO repository ready: https://huggingface.co/Comply2Reg/regulatory-alert-triage-qwen3-4b-v1
+INFO HTTP Request: POST https://huggingface.co/api/validate-yaml "HTTP/1.1 200 OK"
+INFO HTTP Request: POST https://huggingface.co/api/models/Comply2Reg/regulatory-alert-triage-qwen3-4b-v1/preupload/main "HTTP/1.1 200 OK"
+INFO HTTP Request: POST https://huggingface.co/api/models/Comply2Reg/regulatory-alert-triage-qwen3-4b-v1/commit/main "HTTP/1.1 200 OK"
+INFO HTTP Request: GET https://huggingface.co/api/models/Comply2Reg/regulatory-alert-triage-qwen3-4b-v1 "HTTP/1.1 200 OK"
+INFO published Comply2Reg/regulatory-alert-triage-qwen3-4b-v1 (private=True, 10 files) -> https://huggingface.co/Comply2Reg/regulatory-alert-triage-qwen3-4b-v1
+
+models/publish/regulatory-alert-triage-qwen3-4b-v1 -> Comply2Reg/regulatory-alert-triage-qwen3-4b-v1
+PRIVATE repository
+
+     17.8 KB  README.md
+      3.9 KB  chat_template.jinja
+       970 B  config.json
+      4.7 KB  eval_summary.json
+       238 B  generation_config.json
+      2.1 GB  model.safetensors
+     62.5 KB  model.safetensors.index.json
+     10.9 MB  tokenizer.json
+       413 B  tokenizer_config.json
+              9 files, 2.1 GB total
+
+EXIT=0

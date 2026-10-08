@@ -1,0 +1,29 @@
+2026-09-25 14:22:44,414 INFO HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-4B-Instruct-2507-4bit/revision/main "HTTP/1.1 200 OK"
+Fetching 11 files:   0%|          | 0/11 [00:00<?, ?it/s]Fetching 11 files: 100%|██████████| 11/11 [00:00<00:00, 3202.20it/s]
+2026-09-25 14:24:04,986 INFO 10/104 generated
+2026-09-25 14:25:32,624 INFO 20/104 generated
+2026-09-25 14:26:56,165 INFO 30/104 generated
+2026-09-25 14:28:18,144 INFO 40/104 generated
+2026-09-25 14:29:35,976 INFO 50/104 generated
+2026-09-25 14:30:48,731 INFO 60/104 generated
+2026-09-25 14:31:57,159 INFO 70/104 generated
+2026-09-25 14:33:21,151 INFO 80/104 generated
+2026-09-25 14:34:39,715 INFO 90/104 generated
+2026-09-25 14:35:53,886 INFO 100/104 generated
+{
+  "records": 104,
+  "json_valid_rate": 0.9615,
+  "alert_class_accuracy": 0.5865,
+  "alert_class_macro_f1": 0.1378,
+  "priority_accuracy": 0.7404,
+  "obligations_present_accuracy": 0.8846,
+  "primary_function_jaccard": 0.6017,
+  "version": "v1",
+  "model": "qwen3-4b-instruct",
+  "backend": "mlx-lm",
+  "mlx_id": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "adapter": "models/uk-triage-v1-iter1200",
+  "seconds": 825,
+  "chars_per_second": 132.3,
+  "evaluated_at": "2026-09-25T09:06:30.687175+00:00"
+}

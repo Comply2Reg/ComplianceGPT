@@ -1,0 +1,11 @@
+2026-09-27 14:40:15,248 INFO 7734 labels from 2 file(s)
+2026-09-27 14:40:19,418 INFO HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-09-27 14:40:19,426 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-4B-Instruct-2507/cdbee75f17c01a7cc42f958dc650907174af0554/config.json?%2FQwen%2FQwen3-4B-Instruct-2507%2Fresolve%2Fmain%2Fconfig.json=&etag=%226988f134db143052042f2bd6e0c897bc6a605189%22 "HTTP/1.1 200 OK"
+2026-09-27 14:40:19,709 INFO HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-09-27 14:40:19,710 WARNING Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-09-27 14:40:19,719 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-4B-Instruct-2507/cdbee75f17c01a7cc42f958dc650907174af0554/tokenizer_config.json?%2FQwen%2FQwen3-4B-Instruct-2507%2Fresolve%2Fmain%2Ftokenizer_config.json=&etag=%2251c1be0d9192e7f6e6596de71d0f07d58fbc32ac%22 "HTTP/1.1 200 OK"
+2026-09-27 14:40:19,960 INFO HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-4B-Instruct-2507/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-09-27 14:40:20,233 INFO HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-4B-Instruct-2507/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-09-27 14:40:20,758 INFO HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-4B-Instruct-2507 "HTTP/1.1 200 OK"
+2026-09-27 14:48:08,287 INFO wrote {'train': 3194, 'val': 697, 'test': 759, 'all': 3891} | balance {'rule_final': 1076, 'consultation': 360, 'guidance': 1479, 'enforcement': 93, 'intelligence': 186} | gold candidates 2409 -> /Users/karthigeyanrj/Documents/17-Comply2Reg/15-SLM/ComplianceGPT/data/uk/gold/gold_candidates_v3.csv

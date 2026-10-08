@@ -1,0 +1,319 @@
+{
+  "generated_at": "2026-09-25T16:46:55.862099+00:00",
+  "version": "v1",
+  "eval_outputs": "data/uk/datasets/green/eval_v1_qwen3-4b-instruct_mlx_regulatory-alert-triage-qwen3-4b-v1_outputs.jsonl",
+  "records": 104,
+  "against_original_labels": {
+    "json_valid_rate": 1.0,
+    "alert_class_accuracy": 0.6442,
+    "alert_class_macro_f1": 0.2445,
+    "priority_accuracy": 0.7596,
+    "obligations_present_accuracy": 0.9135,
+    "primary_function_jaccard": 0.5744
+  },
+  "reproduces_published_eval": true,
+  "against_judge_labels": {
+    "json_valid_rate": 1.0,
+    "alert_class_accuracy": 0.5673,
+    "alert_class_macro_f1": 0.1549,
+    "priority_accuracy": 0.7981,
+    "obligations_present_accuracy": 0.9423,
+    "primary_function_jaccard": 0.7804
+  },
+  "judge_coverage": 104,
+  "delta": {
+    "json_valid_rate": 0.0,
+    "alert_class_accuracy": -0.0769,
+    "alert_class_macro_f1": -0.0896,
+    "priority_accuracy": 0.0385,
+    "obligations_present_accuracy": 0.0288,
+    "primary_function_jaccard": 0.206
+  },
+  "primary_pair": "gpt-5.4 vs gpt-5.4-mini",
+  "test_labeller": "gpt-5.4-mini",
+  "judge_model": "gpt-5.4",
+  "labellers_compared": [
+    "gpt-4o-2024-08-06",
+    "gpt-4o-mini",
+    "gpt-5.4",
+    "gpt-5.4-mini"
+  ],
+  "labeller_agreement": {
+    "gpt-4o-2024-08-06 vs gpt-4o-mini": {
+      "n": 16,
+      "agreement": {
+        "alert_class": 0.6875,
+        "priority": 0.5,
+        "obligations_present": 0.9375
+      },
+      "function_jaccard": 0.422,
+      "confusion": [
+        [
+          [
+            "A10",
+            "A3"
+          ],
+          3
+        ],
+        [
+          [
+            "A11",
+            "A3"
+          ],
+          1
+        ],
+        [
+          [
+            "A10",
+            "A2"
+          ],
+          1
+        ]
+      ]
+    },
+    "gpt-4o-2024-08-06 vs gpt-5.4": {
+      "n": 16,
+      "agreement": {
+        "alert_class": 0.8125,
+        "priority": 0.6875,
+        "obligations_present": 1.0
+      },
+      "function_jaccard": 0.271,
+      "confusion": [
+        [
+          [
+            "A3",
+            "A10"
+          ],
+          2
+        ],
+        [
+          [
+            "A10",
+            "A11"
+          ],
+          1
+        ]
+      ]
+    },
+    "gpt-4o-2024-08-06 vs gpt-5.4-mini": {
+      "n": 16,
+      "agreement": {
+        "alert_class": 0.75,
+        "priority": 0.5,
+        "obligations_present": 0.9375
+      },
+      "function_jaccard": 0.562,
+      "confusion": [
+        [
+          [
+            "A3",
+            "A10"
+          ],
+          4
+        ]
+      ]
+    },
+    "gpt-4o-mini vs gpt-5.4": {
+      "n": 104,
+      "agreement": {
+        "alert_class": 0.4135,
+        "priority": 0.4423,
+        "obligations_present": 0.6731
+      },
+      "function_jaccard": 0.333,
+      "confusion": [
+        [
+          [
+            "A2",
+            "A11"
+          ],
+          14
+        ],
+        [
+          [
+            "A3",
+            "A11"
+          ],
+          9
+        ],
+        [
+          [
+            "A6",
+            "A11"
+          ],
+          7
+        ],
+        [
+          [
+            "A1",
+            "A9"
+          ],
+          7
+        ],
+        [
+          [
+            "A3",
+            "A10"
+          ],
+          5
+        ],
+        [
+          [
+            "A1",
+            "A11"
+          ],
+          5
+        ],
+        [
+          [
+            "A4",
+            "A11"
+          ],
+          3
+        ],
+        [
+          [
+            "A1",
+            "A6"
+          ],
+          2
+        ]
+      ]
+    },
+    "gpt-4o-mini vs gpt-5.4-mini": {
+      "n": 104,
+      "agreement": {
+        "alert_class": 0.3942,
+        "priority": 0.5096,
+        "obligations_present": 0.6635
+      },
+      "function_jaccard": 0.4,
+      "confusion": [
+        [
+          [
+            "A2",
+            "A11"
+          ],
+          13
+        ],
+        [
+          [
+            "A3",
+            "A10"
+          ],
+          11
+        ],
+        [
+          [
+            "A3",
+            "A11"
+          ],
+          10
+        ],
+        [
+          [
+            "A1",
+            "A9"
+          ],
+          5
+        ],
+        [
+          [
+            "A1",
+            "A14"
+          ],
+          3
+        ],
+        [
+          [
+            "A6",
+            "A11"
+          ],
+          2
+        ],
+        [
+          [
+            "A1",
+            "A11"
+          ],
+          2
+        ],
+        [
+          [
+            "A2",
+            "A8"
+          ],
+          2
+        ]
+      ]
+    },
+    "gpt-5.4 vs gpt-5.4-mini": {
+      "n": 104,
+      "agreement": {
+        "alert_class": 0.7019,
+        "priority": 0.8558,
+        "obligations_present": 0.9327
+      },
+      "function_jaccard": 0.617,
+      "confusion": [
+        [
+          [
+            "A3",
+            "A10"
+          ],
+          6
+        ],
+        [
+          [
+            "A11",
+            "A6"
+          ],
+          6
+        ],
+        [
+          [
+            "A11",
+            "A10"
+          ],
+          2
+        ],
+        [
+          [
+            "A11",
+            "A14"
+          ],
+          2
+        ],
+        [
+          [
+            "A9",
+            "A11"
+          ],
+          2
+        ],
+        [
+          [
+            "A11",
+            "A3"
+          ],
+          1
+        ],
+        [
+          [
+            "A6",
+            "A9"
+          ],
+          1
+        ],
+        [
+          [
+            "A11",
+            "A8"
+          ],
+          1
+        ]
+      ]
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "task": "ledgar",
+  "about": "100-class contract provision classification (LexGLUE)",
+  "n_sampled": 500,
+  "seed": 42,
+  "base": {
+    "n": 500,
+    "accuracy": 0.61,
+    "answered_rate": 0.98,
+    "accuracy_when_answered": 0.6224
+  },
+  "tuned": {
+    "n": 500,
+    "accuracy": 0.418,
+    "answered_rate": 0.846,
+    "accuracy_when_answered": 0.4941
+  },
+  "delta": {
+    "n": 0,
+    "accuracy": -0.192,
+    "answered_rate": -0.134,
+    "accuracy_when_answered": -0.1283
+  },
+  "compared_at": "2026-09-25T17:47:04.166891+00:00"
+}

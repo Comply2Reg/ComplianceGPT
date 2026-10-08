@@ -1,0 +1,500 @@
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration"}
+{"gold": ["Arbitration"], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination"], "raw": "Limitation of liability, Unilateral termination"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Unilateral change"], "raw": "Unilateral change"}
+{"gold": [], "pred": ["Unilateral termination"], "raw": "Unilateral termination"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": ["Unilateral termination"], "pred": ["Limitation of liability", "Unilateral termination"], "raw": "Limitation of liability, Unilateral termination"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination"], "raw": "Limitation of liability, Unilateral termination"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change"], "raw": "Limitation of liability, Unilateral termination, Unilateral change"}
+{"gold": ["Unilateral termination"], "pred": ["Unilateral termination", "Unilateral change"], "raw": "Unilateral termination, Unilateral change"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Unilateral termination"], "raw": "Unilateral termination"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration"}
+{"gold": [], "pred": ["Limitation of liability", "Content removal"], "raw": "Limitation of liability, Content removal"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral change", "Content removal"], "raw": "Limitation of liability, Unilateral change, Content removal"}
+{"gold": [], "pred": ["Content removal"], "raw": "Content removal"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration\n\nNone of the listed clauses directly relate to the provided text, which focuses on restrictions on content posted by users (e.g., prohibiting defamatory, illegal, or harmful"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration\n\nApplicable labels: Limitation of liability, Unilateral termination, Unilateral change, Contract by using"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration\n\nApplicable labels: Jurisdiction, Content removal"}
+{"gold": [], "pred": ["Limitation of liability", "Content removal"], "raw": "Limitation of liability, Content removal"}
+{"gold": [], "pred": ["Content removal", "Jurisdiction"], "raw": "Content removal, Jurisdiction"}
+{"gold": ["Content removal", "Unilateral termination"], "pred": ["Content removal"], "raw": "Content removal"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Unilateral termination"], "raw": "Unilateral termination"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": ["Limitation of liability"], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": ["Limitation of liability"], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": ["Choice of law"], "pred": ["Choice of law"], "raw": "Choice of law"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Unilateral change"], "raw": "Unilateral change"}
+{"gold": [], "pred": ["Limitation of liability", "Arbitration"], "raw": "Limitation of liability, Arbitration"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination"], "raw": "Limitation of liability, Unilateral termination"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Arbitration"], "raw": "Arbitration"}
+{"gold": [], "pred": ["Unilateral change"], "raw": "Unilateral change"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": ["Unilateral termination"], "pred": ["Unilateral termination"], "raw": "Unilateral termination"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": ["Content removal", "Unilateral termination"], "pred": ["Limitation of liability", "Unilateral termination", "Content removal"], "raw": "Limitation of liability, Unilateral termination, Content removal"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Choice of law", "Jurisdiction", "Arbitration"], "raw": "Choice of law, Jurisdiction, Arbitration"}
+{"gold": ["Content removal"], "pred": ["Content removal"], "raw": "Content removal"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Arbitration"], "raw": "Arbitration"}
+{"gold": [], "pred": ["Limitation of liability", "Arbitration"], "raw": "Limitation of liability, Arbitration"}
+{"gold": [], "pred": ["Limitation of liability", "Arbitration"], "raw": "Limitation of liability, Arbitration"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration\n\nNone"}
+{"gold": ["Unilateral change"], "pred": ["Unilateral change"], "raw": "Unilateral change"}
+{"gold": [], "pred": ["Unilateral change"], "raw": "Unilateral change"}
+{"gold": [], "pred": ["Choice of law", "Jurisdiction"], "raw": "Choice of law, Jurisdiction"}
+{"gold": [], "pred": ["Content removal"], "raw": "Content removal"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": ["Unilateral change"], "pred": ["Unilateral change"], "raw": "Unilateral change"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Content removal", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Arbitration"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration\n\nNone of the listed clauses directly relate to the provided text. The clause addresses eligibility based on being on a government list, which relates to access restrictions, but none of the"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": ["Content removal"], "pred": ["Content removal"], "raw": "Content removal"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Contract by using", "Choice of law"], "raw": "Choice of law, Contract by using"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration\n\nNone"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Contract by using", "Choice of law", "Jurisdiction"], "raw": "Limitation of liability, Contract by using, Choice of law, Jurisdiction"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": ["Unilateral change", "Unilateral termination"], "pred": ["Limitation of liability", "Unilateral change"], "raw": "Unilateral change, Limitation of liability"}
+{"gold": ["Unilateral change"], "pred": ["Unilateral termination"], "raw": "Unilateral termination"}
+{"gold": [], "pred": ["Unilateral termination"], "raw": "Unilateral termination"}
+{"gold": ["Unilateral termination"], "pred": ["Unilateral termination"], "raw": "Unilateral termination"}
+{"gold": [], "pred": ["Unilateral termination"], "raw": "Unilateral termination"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": ["Limitation of liability"], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Jurisdiction", "Arbitration"], "raw": "Arbitration, Jurisdiction, Language of arbitration"}
+{"gold": ["Jurisdiction"], "pred": ["Jurisdiction"], "raw": "Jurisdiction"}
+{"gold": [], "pred": ["Choice of law"], "raw": "Choice of law"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Limitation of liability", "Content removal"], "raw": "Limitation of liability, Content removal"}
+{"gold": [], "pred": ["Content removal"], "raw": "Content removal"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": ["Unilateral termination"], "pred": ["Unilateral termination"], "raw": "Unilateral termination"}
+{"gold": ["Content removal", "Limitation of liability"], "pred": ["Unilateral termination", "Content removal"], "raw": "Content removal, Unilateral termination"}
+{"gold": ["Unilateral change"], "pred": ["Unilateral change"], "raw": "Unilateral change"}
+{"gold": ["Unilateral termination"], "pred": ["Unilateral termination"], "raw": "Unilateral termination"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": ["Unilateral termination"], "pred": ["Unilateral termination"], "raw": "Unilateral termination"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Content removal"], "raw": "Limitation of liability, Content removal"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Unilateral change"], "raw": "Unilateral change"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Content removal"], "raw": "Limitation of liability, Content removal"}
+{"gold": [], "pred": ["Content removal"], "raw": "Content removal"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Contract by using"], "raw": "Limitation of liability, Contract by using"}
+{"gold": [], "pred": ["Unilateral change"], "raw": "Unilateral change"}
+{"gold": ["Unilateral termination"], "pred": ["Unilateral change"], "raw": "Unilateral change"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": ["Unilateral termination"], "pred": ["Unilateral termination"], "raw": "Unilateral termination"}
+{"gold": ["Unilateral termination"], "pred": ["Unilateral termination"], "raw": "Unilateral termination"}
+{"gold": [], "pred": ["Unilateral termination"], "raw": "Unilateral termination"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination"], "raw": "Limitation of liability, Unilateral termination"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Content removal"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal"}
+{"gold": [], "pred": ["Unilateral termination"], "raw": "Unilateral termination"}
+{"gold": ["Jurisdiction"], "pred": ["Jurisdiction"], "raw": "Jurisdiction"}
+{"gold": [], "pred": ["Unilateral change", "Contract by using"], "raw": "Unilateral change, Contract by using"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Contract by using"], "raw": "Limitation of liability, Contract by using"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration\n\nNone"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Unilateral change"], "raw": "Unilateral change"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": ["Contract by using"], "pred": ["Unilateral change"], "raw": "Unilateral change"}
+{"gold": [], "pred": ["Contract by using"], "raw": "Contract by using"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Unilateral termination"], "raw": "Unilateral termination"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration\n\nNone"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Unilateral termination", "Unilateral change"], "raw": "Unilateral termination, Unilateral change"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration\n\nNone"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": ["Limitation of liability"], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": ["Limitation of liability"], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": ["Unilateral termination"], "pred": ["Unilateral termination"], "raw": "Unilateral termination"}
+{"gold": ["Unilateral termination"], "pred": ["Unilateral termination"], "raw": "Unilateral termination"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Content removal"], "raw": "Limitation of liability, Content removal"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Choice of law", "Arbitration"], "raw": "Choice of law, Arbitration"}
+{"gold": [], "pred": ["Choice of law", "Jurisdiction", "Arbitration"], "raw": "Arbitration, Choice of law, Jurisdiction"}
+{"gold": [], "pred": ["Limitation of liability", "Arbitration"], "raw": "Limitation of liability, Arbitration"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration"}
+{"gold": ["Contract by using"], "pred": ["Contract by using"], "raw": "Contract by using"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination"], "raw": "Limitation of liability, Unilateral termination"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration\n\nNone"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination"], "raw": "Limitation of liability, Unilateral termination"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration\n\nNone"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": ["Unilateral change"], "pred": ["Unilateral change"], "raw": "Unilateral change"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": ["Limitation of liability"], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": ["Limitation of liability"], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration"}
+{"gold": ["Arbitration"], "pred": ["Arbitration"], "raw": "Arbitration"}
+{"gold": [], "pred": ["Choice of law", "Arbitration"], "raw": "Choice of law, Arbitration"}
+{"gold": [], "pred": ["Limitation of liability", "Arbitration"], "raw": "Limitation of liability, Confidentiality, Arbitration"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Contract by using"], "raw": "Contract by using"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Choice of law", "Jurisdiction"], "raw": "Choice of law, Jurisdiction"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Contract by using"], "raw": "Contract by using"}
+{"gold": [], "pred": ["Contract by using"], "raw": "Contract by using"}
+{"gold": ["Unilateral change"], "pred": ["Unilateral change"], "raw": "Unilateral change"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Unilateral change"], "raw": "Unilateral change"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral change", "Content removal"], "raw": "Limitation of liability, Unilateral change, Content removal"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration"}
+{"gold": [], "pred": ["Unilateral change"], "raw": "Unilateral change"}
+{"gold": ["Unilateral change"], "pred": ["Unilateral change"], "raw": "Unilateral change"}
+{"gold": [], "pred": ["Unilateral change"], "raw": "Unilateral change"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Contract by using"], "raw": "Contract by using"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Unilateral termination"], "raw": "Unilateral termination"}
+{"gold": [], "pred": ["Unilateral termination"], "raw": "Unilateral termination"}
+{"gold": [], "pred": ["Unilateral termination"], "raw": "Unilateral termination"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration"}
+{"gold": ["Jurisdiction"], "pred": ["Jurisdiction", "Arbitration"], "raw": "Jurisdiction, Arbitration"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Arbitration, Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction"}
+{"gold": [], "pred": ["Choice of law", "Arbitration"], "raw": "Arbitration, Choice of law"}
+{"gold": ["Arbitration"], "pred": ["Limitation of liability", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Arbitration, Jurisdiction"}
+{"gold": [], "pred": ["Arbitration"], "raw": "Arbitration"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Arbitration"], "raw": "Arbitration"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration\n\nApplicable labels: Arbitration, Choice of law"}
+{"gold": [], "pred": ["Arbitration"], "raw": "Arbitration"}
+{"gold": [], "pred": ["Limitation of liability", "Arbitration"], "raw": "Limitation of liability, Arbitration"}
+{"gold": [], "pred": ["Arbitration"], "raw": "Arbitration"}
+{"gold": [], "pred": ["Limitation of liability", "Arbitration"], "raw": "Limitation of liability, Arbitration"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Arbitration"], "raw": "Limitation of liability, Arbitration"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Arbitration"], "raw": "Arbitration"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination"], "raw": "Limitation of liability, Unilateral termination"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Content removal"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination"], "raw": "Limitation of liability, Unilateral termination"}
+{"gold": [], "pred": ["Content removal"], "raw": "Content removal"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": ["Unilateral termination"], "pred": ["Limitation of liability", "Unilateral termination"], "raw": "Limitation of liability, Unilateral termination"}
+{"gold": ["Unilateral termination"], "pred": ["Unilateral termination", "Unilateral change"], "raw": "Unilateral termination, Unilateral change"}
+{"gold": [], "pred": ["Content removal"], "raw": "Content removal"}
+{"gold": ["Unilateral change"], "pred": ["Unilateral change"], "raw": "Unilateral change"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": ["Unilateral change"], "pred": ["Content removal"], "raw": "Content removal"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Choice of law", "Jurisdiction", "Arbitration"], "raw": "Choice of law, Jurisdiction, Arbitration"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Content removal"], "raw": "Limitation of liability, Content removal"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Contract by using"], "raw": "Contract by using"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Contract by using"], "raw": "Contract by using"}
+{"gold": [], "pred": ["Content removal"], "raw": "Content removal"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Contract by using", "Content removal", "Choice of law", "Jurisdiction", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal, Contract by using, Choice of law, Jurisdiction, Arbitration\n\nApplicable labels: Unilateral termination, Unilateral change, Monitoring and recording of communications\n\nHowever, based on the provided clause, the only directly relevant and legally significant aspect"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Unilateral change", "Content removal"], "raw": "Limitation of liability, Unilateral termination, Unilateral change, Content removal"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Content removal"], "raw": "Limitation of liability, Unilateral termination, Content removal"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": ["Unilateral termination"], "pred": ["Limitation of liability", "Unilateral termination"], "raw": "Limitation of liability, Unilateral termination"}
+{"gold": ["Limitation of liability"], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Arbitration"], "raw": "Arbitration"}
+{"gold": [], "pred": ["Arbitration"], "raw": "Arbitration"}
+{"gold": [], "pred": ["Choice of law", "Arbitration"], "raw": "Choice of law, Arbitration"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Arbitration"], "raw": "Arbitration"}
+{"gold": [], "pred": ["Arbitration"], "raw": "Arbitration"}
+{"gold": [], "pred": ["Jurisdiction", "Arbitration"], "raw": "Jurisdiction, Arbitration"}
+{"gold": [], "pred": ["Limitation of liability", "Arbitration"], "raw": "Limitation of liability, Arbitration"}
+{"gold": [], "pred": ["Jurisdiction", "Arbitration"], "raw": "Arbitration, Jurisdiction"}
+{"gold": [], "pred": ["Arbitration"], "raw": "Arbitration"}
+{"gold": [], "pred": ["Arbitration"], "raw": "Arbitration"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination"], "raw": "Limitation of liability, Unilateral termination"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral termination", "Arbitration"], "raw": "Limitation of liability, Unilateral termination, Arbitration"}
+{"gold": [], "pred": ["Limitation of liability", "Unilateral change", "Arbitration"], "raw": "Limitation of liability, Unilateral change, Arbitration"}
+{"gold": [], "pred": ["Jurisdiction"], "raw": "Jurisdiction"}
+{"gold": ["Jurisdiction"], "pred": ["Jurisdiction"], "raw": "Jurisdiction"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": [], "pred": ["Limitation of liability"], "raw": "Limitation of liability"}
+{"gold": ["Unilateral change"], "pred": ["Unilateral change"], "raw": "Unilateral change"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": ["Contract by using"], "pred": ["Contract by using"], "raw": "Contract by using"}
+{"gold": ["Unilateral change"], "pred": ["Unilateral change"], "raw": "Unilateral change"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Contract by using"], "raw": "Contract by using"}
+{"gold": [], "pred": [], "raw": "None"}
+{"gold": [], "pred": ["Arbitration"], "raw": "Arbitration"}

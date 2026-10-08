@@ -1,0 +1,31 @@
+{
+  "task": "obliqa",
+  "about": "ADGM financial regulation, behavioural probe (not graded)",
+  "n_sampled": 200,
+  "seed": 42,
+  "base": {
+    "n": 200,
+    "produced_triage_json": 0.015,
+    "obligations_present_rate": 0.0,
+    "alert_class_distribution": {
+      "A10": 3
+    },
+    "descriptive_only": true
+  },
+  "tuned": {
+    "n": 200,
+    "produced_triage_json": 0.99,
+    "obligations_present_rate": 0.0051,
+    "alert_class_distribution": {
+      "A11": 198
+    },
+    "descriptive_only": true
+  },
+  "delta": {
+    "n": 0,
+    "produced_triage_json": 0.975,
+    "obligations_present_rate": 0.0051,
+    "descriptive_only": 0
+  },
+  "compared_at": "2026-09-25T17:47:04.408749+00:00"
+}

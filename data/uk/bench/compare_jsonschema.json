@@ -1,0 +1,27 @@
+{
+  "task": "jsonschema",
+  "about": "does the JSON skill generalise beyond the trained schema",
+  "n_sampled": 200,
+  "seed": 42,
+  "base": {
+    "n": 200,
+    "json_valid_rate": 0.96,
+    "schema_conformance": 0.8906,
+    "schema_checked": 192,
+    "note": null
+  },
+  "tuned": {
+    "n": 200,
+    "json_valid_rate": 0.97,
+    "schema_conformance": 0.8299,
+    "schema_checked": 194,
+    "note": null
+  },
+  "delta": {
+    "n": 0,
+    "json_valid_rate": 0.01,
+    "schema_conformance": -0.0607,
+    "schema_checked": 2
+  },
+  "compared_at": "2026-09-25T17:47:04.328141+00:00"
+}

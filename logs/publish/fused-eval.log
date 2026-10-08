@@ -1,0 +1,27 @@
+2026-09-25 16:23:43,673 INFO 10/104 generated
+2026-09-25 16:24:18,551 INFO 20/104 generated
+2026-09-25 16:24:51,642 INFO 30/104 generated
+2026-09-25 16:25:26,041 INFO 40/104 generated
+2026-09-25 16:25:58,859 INFO 50/104 generated
+2026-09-25 16:26:33,747 INFO 60/104 generated
+2026-09-25 16:27:08,729 INFO 70/104 generated
+2026-09-25 16:27:49,008 INFO 80/104 generated
+2026-09-25 16:28:27,581 INFO 90/104 generated
+2026-09-25 16:29:05,226 INFO 100/104 generated
+{
+  "records": 104,
+  "json_valid_rate": 1.0,
+  "alert_class_accuracy": 0.6442,
+  "alert_class_macro_f1": 0.2445,
+  "priority_accuracy": 0.7596,
+  "obligations_present_accuracy": 0.9135,
+  "primary_function_jaccard": 0.5744,
+  "version": "v1",
+  "model": "qwen3-4b-instruct",
+  "backend": "mlx-lm",
+  "mlx_id": "models/publish/uk-alert-triage-qwen3-4b-v1",
+  "adapter": null,
+  "seconds": 375,
+  "chars_per_second": 286.5,
+  "evaluated_at": "2026-09-25T10:59:23.615326+00:00"
+}

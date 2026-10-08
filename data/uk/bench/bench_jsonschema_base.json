@@ -1,0 +1,22 @@
+{
+  "task": "jsonschema",
+  "about": "does the JSON skill generalise beyond the trained schema",
+  "dataset": "epfl-dlab/JSONSchemaBench",
+  "config": "Github_easy",
+  "split": "test",
+  "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "is_base": true,
+  "n_sampled": 200,
+  "n_available": 577,
+  "seed": 42,
+  "max_new_tokens": 400,
+  "seconds": 202,
+  "evaluated_at": "2026-09-25T17:13:48.633730+00:00",
+  "metrics": {
+    "n": 200,
+    "json_valid_rate": 0.96,
+    "schema_conformance": 0.8906,
+    "schema_checked": 192,
+    "note": null
+  }
+}

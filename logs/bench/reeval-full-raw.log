@@ -1,0 +1,28 @@
+2026-09-25 22:04:44,672 INFO 10/104 generated
+2026-09-25 22:05:19,775 INFO 20/104 generated
+2026-09-25 22:05:53,055 INFO 30/104 generated
+2026-09-25 22:06:27,970 INFO 40/104 generated
+2026-09-25 22:07:01,109 INFO 50/104 generated
+2026-09-25 22:07:34,923 INFO 60/104 generated
+2026-09-25 22:08:09,384 INFO 70/104 generated
+2026-09-25 22:08:48,143 INFO 80/104 generated
+2026-09-25 22:09:27,333 INFO 90/104 generated
+2026-09-25 22:10:04,974 INFO 100/104 generated
+{
+  "records": 104,
+  "json_valid_rate": 1.0,
+  "alert_class_accuracy": 0.6442,
+  "alert_class_macro_f1": 0.2445,
+  "priority_accuracy": 0.7596,
+  "obligations_present_accuracy": 0.9135,
+  "primary_function_jaccard": 0.5744,
+  "version": "v1",
+  "model": "qwen3-4b-instruct",
+  "backend": "mlx-lm",
+  "mlx_id": "models/publish/regulatory-alert-triage-qwen3-4b-v1",
+  "adapter": null,
+  "seconds": 375,
+  "chars_per_second": 286.3,
+  "evaluated_at": "2026-09-25T16:40:23.854367+00:00"
+}
+EXIT=0

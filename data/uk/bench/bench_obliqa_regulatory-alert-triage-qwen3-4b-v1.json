@@ -1,0 +1,24 @@
+{
+  "task": "obliqa",
+  "about": "ADGM financial regulation, behavioural probe (not graded)",
+  "dataset": "RegNLP/ObliQA",
+  "config": "default",
+  "split": "test",
+  "model": "models/publish/regulatory-alert-triage-qwen3-4b-v1",
+  "is_base": false,
+  "n_sampled": 200,
+  "n_available": 2786,
+  "seed": 42,
+  "max_new_tokens": 400,
+  "seconds": 607,
+  "evaluated_at": "2026-09-25T17:46:24.258791+00:00",
+  "metrics": {
+    "n": 200,
+    "produced_triage_json": 0.99,
+    "obligations_present_rate": 0.0051,
+    "alert_class_distribution": {
+      "A11": 198
+    },
+    "descriptive_only": true
+  }
+}

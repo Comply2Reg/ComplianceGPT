@@ -1,0 +1,22 @@
+{
+  "task": "jsonschema",
+  "about": "does the JSON skill generalise beyond the trained schema",
+  "dataset": "epfl-dlab/JSONSchemaBench",
+  "config": "Github_easy",
+  "split": "test",
+  "model": "models/publish/regulatory-alert-triage-qwen3-4b-v1",
+  "is_base": false,
+  "n_sampled": 200,
+  "n_available": 577,
+  "seed": 42,
+  "max_new_tokens": 400,
+  "seconds": 196,
+  "evaluated_at": "2026-09-25T17:17:14.635608+00:00",
+  "metrics": {
+    "n": 200,
+    "json_valid_rate": 0.97,
+    "schema_conformance": 0.8299,
+    "schema_checked": 194,
+    "note": null
+  }
+}

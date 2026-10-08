@@ -1,0 +1,31 @@
+{
+  "task": "unfair_tos",
+  "about": "8-class multi-label unfair terms-of-service clauses (LexGLUE)",
+  "n_sampled": 500,
+  "seed": 42,
+  "base": {
+    "n": 500,
+    "micro_f1": 0.1717,
+    "micro_precision": 0.0952,
+    "micro_recall": 0.8727,
+    "exact_set_match": 0.612,
+    "answered_rate": 1.0
+  },
+  "tuned": {
+    "n": 500,
+    "micro_f1": 0.1462,
+    "micro_precision": 0.0795,
+    "micro_recall": 0.9091,
+    "exact_set_match": 0.64,
+    "answered_rate": 1.0
+  },
+  "delta": {
+    "n": 0,
+    "micro_f1": -0.0255,
+    "micro_precision": -0.0157,
+    "micro_recall": 0.0364,
+    "exact_set_match": 0.028,
+    "answered_rate": 0.0
+  },
+  "compared_at": "2026-09-25T17:47:04.247202+00:00"
+}

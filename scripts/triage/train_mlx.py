@@ -13,7 +13,7 @@ layers fits comfortably in 16-24 GB of unified memory at 2048 tokens.
     python -m scripts.triage.train_mlx eval   --dataset-dir $DS --version v1 \\
         --adapter-path models/uk-triage-v1-qwen3-4b-instruct-mlx
 
-`export` writes data/uk/datasets/<tier>/mlx/{train,valid,test}.jsonl in
+`export` writes data/uk/datasets/<tier>/mlx_<version>/{train,valid,test}.jsonl in
 mlx-lm's chat format ({"messages": [...]}) straight from the records'
 `messages`; `train` runs `mlx_lm lora --mask-prompt` (loss on the assistant
 turn only); `eval` generates greedily on the test split and scores it with
@@ -46,8 +46,14 @@ log = logging.getLogger("triage.train_mlx")
 SPLIT_FILES = {"train": "train", "val": "valid", "test": "test"}
 
 
+def mlx_data_dir(args) -> Path:
+    # Versioned: a fixed mlx/ dir let exporting v3 silently overwrite v2's
+    # training input, and `train` reused whatever was there.
+    return args.dataset_dir / f"mlx_{args.version}"
+
+
 def export(args) -> int:
-    out = args.dataset_dir / "mlx"
+    out = mlx_data_dir(args)
     counts = {}
     for split, mlx_name in SPLIT_FILES.items():
         rows = read_jsonl(args.dataset_dir / f"{split}_{args.version}.jsonl")
@@ -68,7 +74,7 @@ def train(args) -> int:
     if not mlx_id:
         log.error("no MLX conversion registered for %s", args.model)
         return 1
-    data_dir = args.dataset_dir / "mlx"
+    data_dir = mlx_data_dir(args)
     if not (data_dir / "train.jsonl").exists():
         rc = export(args)
         if rc:
@@ -198,6 +204,9 @@ def evaluate(args) -> int:
         adapter_path=str(args.adapter_path) if args.adapter_path else None,
     )
     sampler = make_sampler(temp=0.0)
+    # Thinking models answer the triage JSON with reasoning off: the same
+    # prefilled empty think block the training records were rendered with.
+    template_kwargs = {"enable_thinking": False} if spec.get("thinking_switch") else {}
     preds: List[Dict] = []
     outputs: List[Dict] = []
     started = time.monotonic()
@@ -205,7 +214,7 @@ def evaluate(args) -> int:
     for i, r in enumerate(rows, 1):
         messages = (r.get("messages") or to_messages(r))[:2]
         prompt = tokenizer.apply_chat_template(
-            messages, tokenize=False, add_generation_prompt=True
+            messages, tokenize=False, add_generation_prompt=True, **template_kwargs
         )
         text = generate(
             model,

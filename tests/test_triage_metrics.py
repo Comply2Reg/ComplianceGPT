@@ -70,7 +70,7 @@ def test_mlx_export_writes_chat_format(tmp_path: Path) -> None:
     rc = train_mlx.main(["export", "--dataset-dir", str(ds), "--version", "t"])
     assert rc == 0
     for name, n in (("train", 2), ("valid", 1), ("test", 1)):
-        lines = [json.loads(line) for line in (ds / "mlx" / f"{name}.jsonl").open()]
+        lines = [json.loads(line) for line in (ds / "mlx_t" / f"{name}.jsonl").open()]
         assert len(lines) == n
         assert list(lines[0]) == ["messages"]
         roles = [m["role"] for m in lines[0]["messages"]]

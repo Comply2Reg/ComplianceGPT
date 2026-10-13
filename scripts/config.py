@@ -92,6 +92,30 @@ MODELS = {
         # MLX conversion of the same weights.
         "mlx_id": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
     },
+    # v4+ base (2026-10-13), the base Microsoft FrogNano-4B is built on.
+    # Dense hybrid: 24 Gated-DeltaNet + 8 gated-attention layers (32 total),
+    # vocab 248,320 vs Qwen3's 151,936. One model, thinking ON by default —
+    # there is no 2507-style instruct-only release — and mlx_lm's trainer
+    # cannot pass enable_thinking, so the local conversion's chat template is
+    # patched to default to non-thinking (scripts/triage/mlx_base.py). The
+    # trained assistant turn is then `<think>\n\n</think>\n\n{json}`, exactly
+    # what inference with enable_thinking=False prefills.
+    "qwen3.5-4b": {
+        "hf_id": "Qwen/Qwen3.5-4B",
+        "licence": "Apache-2.0",
+        "max_context": 262144,
+        "max_seq_length": 2048,
+        "instruction_part": "<|im_start|>user\n",
+        "response_part": "<|im_start|>assistant\n<think>\n\n</think>\n\n",
+        "supports_system": True,
+        "thinking_switch": True,
+        "gated": False,
+        # Local 4-bit conversion (no plain 4-bit on mlx-community):
+        #   python -m mlx_lm convert --hf-path Qwen/Qwen3.5-4B \
+        #       --mlx-path models/base/qwen3.5-4b-mlx-4bit -q --q-bits 4
+        #   python -m scripts.triage.mlx_base models/base/qwen3.5-4b-mlx-4bit
+        "mlx_id": "models/base/qwen3.5-4b-mlx-4bit",
+    },
     "gemma-4-e4b-it": {
         "hf_id": "google/gemma-4-E4B-it",
         "licence": "Apache-2.0",

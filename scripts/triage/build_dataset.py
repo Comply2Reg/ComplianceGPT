@@ -270,6 +270,40 @@ def balance_by_class(
     Downsampling only, like `balance`: an oversampled rare class teaches the
     model the duplicate rather than the class.
     """
+    classes = {r["classification"] for r in train}
+    return balance_by_caps(train, {c: cap for c in classes}, seed)
+
+
+def power_caps(available: Dict[str, int], alpha: float, size: int) -> Dict[str, int]:
+    """Per-class caps proportional to available**alpha, summing to ~size.
+
+    alpha=1 keeps the natural distribution (v2: the head class swamps the
+    rest), alpha=0 is a flat cap (v3: the head is cut so hard it is then
+    under-predicted, and formerly scarce classes are over-predicted). 0.5 is
+    square-root sampling, between the two. A class is never asked for more
+    than it has, so the scale K is solved by bisection on
+    sum(min(n_c, K * n_c**alpha)) = size.
+    """
+    total = sum(available.values())
+    if size >= total:
+        return dict(available)
+
+    def kept(k: float) -> int:
+        return sum(min(n, round(k * n**alpha)) for n in available.values())
+
+    lo, hi = 0.0, float(max(available.values()))
+    for _ in range(100):
+        mid = (lo + hi) / 2
+        if kept(mid) < size:
+            lo = mid
+        else:
+            hi = mid
+    return {c: min(n, round(hi * n**alpha)) for c, n in available.items()}
+
+
+def balance_by_caps(
+    train: List[Dict], caps: Dict[str, int], seed: int
+) -> Tuple[List[Dict], Dict]:
     by_class: Dict[str, List[Dict]] = defaultdict(list)
     for r in train:
         by_class[r["classification"]].append(r)
@@ -279,6 +313,7 @@ def balance_by_class(
     for cls in sorted(by_class):  # sorted so the rng draw is reproducible
         rows = by_class[cls]
         available = len(rows)
+        cap = caps[cls]
         if available > cap:
             rows = sorted(rows, key=lambda r: r["metadata"]["doc_hash"])
             rng.shuffle(rows)
@@ -391,10 +426,19 @@ def main(argv=None) -> int:
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument(
         "--balance-by",
-        choices=("stratum", "class"),
+        choices=("stratum", "class", "power"),
         default="stratum",
         help="stratum: cap towards TARGET_MIX (v1/v2 behaviour). "
-        "class: cap each alert class at --class-cap",
+        "class: cap each alert class at --class-cap (v3). "
+        "power: cap each class in proportion to available**--alpha, "
+        "summing to --train-size (v4: --alpha 0.5, square-root sampling)",
+    )
+    ap.add_argument("--alpha", type=float, default=0.5, help="--balance-by power: exponent")
+    ap.add_argument(
+        "--train-size",
+        type=int,
+        default=3194,
+        help="--balance-by power: target train examples (default: v3's size)",
     )
     ap.add_argument(
         "--class-cap",
@@ -497,6 +541,11 @@ def main(argv=None) -> int:
             splits["train"], args.class_cap, args.seed
         )
         balance_report = stratum_view(splits["train"], train)
+    elif args.balance_by == "power":
+        available = Counter(r["classification"] for r in splits["train"])
+        caps = power_caps(dict(available), args.alpha, args.train_size)
+        train, class_report = balance_by_caps(splits["train"], caps, args.seed)
+        balance_report = stratum_view(splits["train"], train)
     else:
         train, balance_report = balance(splits["train"], args.seed)
         class_report = None
@@ -573,6 +622,8 @@ def main(argv=None) -> int:
         "target_mix": TARGET_MIX,
         "balance_mode": args.balance_by,
         "class_cap": args.class_cap if args.balance_by == "class" else None,
+        "alpha": args.alpha if args.balance_by == "power" else None,
+        "train_size": args.train_size if args.balance_by == "power" else None,
         "balance": balance_report,
         "class_balance": class_report,
         "train": breakdown(train),
@@ -616,7 +667,12 @@ def main(argv=None) -> int:
         "",
         *(
             [
-                f"## Train balance: each class capped at {args.class_cap}",
+                (
+                    f"## Train balance: each class capped at {args.class_cap}"
+                    if args.balance_by == "class"
+                    else f"## Train balance: caps proportional to available^{args.alpha}, "
+                    f"target {args.train_size}"
+                ),
                 "",
                 "| class | available | cap | kept | shortfall |",
                 "|---|---:|---:|---:|---:|",

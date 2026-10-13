@@ -361,3 +361,32 @@ def test_apply_gold_keys_on_hash_not_doc_id(tmp_path: Path) -> None:
 def test_gold_sheet_carries_the_hash(tmp_path: Path) -> None:
     """Without doc_hash in the sheet, apply_gold has no safe key to match on."""
     assert "doc_hash" in build_dataset.GOLD_COLUMNS
+
+
+def test_power_caps_interpolate_between_natural_and_flat() -> None:
+    from scripts.triage.build_dataset import power_caps
+
+    avail = {"A11": 1974, "A3": 882, "A2": 572, "A10": 80, "A13": 16}
+    sqrt = power_caps(avail, 0.5, 2000)
+    assert abs(sum(sqrt.values()) - 2000) <= len(avail)
+    assert all(sqrt[c] <= avail[c] for c in avail)
+    assert sqrt["A13"] == 16 and sqrt["A10"] == 80  # scarce classes kept whole
+    assert sqrt["A11"] > sqrt["A3"] > sqrt["A2"]  # order of the head preserved
+    flat = power_caps(avail, 0.0, 2000)
+    natural = power_caps(avail, 1.0, 2000)
+    # the head's share sits between the flat cap and the natural distribution
+    assert flat["A11"] < sqrt["A11"] < natural["A11"]
+    assert power_caps(avail, 0.5, 10_000) == avail  # asking for more than exists
+
+
+def test_class_mode_is_unchanged_by_the_caps_refactor() -> None:
+    from scripts.triage.build_dataset import balance_by_caps, balance_by_class
+
+    rows = [
+        {"classification": c, "metadata": {"doc_hash": f"{c}{i:04d}"}}
+        for c, n in (("A1", 30), ("A2", 5), ("A3", 12))
+        for i in range(n)
+    ]
+    a, ra = balance_by_class(rows, 10, seed=42)
+    b, rb = balance_by_caps(rows, {"A1": 10, "A2": 10, "A3": 10}, seed=42)
+    assert a == b and ra == rb and len(a) == 25

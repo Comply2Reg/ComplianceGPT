@@ -45,6 +45,29 @@ template think only when `regnano_thinking=True` is passed; anything else gets
 the empty think block, during training and inference alike. Verified: the prompt
 is an exact token prefix, and the loss covers only `{json}<|im_end|>`.
 
+### Training cost on the M4 Pro: why triage stays on Qwen3
+
+One LoRA step (rank 8, 16 layers, gradient checkpointing, batch 1), measured 2026-10-13:
+
+| base | tokens | peak memory | s/step |
+|---|---:|---:|---:|
+| Qwen3-4B-Instruct-2507 | 1,536 | 4.4 GB | 5.8 |
+| Qwen3.5-4B | 512 | 7.2 GB | 5.6 |
+| Qwen3.5-4B | 768 | 10.0 GB | 10.0 |
+| Qwen3.5-4B | 1,536 | 21.2 GB | 52-115 (swapping) |
+
+Plain `mlx_lm lora` runs the DeltaNet layers through a per-token Python loop in
+training mode (`use_kernel=not self.training`) and keeps every step's state:
+18 GB at 256 tokens, out of memory on step 1 of the triage run. mlx-lm-lora's
+`recurrent_patch` routes training through MLX's fused `mx.fast.gated_delta_update`
+(verified: all 24 linear-attention calls take it), which is the table above; the
+remaining cost is that kernel's backward in MLX 0.32.3.
+
+Decision: **RegNano RL runs on Qwen3.5-4B** (task prompts p50 726 / p95 919
+tokens), **triage v4 stays on Qwen3-4B-Instruct-2507** (records p50 1,050,
+max 1,499 — ~22 h per run on Qwen3.5). Any Qwen3.5 training goes through
+mlx-lm-lora, never plain `mlx_lm lora`.
+
 ## Task families
 
 | family | gold from | verifier |

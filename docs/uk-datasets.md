@@ -727,3 +727,41 @@ transposition chain that needs a name.
 - 960 documents were unclassified at capture (MIXED sources); their stratum
   comes from the model class (`stratum_source: model`) and they are
   over-represented in the gold sheet on purpose.
+
+## v4: square-root class balance, 2026-10-13
+
+v3's flat cap of 400 per class reversed the imbalance rather than removing it:
+A11 fell to 0.45x its gold rate while formerly scarce A4/A14 were over-predicted
+(`docs/benchmarks.md`, v3). A single cap ignores a class's base rate. v4 caps each
+class in proportion to the square root of what is available, at v3's train size,
+and changes nothing else — one variable, so the v3 -> v4 delta is attributable.
+
+```bash
+python -m scripts.triage.build_dataset \
+    --labels data/uk/labels/triage_uk_v2.jsonl data/uk/labels/triage_us_v1.jsonl \
+    --corpus-dir ../../09-inventory-kit/c2r-inventory-kit/data/alert_corpus \
+                 ../../09-inventory-kit/c2r-inventory-kit/data/us_corpus \
+    --out data/uk/datasets/global --version v4 --tier GREEN \
+    --gold-months 2 --val-frac 0.10 --head-chars 1500 --seed 42 \
+    --balance-by power --alpha 0.5 --train-size 3194
+python -m scripts.triage.train_mlx train --dataset-dir data/uk/datasets/global --version v4 \
+    --model qwen3-4b-instruct --iters 3200 --adapter-path models/triage-v4-global-qwen3-4b-mlx
+```
+
+| class | available | v3 (cap 400) | v4 (sqrt) |
+|---|---:|---:|---:|
+| A11 | 1,974 | 400 | 632 |
+| A3 | 882 | 400 | 422 |
+| A7 | 743 | 400 | 388 |
+| A8 | 660 | 400 | 365 |
+| A2 | 572 | 400 | 340 |
+| A1 | 560 | 400 | 337 |
+| A14 | 493 | 400 | 316 |
+| A4, A6, A10 | 90, 80, 80 | all | all |
+| A12, A9, A5, A13 | 60, 49, 19, 16 | all | all |
+
+Train 3,194 as in v3; val and test are byte-identical to v3's, so v1-v4 are all
+scored on the same 759 documents. Base model stays **Qwen3-4B-Instruct-2507**:
+Qwen3.5-4B trains ~10x slower under MLX on this machine (`docs/regnano.md`).
+`train_mlx export` now writes `mlx_<version>/`, so v4's export no longer
+overwrites v3's training input.

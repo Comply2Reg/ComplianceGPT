@@ -425,6 +425,54 @@ cap traded one skew for a smaller one.
 
 ---
 
+## v4: square-root class balance, 2026-10-13
+
+Same base (Qwen3-4B-Instruct-2507, 4-bit MLX), same prompt, same 3,194 training
+examples and same 759-doc test split as v3; only the per-class cap changed from a flat
+400 to cap ∝ available^0.5 (`docs/uk-datasets.md`, v4 section). 3,200 iters, 6 h 58 min.
+Final adapter (`models/triage-v4-global-qwen3-4b-mlx`), not yet fused.
+
+| Metric | v3 | v4 | v4 - v3 |
+|---|---:|---:|---:|
+| class accuracy | 0.693 | **0.715** | +0.022 |
+| priority accuracy | 0.715 | **0.725** | +0.009 |
+| JSON validity | 0.995 | **0.997** | +0.003 |
+| macro-F1, support >= 20 (7 classes) | 0.717 | **0.759** | +0.042 |
+| macro-F1, support >= 10 (9 classes) | 0.558 | **0.604** | +0.047 |
+| weighted F1 | 0.677 | **0.706** | +0.029 |
+| obligations-present accuracy | 0.864 | 0.864 | 0 |
+
+Paired on the same 759 docs: v4 fixes 36 v3 errors and introduces 19. Bootstrap 95% CI
+on the accuracy gain **[+0.004, +0.042]**, so the gain is real but small. The 0.70
+label-noise ceiling (section 1) still applies: 0.715 is at it, not past it.
+
+| class | gold | v3 pred | v4 pred | v3 F1 | v4 F1 |
+|---|---:|---:|---:|---:|---:|
+| A3 | 239 | 275 | 271 | 0.856 | 0.867 |
+| A11 | 184 | 82 | 126 | 0.587 | 0.600 |
+| A8 | 77 | 114 | 104 | 0.712 | 0.740 |
+| A2 | 67 | 28 | 38 | 0.590 | 0.667 |
+| A14 | 60 | 119 | 51 | 0.615 | 0.793 |
+| A6 | 45 | 52 | 70 | 0.804 | 0.748 |
+| A7 | 33 | 37 | 36 | 0.857 | 0.899 |
+| A9 | 15 | 0 | 1 | 0.000 | 0.125 |
+| A12 | 15 | 14 | 9 | 0.000 | 0.000 |
+| A5 | 9 | 0 | 0 | 0.000 | 0.000 |
+| A10 | 9 | 13 | 23 | 0.545 | 0.375 |
+| A13 | 3 | 1 | 12 | 0.000 | 0.000 |
+| A4 | 2 | 19 | 15 | 0.191 | 0.235 |
+| A1 | 1 | 1 | 1 | 0.000 | 0.000 |
+
+What moved: the A11 under-prediction v3 introduced is half recovered (82 -> 126 of 184
+gold) and the A14 over-prediction is gone (119 -> 51 of 60). What did not: A5 and A9
+are still (almost) never emitted, which is a label problem, not a balance problem
+(see the A5/A9 note in `docs/uk-datasets.md`). New over-predictions: A10 (23 vs 9),
+A13 (12 vs 3), A6 (70 vs 45), from the rarer classes keeping all their examples.
+
+Val loss was noisy (about 25 val examples per check; 0.638 at iter 2800, 0.827 final),
+so the iter-2800 checkpoint is to be scored on this same test split before fusing;
+the winner on test, not on val, is what gets published.
+
 ## Reproducing
 
 ```bash

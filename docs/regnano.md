@@ -74,7 +74,7 @@ mlx-lm-lora, never plain `mlx_lm lora`.
 |---|---|---|
 | `effective_date` | Federal Register `DATES:` paragraph: exactly one effective date, or `null` for comment-only proposals | date equality; `null` only when gold is null |
 | `defined_term` | `“X” means …` running to end of line, unique in a window holding other definitions | verbatim span (typography- and whitespace-insensitive), overlap >= 0.8 |
-| `obligation_span` | author model (next) | every span verbatim, span-set F1 >= 0.8, modality match |
+| `obligation_span` | human-reviewed seed gold (`seed.py`); author model next | every span verbatim, span-set F1 >= 0.8, modality match |
 | `citation` | author model / legislation.gov.uk changes feed (next) | normalised ID equality (`12 C.F.R. § 1026.19` == `12 CFR 1026.19`) |
 | `triage_class` | agreed labels or human gold only | exact class |
 
@@ -138,6 +138,23 @@ citations, staggered/compliance dates.
 The lesson is FrogNano's own stated gap — it never checked task quality by hand.
 Read the failures before trusting a pass rate: two of three "model errors" here
 were task errors.
+
+## Seed gold for obligation spans (2026-10-13)
+
+`seed.py` turns a human-reviewed seed file (630 records, rule-1/vnext-1
+schema: verbatim `source_text` + `item_type` per regulatory item) into one
+`obligation_span` task per record and item type. Licence comes from **our**
+corpus: a record is admitted only if its spans occur in a GREEN document from
+`sources.iter_docs`. Of 630 records, 349 are a script-filled batch
+(`layer2_remaining8`: summary = source sentence, `applies_to` always empty)
+and are skipped as silver; 144 (SEBI/RBI/IRDAI, licence undetermined, and
+FCA, AMBER) are not in a GREEN document. Result: **24 HMT tasks** (10
+obligation, 11 permission, 3 prohibition).
+
+Known risk: the seed lists items per type but may not list *every* provision
+of that type (a passage's second "may" can be unlisted), and span-set F1
+then penalises a model for quoting it. Calibrate, then read the 0/8 tasks
+before training on them.
 
 ## Deviations from FrogNano, recorded
 

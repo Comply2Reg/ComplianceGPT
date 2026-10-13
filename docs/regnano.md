@@ -81,7 +81,8 @@ mlx-lm-lora, never plain `mlx_lm lora`.
 ```bash
 python -m scripts.regnano.mine --out data/regnano/tasks/mined_v1.jsonl   # 909 date + 473 term tasks, all GREEN
 python -m scripts.regnano.calibrate --tasks <tasks> --out <calibration.jsonl> --k 8 --keep-out <in-band.jsonl>
-python -m scripts.regnano.rl export --tasks <in-band.jsonl> --out data/regnano/grpo/iter1
+python -m scripts.regnano.pool --tasks <tasks> --calibration <calibration.jsonl> --out-dir data/regnano/tasks/iter1
+python -m scripts.regnano.rl export --tasks data/regnano/tasks/iter1/train.jsonl --out data/regnano/grpo/iter1
 python -m scripts.regnano.rl train --data data/regnano/grpo/iter1 --model-path <policy> --adapter-path models/regnano-iter1
 ```
 
@@ -103,6 +104,36 @@ Probe of 48 tasks, ~9.7 s/task:
   at their first sentence, so complete quotes were marked wrong. Definitions now
   must run to end of line. After the quote fix alone: mean 0.70, 10 always / 4
   never / 2 in band.
+
+### Full pool, 2026-10-13 (573 tasks, k=8, 2 h 45 min)
+
+| family | tasks | always 8/8 | never 0/8 | in band | mean pass |
+|---|---:|---:|---:|---:|---:|
+| `effective_date` | 100 | 100 | 0 | 0 | 1.00 |
+| `defined_term` | 473 | 307 | 13 | 153 | 0.87 |
+
+Reading the 13 never-solved tasks by hand: most were **gold errors, not model
+errors**: two definitions on one line ("fuel" ran into "feedstock"), aliased
+terms (`"Board" or "Board of Directors"`), definitions continued on the next
+line (`…;\nprovided that`), a term quoted twice (`interprets "X" to mean …
+"X" means …`), lost PDF ligatures (`O\x00ce`), and definitions wrapped
+mid-sentence. `mine.py` (`ambiguous_definition`) now rejects each pattern.
+Re-mined (`mined_v2.jsonl`, 389 terms), it drops 11 of the 13 never-solved
+tasks but only 12% of the always-solved ones, so it is removing bad tasks,
+not hard ones. The remaining failures are real: quoting past the definition
+into a `See …` note, dropping the opening quote mark.
+
+Iteration 1 pool (`pool.py`, 20% held out by task_id hash at every difficulty):
+
+| | defined_term | effective_date |
+|---|---:|---:|
+| train (in band) | 82 (74 train / 8 valid) | 0 |
+| held out | 71, base pass 0.935 | 21, base pass 1.00 |
+
+The base model already solves 0.935 of held-out definitions, so iteration 1
+has ~6 points of headroom on this family and is a test of the loop, not a
+result. A meaningful RL gain needs harder families: obligation spans,
+citations, staggered/compliance dates.
 
 The lesson is FrogNano's own stated gap — it never checked task quality by hand.
 Read the failures before trusting a pass rate: two of three "model errors" here

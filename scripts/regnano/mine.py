@@ -51,6 +51,19 @@ COMMENTS = re.compile(r"\bcomments?\b.{0,80}\b(?:received|submitted|due)\b", re.
 # definitions are skipped rather than guessed.
 DEFINITION = re.compile(r"[“\"]([^”\"\n]{2,60})[”\"] means ([^\n]{10,600}[;.])[ \t]*(?=\n|$)")
 
+QUOTED = re.compile(r"[“\"]([^”\"\n]{2,60})[”\"]")
+# A definition continues onto the next line ("…investment contract;\nprovided
+# that …"): the end-of-line gold would be a truncated answer.
+CONTINUES = re.compile(r"\n[ \t]*(?:[a-z]|provided\b|Provided\b)")
+
+# What may precede the quoted term on its line: nothing, an enumerator
+# "(h)", or the end of a sentence, then "The term"/"A"/"An". Anything else
+# ("England, and “regulator” means …") is a definition wrapped mid-sentence.
+LEAD_IN = re.compile(r"(?:^|.*[.:;—-]\s+|\(?[0-9a-zA-Z]{1,4}\)\s*)(?:(?:[Tt]he term|An?)\s+)?$")
+# Lost PDF ligatures ("O\x00ce" for "Office") and replacement chars: a model
+# that writes the word correctly can never quote it verbatim.
+MANGLED = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\ufffd]")
+
 CONTEXT_CHARS = 2400
 
 DATE_QUESTION = (
@@ -115,6 +128,31 @@ def mine_effective_date(doc: Doc) -> Optional[Dict]:
     return _base(doc, "effective_date", "dates", context, DATE_QUESTION, {"date": gold})
 
 
+def ambiguous_definition(m: re.Match, text: str, context: str) -> Optional[str]:
+    """Why a mined definition has more than one defensible answer, or None.
+
+    Each rule is a calibration failure read by hand (2026-10-13): the base
+    model gave a right answer to a wrong gold, 0/8.
+    """
+    term = m.group(1).strip()
+    gold = m.group(0)
+    if DEFINITION.search(gold, 1) or re.search(r"the term [“\"]", gold[1:]):
+        return "two definitions on one line"  # "fuel" means …; "feedstock" means …
+    if MANGLED.search(gold):
+        return "mangled characters"
+    line_start = text.rfind("\n", 0, m.start()) + 1
+    if QUOTED.search(text, line_start, m.start()):
+        return "aliased term"  # The term "Board" or "Board of Directors" means …
+    if not LEAD_IN.match(text[line_start : m.start()]):
+        return "starts mid-sentence"
+    if CONTINUES.match(text, m.end()):
+        return "definition continues on the next line"
+    mentions = [q for q in QUOTED.finditer(context) if q.group(1).strip() == term]
+    if len(mentions) != 1:
+        return "term quoted more than once"  # interprets the term "X" to mean … "X" means …
+    return None
+
+
 def mine_defined_terms(doc: Doc, rng: random.Random, per_doc: int = 2) -> Iterator[Dict]:
     matches = list(DEFINITION.finditer(doc.text))
     rng.shuffle(matches)
@@ -127,7 +165,7 @@ def mine_defined_terms(doc: Doc, rng: random.Random, per_doc: int = 2) -> Iterat
         # The term must be defined once in the window, and the gold must be
         # locatable — otherwise the task has two right answers or none.
         defined_here = [d for d in DEFINITION.finditer(context) if d.group(1).strip() == term]
-        if len(defined_here) != 1:
+        if len(defined_here) != 1 or ambiguous_definition(m, doc.text, context):
             continue
         gold = m.group(0)
         if locate(gold, context) is None:

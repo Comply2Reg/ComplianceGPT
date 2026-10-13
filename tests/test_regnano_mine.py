@@ -125,3 +125,41 @@ def test_verifiers_import_only_the_standard_library() -> None:
     mods = {n.module.split(".")[0] for n in ast.walk(tree) if isinstance(n, ast.ImportFrom) and n.module}
     mods |= {a.name.split(".")[0] for n in ast.walk(tree) if isinstance(n, ast.Import) for a in n.names}
     assert mods <= set(sys.stdlib_module_names) | {"__future__"}, mods
+
+
+def test_ambiguous_definitions_are_not_mined() -> None:
+    """Each case was a 0/8 calibration task where the model's answer was right."""
+    two_on_a_line = DEFS + (
+        "Proposed § 9 would provide that the term “fuel” means material used to produce "
+        "electricity. Proposed § 10 would provide that the term “feedstock” means any raw material.\n"
+    )
+    aliased = DEFS + "The term “Board” or “Board of Directors” means the Board of Directors of the Company.\n"
+    continued = DEFS + "“Covered contract” means a contract involving a crypto asset;\nprovided that it is not a security.\n"
+    restated = (
+        "The Board interprets the term “offense committed” to mean the last date of the misconduct. "
+        "In instances with multiple offenses,\n“offense committed” means the last date of any of the offenses.\n"
+    ) + DEFS
+    wrapped = DEFS + "“regulators” means the PSR, the FCA and the Bank of\nEngland, and “regulator” means any one of the regulators;\n"
+    ligature = DEFS + "“ICO” means the Information Commissioner’s O\x00ce;\n"
+    for text, term in ((wrapped, "regulator"), (ligature, "ICO"), (two_on_a_line, "fuel"), (aliased, "Board of Directors"),
+                       (continued, "Covered contract"), (restated, "offense committed")):
+        terms = {t["gold"]["term"] for t in mine_defined_terms(_doc(text), random.Random(0), per_doc=9)}
+        assert term not in terms, term
+        assert "the Authority" in terms  # the clean definitions beside it still mine
+
+
+def test_pool_holds_out_every_difficulty_and_trains_only_in_band() -> None:
+    from scripts.regnano.pool import build, is_held_out
+
+    tasks = [{"task_id": f"t{i}", "family": "defined_term"} for i in range(400)]
+    rates = [0.0, 0.5, 1.0, 0.875]
+    cal = [{"task_id": f"t{i}", "pass_rate": rates[i % 4]} for i in range(400)]
+    cal.append({"task_id": "gone", "pass_rate": 0.5})  # rejected by the miner since
+    pool = build(tasks, cal, 0.2, 0.0, 1.0)
+    held = {t["task_id"] for t in pool["heldout"]}
+    train = {t["task_id"] for t in pool["train"]}
+    assert held and not held & train and "gone" not in held | train
+    assert {cal[int(i[1:])]["pass_rate"] for i in held} == set(rates)  # all difficulties
+    assert all(0 < cal[int(i[1:])]["pass_rate"] < 1 for i in train)
+    assert 40 < len(held) < 120 and pool["stats"]["dropped_by_miner"] == 1
+    assert is_held_out("t1", 0.2) == is_held_out("t1", 0.2)

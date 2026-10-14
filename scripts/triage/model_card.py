@@ -410,15 +410,24 @@ def _function_table() -> str:
     return "\n".join(lines)
 
 
+def checkpoint_label(name: str) -> str:
+    m = re.search(r"-(?:it|iter)(\d+)$", name or "")
+    return f"Best-val-loss checkpoint (iter {m.group(1)})" if m else "Best-val-loss checkpoint"
+
+
 def _comparison_table(
-    fused: Dict, adapter: Dict, checkpoint: Optional[Dict], base: Optional[Dict]
+    fused: Dict,
+    adapter: Dict,
+    checkpoint: Optional[Dict],
+    base: Optional[Dict],
+    checkpoint_label: str = "Best-val-loss checkpoint",
 ) -> str:
     cols = [
         ("This model (fused, 4-bit)", fused),
         ("Base + LoRA adapter", adapter),
     ]
     if checkpoint:
-        cols.append(("Best-val-loss checkpoint (iter 1200)", checkpoint))
+        cols.append((checkpoint_label, checkpoint))
     if base:
         cols.append((f"Base model, untuned ({base['records']}-doc probe)", base))
     header = "| Configuration | " + " | ".join(
@@ -697,6 +706,7 @@ def body(
     agreement: Optional[Dict] = None,
     band: Optional[Dict] = None,
     comparisons: Optional[List[Dict]] = None,
+    checkpoint_name: str = "",
 ) -> str:
     baseline = majority_baseline(fused["per_class_gold"])
     cls, share = baseline
@@ -844,7 +854,7 @@ known cost of LoRA fine-tuning on a single narrow task without replay data."""
         else ""
     )
     silent_text = (
-        f"{len(silent)} alert classes the model never predicts "
+        f"{len(silent)} alert class{'es' if len(silent) != 1 else ''} the model never predicts "
         f"({', '.join(silent)})"
         if silent
         else "every alert class present in the test set is predicted at least once"
@@ -1050,7 +1060,7 @@ inherited from the adapter.
 
 {_metric_table(fused, baseline)}
 
-{_comparison_table(fused, adapter, checkpoint, base)}
+{_comparison_table(fused, adapter, checkpoint, base, checkpoint_label(checkpoint_name))}
 
 {table_notes}
 {band_section}{bench_section}
@@ -1243,6 +1253,13 @@ def build_parser() -> argparse.ArgumentParser:
         help="the adapter whose eval is the reference for the fused model",
     )
     ap.add_argument("--checkpoint-name", default="uk-triage-v1-iter1200")
+    ap.add_argument(
+        "--base-eval",
+        type=Path,
+        default=None,
+        help="untuned-base eval JSON, when it was run under an earlier version "
+        "on a byte-identical test split",
+    )
     return ap
 
 
@@ -1275,7 +1292,7 @@ def main(argv=None) -> int:
         return load_json(p) if p.exists() else None
 
     checkpoint = optional(args.checkpoint_name)
-    base = optional("base")
+    base = load_json(args.base_eval) if args.base_eval else optional("base")
     stats = load_json(args.dataset_dir / f"stats_{args.version}.json")
     train_report = load_json(args.train_report)
     coverage = merge_coverage(args.coverage) if args.coverage else None
@@ -1363,6 +1380,7 @@ def main(argv=None) -> int:
         agreement,
         band,
         comparisons,
+        args.checkpoint_name,
     ))
 
     (args.model_dir / "README.md").write_text(card, encoding="utf-8")

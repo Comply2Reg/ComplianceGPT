@@ -486,6 +486,11 @@ gets (bootstrap 95% CI on the gap -0.003 to +0.033). Iter 2800 falls back on A11
 predictions of 184 gold) and over-predicts A14 again (120 of 60). The lowest val loss
 was not the best test checkpoint, so the **final adapter is the v4 release candidate**.
 
+Fused into 4-bit (`models/publish/regulatory-alert-triage-qwen3-4b-v4`), 97.6% of
+predictions are unchanged (741 of 759): class accuracy 0.710, priority 0.725, JSON
+validity 1.000, macro-F1 (support >= 20) 0.754. Like for like against the published
+fused v3 (0.688 / 0.991 / 0.713), v4 is ahead on every headline metric.
+
 ## Reproducing
 
 ```bash

@@ -470,8 +470,21 @@ are still (almost) never emitted, which is a label problem, not a balance proble
 A13 (12 vs 3), A6 (70 vs 45), from the rarer classes keeping all their examples.
 
 Val loss was noisy (about 25 val examples per check; 0.638 at iter 2800, 0.827 final),
-so the iter-2800 checkpoint is to be scored on this same test split before fusing;
-the winner on test, not on val, is what gets published.
+so the iter-2800 checkpoint was scored on this same test split before fusing:
+
+| | final (iter 3200) | iter 2800 |
+|---|---:|---:|
+| Class accuracy | **0.715** | 0.701 |
+| Priority accuracy | 0.725 | **0.734** |
+| JSON validity | **0.997** | 0.986 |
+| Macro-F1, support >= 20 | **0.759** | 0.712 |
+| Macro-F1, support >= 10 | **0.604** | 0.554 |
+| Weighted F1 | **0.706** | 0.683 |
+
+Paired, the final adapter is right on 29 records iter 2800 misses and wrong on 18 it
+gets (bootstrap 95% CI on the gap -0.003 to +0.033). Iter 2800 falls back on A11 (107
+predictions of 184 gold) and over-predicts A14 again (120 of 60). The lowest val loss
+was not the best test checkpoint, so the **final adapter is the v4 release candidate**.
 
 ## Reproducing
 

@@ -10,7 +10,11 @@ targeted ~50% in iterations 1-4.
     python -m scripts.regnano.calibrate --tasks data/regnano/tasks/mined_v1.jsonl \\
         --out data/regnano/calibration/mined_v1_qwen3.5-4b_base.jsonl \\
         [--model qwen3.5-4b] [--model-path DIR] [--adapter-path DIR] \\
-        [--k 8] [--limit 50] [--keep-out data/regnano/tasks/iter1.jsonl]
+        [--k 8] [--limit 50] [--keep-out data/regnano/tasks/iter1.jsonl] \\
+        [--passing-out data/regnano/rft/iter1_passing.jsonl]
+
+--passing-out appends every verified-correct completion: the training data
+for rejection-sampling fine-tuning (rft.py), the on-policy fallback to GRPO.
 
 Resumable: task_ids already in --out are skipped. Iteration 1 runs with
 thinking OFF (short JSON answers; thinking multiplies rollout time ~10x on
@@ -83,6 +87,10 @@ def calibrate(args) -> int:
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
     started = time.monotonic()
+    passing_fh = None
+    if args.passing_out:
+        args.passing_out.parent.mkdir(parents=True, exist_ok=True)
+        passing_fh = args.passing_out.open("a", encoding="utf-8")
     with args.out.open("a", encoding="utf-8") as fh:
         for i in range(0, len(todo), args.tasks_per_batch):
             chunk = todo[i : i + args.tasks_per_batch]
@@ -96,6 +104,11 @@ def calibrate(args) -> int:
                 verdicts = [verify(t, x) for x in texts]
                 passes = sum(v.passed for v in verdicts)
                 fails = [v.reason for v in verdicts if not v.passed]
+                if passing_fh:
+                    for x, v in zip(texts, verdicts):
+                        if v.passed:
+                            passing_fh.write(json.dumps({"task_id": t["task_id"], "family": t["family"],
+                                                         "completion": x}, ensure_ascii=False) + "\n")
                 fh.write(
                     json.dumps(
                         {
@@ -114,10 +127,14 @@ def calibrate(args) -> int:
                     + "\n"
                 )
             fh.flush()
+            if passing_fh:
+                passing_fh.flush()
             n = i + len(chunk)
             rate = (time.monotonic() - started) / n
             log.info("%d/%d tasks, %.1fs/task, ETA %.0f min", n, len(todo), rate, rate * (len(todo) - n) / 60)
 
+    if passing_fh:
+        passing_fh.close()
     rows = read_jsonl(args.out)
     summary = summarise(rows)
     summary["_meta"] = {
@@ -154,6 +171,7 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--max-new-tokens", type=int, default=320)
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--keep-out", type=Path, default=None)
+    ap.add_argument("--passing-out", type=Path, default=None, help="append verified-correct completions")
     ap.add_argument("--lo", type=float, default=0.0, help="keep pass rate > lo")
     ap.add_argument("--hi", type=float, default=1.0, help="keep pass rate < hi")
     return ap

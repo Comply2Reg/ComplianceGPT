@@ -156,6 +156,21 @@ of that type (a passage's second "may" can be unlisted), and span-set F1
 then penalises a model for quoting it. Calibrate, then read the 0/8 tasks
 before training on them.
 
+## GRPO did not fit; rejection-sampling FT instead (2026-10-13)
+
+The GRPO smoke run (group size 4, Qwen3.5-4B, ~1,050 tokens per rollout) took
+265 s for its first step and then drove the 24 GB M4 Pro into critical memory
+pressure; the job was killed. At that pace 200 updates are ~15 h even if memory
+held. Iteration 1 therefore uses **rejection-sampling fine-tuning** (`rft.py`):
+`calibrate.py --passing-out` samples k=8 answers per in-band training task and
+keeps every verified-correct one; `rft build` caps distinct answers per task
+(default 4, so 8/8 tasks do not dominate), re-verifies each, and refuses
+held-out tasks; `rft train` runs LoRA SFT in `.venv-rl` (mlx-lm-lora applies
+the Qwen3.5 recurrent patch). Still on-policy and still never trained on a gold
+answer. Verified: the generation prompt is an exact token prefix of the training
+text; mlx-lm-lora masks at the end of the user turn, so the loss also covers the
+constant `<|im_start|>assistant\n<think>\n\n</think>\n\n` header, which is harmless.
+
 ## Deviations from FrogNano, recorded
 
 - Iteration 1 runs with thinking **off**: answers are short JSON, and thinking

@@ -163,3 +163,21 @@ def test_pool_holds_out_every_difficulty_and_trains_only_in_band() -> None:
     assert all(0 < cal[int(i[1:])]["pass_rate"] < 1 for i in train)
     assert 40 < len(held) < 120 and pool["stats"]["dropped_by_miner"] == 1
     assert is_held_out("t1", 0.2) == is_held_out("t1", 0.2)
+
+
+def test_rft_keeps_distinct_verified_answers_and_refuses_held_out_tasks() -> None:
+    import pytest
+    from scripts.regnano.rft import build_rows
+
+    task = mine_effective_date(_doc(FINAL))
+    good = json.dumps({"date": "2026-11-02"})
+    passing = [{"task_id": task["task_id"], "completion": c} for c in
+               (good, good + "\n", json.dumps({"date": "November 2, 2026"}),
+                json.dumps({"date": "2026-09-01"}),  # wrong: re-verified and dropped
+                json.dumps({"date": "2 November 2026"}))]
+    rows = build_rows([task], passing, set(), per_task=2)
+    texts = [r["messages"][-1]["content"] for d in rows.values() for r in d]
+    assert len(texts) == 2 and texts[0] == good  # duplicate collapsed, capped at 2
+    assert all(r["messages"][0]["role"] == "system" for d in rows.values() for r in d)
+    with pytest.raises(ValueError):
+        build_rows([task], passing, {task["task_id"]}, per_task=2)

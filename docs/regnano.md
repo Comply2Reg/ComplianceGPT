@@ -187,6 +187,32 @@ s/step. So `rft build` drops rows over 1,024 tokens (8 of 179; truncating
 would cut the answer), `sft_eager.py` caps the cache at 2 GB, and `rft train`
 defaults to 8 layers (half the step time). Result: ~9.5 s/step, no swapping.
 
+## Iteration 1 result (2026-10-14): RFT on Qwen3.5-4B
+
+82 in-band training tasks, k=8 at temp 0.7 (the base calibration's settings):
+179 distinct verified answers from 79 tasks (at most 4 per task), 171 after the
+1,024-token cap (152 train / 19 valid, 76 tasks). One epoch, LoRA rank 8 on the
+top 8 layers, lr 2e-5: 152 steps, 24 min, peak 12.1 GB. Val loss 0.390 -> 0.046.
+
+Held out (92 tasks never trained on, same k and sampling as the base run),
+paired by task, 10,000-sample bootstrap over tasks:
+
+| family | tasks | base | RFT iter 1 | delta (95% CI) | tasks up / down |
+|---|---:|---:|---:|---:|---:|
+| `defined_term` | 71 | 0.935 | **0.967** | +0.032 (+0.009, +0.058) | 12 / 3 |
+| `effective_date` | 21 | 1.000 | 1.000 | 0 | 0 / 0 |
+
+Tasks solved 8/8 went from 56 to 64 of 71. The failures that shrank most were
+quoting a different definition of the same passage. This is a real but small
+gain on a family the base already nearly solves; it shows the loop works end to
+end on the laptop (sample -> verify -> SFT -> re-score), not that RegNano is a
+better compliance model. That needs the harder families and the triage /
+LEDGAR regression checks from the plan.
+
+Adapter: `models/regnano-rft-iter1` (mlx-lm-lora also writes a full model copy,
+~8 GB, beside the 16 MB adapter; mlx-lm loads the adapter correctly from that
+directory: 62 non-zero `lora_b` tensors).
+
 ## Deviations from FrogNano, recorded
 
 - Iteration 1 runs with thinking **off**: answers are short JSON, and thinking

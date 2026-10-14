@@ -16,7 +16,8 @@ them (one forward/backward per example, no group).
     python -m scripts.regnano.rft build --tasks data/regnano/tasks/iter1/train.jsonl \\
         --passing data/regnano/rft/iter1_passing.jsonl \\
         --heldout data/regnano/tasks/iter1/heldout.jsonl --out data/regnano/rft/iter1
-    # 3. LoRA SFT in .venv-rl (mlx-lm-lora applies its Qwen3.5 recurrent patch)
+    # 3. LoRA SFT in .venv-rl (mlx-lm-lora applies its Qwen3.5 recurrent patch;
+    #    sft_eager.py runs its trainer uncompiled, which is what fits in memory)
     python -m scripts.regnano.rft train --data data/regnano/rft/iter1 --adapter-path models/regnano-rft-iter1
 
 Distinct answers are capped per task so a task solved 8/8 does not outweigh
@@ -96,7 +97,7 @@ def train(args) -> int:
     model = str(args.model_path) if args.model_path else cfg.MODELS[args.model]["mlx_id"]
     args.adapter_path.mkdir(parents=True, exist_ok=True)
     cmd = [
-        str(RL_PYTHON), "-m", "mlx_lm_lora.train",
+        str(RL_PYTHON), "-m", "scripts.regnano.sft_eager",  # stock CLI, step not compiled
         "--model", model,
         "--train", "--train-mode", "sft", "--train-type", "lora", "--mask-prompt",
         "--data", str(args.data),

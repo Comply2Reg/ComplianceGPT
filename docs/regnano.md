@@ -171,6 +171,15 @@ answer. Verified: the generation prompt is an exact token prefix of the training
 text; mlx-lm-lora masks at the end of the user turn, so the loss also covers the
 constant `<|im_start|>assistant\n<think>\n\n</think>\n\n` header, which is harmless.
 
+**mlx-lm-lora's compiled step does not fit; run it eager.** The first RFT
+run (2026-10-14) died on step 1 with a Metal `Insufficient Memory` error, even
+at ~780 tokens where the earlier probe measured 10 GB. The difference was
+`train_sft` wrapping its step in `mx.compile`. Same model, 800 tokens, 16 LoRA
+layers, gradient checkpointing: eager 10.3 GB at 10 s/step, compiled out of
+memory. `sft_eager.py` runs the stock CLI with only that module's compile
+disabled, and `rft train` calls it. RFT examples are p50 782 / max 1,321
+tokens; the longest train at 17.6 GB, ~14 s/step.
+
 ## Deviations from FrogNano, recorded
 
 - Iteration 1 runs with thinking **off**: answers are short JSON, and thinking

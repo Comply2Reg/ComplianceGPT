@@ -195,7 +195,8 @@ def build_parser() -> argparse.ArgumentParser:
         help="confirm the training-data licences permit public release",
     )
     ap.add_argument(
-        "--commit-message", default="Publish UK alert triage model v1 (fused, 4-bit)"
+        "--commit-message", default=None,
+        help="default: 'Publish <repo name> (fused, 4-bit)'"
     )
     return ap
 
@@ -256,7 +257,7 @@ def main(argv=None) -> int:
         repo_id=args.repo_id,
         repo_type="model",
         folder_path=str(args.model_dir),
-        commit_message=args.commit_message,
+        commit_message=args.commit_message or f"Publish {args.repo_id.split('/')[-1]} (fused, 4-bit)",
     )
     info = api.model_info(args.repo_id, files_metadata=False)
     log.info(

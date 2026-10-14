@@ -415,6 +415,141 @@ def checkpoint_label(name: str) -> str:
     return f"Best-val-loss checkpoint (iter {m.group(1)})" if m else "Best-val-loss checkpoint"
 
 
+# Plain names for the business section; the technical tables keep the taxonomy's
+# full wording.
+CLASS_PLAIN = {
+    "A1": "legislation", "A2": "final rules", "A3": "consultations",
+    "A4": "supervisory guidance", "A5": "letters to firms", "A6": "enforcement actions",
+    "A7": "sanctions updates", "A8": "reporting changes", "A9": "market notices",
+    "A10": "thematic reviews", "A11": "speeches and press releases",
+    "A12": "rulebook pages", "A13": "court decisions",
+    "A14": "register and authorisation changes",
+}
+
+
+def _business_section(fused: Dict, base: Optional[Dict], stats: Dict) -> str:
+    """The first screen of the card, for a reader deciding whether this is useful.
+
+    Every figure is read from the fused eval and the dataset stats, like the rest
+    of the card; only the framing is prose.
+    """
+    per = fused.get("per_class", {})
+    test_from, test_to = stats["test"]["date_range"]
+    regulators = sorted(stats["train"]["regulator"])
+
+    def got(c: str) -> str:
+        v = per[c]
+        return f"{CLASS_PLAIN[c]} ({v['tp']} of {v['gold']})"
+
+    strong = sorted(
+        (c for c, v in per.items() if v["gold"] >= 20 and v["recall"] >= 0.85),
+        key=lambda c: -per[c]["recall"],
+    )
+    weak = sorted(
+        (c for c, v in per.items() if v["gold"] >= 5 and v["recall"] < 0.6),
+        key=lambda c: per[c]["recall"],
+    )
+    strong_text = ", ".join(got(c) for c in strong) or "none above 85% yet"
+    weak_text = ", ".join(got(c) for c in weak)
+    seconds = fused.get("seconds")
+    speed = (
+        f"About {seconds / fused['records']:.0f} seconds per document on a single "
+        "Apple M4 Pro laptop (24 GB), with no GPU server."
+        if seconds
+        else "Runs on a single Apple Silicon laptop, with no GPU server."
+    )
+    base_text = (
+        f" The same base model before this training got the type right on "
+        f"{base['alert_class_accuracy']:.1%} and produced usable output for "
+        f"{base['json_valid_rate']:.1%} of documents, so the capability comes "
+        "from the training, not from the base model."
+        if base
+        else ""
+    )
+    return f"""**A small, private AI model that reads a regulatory publication and tells a
+bank's compliance team what it is, how urgent it is, and who needs to act on it.**
+
+## Why it exists
+
+Regulators publish a steady stream of rules, consultations, enforcement notices,
+sanctions updates and speeches. Today a regulatory-change team reads each one to
+decide whether it matters and whose desk it belongs on. Most of that first pass is
+sorting, and it is slow, repetitive and easy to get inconsistent across analysts.
+
+This model does the first pass. It turns each publication into a short, consistent
+record that an analyst can accept, correct or escalate in seconds, so the team's
+time goes to the documents that need judgement.
+
+## What it tells you
+
+| The question your team asks | What the model returns |
+|---|---|
+| What is this document? | One of 14 types: final rule, consultation, enforcement action, sanctions update, reporting change, speech and so on |
+| How urgent is it? | **P1** act now (binding or imminent), **P2** prepare (likely to bind), **P3** for awareness |
+| Who owns it? | The responsible functions (Compliance, Financial crime, Legal, Risk, Operations and others) and their line of defence |
+| Does it create a duty or a deadline? | A yes/no on obligations, plus the key dates it finds |
+| What does it say? | A plain-English summary and the firms or products in scope |
+
+## How well it works
+
+Measured on {fused["records"]} recent publications ({test_from} to {test_to}) that the
+model had never seen, all dated after everything it was trained on:
+
+- **Document type:** right on **{fused["alert_class_accuracy"]:.0%}**.{base_text}
+- **Urgency (P1/P2/P3):** right on **{fused["priority_accuracy"]:.0%}**.
+- **Creates an obligation or not:** right on **{fused["obligations_present_accuracy"]:.0%}**.
+- **Output your systems can read:** {fused["json_valid_rate"]:.0%} of answers were valid,
+  machine-readable records.
+
+Strongest on {strong_text}. Weakest on {weak_text}: treat those types as
+needing a human read.
+
+The reference answers in this test were written by a larger AI model, not by
+compliance officers, so these scores measure agreement with that model. They are
+a fair comparison between versions, not a guarantee of correctness.
+
+## Why a small model
+
+- **Your documents stay with you.** It runs entirely on your own hardware: no
+  regulatory text, policy or client data is sent to a third-party AI service.
+- **Predictable cost.** No per-document API fees; the cost is the machine it runs on.
+- **Fast enough for a daily feed.** {speed}
+- **Consistent and auditable.** Run with deterministic settings (as in the
+  quickstart below), the same document gives the same answer every time; the
+  weights are open (Apache-2.0) and versioned, and every result above comes from a
+  recorded test run.
+- **Clean provenance.** Trained only on openly licensed public-sector publications.
+
+## Where it fits
+
+A regulatory feed comes in, the model triages each item, the record lands in the
+right team's queue with its priority, and an analyst reviews it before anything is
+actioned. It is a first-pass filter that makes the human review faster, not a
+replacement for it.
+
+## What to know before you rely on it
+
+- **Not legal advice and not a compliance decision.** Every output is meant to be
+  reviewed by a person.
+- **Coverage is specific.** Trained on {len(regulators)} UK and US federal sources
+  ({", ".join(regulators)}). It has not been trained on FCA or PRA material, EU
+  regulators, or US state regulators, and should not be trusted on them yet.
+- **Some document types are still weak** (listed above), and the limitations
+  section below names each gap.
+- **Built by [Comply2Reg](https://comply2reg.com)** as the in-house replacement
+  for the general-purpose AI model behind the triage step of its
+  regulatory-change platform. It is published for review; it is not yet the
+  model serving that platform.
+
+---
+
+## Technical details
+
+The rest of this card is for engineers and model reviewers: how to run it, the
+exact label set, the training data and procedure, and the full evaluation.
+"""
+
+
 def _comparison_table(
     fused: Dict,
     adapter: Dict,
@@ -869,12 +1004,7 @@ known cost of LoRA fine-tuning on a single narrow task without replay data."""
     parts.append(
         f"""# Regulatory Alert Triage: Qwen3-4B ({version_label})
 
-Reads a UK or US federal regulatory publication and returns a structured triage
-record: what kind of document it is, how urgent it is, which bank functions own
-the response, and whether it creates an obligation. It is a working release
-trained on openly-licensed UK and US federal sources, published so the approach
-can be reviewed and built on. It is not a finished product.
-
+{_business_section(fused, base, stats)}
 Fine-tuned by [Comply2Reg](https://comply2reg.com) from
 `{train_report["mlx_id"]}` with LoRA, then fused back into standalone 4-bit
 weights. Runs on Apple Silicon through MLX.
@@ -893,7 +1023,7 @@ weights. Runs on Apple Silicon through MLX.
 accuracy flatters any model. {band_caveat}Limitations below are specific and worth
 reading before you use this for anything.
 
-## Quickstart
+### Quickstart
 
 Requires Apple Silicon and `pip install mlx-lm`.
 
@@ -904,7 +1034,7 @@ from the base model, not from the training data, which contained none. It did so
 on {fused["records"]}/{fused["records"]} test documents, and the JSON that follows
 parsed every time. Take the substring from the first `{{` to the last `}}`.
 
-### Worked example
+#### Worked example
 
 A real test document, and this model's actual output for it:
 

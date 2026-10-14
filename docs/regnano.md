@@ -180,6 +180,13 @@ memory. `sft_eager.py` runs the stock CLI with only that module's compile
 disabled, and `rft train` calls it. RFT examples are p50 782 / max 1,321
 tokens; the longest train at 17.6 GB, ~14 s/step.
 
+Peak memory follows sequence length, not LoRA depth (10.2 GB at 800 tokens and
+17.2 GB at 1,320, for 8 and 16 layers alike), and after one long row MLX's
+buffer cache kept that high-water mark: the first eager run swapped at ~100
+s/step. So `rft build` drops rows over 1,024 tokens (8 of 179; truncating
+would cut the answer), `sft_eager.py` caps the cache at 2 GB, and `rft train`
+defaults to 8 layers (half the step time). Result: ~9.5 s/step, no swapping.
+
 ## Deviations from FrogNano, recorded
 
 - Iteration 1 runs with thinking **off**: answers are short JSON, and thinking

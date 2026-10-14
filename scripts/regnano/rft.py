@@ -36,7 +36,7 @@ import sys
 import time
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, List
+from typing import Callable, Dict, List
 
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
@@ -77,10 +77,34 @@ def build_rows(tasks: List[Dict], passing: List[Dict], heldout_ids: set, per_tas
     return out
 
 
+def drop_long(rows: Dict[str, List[Dict]], n_tokens: Callable[[List[Dict]], int], max_tokens: int) -> int:
+    """Drop rows whose rendered chat exceeds max_tokens; truncating would cut the answer off.
+
+    Qwen3.5 training memory grows with length (10 GB at 800 tokens, 17 GB at
+    1,320), and one long row leaves MLX holding the high-water mark.
+    """
+    dropped = 0
+    for split, data in rows.items():
+        kept = [r for r in data if n_tokens(r["messages"]) <= max_tokens]
+        dropped += len(data) - len(kept)
+        rows[split] = kept
+    return dropped
+
+
+def chat_tokens(model_path: str) -> Callable[[List[Dict]], int]:
+    from transformers import AutoTokenizer
+
+    tok = AutoTokenizer.from_pretrained(model_path)
+    return lambda messages: len(tok.encode(tok.apply_chat_template(messages, tokenize=False)))
+
+
 def build(args) -> int:
     tasks = read_jsonl(args.tasks)
     heldout = {t["task_id"] for t in read_jsonl(args.heldout)} if args.heldout else set()
     rows = build_rows(tasks, read_jsonl(args.passing), heldout, args.per_task)
+    if args.max_tokens:
+        model = str(args.model_path) if args.model_path else cfg.MODELS[args.model]["mlx_id"]
+        log.info("dropped %d rows over %d tokens", drop_long(rows, chat_tokens(model), args.max_tokens), args.max_tokens)
     for split, data in rows.items():
         write_jsonl(args.out / f"{split}.jsonl", data)
     covered = {r["task_id"] for d in rows.values() for r in d}
@@ -130,6 +154,7 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--heldout", type=Path)
     ap.add_argument("--out", type=Path)
     ap.add_argument("--per-task", type=int, default=4)
+    ap.add_argument("--max-tokens", type=int, default=1024, help="build: drop longer rows (0 = keep all)")
     ap.add_argument("--data", type=Path)
     ap.add_argument("--model", default="qwen3.5-4b", choices=sorted(cfg.MODELS))
     ap.add_argument("--model-path", type=Path, default=None)
@@ -137,7 +162,7 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--iters", type=int, default=None, help="default: epochs x train examples")
     ap.add_argument("--epochs", type=int, default=2)
     ap.add_argument("--lr", type=float, default=2e-5)
-    ap.add_argument("--num-layers", type=int, default=16)
+    ap.add_argument("--num-layers", type=int, default=8)  # same peak memory as 16, half the step time
     ap.add_argument("--max-seq-length", type=int, default=2048)
     ap.add_argument("--steps-per-eval", type=int, default=50)
     ap.add_argument("--save-every", type=int, default=50)

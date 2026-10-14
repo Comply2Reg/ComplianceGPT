@@ -8,6 +8,9 @@ runs out of Metal memory where the eager one does not (measured 2026-10-14,
 800 tokens, 16 LoRA layers, grad checkpointing: eager 10.3 GB / 10 s per step,
 compiled kIOGPUCommandBufferCallbackErrorOutOfMemory on step 1). Only that
 module's compile is disabled; everything else is the stock CLI.
+
+The buffer cache is capped too: after one long row MLX otherwise keeps its
+~17 GB high-water mark, and every later step swaps (~100 s/step vs ~7 s).
 """
 
 from __future__ import annotations
@@ -29,6 +32,7 @@ class _EagerMx:
 
 
 sft_trainer.mx = _EagerMx()
+mx.set_cache_limit(2 * 1024**3)
 
 if __name__ == "__main__":
     train.main()

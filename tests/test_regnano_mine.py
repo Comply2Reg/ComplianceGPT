@@ -181,3 +181,8 @@ def test_rft_keeps_distinct_verified_answers_and_refuses_held_out_tasks() -> Non
     assert all(r["messages"][0]["role"] == "system" for d in rows.values() for r in d)
     with pytest.raises(ValueError):
         build_rows([task], passing, {task["task_id"]}, per_task=2)
+
+    from scripts.regnano.rft import drop_long
+    n = lambda messages: len(messages[-1]["content"])  # noqa: E731
+    assert drop_long(rows, n, len(good)) == 1
+    assert [r["messages"][-1]["content"] for d in rows.values() for r in d] == [good]

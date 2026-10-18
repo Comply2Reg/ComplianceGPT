@@ -49,6 +49,9 @@ data/regnano/
 logs/regnano/
 
 # Agent playground (scripts/agent/): the index is rebuilt from the GREEN corpus;
-# rollouts are large and regenerated per iteration.
+# rollouts are large and regenerated per iteration; tasks and SFT sets are rebuilt by
+# tasks.py and sft.py build.
 data/agent/*.sqlite
 data/agent/rollouts/
+data/agent/tasks/
+data/agent/sft/

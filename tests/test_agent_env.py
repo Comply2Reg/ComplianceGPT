@@ -181,3 +181,25 @@ def test_quote_spanning_a_line_break_is_grounded(corpus: Corpus) -> None:
     assert "\\n" in ep.calls[1].result_text
     from scripts.regnano.verifiers import locate
     assert locate(span, ep.seen_text) is not None
+
+
+def test_sft_per_turn_cuts_at_each_assistant_turn() -> None:
+    from scripts.agent.sft import per_turn
+
+    msgs = [{"role": "system"}, {"role": "user"}, {"role": "assistant", "tool_calls": [1]}, {"role": "tool"},
+            {"role": "assistant", "content": "{}"}]
+    cuts = per_turn(msgs)
+    assert [len(c) for c in cuts] == [3, 5]
+    assert all(c[-1]["role"] == "assistant" for c in cuts)
+
+
+def test_compare_pairs_tasks() -> None:
+    from scripts.agent.compare import compare
+
+    def row(tid, ok):
+        return {"family": "f", "task_id": tid, "passed": ok, "calls": [], "malformed": 0, "over_budget": 0,
+                "reason": "ok"}
+
+    res = compare([row("a", False), row("b", True)], [row("a", True), row("b", True), row("c", True)])
+    assert res["families"]["f"] == {"tasks": 2, "base": 0.5, "new": 1.0, "delta": 0.5, "ci95": [0.0, 1.0],
+                                    "up": 1, "down": 0}

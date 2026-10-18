@@ -134,3 +134,56 @@ and index, with its calls turned back into Qwen `<tool_call>` text. Pilot: 10 ep
 4 passed, $0.0378 ($0.0038/episode, about 4.3k prompt + 130 completion tokens).
 Its failures match the base model's: invented document ids and going past the
 3-call budget. Only verified episodes are used.
+
+**Full teacher run** (train split, 1,214 episodes, $4.32): 714 passed.
+
+| family | passed |
+|---|---:|
+| lookup_definition | 86/243 |
+| lookup_effective_date | 414/619 |
+| cited_obligations | 1/17 |
+| no_tool_needed | 175/179 |
+| not_found | 38/156 |
+
+**Teacher held-out reference** (`--split heldout`, k=1, $0.57, never trained on):
+definitions 9/40, dates 30/40, obligations 1/7, no_tool 39/40, not_found 14/40.
+OpenAI spend for the whole track: **$4.89**.
+
+### warm_v1 SFT
+
+`sft.py build` on demos + teacher: 1,327 trajectories → 3,198 train / 120 valid
+per-turn examples (p50 1,474 tokens, max 3,883; 3 over 4,096 dropped). LoRA rank 8,
+scale 20, 8 layers, lr 1e-4, 2,000 iterations, batch 1, `--mask-prompt`,
+grad checkpointing; peak 7.7 GB, 3 h 22 min. Val loss 3.327 → 0.119 (500) → 0.085
+(1000) → 0.075 (1500) → 0.066 (2000).
+
+### Held-out: base vs warm_v1 (k=2, temp 0.7, paired bootstrap per task)
+
+| family | tasks | base | warm_v1 | Δ | 95% CI | teacher (k=1) |
+|---|---:|---:|---:|---:|---|---:|
+| lookup_definition | 40 | 0.075 | **0.475** | +0.400 | [0.24, 0.56] | 0.225 |
+| lookup_effective_date | 40 | 0.250 | **0.800** | +0.550 | [0.38, 0.71] | 0.750 |
+| cited_obligations | 7 | 0.143 | 0.286 | +0.143 | [0.00, 0.43] | 0.143 |
+| no_tool_needed | 40 | 0.875 | 0.975 | +0.100 | [0.00, 0.23] | 0.975 |
+| not_found | 40 | 0.188 | **0.637** | +0.450 | [0.30, 0.60] | 0.350 |
+| **all** | 167 | 0.338 | **0.704** | +0.365 | [0.29, 0.44] | — |
+
+| behaviour (334 episodes) | base | warm_v1 |
+|---|---:|---:|
+| tool calls / episode | 1.04 | 1.47 |
+| valid-call rate | 0.758 | 0.946 |
+| invented-id calls / episode | 0.243 | 0.063 |
+| over-budget episodes | 0 | 2 |
+| JSON final answer | 0.979 | 0.991 |
+
+The 4B student beats its teacher on definitions and not_found: scripted demos teach
+the plain search→fetch→quote path, the teacher adds variety, and only verified
+episodes of either were kept. Obligations (7 tasks) is too small to read.
+
+**Remaining failures (warm_v1, read by hand):**
+- not_found: answers a term the document does not contain (16).
+- definitions:
+  - quote not verbatim (15);
+  - `not_found` on an answerable question (12);
+  - an invented document_id such as `UKLEG:1234` (about 10).
+- dates: unparseable date (6), wrong date (5).

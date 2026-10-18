@@ -187,3 +187,62 @@ episodes of either were kept. Obligations (7 tasks) is too small to read.
   - `not_found` on an answerable question (12);
   - an invented document_id such as `UKLEG:1234` (about 10).
 - dates: unparseable date (6), wrong date (5).
+
+## rft_v1: on-policy rejection sampling, 2026-10-18 (did not help)
+
+**Calibration:** warm_v1 played 1,028 train episodes (60 tasks per family, k=4,
+temp 0.7) in 2 h 40 min. Verified successes became `rft_v1`: 365 trajectories,
+845 train examples. Training resumed from the warm adapter (8 layers, lr 5e-5,
+845 iterations, 1 h 27 min). Val loss went 0.109 → 0.086 (500) → 0.096 (845).
+
+**Held-out: warm_v1 vs rft_v1** (k=2)
+
+| family | warm_v1 | rft_v1 | Δ | 95% CI |
+|---|---:|---:|---:|---|
+| lookup_definition | 0.475 | 0.113 | −0.362 | [−0.50, −0.23] |
+| lookup_effective_date | 0.800 | 0.600 | −0.200 | [−0.34, −0.08] |
+| cited_obligations | 0.286 | 0.000 | −0.286 | [−0.57, 0.00] |
+| no_tool_needed | 0.975 | 0.963 | −0.013 | [−0.09, 0.05] |
+| not_found | 0.637 | 0.688 | +0.050 | [−0.06, 0.18] |
+| **all** | **0.704** | 0.566 | −0.138 | [−0.20, −0.08] |
+
+**What went wrong:**
+- **The model got lazy.** Tool calls per episode fell from 1.47 to 0.78. On definitions, a
+  correct answer used to take about 2 calls (search, then fetch). Now the model searches
+  once and says `not_found`: 50 failures of that kind, against 12 for warm_v1.
+- **Why:** training only on its own successes, with no replay of the warm-start data, and
+  with not_found successes about as common as definition successes, pushed the model
+  towards the short path.
+- **Kept:** warm_v1, picked automatically by held-out score. rft_v1 stays on disk for the
+  record.
+- **Retry (mix_v2):** one SFT from the base model on demos, teacher and on-policy successes
+  together (replay). It is kept only if it beats warm_v1.
+
+**Note on selection:** picking between adapters on the held-out tasks uses them as a
+validation set. A third task set would be needed for an unbiased final number.
+The base → warm_v1 gain (+0.37) is far larger than that effect.
+
+**Output format:** the 4-bit MLX template renders an empty `<think>\n\n</think>\n\n` before
+every assistant turn, so the model emits it too. The harness and verifiers find the
+JSON after it. Clients should strip a leading `<think>…</think>` before parsing.
+
+## Fused v1 and serving check, 2026-10-18
+
+`mlx_lm fuse` of warm_v1 into the 4-bit base → `models/agent-qwen3-4b-v1-fused`.
+**Fusing costs accuracy here:** held-out 0.638 fused vs 0.704 adapter. Definitions fell
+0.475 → 0.338 and not_found 0.637 → 0.537; over-budget episodes rose 2 → 12. The LoRA
+deltas are re-quantized to 4 bits when merged. (Triage v4 lost only 0.005 that way; tool
+trajectories are longer and seem less forgiving.)
+
+**Serve the adapter unfused:**
+
+```bash
+python -m mlx_lm server --model mlx-community/Qwen3-4B-Instruct-2507-4bit \
+    --adapter-path models/agent-qwen3-4b-warm-v1 --port 8088
+```
+
+**Server check, fused model** (`mlx_lm.server`, `play --server`, one held-out task per
+family): 3/5 passed, in line with the held-out rates.
+- `tool_calls` came back parsed: the server picks the `json_tools` parser from the template.
+- The empty think block is moved out of `content`, so `content` is the JSON answer.
+- The same check against the unfused adapter is `logs/agent/chain_serve.sh`.

@@ -10,7 +10,8 @@ turned back into the student's own <tool_call> text, so a kept trajectory render
 through Qwen's chat template like any other. Only verified episodes are training
 data; the rest are kept in --out (passed=false) for reading.
 
-Train split only: held-out tasks are refused. --max-usd is a hard stop on
+Train split by default. --split heldout scores the teacher on held-out tasks as a
+reference point only: those rows carry split=heldout, which sft.py build refuses. --max-usd is a hard stop on
 estimated spend (config.LABEL_MODELS prices); usage is recorded per episode.
 Needs OPENAI_API_KEY in .env; the key is never printed.
 """
@@ -78,7 +79,7 @@ async def run(args) -> int:
         raise SystemExit(f"{args.model} has no price in config.LABEL_MODELS; add one so --max-usd can hold")
     spec = dict(spec, max_output=args.max_output)
 
-    tasks = select(read_jsonl(args.tasks), "train", args.families, args.per_family, args.seed)
+    tasks = select(read_jsonl(args.tasks), args.split, args.families, args.per_family, args.seed)
     done = {r["task_id"] for r in read_jsonl(args.out)} if args.out.exists() else set()
     spent = sum(r.get("usd", 0.0) for r in read_jsonl(args.out)) if args.out.exists() else 0.0
     todo = [t for t in tasks if t["task_id"] not in done]
@@ -130,6 +131,7 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--tasks", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
+    ap.add_argument("--split", choices=["train", "heldout"], default="train")
     ap.add_argument("--families", nargs="*", default=[])
     ap.add_argument("--per-family", type=int, default=0)
     ap.add_argument("--seed", type=int, default=7)

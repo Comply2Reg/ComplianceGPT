@@ -51,9 +51,14 @@ def server_generator(args):
 
     client = OpenAI(base_url=args.server, api_key="not-needed")
 
+    # mlx_lm 0.31's server drops --adapter-path for "default_model" requests (it looks the adapter up
+    # under the resolved model path), so the adapter has to be named in the request body.
+    extra = {"adapters": str(args.server_adapter)} if args.server_adapter else None
+
     def gen(messages):
         msg = client.chat.completions.create(model=args.server_model, messages=to_openai(messages), tools=TOOLS,
-                                             temperature=args.temp, max_tokens=args.max_new_tokens).choices[0].message
+                                             temperature=args.temp, max_tokens=args.max_new_tokens,
+                                             extra_body=extra).choices[0].message
         return from_openai(msg)
 
     return gen
@@ -69,6 +74,7 @@ def main(argv=None) -> int:
     ap.add_argument("--adapter-path", type=Path)
     ap.add_argument("--server", help="OpenAI-compatible base URL, e.g. http://127.0.0.1:8080/v1")
     ap.add_argument("--server-model", default="default_model")
+    ap.add_argument("--server-adapter", type=Path, help="adapter folder the server should apply (sent per request)")
     ap.add_argument("--temp", type=float, default=0.0)
     ap.add_argument("--max-new-tokens", type=int, default=768)
     ap.add_argument("--db", type=Path, default=DEFAULT_DB)

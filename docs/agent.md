@@ -246,3 +246,67 @@ family): 3/5 passed, in line with the held-out rates.
 - `tool_calls` came back parsed: the server picks the `json_tools` parser from the template.
 - The empty think block is moved out of `content`, so `content` is the JSON answer.
 - The same check against the unfused adapter is `logs/agent/chain_serve.sh`.
+
+## mix_v2: replay retry, 2026-10-19 (did not help either)
+
+**Setup:** one SFT from the base model on demos, teacher and on-policy successes together
+(`--per-task 3`). That gave 4,060 train / 162 valid examples, 2,400 iterations, 3 h 28 min.
+Val loss 3.604 → 0.103 (600) → 0.083 (1200) → 0.117 (1800) → 0.094 (2400).
+
+| family | warm_v1 | mix_v2 | Δ | 95% CI |
+|---|---:|---:|---:|---|
+| lookup_definition | 0.475 | 0.263 | −0.212 | [−0.39, −0.04] |
+| lookup_effective_date | 0.800 | 0.600 | −0.200 | [−0.33, −0.08] |
+| cited_obligations | 0.286 | 0.000 | −0.286 | [−0.57, 0.00] |
+| no_tool_needed | 0.975 | 0.938 | −0.037 | [−0.13, 0.04] |
+| not_found | 0.637 | 0.688 | +0.050 | [−0.05, 0.16] |
+| **all** | **0.704** | 0.596 | −0.108 | [−0.17, −0.05] |
+
+**Result:** the same pattern as rft_v1. not_found improves a little, the lookups fall, and
+tool calls per episode drop (1.47 → 1.06).
+- **Likely cause:** the model's own successful trajectories are shorter than the
+  scripted ones (often a single title search), so adding them teaches it to stop
+  early, even with replay.
+- **What a next attempt needs:** reward for the *lookup* families only, or on-policy
+  rows filtered to at least 2 calls on answerable tasks. A larger, more diverse
+  lookup task set would also help, more than another round over the same 1,520 tasks.
+
+**warm_v1 remains the model.**
+
+## Serving the adapter: mlx_lm 0.31 server bug, 2026-10-19
+
+**The bug.** `mlx_lm server --adapter-path X` does not apply X to requests that name
+`default_model`. `ModelProvider.load` first resolves `default_model` to the base
+model's path, then looks the adapter up under that path, finds nothing, and serves
+the bare base model. The first unfused server check therefore scored like the base
+model (1/5, no tool calls, the example id from the tool description cited).
+
+**The fix.** Name the adapter in each request body:
+- `extra_body={"adapters": "models/agent-qwen3-4b-warm-v1"}`, or
+- `play --server-adapter <path>`.
+
+**Server check with the fix:** 4/5 (definition, date, no_tool and not_found passed;
+obligations failed on a non-verbatim span). (`logs/agent/server_raw_adapter.json` was
+sent without the adapter, so it shows only that the server parses tool calls.)
+
+## Single-file model without the 4-bit loss, 2026-10-19
+
+**Build.** `mlx_lm fuse --dequantize` of warm_v1 → `models/agent-qwen3-4b-v1-fused-bf16`
+(7.5 GB). Weights are not re-quantized after the merge.
+
+| held-out (k=2) | all | definitions | dates | not_found | no_tool | obligations |
+|---|---:|---:|---:|---:|---:|---:|
+| warm_v1 adapter on 4-bit base | **0.704** | 0.475 | 0.800 | 0.637 | 0.975 | 0.286 |
+| fused bf16 | 0.662 | 0.388 | 0.688 | 0.675 | 0.975 | 0.214 |
+| fused 4-bit | 0.638 | 0.338 | 0.800 | 0.537 | 0.938 | 0.286 |
+
+- **bf16 vs adapter:** −0.042 [−0.09, +0.003], not significant. Speed is about 10 s per
+  episode, the same as 4-bit.
+- **Why it is a little lower:** the adapter was trained on the 4-bit weights. Merging it
+  into dequantized weights is close to the trained model, but not identical.
+
+**Which to serve:**
+- **Adapter on the 4-bit base:** best scores, about 2 GB base + 14 MB adapter. Each request
+  must carry `"adapters"` (the server bug above).
+- **Fused bf16:** no request changes, so any OpenAI client, including `c2r_cga_api` as it
+  is, can call it.

@@ -37,7 +37,13 @@ temperature 0.7) and checked by code (`scripts/agent/verify.py`).
 **Caveats:**
 - **Obligations** has only 7 held-out tasks; its score is too uncertain to rely on.
 - **Selection:** picking between adapters used these held-out tasks, so the 0.70 is slightly optimistic. The gain over the base model (+0.37, CI 0.29-0.44) is not.
-- **Fused model:** the single-file fused model scores 0.64. Serve the adapter unfused (section 4).
+- **Packaging matters:**
+  - adapter on the 4-bit base: 0.70;
+  - single-file bf16 merge: 0.66 (difference not significant);
+  - single-file 4-bit merge: 0.64 (avoid).
+- **Four training variants were tried; the first warm start (warm_v1) won.** Two later rounds that
+  added the model's own successful attempts both scored lower (0.57, 0.60), because the model learned
+  to stop searching too early. Details are in `docs/agent.md`.
 
 ## 2. Agents that can be built now
 
@@ -71,19 +77,31 @@ These would need an eval set and probably training data before being used.
 
 ## 4. How to run it
 
-**Serve** (OpenAI-compatible, tool calls parsed by the server):
+**Serve.** The server speaks the OpenAI API, and tool calls come back parsed as `tool_calls`.
+There are two options:
 
 ```bash
 cd 15-SLM/ComplianceGPT && source .venv/bin/activate
 python -m scripts.agent.index build          # once: data/agent/corpus.sqlite, ~10 s
-python -m mlx_lm server --model mlx-community/Qwen3-4B-Instruct-2507-4bit \
-    --adapter-path models/agent-qwen3-4b-warm-v1 --port 8088
+
+# A. best accuracy (0.70): 4-bit base + adapter. Clients must send "adapters" in each request (see below)
+python -m mlx_lm server --model mlx-community/Qwen3-4B-Instruct-2507-4bit --port 8088
+
+# B. drop-in (0.66): one 7.5 GB folder, no request changes; use this for c2r_cga_api
+python -m mlx_lm server --model models/agent-qwen3-4b-v1-fused-bf16 --port 8088
 ```
+
+For option A, `--adapter-path` on the command line is **not enough**. In mlx_lm 0.31 the server
+ignores it for `default_model` requests and silently serves the bare base model. Name the adapter
+in every request body instead: `extra_body={"adapters": "models/agent-qwen3-4b-warm-v1"}`, or
+`play --server-adapter models/agent-qwen3-4b-warm-v1`. With that, the server check passed 4/5
+(one task per family).
 
 **Try it** in the playground. It prints every step, runs the tools locally, and scores the episode when given a task id:
 
 ```bash
-python -m scripts.agent.play --server http://127.0.0.1:8088/v1 "How does the CMA define 'relevant merger situation'?"
+python -m scripts.agent.play --server http://127.0.0.1:8088/v1 --server-adapter models/agent-qwen3-4b-warm-v1 \
+    "How does the CMA define 'relevant merger situation'?"      # drop --server-adapter for option B
 ```
 
 **Call it from any OpenAI client.** Pass `tools=json.load(open("scripts/agent/tools.json"))` and
@@ -95,7 +113,7 @@ instead, strip a leading `<think>…</think>` before parsing JSON.
 **In `c2r_cga_api`** (branch `feat/lifecycle-extractor-provider`, local, not pushed):
 
 ```bash
-SLM_BASE_URL=http://127.0.0.1:8088/v1
+SLM_BASE_URL=http://127.0.0.1:8088/v1      # serve option B (fused bf16) for the app
 SLM_MODEL=default_model
 LLM_FEATURE_PROVIDERS={"<feature key>": "slm,openai"}
 LLM_FALLBACK_FEATURES=<feature key>          # optional: fall back to OpenAI on error
@@ -114,3 +132,19 @@ LLM_FALLBACK_FEATURES=<feature key>          # optional: fall back to OpenAI on 
 - **Hardware:** one Mac (M4 Pro, 24 GB) serves one request at a time at about 10 s per lookup. Production hosting is not decided.
 - **Library:** the GREEN snapshot indexed on 2026-10-18 (7,734 documents, 245,374 provisions). A new crawl means rebuilding the index; the model needs no retraining for that.
 - **Ids:** it still occasionally invents a document id (about 6% of episodes). The tools reject it with an error, so it cannot pass a check, but the agent should treat any failed call as "no answer".
+
+## 6. What exists on disk
+
+All of this is local. Nothing is pushed or published.
+
+| item | path |
+|---|---|
+| adapter (the model) | `models/agent-qwen3-4b-warm-v1/` (14 MB) |
+| drop-in single-file model | `models/agent-qwen3-4b-v1-fused-bf16/` (7.5 GB) |
+| tools, harness, verifier, playground | `scripts/agent/` (`tools.json`, `env.py`, `verify.py`, `play.py`) |
+| library index | `data/agent/corpus.sqlite` (rebuild with `python -m scripts.agent.index build`) |
+| held-out results | `data/agent/rollouts/compare_*.json` |
+| how it was trained, every number | `docs/agent.md` |
+
+**Cost:** $4.89 of OpenAI for teacher trajectories and the teacher reference. About 14 h of
+Mac GPU time across four training variants and their evaluations.

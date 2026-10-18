@@ -1,0 +1,76 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "search_regulation",
+      "description": "Full-text search over the regulation library. Returns up to 5 matching provisions, each with its provision_id, document_id, title and a short snippet. Use get_provision to read one in full.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Words to search for, e.g. a document title, a defined term or a topic."
+          },
+          "regulator": {
+            "type": "string",
+            "description": "Optional regulator code to filter by, e.g. SEC, FDIC, HMT, CMA."
+          },
+          "document_id": {
+            "type": "string",
+            "description": "Optional: search within one document. Only use a document_id given in the question or returned by an earlier search; never make one up."
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5,
+            "description": "Number of results, 1-5 (default 5)."
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "get_provision",
+      "description": "Read one provision in full, with its document's title and publication date.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "provision_id": {
+            "type": "string",
+            "description": "A provision_id from search_regulation or list_sections, shaped '<document_id>#<number>', e.g. 'us_corpus:7069#2'. A document_id alone is not a provision_id."
+          }
+        },
+        "required": [
+          "provision_id"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "list_sections",
+      "description": "List a document's provisions in order (provision_id and section heading). Use it when you know the document_id and need to see what the document contains.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "document_id": {
+            "type": "string",
+            "description": "A document_id returned by search_regulation."
+          }
+        },
+        "required": [
+          "document_id"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+]

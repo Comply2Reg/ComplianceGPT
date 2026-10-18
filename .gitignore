@@ -47,3 +47,8 @@ logs/**/*.pids
 # contains regulation text, so committing it is a deliberate decision
 data/regnano/
 logs/regnano/
+
+# Agent playground (scripts/agent/): the index is rebuilt from the GREEN corpus;
+# rollouts are large and regenerated per iteration.
+data/agent/*.sqlite
+data/agent/rollouts/

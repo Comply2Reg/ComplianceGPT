@@ -170,3 +170,14 @@ def test_held_out_split_is_by_document_and_stable() -> None:
     assert held_out("abc") == held_out("abc")
     share = sum(held_out(f"doc{i}") for i in range(2000)) / 2000
     assert 0.15 < share < 0.25
+
+
+def test_quote_spanning_a_line_break_is_grounded(corpus: Corpus) -> None:
+    """Tool results reach the model as JSON, where line breaks are escaped; quotes are checked unescaped."""
+    span = "§ 1.3 Reporting.\nA covered institution must submit the report"
+    ep = env.start(_task("lookup_definition"))
+    env.step(ep, _call("search_regulation", query="covered institution report", document_id="us:1"), corpus)
+    env.step(ep, _call("get_provision", provision_id=ep.calls[0].returned_ids[0]), corpus)
+    assert "\\n" in ep.calls[1].result_text
+    from scripts.regnano.verifiers import locate
+    assert locate(span, ep.seen_text) is not None

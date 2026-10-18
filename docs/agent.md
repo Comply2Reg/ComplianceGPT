@@ -104,3 +104,33 @@ Read by hand. What changed between probes, and why:
 - saying `not_found` without looking.
 
 **Result:** the base model solves about 5-10% of tool episodes, against 7/8 when the passage is given. Speed is 2-10 s per episode in batches of 4.
+
+## Warm start: scripted demos + teacher (hybrid), 2026-10-18
+
+Base model solves too few tool episodes to learn from its own successes, so the
+first SFT mixes two sources, both kept only when `verify_episode` passes them:
+
+**Scripted demos** (`demos.py`, $0): code plays each train task from its gold answer
+through the real harness. It finds the document by title (or from the prompt's
+document_id), searches inside it, reads the provision, and quotes the gold. It
+fetches a provision only if an earlier result in the episode returned its id.
+
+| family | kept | unreachable by the plain strategy |
+|---|---:|---:|
+| lookup_definition | 229 | 14 |
+| lookup_effective_date | 504 | 115 |
+| cited_obligations | 14 | 3 |
+| no_tool_needed | 179 | — |
+| not_found | 151 | 5 |
+
+**Verifier bug found by the demos, fixed.** Quotes were checked against the
+JSON-escaped tool output the model reads. A correct quote spanning a line break or
+a quote mark could never match: 14 of 14 obligation demos failed on it. Quotes are
+now checked against the unescaped result text (`Call.plain_text`), and a test
+covers it.
+
+**Teacher** (`teacher.py`, `gpt-5.4-mini`, reasoning none): the same prompt, tools
+and index, with its calls turned back into Qwen `<tool_call>` text. Pilot: 10 episodes,
+4 passed, $0.0378 ($0.0038/episode, about 4.3k prompt + 130 completion tokens).
+Its failures match the base model's: invented document ids and going past the
+3-call budget. Only verified episodes are used.

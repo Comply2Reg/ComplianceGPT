@@ -23,7 +23,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from scripts import config as cfg  # noqa: E402
-from scripts.agent.env import TOOLS, start, step  # noqa: E402
+from scripts.agent.env import TOOLS, from_openai, start, step, to_openai  # noqa: E402
 from scripts.agent.index import DEFAULT_DB, Corpus  # noqa: E402
 from scripts.agent.verify import verify_episode  # noqa: E402
 
@@ -52,23 +52,9 @@ def server_generator(args):
     client = OpenAI(base_url=args.server, api_key="not-needed")
 
     def gen(messages):
-        wire = []
-        for m in messages:
-            m = dict(m)
-            if m.get("tool_calls"):
-                m["tool_calls"] = [{"id": f"call_{i}", "type": "function",
-                                    "function": {"name": c["function"]["name"],
-                                                 "arguments": json.dumps(c["function"]["arguments"])}}
-                                   for i, c in enumerate(m["tool_calls"])]
-            wire.append(m)
-        msg = client.chat.completions.create(model=args.server_model, messages=wire, tools=TOOLS,
+        msg = client.chat.completions.create(model=args.server_model, messages=to_openai(messages), tools=TOOLS,
                                              temperature=args.temp, max_tokens=args.max_new_tokens).choices[0].message
-        text = msg.content or ""
-        for c in msg.tool_calls or []:
-            text += ("\n<tool_call>\n" + json.dumps({"name": c.function.name,
-                                                     "arguments": json.loads(c.function.arguments or "{}")})
-                     + "\n</tool_call>")
-        return text
+        return from_openai(msg)
 
     return gen
 

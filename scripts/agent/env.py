@@ -53,6 +53,7 @@ class Call:
     error: Optional[str] = None
     returned_ids: List[str] = field(default_factory=list)
     result_text: str = ""
+    plain_text: str = ""  # the result's strings unescaped, for checking quotes
 
 
 @dataclass
@@ -75,8 +76,10 @@ class Episode:
 
     @property
     def seen_text(self) -> str:
-        """Everything the tools showed the model, as it saw it."""
-        return "\n".join(c.result_text for c in self.calls if c.ok)
+        """The text the tools returned, unescaped. Quotes are checked against this,
+        not the JSON the model read: a line break or quote mark inside a provision
+        is escaped in JSON, and a correct quote of it would otherwise never match."""
+        return "\n".join(c.plain_text for c in self.calls if c.ok)
 
 
 def start(task: Dict) -> Episode:
@@ -100,6 +103,16 @@ def parse_calls(text: str) -> Tuple[str, List[Optional[Dict]]]:
         ok = isinstance(obj, dict) and isinstance(obj.get("name"), str) and isinstance(obj.get("arguments", {}), dict)
         calls.append({"name": obj["name"], "arguments": obj.get("arguments", {})} if ok else None)
     return content, calls
+
+
+def _plain(value) -> str:
+    if isinstance(value, str):
+        return value
+    if isinstance(value, dict):
+        return "\n".join(_plain(v) for v in value.values())
+    if isinstance(value, list):
+        return "\n".join(_plain(v) for v in value)
+    return ""
 
 
 def _cut(text: str) -> str:
@@ -136,7 +149,7 @@ def run_tool(corpus: Corpus, name: str, args: Dict) -> Call:
             result["note"] = f"first {len(rows)} of {total}; use search_regulation with document_id for the rest"
         ids = [r["provision_id"] for r in rows]
     text = _cut(json.dumps(result, ensure_ascii=False))
-    return Call(name, args, True, None, ids, text)
+    return Call(name, args, True, None, ids, text, _plain(result)[: RESULT_CHARS])
 
 
 def step(ep: Episode, completion: str, corpus: Corpus) -> None:
@@ -164,6 +177,38 @@ def step(ep: Episode, completion: str, corpus: Corpus) -> None:
     ep.messages.append({"role": "assistant", "content": content, "tool_calls": tool_calls})
     for r in results:
         ep.messages.append({"role": "tool", "content": r})
+
+
+def to_openai(messages: List[Dict]) -> List[Dict]:
+    """Messages in OpenAI wire shape: string arguments, call ids, and tool_call_id on each result."""
+    wire: List[Dict] = []
+    pending: List[str] = []
+    for i, m in enumerate(messages):
+        m = dict(m)
+        if m.get("tool_calls"):
+            ids = [f"call_{i}_{j}" for j in range(len(m["tool_calls"]))]
+            m["tool_calls"] = [{"id": cid, "type": "function",
+                                "function": {"name": c["function"]["name"],
+                                             "arguments": json.dumps(c["function"]["arguments"], ensure_ascii=False)}}
+                               for cid, c in zip(ids, m["tool_calls"])]
+            pending = ids
+        elif m["role"] == "tool":
+            m["tool_call_id"] = pending.pop(0) if pending else "call_orphan"
+        wire.append(m)
+    return wire
+
+
+def from_openai(message) -> str:
+    """An OpenAI assistant message as the model's own text: content, then <tool_call> blocks."""
+    text = message.content or ""
+    for c in message.tool_calls or []:
+        try:
+            body = json.dumps({"name": c.function.name, "arguments": json.loads(c.function.arguments or "{}")},
+                              ensure_ascii=False)
+        except json.JSONDecodeError:
+            body = c.function.arguments or ""
+        text += "\n<tool_call>\n" + body + "\n</tool_call>"
+    return text
 
 
 def transcript(ep: Episode) -> Dict:

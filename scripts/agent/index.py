@@ -215,6 +215,12 @@ class Corpus:
         )
         return [dict(r) for r in rows], total
 
+    def provisions_of(self, document_id: str) -> List[Dict]:
+        rows = self.con.execute(
+            "SELECT provision_id, section, text FROM provisions WHERE document_id = ? ORDER BY seq", (document_id,)
+        )
+        return [dict(r) for r in rows]
+
     def document_text(self, document_id: str) -> str:
         rows = self.con.execute("SELECT text FROM provisions WHERE document_id = ? ORDER BY seq", (document_id,))
         return "\n".join(r[0] for r in rows)

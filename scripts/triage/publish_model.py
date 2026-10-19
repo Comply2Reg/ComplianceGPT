@@ -143,6 +143,8 @@ def validate(model_dir: Path) -> List[str]:
                 "primary_functions Jaccard": "primary_function_jaccard",
                 "JSON validity": "json_valid_rate",
             }
+            # A card from another pipeline (scripts/agent/model_card.py) names its own metrics.
+            aliases.update(summary.get("card_metrics") or {})
             for name, value in declared.items():
                 key = aliases.get(name)
                 if key is None:

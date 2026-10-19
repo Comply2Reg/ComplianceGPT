@@ -154,7 +154,7 @@ OpenAI spend for the whole track: **$4.89**.
 `sft.py build` on demos + teacher: 1,327 trajectories → 3,198 train / 120 valid
 per-turn examples (p50 1,474 tokens, max 3,883; 3 over 4,096 dropped). LoRA rank 8,
 scale 20, 8 layers, lr 1e-4, 2,000 iterations, batch 1, `--mask-prompt`,
-grad checkpointing; peak 7.7 GB, 3 h 22 min. Val loss 3.327 → 0.119 (500) → 0.085
+grad checkpointing; peak 9.2 GB, 3 h 22 min. Val loss 3.327 → 0.119 (500) → 0.085
 (1000) → 0.075 (1500) → 0.066 (2000).
 
 ### Held-out: base vs warm_v1 (k=2, temp 0.7, paired bootstrap per task)
@@ -310,3 +310,16 @@ sent without the adapter, so it shows only that the server parses tool calls.)
   must carry `"adapters"` (the server bug above).
 - **Fused bf16:** no request changes, so any OpenAI client, including `c2r_cga_api` as it
   is, can call it.
+
+## Published
+
+`python -m scripts.agent.model_card --out models/publish/regulatory-research-agent-qwen3-4b-v1` builds
+the Hugging Face folder:
+- the fused bf16 model at the root;
+- the LoRA in `adapter/`;
+- `tools.json` and `system_prompt.txt`;
+- a card whose numbers are read from the compare and summary files.
+
+`scripts/triage/publish_model.py` validates the card against `eval_summary.json`. It now accepts a
+card's own metric names through `card_metrics`. The card's quickstart loop was run against
+the exact publish folder before upload.

@@ -1,0 +1,34 @@
+{
+ "id": "chatcmpl-732b3567-42fd-49af-b941-3c93774aece0",
+ "system_fingerprint": "0.31.3-0.32.2-macOS-26.6.2-arm64-arm-64bit-applegpu_g16s",
+ "object": "chat.completion",
+ "model": "default_model",
+ "created": 1792358032,
+ "choices": [
+  {
+   "index": 0,
+   "finish_reason": "tool_calls",
+   "message": {
+    "role": "assistant",
+    "tool_calls": [
+     {
+      "function": {
+       "name": "search_regulation",
+       "arguments": "{\"query\": \"relevant merger situation\", \"regulator\": \"CMA\"}"
+      },
+      "type": "function",
+      "id": "d1c5f294-5664-4135-b204-8733ede0dd25"
+     }
+    ]
+   }
+  }
+ ],
+ "usage": {
+  "prompt_tokens": 568,
+  "completion_tokens": 31,
+  "total_tokens": 599,
+  "prompt_tokens_details": {
+   "cached_tokens": 3
+  }
+ }
+}

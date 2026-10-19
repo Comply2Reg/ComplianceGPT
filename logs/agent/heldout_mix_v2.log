@@ -1,0 +1,191 @@
+2026-10-19 02:09:24,705 INFO 167 tasks x k=2; 0 episodes already done, 334 to run
+2026-10-19 02:09:25,028 INFO HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-4B-Instruct-2507-4bit/revision/main "HTTP/1.1 200 OK"
+Fetching 11 files:   0%|          | 0/11 [00:00<?, ?it/s]Fetching 11 files: 100%|██████████| 11/11 [00:00<00:00, 2011.31it/s]
+2026-10-19 02:09:53,710 INFO 4/334 episodes, 6.9s/episode, ETA 38 min
+2026-10-19 02:10:30,974 INFO 8/334 episodes, 8.1s/episode, ETA 44 min
+2026-10-19 02:11:06,798 INFO 12/334 episodes, 8.4s/episode, ETA 45 min
+2026-10-19 02:11:31,718 INFO 16/334 episodes, 7.9s/episode, ETA 42 min
+2026-10-19 02:12:06,497 INFO 20/334 episodes, 8.0s/episode, ETA 42 min
+2026-10-19 02:12:36,846 INFO 24/334 episodes, 8.0s/episode, ETA 41 min
+2026-10-19 02:13:07,396 INFO 28/334 episodes, 7.9s/episode, ETA 40 min
+2026-10-19 02:13:28,147 INFO 32/334 episodes, 7.6s/episode, ETA 38 min
+2026-10-19 02:13:53,673 INFO 36/334 episodes, 7.4s/episode, ETA 37 min
+2026-10-19 02:14:14,392 INFO 40/334 episodes, 7.2s/episode, ETA 35 min
+2026-10-19 02:14:52,961 INFO 44/334 episodes, 7.4s/episode, ETA 36 min
+2026-10-19 02:15:19,115 INFO 48/334 episodes, 7.4s/episode, ETA 35 min
+2026-10-19 02:15:48,054 INFO 52/334 episodes, 7.3s/episode, ETA 35 min
+2026-10-19 02:16:15,935 INFO 56/334 episodes, 7.3s/episode, ETA 34 min
+2026-10-19 02:16:47,124 INFO 60/334 episodes, 7.4s/episode, ETA 34 min
+2026-10-19 02:17:07,134 INFO 64/334 episodes, 7.2s/episode, ETA 32 min
+2026-10-19 02:17:39,260 INFO 68/334 episodes, 7.3s/episode, ETA 32 min
+2026-10-19 02:18:07,161 INFO 72/334 episodes, 7.2s/episode, ETA 32 min
+2026-10-19 02:18:35,977 INFO 76/334 episodes, 7.2s/episode, ETA 31 min
+2026-10-19 02:19:01,942 INFO 80/334 episodes, 7.2s/episode, ETA 30 min
+2026-10-19 02:19:23,722 INFO 84/334 episodes, 7.1s/episode, ETA 30 min
+2026-10-19 02:19:45,420 INFO 88/334 episodes, 7.0s/episode, ETA 29 min
+2026-10-19 02:20:14,583 INFO 92/334 episodes, 7.1s/episode, ETA 28 min
+2026-10-19 02:20:45,199 INFO 96/334 episodes, 7.1s/episode, ETA 28 min
+2026-10-19 02:21:13,645 INFO 100/334 episodes, 7.1s/episode, ETA 28 min
+2026-10-19 02:21:36,256 INFO 104/334 episodes, 7.0s/episode, ETA 27 min
+2026-10-19 02:21:53,327 INFO 108/334 episodes, 6.9s/episode, ETA 26 min
+2026-10-19 02:22:27,022 INFO 112/334 episodes, 7.0s/episode, ETA 26 min
+2026-10-19 02:22:55,092 INFO 116/334 episodes, 7.0s/episode, ETA 25 min
+2026-10-19 02:23:23,679 INFO 120/334 episodes, 7.0s/episode, ETA 25 min
+2026-10-19 02:23:58,288 INFO 124/334 episodes, 7.0s/episode, ETA 25 min
+2026-10-19 02:24:32,517 INFO 128/334 episodes, 7.1s/episode, ETA 24 min
+2026-10-19 02:25:06,615 INFO 132/334 episodes, 7.1s/episode, ETA 24 min
+2026-10-19 02:25:37,887 INFO 136/334 episodes, 7.1s/episode, ETA 24 min
+2026-10-19 02:26:14,987 INFO 140/334 episodes, 7.2s/episode, ETA 23 min
+2026-10-19 02:26:48,286 INFO 144/334 episodes, 7.2s/episode, ETA 23 min
+2026-10-19 02:27:05,086 INFO 148/334 episodes, 7.2s/episode, ETA 22 min
+2026-10-19 02:27:42,703 INFO 152/334 episodes, 7.2s/episode, ETA 22 min
+2026-10-19 02:28:18,385 INFO 156/334 episodes, 7.3s/episode, ETA 22 min
+2026-10-19 02:28:52,189 INFO 160/334 episodes, 7.3s/episode, ETA 21 min
+2026-10-19 02:29:13,360 INFO 164/334 episodes, 7.2s/episode, ETA 21 min
+2026-10-19 02:29:41,176 INFO 168/334 episodes, 7.2s/episode, ETA 20 min
+2026-10-19 02:30:10,064 INFO 172/334 episodes, 7.2s/episode, ETA 20 min
+2026-10-19 02:30:25,348 INFO 176/334 episodes, 7.2s/episode, ETA 19 min
+2026-10-19 02:30:35,520 INFO 180/334 episodes, 7.1s/episode, ETA 18 min
+2026-10-19 02:30:46,542 INFO 184/334 episodes, 7.0s/episode, ETA 17 min
+2026-10-19 02:30:58,309 INFO 188/334 episodes, 6.9s/episode, ETA 17 min
+2026-10-19 02:31:09,709 INFO 192/334 episodes, 6.8s/episode, ETA 16 min
+2026-10-19 02:31:20,139 INFO 196/334 episodes, 6.7s/episode, ETA 15 min
+2026-10-19 02:31:31,410 INFO 200/334 episodes, 6.6s/episode, ETA 15 min
+2026-10-19 02:31:42,741 INFO 204/334 episodes, 6.6s/episode, ETA 14 min
+2026-10-19 02:31:52,729 INFO 208/334 episodes, 6.5s/episode, ETA 14 min
+2026-10-19 02:32:05,703 INFO 212/334 episodes, 6.4s/episode, ETA 13 min
+2026-10-19 02:32:16,388 INFO 216/334 episodes, 6.3s/episode, ETA 12 min
+2026-10-19 02:32:28,299 INFO 220/334 episodes, 6.3s/episode, ETA 12 min
+2026-10-19 02:32:39,141 INFO 224/334 episodes, 6.2s/episode, ETA 11 min
+2026-10-19 02:32:50,031 INFO 228/334 episodes, 6.2s/episode, ETA 11 min
+2026-10-19 02:33:01,318 INFO 232/334 episodes, 6.1s/episode, ETA 10 min
+2026-10-19 02:33:13,880 INFO 236/334 episodes, 6.1s/episode, ETA 10 min
+2026-10-19 02:33:25,408 INFO 240/334 episodes, 6.0s/episode, ETA 9 min
+2026-10-19 02:33:37,629 INFO 244/334 episodes, 5.9s/episode, ETA 9 min
+2026-10-19 02:33:50,442 INFO 248/334 episodes, 5.9s/episode, ETA 8 min
+2026-10-19 02:34:01,089 INFO 252/334 episodes, 5.9s/episode, ETA 8 min
+2026-10-19 02:34:17,067 INFO 256/334 episodes, 5.8s/episode, ETA 8 min
+2026-10-19 02:34:42,129 INFO 260/334 episodes, 5.8s/episode, ETA 7 min
+2026-10-19 02:35:07,010 INFO 264/334 episodes, 5.8s/episode, ETA 7 min
+2026-10-19 02:35:42,334 INFO 268/334 episodes, 5.9s/episode, ETA 6 min
+2026-10-19 02:36:03,478 INFO 272/334 episodes, 5.9s/episode, ETA 6 min
+2026-10-19 02:36:23,278 INFO 276/334 episodes, 5.9s/episode, ETA 6 min
+2026-10-19 02:36:44,050 INFO 280/334 episodes, 5.9s/episode, ETA 5 min
+2026-10-19 02:37:02,639 INFO 284/334 episodes, 5.8s/episode, ETA 5 min
+2026-10-19 02:37:38,199 INFO 288/334 episodes, 5.9s/episode, ETA 5 min
+2026-10-19 02:38:13,303 INFO 292/334 episodes, 5.9s/episode, ETA 4 min
+2026-10-19 02:38:41,447 INFO 296/334 episodes, 5.9s/episode, ETA 4 min
+2026-10-19 02:39:01,666 INFO 300/334 episodes, 5.9s/episode, ETA 3 min
+2026-10-19 02:39:30,262 INFO 304/334 episodes, 5.9s/episode, ETA 3 min
+2026-10-19 02:40:05,889 INFO 308/334 episodes, 6.0s/episode, ETA 3 min
+2026-10-19 02:40:36,995 INFO 312/334 episodes, 6.0s/episode, ETA 2 min
+2026-10-19 02:40:57,600 INFO 316/334 episodes, 6.0s/episode, ETA 2 min
+2026-10-19 02:41:24,768 INFO 320/334 episodes, 6.0s/episode, ETA 1 min
+2026-10-19 02:41:45,763 INFO 324/334 episodes, 6.0s/episode, ETA 1 min
+2026-10-19 02:42:06,973 INFO 328/334 episodes, 6.0s/episode, ETA 1 min
+2026-10-19 02:42:34,721 INFO 332/334 episodes, 6.0s/episode, ETA 0 min
+2026-10-19 02:42:42,577 INFO 334/334 episodes, 6.0s/episode, ETA 0 min
+{
+ "summary": {
+  "cited_obligations": {
+   "episodes": 14,
+   "passed": 0,
+   "invalid_calls": 0,
+   "over_budget": 0,
+   "reasons": {
+    "said not_found for an answerable question": 5,
+    "final answer is not JSON": 5,
+    "span not verbatim in context": 3,
+    "no spans list": 1
+   },
+   "pass_rate": 0.0,
+   "calls_per_episode": 1.29,
+   "seconds_per_episode": 8.1
+  },
+  "lookup_definition": {
+   "episodes": 80,
+   "passed": 21,
+   "invalid_calls": 6,
+   "over_budget": 0,
+   "reasons": {
+    "said not_found for an answerable question": 45,
+    "invalid tool call: no document with id 'SEC-2026-08-17-1'; document_ids come fr": 1,
+    "definition not verbatim in context": 6,
+    "invalid tool call: no document with id 'UKLEG:2014#1'; document_ids come from s": 1,
+    "invalid tool call: no document with id 'SEC-2026-09-02'; document_ids come from": 1,
+    "different passage": 1,
+    "no definition": 1,
+    "invalid tool call: no document with id 'UKLEG:2000:1'; document_ids come from s": 1,
+    "invalid tool call: no document with id 'UKLEG:1123'; document_ids come from sea": 1,
+    "invalid tool call: no document with id 'cftc:1234'; document_ids come from sear": 1
+   },
+   "pass_rate": 0.263,
+   "calls_per_episode": 1.34,
+   "seconds_per_episode": 6.9
+  },
+  "lookup_effective_date": {
+   "episodes": 80,
+   "passed": 48,
+   "invalid_calls": 1,
+   "over_budget": 0,
+   "reasons": {
+    "unparseable date": 14,
+    "wrong date": 7,
+    "provision_id missing or never returned by a tool": 2,
+    "date given where none is stated": 2,
+    "said not_found for an answerable question": 2,
+    "no date key": 2,
+    "cited provision is from another document": 2,
+    "invalid tool call: no document with id 'us_corpus:6902'; document_ids come from": 1
+   },
+   "pass_rate": 0.6,
+   "calls_per_episode": 1.55,
+   "seconds_per_episode": 7.4
+  },
+  "no_tool_needed": {
+   "episodes": 80,
+   "passed": 75,
+   "invalid_calls": 0,
+   "over_budget": 0,
+   "reasons": {
+    "wrong date": 2,
+    "definition not verbatim in context": 2,
+    "different passage": 1
+   },
+   "pass_rate": 0.938,
+   "calls_per_episode": 0.0,
+   "seconds_per_episode": 2.9
+  },
+  "not_found": {
+   "episodes": 80,
+   "passed": 55,
+   "invalid_calls": 12,
+   "over_budget": 0,
+   "reasons": {
+    "answered where the library has no answer": 11,
+    "invalid tool call: no document with id 'SEC-2026-09-18'; document_ids come from": 1,
+    "invalid tool call: no document with id 'cftc:7069'; document_ids come from sear": 1,
+    "invalid tool call: no document with id 'UKLEG:89#2'; document_ids come from sea": 1,
+    "invalid tool call: no document with id 'SEC:2026-09-28#1'; document_ids come fr": 1,
+    "invalid tool call: no document with id 'sec_2026_09_25'; document_ids come from": 1,
+    "invalid tool call: no document with id 'FFIEC#20230627'; document_ids come from": 1,
+    "invalid tool call: no document with id 'SEC:2026-07-07'; document_ids come from": 1,
+    "invalid tool call: no document with id 'SEC:2026-07-07#1'; document_ids come fr": 1,
+    "invalid tool call: no document with id 'HMT:2025:0001'; document_ids come from ": 1,
+    "said not_found without looking": 1,
+    "final answer is not JSON": 1,
+    "invalid tool call: no document with id 'UKLEG:2020:123'; document_ids come from": 1,
+    "invalid tool call: no document with id 'UKLEG:1948'; document_ids come from sea": 2
+   },
+   "pass_rate": 0.688,
+   "calls_per_episode": 1.3,
+   "seconds_per_episode": 6.4
+  }
+ },
+ "episodes": 334,
+ "tasks_file": "data/agent/tasks/v2.jsonl",
+ "split": "heldout",
+ "k": 2,
+ "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+ "adapter": "models/agent-qwen3-4b-mix-v2"
+}

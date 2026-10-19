@@ -1,0 +1,48 @@
+2026-10-18 22:41:40,506 INFO HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-10-18 22:41:40,533 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-4B-Instruct-2507/cdbee75f17c01a7cc42f958dc650907174af0554/config.json?%2FQwen%2FQwen3-4B-Instruct-2507%2Fresolve%2Fmain%2Fconfig.json=&etag=%226988f134db143052042f2bd6e0c897bc6a605189%22 "HTTP/1.1 200 OK"
+2026-10-18 22:41:40,796 INFO HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-10-18 22:41:40,797 WARNING Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-10-18 22:41:40,823 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3-4B-Instruct-2507/cdbee75f17c01a7cc42f958dc650907174af0554/tokenizer_config.json?%2FQwen%2FQwen3-4B-Instruct-2507%2Fresolve%2Fmain%2Ftokenizer_config.json=&etag=%2251c1be0d9192e7f6e6596de71d0f07d58fbc32ac%22 "HTTP/1.1 200 OK"
+2026-10-18 22:41:41,088 INFO HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-4B-Instruct-2507/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-10-18 22:41:41,327 INFO HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-4B-Instruct-2507/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-18 22:41:41,780 INFO HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-4B-Instruct-2507 "HTTP/1.1 200 OK"
+{
+ "counts": {
+  "examples/dropped_too_long": 3,
+  "examples/train/answer": 1601,
+  "examples/train/tool_call": 2459,
+  "examples/valid/answer": 69,
+  "examples/valid/tool_call": 93,
+  "trajectories/onpolicy/cited_obligations": 12,
+  "trajectories/onpolicy/lookup_definition": 87,
+  "trajectories/onpolicy/lookup_effective_date": 111,
+  "trajectories/onpolicy/no_tool_needed": 95,
+  "trajectories/onpolicy/not_found": 103,
+  "trajectories/scripted/cited_obligations": 13,
+  "trajectories/scripted/lookup_definition": 150,
+  "trajectories/scripted/lookup_effective_date": 150,
+  "trajectories/scripted/no_tool_needed": 118,
+  "trajectories/scripted/not_found": 130,
+  "trajectories/teacher/cited_obligations": 1,
+  "trajectories/teacher/lookup_definition": 84,
+  "trajectories/teacher/lookup_effective_date": 409,
+  "trajectories/teacher/no_tool_needed": 174,
+  "trajectories/teacher/not_found": 36
+ },
+ "rollouts": [
+  "data/agent/rollouts/demos_v2.jsonl",
+  "data/agent/rollouts/teacher_v2.jsonl",
+  "data/agent/rollouts/onpolicy_warm_v1.jsonl"
+ ],
+ "tokens": {
+  "p50": 1500,
+  "p95": 2584,
+  "max": 3883
+ },
+ "caps": {
+  "per_task": 3,
+  "scripted_per_family": 150,
+  "max_tokens": 4096
+ }
+}

@@ -1,0 +1,86 @@
+[1mquestion[0m In the HMT document "Proposed amendments to the Money Laundering Regulations - draft SI and policy note" (published 2025-09-02, document_id alert_corpus:1005), find the passage that begins "Pooled Client Accounts (PCAs) (Regulations 14 and 20) Policy intent: Increase the supply and". Quote, exactly as written in that passage, every provision that imposes an obligation (something that must be done). Cite the provisions you quote. Answer only with JSON {"spans": ["...", ...], "modality": "must", "provision_ids": ["...", ...]}.
+
+[1mcall[0m search_regulation({"query": "Pooled Client Accounts (PCAs) (Regulations 14 and 20) Policy intent: Increase the supply and", "document_id": "alert_corpus:1005"})
+[2m{"results": [{"provision_id": "alert_corpus:1005#5", "document_id": "alert_corpus:1005", "title": "Proposed amendments to the Money Laundering Regulations - draft SI and policy note", "regulator": "HMT", "release_date": "2025-09-02", "section": "Chapter 2", "snippet": " … Pooled Client Accounts (PCAs) (Regulations 14 and 20)\nPolicy intent: Increase the supply and accessibility of PCAs for\nbusinesses with a legitimate need, while maintaining robust risk-based\ncontrols.\n• The SI decouples PCAs from the simplified due diligence (SDD)\nframework … "}, {"provision_id": "alert_corpus:1005#0", "document_id": "alert_corpus:1005", "title": "Proposed amendments to the Money Laundering Regulations - draft SI and policy note", "regulator": "HMT", "release_date": "2025-09-02", "section": "", "snipp…[0m
+
+[1mcall[0m get_provision({"provision_id": "alert_corpus:1005#0"})
+[2m{"provision_id": "alert_corpus:1005#0", "document_id": "alert_corpus:1005", "title": "Proposed amendments to the Money Laundering Regulations - draft SI and policy note", "regulator": "HMT", "release_date": "2025-09-02", "section": "", "text": "September 2025\nThe draft Money Laundering\nand Terrorist Financing\n(Amendment and\nMiscellaneous Provision)\nRegulations 2025\nPolicy note\nSeptember 2025\nThe draft Money Laundering\nand Terrorist Financing\n(Amendment and\nMiscellaneous Provision)\nRegulations 2025\nPolicy note\n© Crown copyright 2025\nThis publication is licensed under the terms of the Open Government\nLicence v3.0 except where otherwise stated. To view this licence, visit\nnationalarchives.gov.uk/doc/open-government-licence/version/3.\nWhere we have identified any third party …[0m
+
+[1manswer[0m 
+
+{"spans": ["The draft Money Laundering and Terrorist Financing (Amendment and Miscellaneous Provision) Regulations 2025 Policy note"], "modality": "must", "provision_ids": ["alert_corpus:1005#0"]}
+
+[1mFAIL[0m span not verbatim in context  (2 calls, 3 turns)
+------
+[1mquestion[0m In the UKLEG document "The Financial Services and Markets Act 2023 (Panel Remuneration and Reports) Regulations 2023" (published 2023-11-27), how is “the 2000 Act” defined? Quote the definition exactly as written, from the quoted term to the end of its definition, and cite the provision it is in. Answer only with JSON {"definition": "...", "provision_id": "..."}.
+
+[1mcall[0m search_regulation({"query": "The Financial Services and Markets Act 2023 (Panel Remuneration and Reports) Regulations 2023", "regulator": "UKLEG"})
+[2m{"results": [{"provision_id": "alert_corpus:7917#0", "document_id": "alert_corpus:7917", "title": "The Financial Services and Markets Act 2023 (Panel Remuneration and Reports) Regulations 2023", "regulator": "UKLEG", "release_date": "2023-11-27", "section": "", "snippet": "S T A T U T O R Y I N S T R U M E N T S\n2023 No. 1273\nFINANCIAL SERVICES\nThe Financial Services and Markets Act 2023 (Panel\nRemuneration and Reports) Regulations 2023\nMade - - - - 27th … "}, {"provision_id": "alert_corpus:7917#1", "document_id": "alert_corpus:7917", "title": "The Financial Services and Markets Act 2023 (Panel Remuneration and Reports) Regulations 2023", "regulator": "UKLEG", "release_date": "2023-11-27", "section": "", "snippet": " … the panel established under\nsection 103(3) of the 2013 Act (regul…[0m
+
+[1mcall[0m get_provision({"provision_id": "alert_corpus:7917#0"})
+[2m{"provision_id": "alert_corpus:7917#0", "document_id": "alert_corpus:7917", "title": "The Financial Services and Markets Act 2023 (Panel Remuneration and Reports) Regulations 2023", "regulator": "UKLEG", "release_date": "2023-11-27", "section": "", "text": "S T A T U T O R Y I N S T R U M E N T S\n2023 No. 1273\nFINANCIAL SERVICES\nThe Financial Services and Markets Act 2023 (Panel\nRemuneration and Reports) Regulations 2023\nMade - - - - 27th November 2023\nLaid before Parliament 28th November 2023\nComing into force - - 26th December 2023\nThe Treasury make the following Regulations in exer cise of the powers conferred by sections\n1MA(2) and (3), 2LA(2) and (3) and 428(3) of the Fi nancial Services and Markets Act 2000( a),\nsections 103(5B) and (5C) and 142(3) of the Financi al Service…[0m
+
+[1manswer[0m 
+
+{"definition": "“the 2000 Act” means the Financial Services and Mar kets Act 2000;", "provision_id": "alert_corpus:7917#0"}
+
+[1mPASS[0m ok  (2 calls, 3 turns)
+------
+[1mquestion[0m When does the TREAS document "Consistent Basis Reporting Between Estate and Person Acquiring Property From Decedent" (published 2024-09-17) take effect? A comment deadline or publication date is not an effective date. Answer only with JSON {"date": "YYYY-MM-DD", "provision_id": "..."}, citing the provision that states it, or {"date": null, "provision_id": "..."} if the document states no effective date.
+
+[1mcall[0m search_regulation({"query": "Consistent Basis Reporting Between Estate and Person Acquiring Property From Decedent effective date", "regulator": "TREAS", "limit": 5})
+[2m{"results": [{"provision_id": "us_corpus:6833#0", "document_id": "us_corpus:6833", "title": "Consistent Basis Reporting Between Estate and Person Acquiring Property From Decedent", "regulator": "TREAS", "release_date": "2024-09-17", "section": "", "snippet": "DEPARTMENT OF THE TREASURY\nInternal Revenue Service\n26 CFR Parts 1 and 301\n[TD 9991]\nRIN 1545-BM97\nConsistent Basis Reporting Between Estate and Person Acquiring Property From Decedent\nAGENCY:\nInternal Revenue Service (IRS), Treasury.\nACTION:\nFinal rule.\nSUMMARY:\nThis … "}, {"provision_id": "us_corpus:6833#116", "document_id": "us_corpus:6833", "title": "Consistent Basis Reporting Between Estate and Person Acquiring Property From Decedent", "regulator": "TREAS", "release_date": "2024-09-17", "section": "2. Section 6035—Requ…[0m
+
+[1mcall[0m get_provision({"provision_id": "us_corpus:6833#0"})
+[2m{"provision_id": "us_corpus:6833#0", "document_id": "us_corpus:6833", "title": "Consistent Basis Reporting Between Estate and Person Acquiring Property From Decedent", "regulator": "TREAS", "release_date": "2024-09-17", "section": "", "text": "DEPARTMENT OF THE TREASURY\nInternal Revenue Service\n26 CFR Parts 1 and 301\n[TD 9991]\nRIN 1545-BM97\nConsistent Basis Reporting Between Estate and Person Acquiring Property From Decedent\nAGENCY:\nInternal Revenue Service (IRS), Treasury.\nACTION:\nFinal rule.\nSUMMARY:\nThis document contains final regulations that provide guidance on the statutory requirement that a recipient's basis in certain property acquired from a decedent be consistent with the value of the property as finally determined for Federal estate tax purposes. In addition, the fi…[0m
+
+[1manswer[0m 
+
+{"date":"2024-09-17","provision_id":"us_corpus:6833#0"}
+
+[1mPASS[0m ok  (2 calls, 3 turns)
+------
+[1mquestion[0m Passage:
+Proposed Rule 5.35(a) sets forth the eligibility requirements for SUM. Under the proposed rule, the Exchange will determine
+eligible order size, eligible order type, eligible order Capacity (
+e.g.,
+Priority Customer orders, non-Market Maker non-Priority Customer orders, and Market Maker orders), and classes in which SUM is activated. Bulk messages are not eligible for SUM, as bulk messages are intended to assist Market-Makers' facilitation of the provision of liquidity on the Exchange. SUM will automatically process upon receipt of: (1) an eligible order that is marketable against the Exchange's BBO
+that is not the NBBO;
+or (2) an eligible order that would improve the Exchange's BBO and that is marketable against the ABBO.
+The proposed rule change also permits a User to opt out of this process.
+The Exchange will not initiate the SUM process if the NBBO is crossed.
+The Exchange announces to Trading Permit Holders all determinations it makes pursuant to the Rules via: specifications, Notices, or Regulatory Circulars with appropriate advanced notice, which will be posted on the Exchange's website, or as otherwise provided in the Rules; electronic message; or other communication method as provided in the Rules.
+See
+Rule 1.5(a).
+“BBO” means the best bid or offer disseminated on the Exchange.
+See
+Rule 1.1.
+“NBBO” means the national best bid or offer the Exchange calculates based on market information it receives from OPRA.
+See
+Rule 1.1.
+“ABBO” means the best bid(s) or offer(s) disseminated by other Eligible Exchanges (as defined in Section E of Chapter 5) and calculated by the Exchange based on market information the Exchange receives from OPRA.
+See
+Rule 1.1.
+Users may opt out from SUM on an order-by-order basis or by applying a setting to an order entry port that would opt out all orders submitted by that User through that port.
+Proposed Rule 5.35(b) describes the order handling and response process during a SUM exposure period. Upon receipt of a SUM-eligible order, the System electronically exposes the order at the NBBO immediately upon receipt. The order is exposed for a period of time determined by the Exchange
+on a class-by-class basis, which period of time may not exceed one second. During the exposure period, all Users may submit responses to the exposure message. Responses must be limited to the size of the order being exposed; may be modified, cancelled, or replaced any time during the exposure period; and are cancelled back at the end of the exposure period if unexecuted.
+
+Task: Quote, exactly as written in the passage, the definition of “BBO”: the text from the quoted term to the end of its definition. Answer only with JSON {"definition": "..."}.
+
+[1manswer[0m 
+
+{"definition": "“BBO” means the best bid or offer disseminated on the Exchange."}
+
+[1mPASS[0m ok  (0 calls, 1 turns)
+------
+[1mquestion[0m In the SEC document "Self-Regulatory Organizations; NYSE Arca, Inc.; Notice of Filing and Immediate Effectiveness of a Proposed Rule Change To Modify the NYSE Arca Options Fee Schedule To Eliminate Customer and Professional Customer Fees and Introduce a Floor Broker Incentive for Trading in Certain MSCI Related Index Options" (published 2026-08-24, document_id us_corpus:5550), how is “Crypto asset” defined? Quote the definition exactly as written, from the quoted term to the end of its definition, and cite the provision it is in. Answer only with JSON {"definition": "...", "provision_id": "..."}.
+
+[1mcall[0m search_regulation({"query": "Crypto asset means", "document_id": "us_corpus:5550"})
+[2m{"results": [], "note": "no matching provisions"}[0m
+
+[1manswer[0m 
+
+{"status": "not_found"}
+
+[1mPASS[0m ok  (1 calls, 2 turns)
+------

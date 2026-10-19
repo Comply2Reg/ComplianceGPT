@@ -1,0 +1,92 @@
+2026-10-18 11:53:40,799 INFO 40 tasks x k=1; 0 episodes already done, 40 to run
+2026-10-18 11:53:41,149 INFO HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-4B-Instruct-2507-4bit/revision/main "HTTP/1.1 200 OK"
+Fetching 11 files:   0%|          | 0/11 [00:00<?, ?it/s]Fetching 11 files: 100%|██████████| 11/11 [00:00<00:00, 2110.97it/s]
+2026-10-18 11:54:23,280 INFO 4/40 episodes, 10.2s/episode, ETA 6 min
+2026-10-18 11:55:06,463 INFO 8/40 episodes, 10.5s/episode, ETA 6 min
+2026-10-18 11:55:29,860 INFO 12/40 episodes, 9.0s/episode, ETA 4 min
+2026-10-18 11:55:42,846 INFO 16/40 episodes, 7.5s/episode, ETA 3 min
+2026-10-18 11:56:04,711 INFO 20/40 episodes, 7.1s/episode, ETA 2 min
+2026-10-18 11:56:40,770 INFO 24/40 episodes, 7.4s/episode, ETA 2 min
+2026-10-18 11:56:51,438 INFO 28/40 episodes, 6.8s/episode, ETA 1 min
+2026-10-18 11:57:03,198 INFO 32/40 episodes, 6.3s/episode, ETA 1 min
+2026-10-18 11:57:09,140 INFO 36/40 episodes, 5.7s/episode, ETA 0 min
+2026-10-18 11:57:16,852 INFO 40/40 episodes, 5.4s/episode, ETA 0 min
+{
+ "summary": {
+  "cited_obligations": {
+   "episodes": 8,
+   "passed": 0,
+   "invalid_calls": 2,
+   "over_budget": 0,
+   "reasons": {
+    "no spans list": 4,
+    "span not in any tool result": 1,
+    "invalid tool call: no document with id 'hmt:2026-02-19'; document_ids come from": 1,
+    "span F1 0.00 < 0.8": 1,
+    "invalid tool call: no document with id 'hmt:2024:001'; document_ids come from s": 1
+   },
+   "pass_rate": 0.0,
+   "calls_per_episode": 2.25,
+   "seconds_per_episode": 10.5
+  },
+  "lookup_definition": {
+   "episodes": 8,
+   "passed": 0,
+   "invalid_calls": 2,
+   "over_budget": 0,
+   "reasons": {
+    "said not_found for an answerable question": 5,
+    "malformed tool call": 1,
+    "final answer is not JSON": 1,
+    "definition not verbatim in context": 1
+   },
+   "pass_rate": 0.0,
+   "calls_per_episode": 0.75,
+   "seconds_per_episode": 4.5
+  },
+  "lookup_effective_date": {
+   "episodes": 8,
+   "passed": 2,
+   "invalid_calls": 2,
+   "over_budget": 0,
+   "reasons": {
+    "invalid tool call: no document with id 'treas:2023-03-08'; document_ids come fr": 1,
+    "unparseable date": 4,
+    "invalid tool call: no document with id 'sec:2025-03-14'; document_ids come from": 1
+   },
+   "pass_rate": 0.25,
+   "calls_per_episode": 1.62,
+   "seconds_per_episode": 7.2
+  },
+  "no_tool_needed": {
+   "episodes": 8,
+   "passed": 7,
+   "invalid_calls": 0,
+   "over_budget": 0,
+   "reasons": {
+    "wrong date": 1
+   },
+   "pass_rate": 0.875,
+   "calls_per_episode": 0.0,
+   "seconds_per_episode": 2.8
+  },
+  "not_found": {
+   "episodes": 8,
+   "passed": 1,
+   "invalid_calls": 0,
+   "over_budget": 0,
+   "reasons": {
+    "said not_found without looking": 7
+   },
+   "pass_rate": 0.125,
+   "calls_per_episode": 0.12,
+   "seconds_per_episode": 1.7
+  }
+ },
+ "episodes": 40,
+ "tasks_file": "data/agent/tasks/v2.jsonl",
+ "split": "train",
+ "k": 1,
+ "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+ "adapter": null
+}

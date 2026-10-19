@@ -1,0 +1,79 @@
+2026-10-18 11:46:59,456 INFO 20 tasks x k=1; 0 episodes already done, 20 to run
+2026-10-18 11:46:59,719 INFO HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-4B-Instruct-2507-4bit/revision/main "HTTP/1.1 200 OK"
+Fetching 11 files:   0%|          | 0/11 [00:00<?, ?it/s]Fetching 11 files: 100%|██████████| 11/11 [00:00<00:00, 2044.28it/s]
+2026-10-18 11:47:11,288 INFO 4/20 episodes, 2.8s/episode, ETA 1 min
+2026-10-18 11:47:21,418 INFO 8/20 episodes, 2.6s/episode, ETA 1 min
+2026-10-18 11:47:36,366 INFO 12/20 episodes, 3.0s/episode, ETA 0 min
+2026-10-18 11:47:45,877 INFO 16/20 episodes, 2.8s/episode, ETA 0 min
+2026-10-18 11:47:54,286 INFO 20/20 episodes, 2.6s/episode, ETA 0 min
+{
+ "summary": {
+  "cited_obligations": {
+   "episodes": 4,
+   "passed": 0,
+   "invalid_calls": 0,
+   "over_budget": 0,
+   "reasons": {
+    "said not_found for an answerable question": 4
+   },
+   "pass_rate": 0.0,
+   "calls_per_episode": 1.0,
+   "seconds_per_episode": 2.8
+  },
+  "lookup_definition": {
+   "episodes": 4,
+   "passed": 0,
+   "invalid_calls": 0,
+   "over_budget": 0,
+   "reasons": {
+    "said not_found for an answerable question": 4
+   },
+   "pass_rate": 0.0,
+   "calls_per_episode": 1.0,
+   "seconds_per_episode": 2.5
+  },
+  "lookup_effective_date": {
+   "episodes": 4,
+   "passed": 0,
+   "invalid_calls": 0,
+   "over_budget": 0,
+   "reasons": {
+    "unparseable date": 3,
+    "cited provision is from another document": 1
+   },
+   "pass_rate": 0.0,
+   "calls_per_episode": 1.25,
+   "seconds_per_episode": 3.7
+  },
+  "no_tool_needed": {
+   "episodes": 4,
+   "passed": 3,
+   "invalid_calls": 0,
+   "over_budget": 0,
+   "reasons": {
+    "wrong date": 1
+   },
+   "pass_rate": 0.75,
+   "calls_per_episode": 0.0,
+   "seconds_per_episode": 2.1
+  },
+  "not_found": {
+   "episodes": 4,
+   "passed": 3,
+   "invalid_calls": 0,
+   "over_budget": 0,
+   "reasons": {
+    "said not_found without looking": 1
+   },
+   "pass_rate": 0.75,
+   "calls_per_episode": 0.75,
+   "seconds_per_episode": 2.1
+  }
+ },
+ "episodes": 20,
+ "tasks_file": "data/agent/tasks/v1.jsonl",
+ "split": "train",
+ "k": 1,
+ "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+ "adapter": null
+}
